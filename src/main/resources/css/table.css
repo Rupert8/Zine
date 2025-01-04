@@ -1,0 +1,12 @@
+.table{
+    -fx-background-color:#fff;
+    -fx-border-color:#e8d58c;
+    -fx-border-radius:5px;
+    -fx-border-width:2px;
+}
+
+.column{
+    -fx-background-color:#fff;
+    -fx-font-size:14px;
+    -fx-background-radius:1px;
+}

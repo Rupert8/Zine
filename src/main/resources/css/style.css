@@ -1,0 +1,101 @@
+.table{
+    -fx-background-color:#fff;
+    -fx-border-color:#e8d58c;
+    -fx-border-radius:5px;
+    -fx-border-width:2px;
+}
+
+.textField{
+    -fx-background-color:white;
+    -fx-border-color: #e8d58c;
+    -fx-border-width: 2px;
+    -fx-border-radius: 30px;
+}
+
+.column{
+-fx-background-color:#fff;
+-fx-font-size:18px;
+-fx-background-radius:1px;
+}
+
+.horizontal-tabs .tab-header-area .tab {
+    -fx-rotate: -270; /* Обертає вкладки вертикально */
+}
+
+.horizontal-tabs .tab-header-area{
+    
+}
+
+
+.tab-pane {
+    -fx-tab-min-width: 40px ;
+    -fx-tab-min-height: 30px ;
+}
+
+.tab-pane:left *.tab-header-area {
+    -fx-padding: 0 5 0 5;
+
+    /* NO SPACE LEFT OF FIRST TAB */
+    /* -fx-padding: 0 0 0 30; */
+}
+
+
+.comboBox{
+    -fx-background-color:#fff;
+    -fx-border-color:#47409c;
+    -fx-border-radius:30px;
+    -fx-font-family: "Kharkiv Tone Regular";
+    -fx-text-fill: #aaa;
+    -fx-font-size:15px;
+    -fx-algiment:center;
+}
+.combobox .text-field{
+    -fx-alignment: center;
+}
+
+.combo-box .combo-box-popup .list-view {
+    -fx-background-color: #47409c; /* Колір фону списку */
+    -fx-background-radius:5px;
+    -fx-text-fill:#fff;
+    -fx-opacity:0.7;
+}
+.combo-box .combo-box-popup .list-cell{
+    fx-background-color: #fff; /* Колір фону списку */
+    -fx-text-fill:#000;
+}
+
+.data_picker{
+    -fx-background-color:#fff;
+    -fx-border-color:#47409c;
+    -fx-border-radius:5px;
+    -fx-background-radius:5px;
+    -fx-font-size:15px;
+}
+
+.date-picker .arrow-button:hover {
+    -fx-background-color:#47409c ;  /* Колір при наведенні */
+}
+.date-picker .arrow-button {
+    -fx-background-color:white ;  /* Колір при наведенні */
+}
+
+.date-picker .day-cell {
+    -fx-background-color: #fff;
+}
+.date-picker .day-cell:focused {
+    -fx-background-color: #47409c;
+    -fx-text-fill: white;
+}
+
+.plus_btn{
+    -fx-background-color:#fff;
+}
+
+
+
+
+
+/*Workstud page*/
+
+
+

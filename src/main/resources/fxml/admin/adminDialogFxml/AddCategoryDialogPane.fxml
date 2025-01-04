@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.admin.adminDialog.AddSocialCategoryDialogPane">
+   <content>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.0" prefWidth="600.0" style="-fx-background-color: #fff;">
+         <children>
+            <AnchorPane layoutX="24.0" layoutY="65.0" prefHeight="67.0" prefWidth="549.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 2;">
+               <children>
+                  <Label layoutX="27.0" layoutY="21.0" text="Назва категорії">
+                     <font>
+                        <Font name="Gotham-Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="CategoryNameTextField" layoutX="230.0" layoutY="15.0" prefHeight="35.0" prefWidth="300.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
+               </children></AnchorPane>
+            <Button fx:id="applyButton" layoutX="441.0" layoutY="373.0" mnemonicParsing="false" onAction="#setButtonAddCategory" styleClass="Button" stylesheets="@../../../css/button.css" text="підтвердити" />
+            <Button fx:id="cancelButton" layoutX="24.0" layoutY="373.0" mnemonicParsing="false" onAction="#close" styleClass="Button" stylesheets="@../../../css/button.css" text="скасувати" />
+            <Label layoutX="135.0" layoutY="14.0" text="Додати Категорію">
+               <font>
+                  <Font name="Kharkiv Tone Regular" size="32.0" />
+               </font>
+            </Label>
+            <TableView fx:id="SocialPassportCategory" layoutX="200.0" layoutY="141.0" prefHeight="220.0" prefWidth="238.0" styleClass="table" stylesheets="@../../../css/table.css">
+              <columns>
+                <TableColumn fx:id="NameCategory" prefWidth="232.0" styleClass="column" text="Назва категорії" />
+              </columns>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </TableView>
+         </children>
+      </Pane>
+   </content>
+</DialogPane>

@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">jdbc:mysql://localhost:3306/electronic_magazine</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password">1111</property>
+
+    <property name="show_sql">true</property>
+    <property name="format_sql">true</property>
+
+    <property name="default_schema">electronic_magazine</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
+
+    <mapping class="hibernate.entity.User"/>
+    <mapping class="hibernate.entity.StudentInfo"/>
+    <mapping class="hibernate.entity.WorkPlan"/>
+    <mapping class="hibernate.entity.EducationInfo"/>
+    <mapping class="hibernate.entity.MilitaryService"/>
+    <mapping class="hibernate.entity.StudentJob"/>
+    <mapping class="hibernate.entity.StudentParents"/>
+    <mapping class="hibernate.entity.IndividualSupport"/>
+    <mapping class="hibernate.entity.CircleActivity"/>
+    <mapping class="hibernate.entity.SocialActivity"/>
+    <mapping class="hibernate.entity.Promotion"/>
+    <mapping class="hibernate.entity.DroppedOutStudents"/>
+    <mapping class="hibernate.entity.Curators"/>
+    <mapping class="hibernate.entity.Groups"/>
+    <mapping class="hibernate.entity.SocialPassport"/>
+    <mapping class="hibernate.entity.SpCategoryName"/>
+    <mapping class="hibernate.entity.SpManyChildrenFamily"/>
+    <mapping class="hibernate.entity.SpInvalidPeople"/>
+    <mapping class="hibernate.entity.SpChornobiltsi"/>
+    <mapping class="hibernate.entity.StudentGroups"/>
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>

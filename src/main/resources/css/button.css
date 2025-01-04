@@ -1,0 +1,90 @@
+.button {
+    -fx-background-color: #e8d58c;
+    -fx-border-color:  #e8d58c;
+    -fx-border-radius: 5;
+    -fx-border-width: 2;
+    -fx-background-radius: 5;
+    -fx-font-family: Gotham;
+    -fx-font-size: 16px;
+}
+
+.button:pressed:hover {
+    -fx-background-color: #fff;
+}
+
+.button:hover {
+    -fx-background-color: #cdbb7c;
+    -fx-border-color: #cdbb7c;
+}
+
+.menuButton {
+    -fx-background-color: #e8d58c;
+    -fx-border-color: #fff;
+    -fx-font-size: 13px;
+
+}
+
+.menuButton:hover {
+    -fx-background-radius: 6;
+    -fx-background-color: #fff;
+    -fx-border-color:  #e8d58c;
+    -fx-transition: 0.7s;
+}
+
+.menuButton:focused {
+    -fx-background-radius: 6;
+    -fx-background-color: #fff;
+    -fx-border-color:  #e8d58c;
+}
+
+.mainButton {
+    -fx-background-color: #e8d58c;
+    -fx-text-fill: black;
+    -fx-font-size: 24px;
+    -fx-font-family: Kharkiv;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30;
+}
+
+.mainButton:hover {
+    -fx-background-color: #e8d58c;
+    -fx-border-color: #e8d58c;
+}
+
+.mainButton:pressed:hover {
+    -fx-background-color: #e8d58c;
+}
+
+.loginButton {
+    -fx-text-fill: black;
+    -fx-font-family: Gotham;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-background-color: #e8d58c;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+}
+
+.loginButton:pressed:hover {
+    -fx-text-fill:  #e8d58c;
+    -fx-font-family: Gotham;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-border-color:  #e8d58c;
+}
+
+.loginButton:hover {
+    -fx-text-fill:  black;
+    -fx-font-family: Gotham;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-background-color: #cdbb7c;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-border-color:  #cdbb7c;
+}
+
+

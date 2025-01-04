@@ -1,0 +1,23 @@
+.data_picker{
+    -fx-background-color:#fff;
+    -fx-border-color: #e8d58c;
+    -fx-border-radius:5px;
+    -fx-border-width: 2px;
+    -fx-background-radius:5px;
+    -fx-font-size:15px;
+}
+
+.date-picker .arrow-button:hover {
+    -fx-background-color: #e8d58c ;  /* Колір при наведенні */
+}
+.date-picker .arrow-button {
+    -fx-background-color:white ;  /* Колір при наведенні */
+}
+
+.date-picker .day-cell {
+    -fx-background-color: #fff;
+}
+.date-picker .day-cell:focused {
+    -fx-background-color:  #e8d58c;
+    -fx-text-fill: white;
+}
