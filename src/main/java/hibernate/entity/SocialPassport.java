@@ -54,6 +54,9 @@ public class SocialPassport {
     @Column
     private boolean manyChildrenStatus;
 
+    @Column(name = "status_adult")
+    private boolean statusAdult;
+
     public SocialPassport(Date startDate, Date endDate, Integer semester, String note) {
         this.startDate = startDate;
         this.endDate = endDate;

@@ -1,5 +1,6 @@
 package controller.curator;
 
+import services.ClearValueService;
 import services.TextFieldService;
 import data.AddData;
 import data.DisplayDate;
@@ -119,6 +120,8 @@ public class AddInformationAboutStudentController extends TextFieldService imple
     private DatePicker StartDateSocialPassport,EndDateSocialPassport;
     @FXML
     private TextField NoteSocialPassport;
+    @FXML
+    private RadioButton AdultStudentStatusRadioButton;
 
     @FXML   //Дані про інвалідність
     private ComboBox<String> StudentPIPInvalidPassport;
@@ -293,6 +296,7 @@ public class AddInformationAboutStudentController extends TextFieldService imple
 
         int id = SearchStudentData.getIdStudent(name,surname,middleName);
         AddData.addEducationInfo(id,endDate,schoolName,averageGrade);
+        ClearValueService.clearEducationInfo(EndDateEducation,SchoolNameEducation,GradeAvarageEducation);
     }
 
     public void addMilitaryInfo(){
@@ -305,6 +309,7 @@ public class AddInformationAboutStudentController extends TextFieldService imple
 
         int id = SearchStudentData.getIdStudent(name,surname,middleName);
         AddData.addMilitaryInfo(id,startDate,endDate,unit);
+        ClearValueService.clearMilitaryInfo(StartDateMilitary,EndDateMilitary,UnitMilitary);
     }
 
     public void addJobInfo(){
@@ -318,6 +323,7 @@ public class AddInformationAboutStudentController extends TextFieldService imple
 
         int id = SearchStudentData.getIdStudent(name,surname,middleName);
         AddData.addJobInfo(id,startDate,endDate,place,position);
+        ClearValueService.clearJobInfo(StartDateJob,EndDateJob,PlaceJob,PositionJob);
     }
 
     public void addFamilyInfo(){
@@ -331,6 +337,7 @@ public class AddInformationAboutStudentController extends TextFieldService imple
 
         int id = SearchStudentData.getIdStudent(name,surname,middleName);
         AddData.addParentsInfo(id,pipFather,pipMother,phoneFather,phoneMother);
+        ClearValueService.clearFamilyInfo(PIPFatherParents,PIPMotherParents,PhoneFatherParents,PhoneMotherParents);
     }
 
     public void addSocialActivityInfo(){
@@ -343,6 +350,7 @@ public class AddInformationAboutStudentController extends TextFieldService imple
 
         int id = SearchStudentData.getIdStudent(name,surname,middleName);
         AddData.addSocialActivityInfo(id,semester,date,activity);
+        ClearValueService.clearSocialActivityInfo(SemesterSocial,DateSocial,ActivitySocial);
     }
 
     public void addGroupActivityInfo(){
@@ -355,6 +363,7 @@ public class AddInformationAboutStudentController extends TextFieldService imple
 
         int id = SearchStudentData.getIdStudent(name,surname,middleName);
         AddData.addGroupActivityInfo(id,semester,groupName,note);
+        ClearValueService.clearGroupActivity(SemesterGroup,GroupName,NoteGroup);
     }
 
     public void addIndividualSupportInfo(){
@@ -367,6 +376,7 @@ public class AddInformationAboutStudentController extends TextFieldService imple
 
         int id  = SearchStudentData.getIdStudent(name,surname,middleName);
         AddData.addIndividualSupportInfo(id,semester,date,content);
+        ClearValueService.clearIndividualSupport(SemesterSupport,DateSupport,ContentSupport);
     }
 
     public void addPromotionInfo(){
@@ -379,6 +389,7 @@ public class AddInformationAboutStudentController extends TextFieldService imple
 
         int id = SearchStudentData.getIdStudent(name,surname,middleName);
         AddData.addPromotionInfo(id,semester,date,content);
+        ClearValueService.clearPromotionInfo(SemesterPromotion,DatePromotion,ContentPromotion);
     }
 
     public void addSocialPassportInfo(){
@@ -390,10 +401,17 @@ public class AddInformationAboutStudentController extends TextFieldService imple
         Date startDate = Date.valueOf(StartDateSocialPassport.getValue());
         Date endDate = Date.valueOf(EndDateSocialPassport.getValue());
         String note = NoteSocialPassport.getText();
+        boolean statusAdult;
+        if(AdultStudentStatusRadioButton.isSelected()){
+            statusAdult = true;
+        }else{
+            statusAdult = false;
+        }
 
         int id = SearchStudentData.getIdStudent(name,surname,middleName);
         System.out.print(id);
-        AddData.addGeneralSocialPassportInfo(id,nameCategory,semester,startDate,endDate,note);
+        AddData.addGeneralSocialPassportInfo(id,nameCategory,semester,startDate,endDate,note,statusAdult);
+        ClearValueService.clearSocialPassportField(StartDateSocialPassport,EndDateSocialPassport,SemesterSocialPassport,CategorySocialPassport,NoteSocialPassport,AdultStudentStatusRadioButton);
     }
 
     public void addInvalidPassportInfo(){
@@ -439,13 +457,15 @@ public class AddInformationAboutStudentController extends TextFieldService imple
 
     public void setCategoryComboBox(){
         ObservableList<String> list = DisplayDate.getCategoryInComboBox();
-        CategorySocialPassport.getItems().addAll(list);
+        ObservableList<String> filteredList = list.filtered(category ->
+                !category.equals("Багатодітна родина") && !category.equals("Інвалід"));
+        CategorySocialPassport.getItems().addAll(filteredList);
     }
 
     public void setInvalidCategoryComboBox(){
          CategoryInvalidPassport.getItems().addAll("І група інвалідності","ІІ група інвалідності","ІІІ група інвалідності","Дитяча інвалідність");
     }
-
+     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setStudentPIP();

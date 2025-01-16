@@ -257,6 +257,16 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
             EndDateJob.setValue(endDateJob.toLocalDate());
             PlaceJob.setText(placeJob);
             PositionJob.setText(positionJob);
+        }else{
+            StartDateJob.setVisible(true);
+            EndDateJob.setVisible(true);
+            PlaceJob.setVisible(true);
+            PositionJob .setVisible(true);
+
+            StartDateJobLabel.setVisible(true);
+            EndDateJobLabel.setVisible(true);
+            PlaceJobLabel.setVisible(true);
+            PositionJobLabel.setVisible(true);
         }
     }
 
@@ -311,6 +321,14 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
             SemesterSocial.setValue(semesterSocial);
             DateSocial.setValue(dateSocial.toLocalDate());
             ActivitySocial.setText(activitySocial);
+        }else{
+            SemesterSocial.setVisible(true);
+            DateSocial.setVisible(true);
+            ActivitySocial.setVisible(true);
+
+            SemesterSocialActivityLabel.setVisible(true);
+            DateSocialActivityLabel.setVisible(true);
+            ActivitySocialActivityLabel.setVisible(true);
         }
     }
 
@@ -351,6 +369,14 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
             SemesterGroup.setValue(semesterGroup);
             GroupName.setText(groupNameGroup);
             NoteGroup.setText(noteGroup);
+        }else{
+            SemesterGroup.setVisible(true);
+            GroupName.setVisible(true);
+            NoteGroup.setVisible(true);
+
+            SemesterGroupActivityLabel.setVisible(true);
+            NameGroupActivityLabel.setVisible(true);
+            NoteGroupActivityLabel.setVisible(true);
         }
 
     }
@@ -391,6 +417,14 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
             SemesterSupport.setValue(semesterSupport);
             DateSupport.setValue(dateSupport.toLocalDate());
             ContentSupport.setText(contentSupport);
+        }else{
+            SemesterSupport.setVisible(true);
+            DateSupport.setVisible(true);
+            ContentSupport.setVisible(true);
+
+            SemesterSupportLabel.setVisible(true);
+            DateSupportLabel.setVisible(true);
+            ContentSupportLabel.setVisible(true);
         }
     }
 
@@ -430,6 +464,14 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
             SemesterPromotion.setValue(semesterPromotion);
             DatePromotion.setValue(datePromotion.toLocalDate());
             ContentPromotion.setText(contentPromotion);
+        }else{
+            SemesterPromotion.setVisible(true);
+            DatePromotion.setVisible(true);
+            ContentPromotion.setVisible(true);
+
+            SemesterPromotionLabel.setVisible(true);
+            DatePromotionLabel.setVisible(true);
+            ContentPromotionLabel.setVisible(true);
         }
     }
 
@@ -483,6 +525,18 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
             SemesterSocialPassport.setValue(semesterSocialPassport);
             NoteSocialPassport.setText(noteSocialPassport);
 
+        }else{
+            StartDateSocialPassport.setVisible(true);
+            EndDateSocialPassport.setVisible(true);
+            CategorySocialPassport.setVisible(true);
+            SemesterSocialPassport.setVisible(true);
+            NoteSocialPassport.setVisible(true);
+
+            StartDateSocialPassportLabel.setVisible(true);
+            EndDateSocialPassportLabel.setVisible(true);
+            CategorySocialPassportLabel.setVisible(true);
+            SemesterSocialPassportLabel.setVisible(true);
+            NoteSocialPassportLabel.setVisible(true);
         }
     }
 
@@ -547,12 +601,26 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
 
     public void loadAndSetSocialActivityInfo(){
         List<SocialActivity> socialActivityList = DisplayDate.selectSocialActivityList();
-        if(socialActivityList.size() > 1){
-            ChooseSocialActivityComboBox.getItems().addAll(DisplayDate.selectSocialActivity(studentName,studentSurname,studentMiddleName));
+        if(socialActivityList != null){
+            if(socialActivityList.size() > 1){
+                ChooseSocialActivityComboBox.getItems().addAll(DisplayDate.selectSocialActivity(studentName,studentSurname,studentMiddleName));
+            }else{
+                ChooseSocialActivityComboBox.setVisible(false);
+                setSocialActivityInfoFieldOneResult();
+            }
         }else{
             ChooseSocialActivityComboBox.setVisible(false);
-            setSocialActivityInfoFieldOneResult();
+
+            SemesterSocial.setVisible(true);
+            DateSocial.setVisible(true);
+            ActivitySocial.setVisible(true);
+
+            SemesterSocialActivityLabel.setVisible(true);
+            DateSocialActivityLabel.setVisible(true);
+            ActivitySocialActivityLabel.setVisible(true);
+            throw new IllegalArgumentException("немає значень");
         }
+
     }
 
     public void loadAndSetGroupActivityInfo(){

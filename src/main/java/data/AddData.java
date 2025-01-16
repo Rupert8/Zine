@@ -301,7 +301,7 @@ public class AddData {
         }
     }
 
-    public static void addGeneralSocialPassportInfo(int studentId, String nameCategory,int semester, Date startDate, Date endDate, String note) {
+    public static void addGeneralSocialPassportInfo(int studentId, String nameCategory,int semester, Date startDate, Date endDate, String note,boolean statusAdult) {
         Session session = null;
         try {
             session = HibernateUtil.getSession();
@@ -318,6 +318,8 @@ public class AddData {
             socialPassport.setEndDate(endDate);
             socialPassport.setNote(note);
             socialPassport.setInvalidStatus(false);
+            socialPassport.setManyChildrenStatus(false);
+            socialPassport.setStatusAdult(statusAdult);
 
             session.persist(socialPassport);
             session.getTransaction().commit();
@@ -357,7 +359,7 @@ public class AddData {
             StudentInfo student = session.get(StudentInfo.class, studentId);
 
             SpCategoryName spCategoryName = session.createQuery("FROM SpCategoryName WHERE category = :name", SpCategoryName.class)
-                               .setParameter("name", "інвалід")
+                               .setParameter("name", "Інвалід")
                                .uniqueResult();
 
             SocialPassport socialPassport = new SocialPassport();
