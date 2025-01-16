@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static controller.ExtendedInformationAboutStudent.*;
 import static controller.admin.AdminGroupController.*;
@@ -20,9 +21,19 @@ public class DisplayDate  {
                                                         "FROM Curators c\n" +
                                                         "LEFT JOIN User u ON c.id = u.curators.id";
 
-    public static final String GET_SOCIAL_PASSPORT_INFO = "SELECT s.id,s.studentInfo.name,s.studentInfo.surname,s.studentInfo.middleName,c.category,s.semester\n" +
+    public static final String GET_SOCIAL_PASSPORT_INFO = "SELECT s.id,s.studentInfo.name,s.studentInfo.surname,s.studentInfo.middleName,s.studentInfo.groupName,c.category,s.semester\n" +
                                                           "FROM SocialPassport s\n" +
                                                           "INNER JOIN SpCategoryName c on s.spCategoryName.id = c.id";
+
+    public static final String GET_SOCIAL_BY_GROUP_NAME_PASSPORT_INFO = "SELECT s.id,s.studentInfo.name,s.studentInfo.surname,s.studentInfo.middleName,s.studentInfo.groupName,c.category,s.semester\n" +
+                                                                        "FROM SocialPassport s\n" +
+                                                                        "INNER JOIN SpCategoryName c on s.spCategoryName.id = c.id\n" +
+                                                                        "WHERE s.studentInfo.groupName = :groupName";
+
+    public static final String GET_SOCIAL_BY_CATEGORY_NAME_PASSPORT_INFO = "SELECT s.id,s.studentInfo.name,s.studentInfo.surname,s.studentInfo.middleName,s.studentInfo.groupName,c.category,s.semester\n" +
+                                                                           "FROM SocialPassport s\n" +
+                                                                           "INNER JOIN SpCategoryName c on s.spCategoryName.id = c.id\n" +
+                                                                           "WHERE c.category = :categoryName";
 
     public static final String GET_INVALID_INFO = "SELECT s\n" +
                                                   "FROM SocialPassport s\n" +
@@ -40,13 +51,24 @@ public class DisplayDate  {
     public static final String GET_CURATOR_NAME = "SELECT CONCAT(name, ' ', surname, ' ', middleName) FROM Curators";
     public static final String GET_STUDENT_EDUCATION_INFO = "FROM EducationInfo WHERE studentInfo.id = :studentId";
     public static final String GET_STUDENT_MILITARY_INFO = "FROM MilitaryService WHERE studentInfo.id = :studentId";
-    public static final String GET_STUDENT_JOB_INFO = "FROM StudentJob WHERE studentInfo.id = :studentId";
+    public static final String GET_STUDENT_JOB_INFO = "FROM StudentJob WHERE studentInfo.id = :studentId and place = :place";
+    public static final String GET_STUDENT_JOB_INFO_ONE_RESULT = "FROM StudentJob WHERE studentInfo.id = :studentId";
+    public static final String GET_STUDENT_JOB_INFO_ONE_LIST = "FROM StudentJob WHERE studentInfo.id = :studentId";
     public static final String GET_STUDENT_PARENTS_INFO = "FROM StudentParents WHERE studentInfo.id = :studentId";
-    public static final String GET_STUDENT_SOCIAL_INFO = "FROM SocialActivity WHERE studentInfo.id = :studentId";
-    public static final String GET_STUDENT_GROUP_INFO = "FROM CircleActivity WHERE studentInfo.id = :studentId";
-    public static final String GET_STUDENT_INDIVIDUAL_SUPPORT_INFO = "FROM IndividualSupport WHERE studentInfo.id = :studentId";
-    public static final String GET_STUDENT_PROMOTION_INFO = "FROM Promotion WHERE studentInfo.id = :studentId";
-    public static final String GET_STUDENT_SOCIAL_PASSPORT_INFO = "FROM SocialPassport s WHERE s.studentInfo.id = :studentId and s.invalidStatus = false";
+    public static final String GET_STUDENT_SOCIAL_INFO = "FROM SocialActivity WHERE studentInfo.id = :studentId and activity = :activity";
+    public static final String GET_STUDENT_SOCIAL_INFO_ONE_RESULT = "FROM SocialActivity WHERE studentInfo.id = :studentId";
+    public static final String GET_STUDENT_SOCIAL_INFO_LIST = "FROM SocialActivity WHERE studentInfo.id = :studentId";
+    public static final String GET_STUDENT_GROUP_INFO = "FROM CircleActivity WHERE studentInfo.id = :studentId and circleName = :groupName";
+    public static final String GET_STUDENT_GROUP_INFO_ONE_RESULT = "FROM CircleActivity WHERE studentInfo.id = :studentId";
+    public static final String GET_STUDENT_GROUP_INFO_LIST = "FROM CircleActivity WHERE studentInfo.id = :studentId";
+    public static final String GET_STUDENT_INDIVIDUAL_SUPPORT_INFO = "FROM IndividualSupport WHERE studentInfo.id = :studentId and content = :content";
+    public static final String GET_STUDENT_INDIVIDUAL_SUPPORT_INFO_ONE_RESULT = "FROM IndividualSupport WHERE studentInfo.id = :studentId";
+    public static final String GET_STUDENT_INDIVIDUAL_SUPPORT_INFO_LIST = "FROM IndividualSupport WHERE studentInfo.id = :studentId";
+    public static final String GET_STUDENT_PROMOTION_INFO = "FROM Promotion WHERE studentInfo.id = :studentId and content = :content";
+    public static final String GET_STUDENT_PROMOTION_INFO_ONE_RESULT = "FROM Promotion WHERE studentInfo.id = :studentId";
+    public static final String GET_STUDENT_PROMOTION_INFO_LIST = "FROM Promotion WHERE studentInfo.id = :studentId";
+    public static final String GET_STUDENT_SOCIAL_PASSPORT_INFO = "FROM SocialPassport s WHERE s.studentInfo.id = :studentId and s.invalidStatus = false and s.manyChildrenStatus = false and s.spCategoryName.category = :categoryName";
+    public static final String GET_STUDENT_SOCIAL_PASSPORT_INFO_LIST = "FROM SocialPassport s WHERE s.studentInfo.id = :studentId and s.invalidStatus = false and s.manyChildrenStatus = false";
 
     public static Session session = null;
 
@@ -61,6 +83,9 @@ public class DisplayDate  {
             studentInfo.addAll(resoultlist);
 
             session.getTransaction().commit();
+            for (int i = 0; i < resoultlist.size(); i++) {
+                resoultlist.get(i).setId(i + 1);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             HibernateUtil.rollback(session);
@@ -93,6 +118,9 @@ public class DisplayDate  {
             socialPassportInfo.addAll(resultList);
 
             session.getTransaction().commit();
+            for (int i = 0; i < resultList.size(); i++) {
+                resultList.get(i).setId(i + 1);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             HibernateUtil.rollback(session);
@@ -137,15 +165,19 @@ public class DisplayDate  {
     }
 
 
-    public static ObservableList<WorkPlan> getDataWithParametrPlanInfo(Date startDate, Date endDate,int semester) {
-        String hql = "FROM WorkPlan WHERE executionDate BETWEEN :startDate AND :endDate AND semester = :semester" ;
+    public static ObservableList<WorkPlan> getDataWithParameterForAdminPlanInfo(Date startDate, Date endDate) {
+        String hql = "FROM WorkPlan WHERE executionDate BETWEEN :startDate AND :endDate" ;
         ObservableList<WorkPlan> planInfo = FXCollections.observableArrayList();
         try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            List<WorkPlan> resoultlist = session.createQuery(hql, WorkPlan.class).setParameter("startDate", startDate).setParameter("endDate", endDate).setParameter("semester", semester).getResultList();
+            List<WorkPlan> resoultlist = session.createQuery(hql, WorkPlan.class).setParameter("startDate", startDate).setParameter("endDate", endDate).getResultList();
             planInfo.addAll(resoultlist);
+
+            for (int i = 0; i < resoultlist.size(); i++) {
+                resoultlist.get(i).setId(i + 1);
+            }
 
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -155,17 +187,21 @@ public class DisplayDate  {
         return planInfo;
     }
 
-    public static ObservableList<Integer> getSemesterPlanInfo() {
-        String hql = "SELECT semester FROM WorkPlan";
-        ObservableList<Integer> planInfo = FXCollections.observableArrayList();
+    public static ObservableList<WorkPlan> getDataWithParameterPlanInfo(Date startDate, Date endDate,String performer) {
+        String hql = "FROM WorkPlan WHERE executionDate BETWEEN :startDate AND :endDate AND (performer = :performer or performer = 'Адміністратор')" ;
+        ObservableList<WorkPlan> planInfo = FXCollections.observableArrayList();
         try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            List<Integer> resoultlist = session.createQuery(hql, Integer.class).getResultList();
+            List<WorkPlan> resoultlist = session.createQuery(hql, WorkPlan.class).setParameter("startDate", startDate).setParameter("endDate", endDate).setParameter("performer", performer).getResultList();
             planInfo.addAll(resoultlist);
 
             session.getTransaction().commit();
+
+            for (int i = 0; i < resoultlist.size(); i++) {
+                resoultlist.get(i).setId(i + 1);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             HibernateUtil.rollback(session);
@@ -173,7 +209,28 @@ public class DisplayDate  {
         return planInfo;
     }
 
-    public static ObservableList<WorkPlan> getDataBySemesterPlanInfo(int semester) {
+    public static ObservableList<WorkPlan> getPlanForAdminInfo() {
+        String hql = "FROM WorkPlan";
+        ObservableList<WorkPlan> planInfo = FXCollections.observableArrayList();
+        try {
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            List<WorkPlan> resoultlist = session.createQuery(hql, WorkPlan.class).getResultList();
+            planInfo.addAll(resoultlist);
+
+            session.getTransaction().commit();
+            for (int i = 0; i < resoultlist.size(); i++) {
+                resoultlist.get(i).setId(i + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            HibernateUtil.rollback(session);
+        }
+        return planInfo;
+    }
+
+    public static ObservableList<WorkPlan> getDataBySemesterForAdminPlanInfo(int semester) {
         String hql = "FROM WorkPlan WHERE semester = :semester";
         ObservableList<WorkPlan> planInfo = FXCollections.observableArrayList();
         try {
@@ -184,6 +241,9 @@ public class DisplayDate  {
             planInfo.addAll(resoultlist);
 
             session.getTransaction().commit();
+            for (int i = 0; i < resoultlist.size(); i++) {
+                resoultlist.get(i).setId(i + 1);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             HibernateUtil.rollback(session);
@@ -191,11 +251,96 @@ public class DisplayDate  {
         return planInfo;
     }
 
-    public static List<String> getStudentFullNames() {
+    public static ObservableList<StudentInfo> getDataByGroupNameForAdminStudentInfo(String groupName) {
+        String hql = "FROM StudentInfo WHERE groupName = :groupName";
+        ObservableList<StudentInfo> studentInfo = FXCollections.observableArrayList();
+        try {
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            List<StudentInfo> resoultlist = session.createQuery(hql, StudentInfo.class).setParameter("groupName",groupName).getResultList();
+            studentInfo.addAll(resoultlist);
+
+            session.getTransaction().commit();
+            for (int i = 0; i < resoultlist.size(); i++) {
+                resoultlist.get(i).setId(i + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            HibernateUtil.rollback(session);
+        }
+        return studentInfo;
+    }
+
+    public static ObservableList<SocialPassportPrototype> getDataByGroupNameForAdminSocialPassport(String groupName) {
+        ObservableList<SocialPassportPrototype> studentInfo = FXCollections.observableArrayList();
+        try {
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            List<SocialPassportPrototype> resoultlist = session.createQuery(GET_SOCIAL_BY_GROUP_NAME_PASSPORT_INFO, SocialPassportPrototype.class).setParameter("groupName",groupName).getResultList();
+            studentInfo.addAll(resoultlist);
+
+            session.getTransaction().commit();
+            for (int i = 0; i < resoultlist.size(); i++) {
+                resoultlist.get(i).setId(i + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            HibernateUtil.rollback(session);
+        }
+        return studentInfo;
+    }
+
+    public static ObservableList<SocialPassportPrototype> getDataByCategoryNameForAdminSocialPassport(String categoryName) {
+        ObservableList<SocialPassportPrototype> studentInfo = FXCollections.observableArrayList();
+        try {
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            List<SocialPassportPrototype> resoultlist = session.createQuery(GET_SOCIAL_BY_CATEGORY_NAME_PASSPORT_INFO, SocialPassportPrototype.class).setParameter("categoryName",categoryName).getResultList();
+            studentInfo.addAll(resoultlist);
+
+            session.getTransaction().commit();
+            for (int i = 0; i < resoultlist.size(); i++) {
+                resoultlist.get(i).setId(i + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            HibernateUtil.rollback(session);
+        }
+        return studentInfo;
+    }
+
+    public static ObservableList<WorkPlan> getDataBySemesterPlanInfo(int semester,String performer) {
+        String hql = "FROM WorkPlan WHERE semester = :semester AND (performer = :performer OR performer = 'Адміністратор')";
+        ObservableList<WorkPlan> planInfo = FXCollections.observableArrayList();
+        try {
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            List<WorkPlan> resoultlist = session.createQuery(hql, WorkPlan.class).setParameter("semester",semester).setParameter("performer", performer).getResultList();
+            planInfo.addAll(resoultlist);
+
+            for (int i = 0; i < resoultlist.size(); i++) {
+                resoultlist.get(i).setId(i + 1);
+            }
+
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            HibernateUtil.rollback(session);
+        }
+        return planInfo;
+    }
+
+    public static List<String> getStudentFullNames(String groupName) {
         List<String> studentNames = new ArrayList<>();
         session = HibernateUtil.getSession();
         try {
-            List<StudentInfo> students = session.createQuery("FROM StudentInfo", StudentInfo.class).list();
+            List<StudentInfo> students = session.createQuery("FROM StudentInfo WHERE groupName = :groupName", StudentInfo.class)
+                                                            .setParameter("groupName", groupName).list();
+
             for (StudentInfo student : students) {
                 studentNames.add(student.getFullName());
             }
@@ -217,6 +362,18 @@ public class DisplayDate  {
         return groupNames;
     }
 
+    public static List<String> getGroupForAddCuratorName() {
+        List<String> groupNames = new ArrayList<>();
+        session = HibernateUtil.getSession();
+        try {
+            List<String> students = session.createQuery("SELECT groupName FROM Groups WHERE status = false", String.class).list();
+            groupNames.addAll(students);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return groupNames;
+    }
+
 
     public static ObservableList<Curators> getCurators() {
         ObservableList<Curators> groupNames = FXCollections.observableArrayList();
@@ -224,6 +381,11 @@ public class DisplayDate  {
         try {
             List<Curators> students = session.createQuery(GET_CURATOR_AND_EMAIL, Curators.class).list();
             groupNames.addAll(students);
+
+
+            for (int i = 0; i < students.size(); i++) {
+                students.get(i).setId(i + 1);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -260,19 +422,32 @@ public class DisplayDate  {
         try {
             List<Groups> group = session.createQuery(GET_GROUP_INFO, Groups.class).list();
             groupNames.addAll(group);
+
+            for (int i = 0; i < group.size(); i++) {
+                group.get(i).setId(i + 1);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
         return groupNames;
     }
 
-    public static ObservableList<WorkPlan> getFullPlanInfo() {
+    public static ObservableList<WorkPlan> getFullPlanInfo(String performer) {
         ObservableList<WorkPlan> planNames = FXCollections.observableArrayList();
         session = HibernateUtil.getSession();
-        try{
-            List<WorkPlan> workPlan = session.createQuery("FROM WorkPlan", WorkPlan.class).getResultList();
+        try {
+            List<WorkPlan> workPlan = session.createQuery(
+                            "FROM WorkPlan Where performer = :performer or performer = 'Адміністратор'", WorkPlan.class)
+                    .setParameter("performer", performer)
+                    .getResultList();
+
+            for (int i = 0; i < workPlan.size(); i++) {
+                workPlan.get(i).setId(i + 1);
+            }
+
+            System.out.print("результат " + performer);
             planNames.addAll(workPlan);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return planNames;
@@ -341,17 +516,78 @@ public class DisplayDate  {
         return militaryService;
     }
 
-    public static StudentJob selectStudentJobInfo(){
+    public static StudentJob selectStudentJobInfo(String place){
         StudentJob studentJob = null;
         try{
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            studentJob = session.createQuery(GET_STUDENT_JOB_INFO, StudentJob.class).setParameter("studentId", studentId).getSingleResult();
+            studentJob = session.createQuery(GET_STUDENT_JOB_INFO, StudentJob.class).setParameter("studentId", studentId).setParameter("place", place).getSingleResult();
             startDateJob = studentJob.getStartDate();
             endDateJob = studentJob.getEndDate();
             placeJob = studentJob.getPlace();
             positionJob = studentJob.getPosition();
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+
+        return studentJob;
+    }
+
+    public static StudentJob selectStudentJobInfoOneResult(){
+        StudentJob studentJob = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            studentJob = session.createQuery(GET_STUDENT_JOB_INFO_ONE_RESULT, StudentJob.class).setParameter("studentId", studentId).getSingleResult();
+            startDateJob = studentJob.getStartDate();
+            endDateJob = studentJob.getEndDate();
+            placeJob = studentJob.getPlace();
+            positionJob = studentJob.getPosition();
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+
+        return studentJob;
+    }
+
+    public static List<String> selectStudentJobPlace(String name,String surname,String middleName){
+        List<String> socialPassport = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            socialPassport = session.createQuery("SELECT s.place FROM StudentJob s WHERE s.studentInfo.name = :name and s.studentInfo.surname = :surname and s.studentInfo.middleName = :middleName", String.class)
+                    .setParameter("name", name)
+                    .setParameter("surname", surname)
+                    .setParameter("middleName", middleName).getResultList();
+
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        return socialPassport;
+    }
+
+    public static List<StudentJob> selectStudentJobInfoList(){
+        List<StudentJob> studentJob = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            studentJob = session.createQuery(GET_STUDENT_JOB_INFO_ONE_LIST, StudentJob.class).setParameter("studentId", studentId).getResultList();
 
             session.getTransaction().commit();
 
@@ -385,13 +621,13 @@ public class DisplayDate  {
         return studentParents;
     }
 
-    public static SocialActivity selectStudentSocialInfo(){
+    public static SocialActivity selectSocialActivityInfo(String activity){
         SocialActivity socialActivity = null;
         try{
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            socialActivity= session.createQuery(GET_STUDENT_SOCIAL_INFO, SocialActivity.class).setParameter("studentId", studentId).getSingleResult();
+            socialActivity= session.createQuery(GET_STUDENT_SOCIAL_INFO, SocialActivity.class).setParameter("studentId", studentId).setParameter("activity", activity).getSingleResult();
             semesterSocial = socialActivity.getSemestr();
             dateSocial = socialActivity.getDate();
             activitySocial = socialActivity.getActivity();
@@ -406,13 +642,73 @@ public class DisplayDate  {
         return socialActivity;
     }
 
-    public static CircleActivity selectStudentGroupActivityInfo(){
+    public static SocialActivity selectSocialActivityInfoOneResult(){
+        SocialActivity socialActivity = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            socialActivity= session.createQuery(GET_STUDENT_SOCIAL_INFO_ONE_RESULT, SocialActivity.class).setParameter("studentId", studentId).getSingleResult();
+            semesterSocial = socialActivity.getSemestr();
+            dateSocial = socialActivity.getDate();
+            activitySocial = socialActivity.getActivity();
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+
+        return socialActivity;
+    }
+
+    public static List<SocialActivity> selectSocialActivityList(){
+        List<SocialActivity> socialActivity = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            socialActivity= session.createQuery(GET_STUDENT_SOCIAL_INFO_LIST, SocialActivity.class).setParameter("studentId", studentId).getResultList();
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+
+        return socialActivity;
+    }
+
+    public static List<String> selectSocialActivity(String name,String surname,String middleName){
+        List<String> socialPassport = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            socialPassport = session.createQuery("SELECT s.activity FROM SocialActivity s WHERE s.studentInfo.name = :name and s.studentInfo.surname = :surname and s.studentInfo.middleName = :middleName", String.class)
+                    .setParameter("name", name)
+                    .setParameter("surname", surname)
+                    .setParameter("middleName", middleName).getResultList();
+
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        return socialPassport;
+    }
+
+    public static CircleActivity selectGroupActivityInfo(String groupName){
         CircleActivity circleActivity = null;
         try{
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            circleActivity = session.createQuery(GET_STUDENT_GROUP_INFO, CircleActivity.class).setParameter("studentId", studentId).getSingleResult();
+            circleActivity = session.createQuery(GET_STUDENT_GROUP_INFO, CircleActivity.class).setParameter("studentId", studentId).setParameter("groupName", groupName).getSingleResult();
             semesterGroup = circleActivity.getSemestr();
             groupNameGroup = circleActivity.getCircleName();
             noteGroup = circleActivity.getNote();
@@ -426,13 +722,71 @@ public class DisplayDate  {
         return circleActivity;
     }
 
-    public static IndividualSupport selectStudentIndividualSupportInfo(){
+    public static CircleActivity selectGroupActivityInfoOneResult(){
+        CircleActivity circleActivity = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            circleActivity = session.createQuery(GET_STUDENT_GROUP_INFO_ONE_RESULT, CircleActivity.class).setParameter("studentId", studentId).getSingleResult();
+            semesterGroup = circleActivity.getSemestr();
+            groupNameGroup = circleActivity.getCircleName();
+            noteGroup = circleActivity.getNote();
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        return circleActivity;
+    }
+
+    public static List<CircleActivity> selectGroupActivityList(){
+        List<CircleActivity> circleActivity = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            circleActivity = session.createQuery(GET_STUDENT_GROUP_INFO_LIST, CircleActivity.class).setParameter("studentId", studentId).getResultList();
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        return circleActivity;
+    }
+
+    public static List<String> selectGroupName(String name,String surname,String middleName){
+        List<String> socialPassport = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            socialPassport = session.createQuery("SELECT c.circleName FROM CircleActivity c WHERE c.studentInfo.name = :name and c.studentInfo.surname = :surname and c.studentInfo.middleName = :middleName", String.class)
+                    .setParameter("name", name)
+                    .setParameter("surname", surname)
+                    .setParameter("middleName", middleName).getResultList();
+
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        return socialPassport;
+    }
+
+    public static IndividualSupport selectStudentIndividualSupportInfo(String content){
         IndividualSupport individualSupport = null;
         try{
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            individualSupport = session.createQuery(GET_STUDENT_INDIVIDUAL_SUPPORT_INFO, IndividualSupport.class).setParameter("studentId", studentId).getSingleResult();
+            individualSupport = session.createQuery(GET_STUDENT_INDIVIDUAL_SUPPORT_INFO, IndividualSupport.class).setParameter("studentId", studentId).setParameter("content", content).getSingleResult();
             semesterSupport = individualSupport.getSemestr();
             dateSupport = individualSupport.getDate();
             contentSupport = individualSupport.getContent();
@@ -446,13 +800,71 @@ public class DisplayDate  {
         return individualSupport;
     }
 
-    public static Promotion selectStudentPromotionInfo(){
+    public static IndividualSupport selectStudentIndividualSupportInfoOneResult(){
+        IndividualSupport individualSupport = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            individualSupport = session.createQuery(GET_STUDENT_INDIVIDUAL_SUPPORT_INFO_ONE_RESULT, IndividualSupport.class).setParameter("studentId", studentId).getSingleResult();
+            semesterSupport = individualSupport.getSemestr();
+            dateSupport = individualSupport.getDate();
+            contentSupport = individualSupport.getContent();
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        return individualSupport;
+    }
+
+    public static List<IndividualSupport> selectStudentIndividualSupportInfoList(){
+        List<IndividualSupport> individualSupport = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            individualSupport = session.createQuery(GET_STUDENT_INDIVIDUAL_SUPPORT_INFO_LIST, IndividualSupport.class).setParameter("studentId", studentId).getResultList();
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        return individualSupport;
+    }
+
+    public static List<String> selectIndividualSupportContentName(String name,String surname,String middleName){
+        List<String> socialPassport = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            socialPassport = session.createQuery("SELECT i.content FROM IndividualSupport i WHERE i.studentInfo.name = :name and i.studentInfo.surname = :surname and i.studentInfo.middleName = :middleName", String.class)
+                    .setParameter("name", name)
+                    .setParameter("surname", surname)
+                    .setParameter("middleName", middleName).getResultList();
+
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        return socialPassport;
+    }
+
+    public static Promotion selectStudentPromotionInfo(String content){
         Promotion promotion = null;
         try{
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            promotion = session.createQuery(GET_STUDENT_PROMOTION_INFO, Promotion.class).setParameter("studentId", studentId).getSingleResult();
+            promotion = session.createQuery(GET_STUDENT_PROMOTION_INFO, Promotion.class).setParameter("studentId", studentId).setParameter("content", content).getSingleResult();
             semesterPromotion = promotion.getSemestr();
             datePromotion = promotion.getStartDate();
             contentPromotion = promotion.getContent();
@@ -466,21 +878,140 @@ public class DisplayDate  {
         return promotion;
     }
 
-    public static SocialPassport selectStudentSocialPassportInfo(){
+    public static Promotion selectStudentPromotionInfoOneResult(){
+        Promotion promotion = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            promotion = session.createQuery(GET_STUDENT_PROMOTION_INFO_ONE_RESULT, Promotion.class).setParameter("studentId", studentId).getSingleResult();
+            semesterPromotion = promotion.getSemestr();
+            datePromotion = promotion.getStartDate();
+            contentPromotion = promotion.getContent();
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        return promotion;
+    }
+
+    public static List<Promotion> selectStudentPromotionInfoList(){
+        List<Promotion> promotion = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            promotion = session.createQuery(GET_STUDENT_PROMOTION_INFO_LIST, Promotion.class).setParameter("studentId", studentId).getResultList();
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        return promotion;
+    }
+
+    public static List<String> selectPromotionContentName(String name,String surname,String middleName){
+        List<String> socialPassport = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            socialPassport = session.createQuery("SELECT p.content FROM Promotion p WHERE p.studentInfo.name = :name and p.studentInfo.surname = :surname and p.studentInfo.middleName = :middleName", String.class)
+                    .setParameter("name", name)
+                    .setParameter("surname", surname)
+                    .setParameter("middleName", middleName).getResultList();
+
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        return socialPassport;
+    }
+
+    public static SocialPassport selectStudentSocialPassportInfo(String categoryName){
         SocialPassport socialPassport = null;
         try{
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            socialPassport = session.createQuery(GET_STUDENT_SOCIAL_PASSPORT_INFO, SocialPassport.class).setParameter("studentId", studentId).getSingleResult();
-            int categoryId = socialPassport.getSpCategoryName().getId();
-            SpCategoryName spCategoryName = session.createQuery(GET_SOCIAL_PASSPORT_CATEGORY_NAME_IN_TABLE, SpCategoryName.class).setParameter("categoryId", categoryId).getSingleResult();
+            socialPassport = session.createQuery(GET_STUDENT_SOCIAL_PASSPORT_INFO, SocialPassport.class).setParameter("studentId", studentId).setParameter("categoryName", categoryName).getSingleResult();
+            //int categoryId = socialPassport.getSpCategoryName().getId();
+            //SpCategoryName spCategoryName = session.createQuery(GET_SOCIAL_PASSPORT_CATEGORY_NAME_IN_TABLE, SpCategoryName.class).setParameter("categoryId", categoryId).getSingleResult();
 
             startDateSocialPassport = socialPassport.getStartDate();
             endDateSocialPassport = socialPassport.getEndDate();
-            categorySocialPassport = spCategoryName.getCategory();
+            categorySocialPassport = socialPassport.getSpCategoryName().getCategory();
             semesterSocialPassport = socialPassport.getSemester();
             noteSocialPassport = socialPassport.getNote();
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        return socialPassport;
+    }
+
+    public static SocialPassport selectStudentSocialPassportInfoIfOneResult(){
+        SocialPassport socialPassport = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            socialPassport = session.createQuery(GET_STUDENT_SOCIAL_PASSPORT_INFO_LIST, SocialPassport.class).setParameter("studentId", studentId).getSingleResult();
+
+            startDateSocialPassport = socialPassport.getStartDate();
+            endDateSocialPassport = socialPassport.getEndDate();
+            categorySocialPassport = socialPassport.getSpCategoryName().getCategory();
+            semesterSocialPassport = socialPassport.getSemester();
+            noteSocialPassport = socialPassport.getNote();
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        return socialPassport;
+    }
+
+    public static List<SocialPassport> selectStudentSocialPassportInfoList(){
+        List<SocialPassport> socialPassport = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            socialPassport = session.createQuery(GET_STUDENT_SOCIAL_PASSPORT_INFO_LIST, SocialPassport.class).setParameter("studentId", studentId).getResultList();
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        return socialPassport;
+    }
+
+    public static List<String> selectStudentSocialPassportCategory(String name,String surname,String middleName){
+        List<String> socialPassport = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            socialPassport = session.createQuery("SELECT s.spCategoryName.category FROM SocialPassport s WHERE s.studentInfo.name = :name and s.studentInfo.surname = :surname and s.studentInfo.middleName = :middleName", String.class)
+                                                .setParameter("name", name)
+                                                .setParameter("surname", surname)
+                                                .setParameter("middleName", middleName).getResultList();
+
 
             session.getTransaction().commit();
 
@@ -543,4 +1074,5 @@ public class DisplayDate  {
         }
         return socialPassport;
     }
+
 }

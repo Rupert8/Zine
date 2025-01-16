@@ -63,6 +63,7 @@ public class AdditionalCuratorDialogController extends AdminCuratorController im
     }
 
     public void deleteCurator(){
+
         DeleteData.deleteCurator(curatorId);
         closeDialog();
     }

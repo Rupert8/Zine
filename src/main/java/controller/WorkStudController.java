@@ -104,11 +104,28 @@ public class WorkStudController extends HelloApplication implements Initializabl
     }
 
     private void showAndHideComboBox() {
-        GeneralInfoComboBox.setOnMouseEntered(event -> {
-            if (!GeneralInfoComboBox.isShowing()) {
-                GeneralInfoComboBox.show();
+        GeneralInfoComboBox.setOnMouseEntered(event -> handleComboBoxShow(GeneralInfoComboBox));
+        SocialActivityComboBox.setOnMouseEntered(event -> handleComboBoxShow(SocialActivityComboBox));
+        IndividualSupportComboBox.setOnMouseEntered(event -> handleComboBoxShow(IndividualSupportComboBox));
+        PromotionComboBox.setOnMouseEntered(event -> handleComboBoxShow(PromotionComboBox));
+        SocialPassport.setOnMouseEntered(event -> handleComboBoxShow(SocialPassport));
+    }
+
+    private void handleComboBoxShow(ComboBox<?> activeComboBox) {
+        ComboBox<?>[] comboBoxes = {
+                GeneralInfoComboBox, SocialActivityComboBox,
+                IndividualSupportComboBox, PromotionComboBox, SocialPassport
+        };
+
+        for (ComboBox<?> comboBox : comboBoxes) {
+            if (comboBox != activeComboBox && comboBox.isShowing()) {
+                comboBox.hide(); // Закрити всі ComboBox, окрім активного
             }
-        });
+        }
+
+        if (!activeComboBox.isShowing()) {
+            activeComboBox.show(); // Відкрити активний ComboBox
+        }
     }
 
     public void setCuratorName(){

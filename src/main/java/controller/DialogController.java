@@ -1,6 +1,7 @@
 package controller;
 
 import data.AddData;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -11,15 +12,12 @@ import java.sql.Date;
 import java.util.ResourceBundle;
 
 public class DialogController extends WorkPlanController implements Initializable{
-
     @FXML
     private ComboBox<String> CompletionComboBox;
 
     @FXML
     private TextField NameEvent;
 
-    @FXML
-    private TextField DialogPerformer;
 
     @FXML
     private DatePicker dateExecution;
@@ -27,19 +25,14 @@ public class DialogController extends WorkPlanController implements Initializabl
     @FXML
     private ComboBox<Integer> SemesterComboBox;
 
-    @FXML
-    private Button applyButton;
-
-    @FXML
-    private Button cancelButton;
-
     private String completion;
     private String nameEvent;
-    private String performer;
     private Date date;
     private Integer semester;
     private String status;
 
+    private URL url;
+    private ResourceBundle resources;
 
     private void getData(){
         if(CompletionComboBox.getValue().equals("Виконано")){
@@ -49,22 +42,20 @@ public class DialogController extends WorkPlanController implements Initializabl
         }
 
         nameEvent = String.valueOf(NameEvent.getText());
-        performer = String.valueOf(DialogPerformer.getText());
         date = Date.valueOf(dateExecution.getValue());
         semester = SemesterComboBox.getValue();
     }
 
-    public void addEvent(){
+    public void addEvent(ActionEvent event){
         getData();
-        AddData.addPlanData(nameEvent,date,performer,status,semester);
-        closeDialog();
+        AddData.addPlanForCuratorData(nameEvent,date,performerNameForAdd,status,semester);
+
     }
 
-    public void closeDialog(){
+    public void closeAddDialog(ActionEvent event){
         saveDialog.setResult(Boolean.TRUE);
         saveDialog.close();
     }
-
 
     private void setCompletionComboBox(){
         CompletionComboBox.getItems().addAll("Виконано","Невиконано");

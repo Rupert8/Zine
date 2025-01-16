@@ -1,0 +1,21 @@
+.table-view {
+    -fx-border-color: black; /* Чорний контур таблиці */
+    -fx-border-width: 1px;
+    -fx-background-color: white; /* Білий фон таблиці */
+}
+
+.table-row-cell {
+    -fx-border-color: black; /* Чорний контур рядків */
+    -fx-border-width: 1px;
+    -fx-background-color: white; /* Білий фон для рядків */
+}
+
+.table-row-cell:focused {
+    -fx-background-color: lightgray; /* Сірий фон при виборі рядка */
+    -fx-border-color: black; /* Чорний контур залишаються */
+}
+
+.table-cell {
+    -fx-border-color: black; /* Чорний контур для окремих комірок */
+    -fx-border-width: 1px;
+}

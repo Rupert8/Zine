@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane styleClass="dialogPane" stylesheets="@../../css/dialogPane.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ExtendedInformationAboutStudent">
+   <content>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="524.0" style="-fx-background-color: #fff;">
+         <children>
+            <Button fx:id="cancelButton" layoutX="14.0" layoutY="410.0" mnemonicParsing="false" styleClass="Button" stylesheets="@../../css/button.css" text="скасувати" />
+            <Label layoutX="13.0" layoutY="14.0" text="Змінити Дані про освіту">
+               <font>
+                  <Font name="Kharkiv Tone Regular" size="32.0" />
+               </font>
+            </Label>
+            <Button fx:id="applyButton" layoutX="416.0" layoutY="410.0" mnemonicParsing="false" styleClass="Button" stylesheets="@../../css/button.css" text="Змінити" />
+            <Pane layoutX="130.0" layoutY="77.0" prefHeight="308.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
+               <children>
+                  <Label layoutX="54.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата закінчення" />
+                  <Label layoutX="41.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Навчальний заклад" />
+                  <Label layoutX="68.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Середній бал" />
+                  <DatePicker fx:id="EndDateEducation" editable="false" layoutX="21.0" layoutY="45.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Закінчення" styleClass="data_picker">
+                     <stylesheets>
+                        <URL value="@../../css/style.css" />
+                        <URL value="@../../css/datePicker.css" />
+                     </stylesheets>
+                  </DatePicker>
+                  <TextField fx:id="SchoolNameEducation" layoutX="21.0" layoutY="125.0" prefWidth="222.0" promptText="Заклад" styleClass="textField" stylesheets="@../../css/textField.css" />
+                  <TextField fx:id="GradeAvarageEducation" layoutX="21.0" layoutY="205.0" prefWidth="222.0" promptText="Середній бал" styleClass="textField" stylesheets="@../../css/textField.css" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </content>
+</DialogPane>

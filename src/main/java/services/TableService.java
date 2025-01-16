@@ -1,4 +1,4 @@
-package controller.services;
+package services;
 
 import hibernate.entity.SocialPassport;
 import hibernate.entity.SpCategoryName;
@@ -16,15 +16,16 @@ import java.sql.Date;
 
 public class TableService {
 
-    public static void setDataInSocialPassportTable(ObservableList<SocialPassportPrototype> studentInfo, TableView<SocialPassportPrototype> SocialPassportTable, TableColumn<SocialPassportPrototype, Integer> number, TableColumn<SocialPassportPrototype, String> studentName, TableColumn<SocialPassportPrototype, String> studentSurname, TableColumn<SocialPassportPrototype, String> studentMiddleName, TableColumn<SocialPassportPrototype,Integer> semester, TableColumn<SocialPassportPrototype,String> categoryName) {
+    public static void setDataInSocialPassportTable(ObservableList<SocialPassportPrototype> studentInfo, TableView<SocialPassportPrototype> SocialPassportTable, TableColumn<SocialPassportPrototype, Integer> number, TableColumn<SocialPassportPrototype, String> studentName, TableColumn<SocialPassportPrototype, String> studentSurname, TableColumn<SocialPassportPrototype, String> studentMiddleName, TableColumn<SocialPassportPrototype,Integer> semester, TableColumn<SocialPassportPrototype,String> categoryName,TableColumn<SocialPassportPrototype,String> groupName)  {
         SocialPassportTable.setItems(studentInfo);
 
         number.setCellValueFactory(new PropertyValueFactory<SocialPassportPrototype, Integer>("id"));
         studentName.setCellValueFactory(new PropertyValueFactory<SocialPassportPrototype, String>("name"));
         studentMiddleName.setCellValueFactory(new PropertyValueFactory<SocialPassportPrototype, String>("middleName"));
         studentSurname.setCellValueFactory(new PropertyValueFactory<SocialPassportPrototype, String>("surname"));
+        groupName.setCellValueFactory(new PropertyValueFactory<SocialPassportPrototype, String>("nameCategory"));
         semester.setCellValueFactory(new PropertyValueFactory<SocialPassportPrototype, Integer>("semester"));
-        categoryName.setCellValueFactory(new PropertyValueFactory<SocialPassportPrototype, String>("nameCategory"));
+        categoryName.setCellValueFactory(new PropertyValueFactory<SocialPassportPrototype, String>("groupName"));
     }
 
     public static void setDataInSocialPassportCategoryTable(ObservableList<SocialPassportCategoryPrototype> CategoryName,TableView<SocialPassportCategoryPrototype> SocialPassportCategoryTable, TableColumn<SocialPassportCategoryPrototype, String> nameCategory) {

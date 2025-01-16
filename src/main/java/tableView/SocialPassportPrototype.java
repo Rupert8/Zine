@@ -13,5 +13,6 @@ public class SocialPassportPrototype {
     private String surname;
     private String middleName;
     private String nameCategory;
+    private String groupName;
     private Integer semester;
 }

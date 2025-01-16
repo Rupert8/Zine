@@ -61,4 +61,9 @@ public class SocialPassport {
         this.note = note;
     }
 
+    @Override
+    public String toString() {
+        return spCategoryName.getCategory(); // Або інший логічний атрибут
+    }
+
 }

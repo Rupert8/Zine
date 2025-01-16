@@ -1,7 +1,6 @@
 package start.zine;
 
-import controller.LoginController;
-import data.DisplayDate;
+import controller.WorkPlanController;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -12,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
-import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -24,6 +22,7 @@ public class HelloApplication extends Application {
     private Stage stage;
     private Scene scene;
 
+    public static WorkPlanController workPlanController;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -180,12 +179,26 @@ public class HelloApplication extends Application {
     }
 
     public void switchToExtendedStudentInfo(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/fxml/admin/adminDialogFxml/ExtendedInformationAboutStudent.fxml");
+        switchScene((Node) event.getSource(), "/fxml/extendedInformationAboutStudent/ExtendedInformationAboutStudent.fxml");
     }
 
     public void switchToAddSocialCategoryInfo(ActionEvent event) {
         switchScene((Node) event.getSource(), "/fxml/admin/adminDialogFxml/AddSocialCategoryDialogPane.fxml");
     }
+
+    public void switchToAdminWorkPlanPage(ActionEvent event){
+        switchScene((Node) event.getSource(), "/fxml/admin/AdminWorkPlan.fxml");
+    }
+
+    public void switchToCodeFxml(ActionEvent event) {
+        switchScene((Node) event.getSource(), "/recoveryPassword/CodeFxml.fxml");
+    }
+
+    public void switchToUpdateEducationInfo(ActionEvent event) {
+        switchScene((Node) event.getSource(), "/fxml/extendedInformationAboutStudent/UpdateEducationInfo.fxml");
+    }
+
+
     public static void main(String[] args) {
         //Session session = HibernateUtil.getSessionFactory().openSession();
         //HibernateUtil.shutdown();

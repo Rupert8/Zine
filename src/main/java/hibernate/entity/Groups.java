@@ -47,6 +47,9 @@ public class Groups {
     @Column(name = "form_of_education")
     private String formOfEducation;
 
+    @Column(name = "status")
+    private Boolean status;
+
     public Groups(Integer id,String groupName,String curator,String profession){
         this.id = id;
         this.groupName = groupName;

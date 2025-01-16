@@ -31,7 +31,6 @@ public class AddGroupDialogController extends AdminGroupController implements In
     private String groupLevelOfEducation;
     private String groupEducationAndProfessionalProgram;
     private int groupCourse;
-    private String groupCurator;
 
     private void getData(){
         groupName = GroupName.getText();
@@ -41,7 +40,6 @@ public class AddGroupDialogController extends AdminGroupController implements In
         groupLevelOfEducation = GroupLevelOfEducation.getText();
         groupEducationAndProfessionalProgram = EducationAndProfessionalProgram.getText();
         groupCourse = Integer.parseInt(GroupCourse.getValue());
-        groupCurator = GroupCurator.getValue();
     }
 
     public void closeDialog(){
@@ -51,22 +49,16 @@ public class AddGroupDialogController extends AdminGroupController implements In
 
     public void addGroup(){
         getData();
-        AddData.addGroupInfo(groupName,groupProfession,groupFormOfEducation,groupGroupYearOfStudy,groupLevelOfEducation,groupEducationAndProfessionalProgram,groupCourse,groupCurator);
+        AddData.addGroupInfo(groupName,groupProfession,groupFormOfEducation,groupGroupYearOfStudy,groupLevelOfEducation,groupEducationAndProfessionalProgram,groupCourse);
         closeDialog();
     }
 
-    public void setCuratorComboBox(){
-        List<String> groups = DisplayDate.getCuratorName();
-        GroupCurator.getItems().setAll(groups);
-
-    }
 
     public void setCourseComboBox(){
         GroupCourse.getItems().setAll("1","2","3","4");
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setCuratorComboBox();
         setCourseComboBox();
     }
 }

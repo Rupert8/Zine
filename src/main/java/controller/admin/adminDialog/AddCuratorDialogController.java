@@ -51,7 +51,7 @@ public class AddCuratorDialogController extends AdminCuratorController implement
     }
 
     public void setComboBox(){
-        List<String> groups = DisplayDate.getGroupName();
+        List<String> groups = DisplayDate.getGroupForAddCuratorName();
         CuratorGroup.getItems().setAll(groups);
     }
 

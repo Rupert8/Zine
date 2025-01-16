@@ -1,6 +1,7 @@
 package controller.admin;
 
 import data.DisplayDate;
+import data.SearchStudentData;
 import hibernate.entity.Curators;
 import hibernate.entity.Groups;
 import javafx.collections.ObservableList;
@@ -66,7 +67,9 @@ public class AdminGroupController extends HelloApplication implements Initializa
         GroupTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue != null){
                 Groups groups = newValue;
-                groupId = groups.getId();
+
+                groupCurator = groups.getCurator();
+                groupId = SearchStudentData.getIdGroup(groupCurator);
 
                 DisplayDate.setFullGroupInfo(groupId);
 
@@ -84,6 +87,7 @@ public class AdminGroupController extends HelloApplication implements Initializa
     public void startAdminGroup(){
         displayCurators();
         AdditionInfoButton.setVisible(false);
+        GroupTable.getSelectionModel().clearSelection();
         selectRows();
     }
 

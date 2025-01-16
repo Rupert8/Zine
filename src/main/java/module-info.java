@@ -8,6 +8,8 @@ module start.zine {
     requires java.naming;
     requires java.management;
     requires java.desktop;
+    requires jakarta.mail;
+    requires jakarta.activation;
 
 
     opens start.zine to javafx.fxml;
@@ -33,4 +35,6 @@ module start.zine {
 
     opens tableView to org.hibernate.orm.core, javafx.base;
     opens hibernate.entity to javafx.base, org.hibernate.orm.core;
+    exports controller.passwordRecovery;
+    opens controller.passwordRecovery to javafx.fxml;
 }

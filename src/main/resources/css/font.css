@@ -20,5 +20,5 @@
 .littleFont {
     -fx-font-family: Gotham;
     -fx-font-size: 18px;
-    -fx-font-weight: regular;
+    -fx-font-weight: bold;
 }

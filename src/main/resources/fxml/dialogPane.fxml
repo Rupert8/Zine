@@ -14,21 +14,17 @@
    <content>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="395.0" prefWidth="600.0" style="-fx-background-color: #fff;">
          <children>
-            <AnchorPane layoutX="24.0" layoutY="80.0" prefHeight="276.0" prefWidth="549.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 2;" />
-            <TextField fx:id="NameEvent" layoutX="325.0" layoutY="100.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../css/textField.css" />
-            <TextField fx:id="DialogPerformer" layoutX="325.0" layoutY="200.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../css/textField.css" />
-            <DatePicker fx:id="dateExecution" editable="false" layoutX="325.0" layoutY="150.0" prefHeight="35.0" prefWidth="225.0" styleClass="data_picker" stylesheets="@../css/datePicker.css" />
-            <Label layoutX="100.0" layoutY="105.0" text="Назва Заходу">
-               <font>
-                  <Font name="Gotham-Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="86.0" layoutY="155.0" text="Дата виконання">
-               <font>
-                  <Font name="Gotham-Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="109.0" layoutY="205.0" text="Виконавець">
+            <AnchorPane layoutX="24.0" layoutY="80.0" prefHeight="276.0" prefWidth="550.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 2;">
+               <children>
+                  <TextField fx:id="NameEvent" layoutX="20.0" layoutY="61.0" prefHeight="25.0" prefWidth="510.0" styleClass="textField" stylesheets="@../css/textField.css" />
+                  <Label layoutX="203.0" layoutY="22.0" text="Назва Заходу">
+                     <font>
+                        <Font name="Gotham-Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <DatePicker fx:id="dateExecution" editable="false" layoutX="325.0" layoutY="200.0" prefHeight="35.0" prefWidth="225.0" styleClass="data_picker" stylesheets="@../css/datePicker.css" />
+            <Label layoutX="86.0" layoutY="205.0" text="Дата виконання">
                <font>
                   <Font name="Gotham-Bold" size="20.0" />
                </font>
@@ -45,7 +41,7 @@
                </font>
             </Label>
             <ComboBox fx:id="SemesterComboBox" layoutX="325.0" layoutY="300.0" prefHeight="35.0" prefWidth="225.0" styleClass="comboBox" stylesheets="@../css/textField.css" />
-            <Button fx:id="cancelButton" layoutX="24.0" layoutY="368.0" mnemonicParsing="false" onAction="#closeDialog" styleClass="Button" stylesheets="@../css/button.css" text="скасувати" />
+            <Button fx:id="cancelButton" layoutX="24.0" layoutY="368.0" mnemonicParsing="false" onAction="#closeAddDialog" styleClass="Button" stylesheets="@../css/button.css" text="скасувати" />
             <Label layoutX="192.0" layoutY="14.0" text="Додати План">
                <font>
                   <Font name="Kharkiv Tone Regular" size="32.0" />

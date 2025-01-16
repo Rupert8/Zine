@@ -2,6 +2,7 @@ package controller.admin;
 
 import data.DeleteData;
 import data.DisplayDate;
+import data.SearchStudentData;
 import hibernate.entity.Curators;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -81,12 +82,13 @@ public class AdminCuratorController extends HelloApplication implements Initiali
             if(newValue != null){
                 Curators curators = newValue;
 
-                curatorId = curators.getId();
                 curatorName = curators.getName();
                 curatorSurname = curators.getSurname();
                 curatorMiddleName = curators.getMiddleName();
                 curatorEmail = curators.getEmail();
                 curatorGroupName = curators.getGroup();
+
+                curatorId = SearchStudentData.getIdCurator(curatorGroupName);
 
                 AdditionCuratorButton.setVisible(true);
             }
@@ -95,12 +97,13 @@ public class AdminCuratorController extends HelloApplication implements Initiali
 
     public void correctLoadPane(){
         AdditionCuratorButton.setVisible(false);
+        displayCurators();
+        selectRows();
+        CuratorTable.getSelectionModel().clearSelection();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        displayCurators();
-        selectRows();
         correctLoadPane();
     }
 }

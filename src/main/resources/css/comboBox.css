@@ -4,25 +4,24 @@
     -fx-border-width: 1px; /* Товщина рамки */
     -fx-border-radius: 5px; /* Заокруглення країв */
     -fx-background-radius: 5px; /* Заокруглення фону */
+    -fx-font-family: Gotham;
+    -fx-font-size: 15px;
     -fx-padding: 5px; /* Відступи */
 }
 
 .combo-box .arrow-button {
-    -fx-background-color: #c0a763; /* Колір стрілки */
+    -fx-background-color: #e8d58c; /* Колір стрілки */
 }
 
 .combo-box .arrow {
     -fx-background-color: black; /* Колір самої стрілки */
 }
 
-.combo-box-popup {
-    -fx-background-color: #e8d58c; /* Колір випадаючого списку */
-    -fx-border-color: black; /* Рамка випадаючого списку */
-}
 
 .combo-box .list-cell {
-    -fx-background-color: transparent; /* Прозорий фон елементів */
+    -fx-background-color: #e8d58c; /* Прозорий фон елементів */
     -fx-text-fill: black; /* Колір тексту елементів */
+    -fx-padding: 10px;
 }
 
 .combo-box .list-cell:hover {

@@ -6,13 +6,16 @@ import hibernate.entity.*;
 
 import org.hibernate.Session;
 
+import javax.swing.*;
 import java.sql.Date;
+
+import static controller.LoginController.curatorGroupName;
 
 public class AddData {
     public static final String GET_CATEGORYNAME_ID = "SELECT s FROM SpCategoryName s WHERE s.category = :categoryName";
 
 
-    public static void addPlanData(String eventName, Date executionDate, String Performer, String execution, int semester) {
+    public static void addPlanForCuratorData(String eventName, Date executionDate, String Performer, String execution, int semester) {
         try {
             Session session = HibernateUtil.getSession();
             session.beginTransaction();
@@ -23,6 +26,28 @@ public class AddData {
             plan.setExecutionDate(executionDate);
             plan.setSemester(semester);
             plan.setCompletionNote(execution);
+            plan.setConfirmationNote("Не затверджено");
+
+            session.persist(plan);
+            session.getTransaction().commit();
+            HibernateUtil.closeSession(session);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addPlanForAdminData(String eventName, Date executionDate, String execution, int semester) {
+        try {
+            Session session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            WorkPlan plan = new WorkPlan();
+            plan.setEventName(eventName);
+            plan.setPerformer("Адміністратор");
+            plan.setExecutionDate(executionDate);
+            plan.setSemester(semester);
+            plan.setCompletionNote(execution);
+            plan.setConfirmationNote("Затверджено");
 
             session.persist(plan);
             session.getTransaction().commit();
@@ -74,8 +99,11 @@ public class AddData {
                 user.setCurators(curator);
                 user.setStatus(true);
 
+                String curatorFullName = curator.getSurname() + " " + curator.getName() + " " + curator.getMiddleName();
                 session.persist(user);
                 session.getTransaction().commit();
+
+                UpdateData.updateGroupCurator(curatorFullName,group);
             }
 
         } catch (RuntimeException e) {
@@ -84,7 +112,7 @@ public class AddData {
         }
     }
 
-    public static void addGroupInfo(String groupName, String groupProfession, String groupFormOfEducation, String groupGroupYearOfStudy, String groupLevelOfEducation, String groupEducationAndProfessionalProgram, int groupCourse, String groupCurator) {
+    public static void addGroupInfo(String groupName, String groupProfession, String groupFormOfEducation, String groupGroupYearOfStudy, String groupLevelOfEducation, String groupEducationAndProfessionalProgram, int groupCourse) {
         Session session = null;
         try {
             session = HibernateUtil.getSession();
@@ -98,7 +126,7 @@ public class AddData {
             groups.setLevelOfEducation(groupLevelOfEducation);
             groups.setEducationProgram(groupEducationAndProfessionalProgram);
             groups.setCourse(groupCourse);
-            groups.setCurator(groupCurator);
+            groups.setStatus(false);
 
             session.persist(groups);
             session.getTransaction().commit();
@@ -382,7 +410,7 @@ public class AddData {
             StudentInfo student = session.get(StudentInfo.class, studentId);
 
             SpCategoryName spCategoryName = session.createQuery("FROM SpCategoryName WHERE category = :name", SpCategoryName.class)
-                    .setParameter("name", "Багатодітна сім'я")
+                    .setParameter("name", "Багатодітна родина")
                     .uniqueResult();
 
             SocialPassport socialPassport = new SocialPassport();
@@ -422,6 +450,30 @@ public class AddData {
             spManyChildrenFamily.setSocialPassport(socialPassportObject);
 
             session.persist(spManyChildrenFamily);
+            session.getTransaction().commit();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void addStudent(String name,String surname,String middleName,String address,String phoneNumber,Date dateOfBirth){
+        Session session = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            StudentInfo studentInfo = new StudentInfo();
+            studentInfo.setName(name);
+            studentInfo.setSurname(surname);
+            studentInfo.setMiddleName(middleName);
+            studentInfo.setAddress(address);
+            studentInfo.setPhoneNumber(phoneNumber);
+            studentInfo.setDate_of_birth(dateOfBirth);
+            studentInfo.setGroupName(curatorGroupName);
+
+
+            session.persist(studentInfo);
             session.getTransaction().commit();
         }catch(Exception e){
             e.printStackTrace();

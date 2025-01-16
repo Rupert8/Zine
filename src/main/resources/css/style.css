@@ -1,9 +1,26 @@
-.table{
-    -fx-background-color:#fff;
-    -fx-border-color:#e8d58c;
-    -fx-border-radius:5px;
-    -fx-border-width:2px;
+.table {
+    -fx-background-color: #fff;
+    -fx-border-color: #e8d58c; /* Сірий контур */
+    -fx-border-radius: 5px;
+    -fx-border-width: 2px;
 }
+
+.table-row-cell {
+    -fx-padding: 0; /* Без відступів */
+    -fx-background-insets: 0; /* Фон не зміщується */
+    -fx-border-insets: 0; /* Межі не зміщуються */
+}
+
+.table-row-cell:focused, .table-row-cell:selected {
+    -fx-background-color: lightgray !important; /* Сірий фон */
+    -fx-border-color: gray !important; /* Сірий контур */
+    -fx-padding: 0; /* Вирівнювання */
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: black; /* Чорний текст */
+}
+
 
 .textField{
     -fx-background-color:white;

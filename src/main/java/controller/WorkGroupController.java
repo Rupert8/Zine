@@ -6,6 +6,7 @@ import hibernate.entity.StudentInfo;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -44,6 +45,8 @@ public class WorkGroupController extends HelloApplication {
 
     private static ObservableList<StudentInfo> list;
 
+    public static Dialog<Boolean> saveDialog;
+
     public void switchPlanPage(ActionEvent event) {
         switchWorkPlanPage(event);
     }
@@ -80,6 +83,10 @@ public class WorkGroupController extends HelloApplication {
         }else{
             CuratorName.setText(curatorFullName);
         }
+    }
+
+    public void showAddStudentDialog(){
+        saveDialog = loadAndShowDialog("/fxml/curator/curatorDialogFxml/AddStudent.fxml",saveDialog);
     }
 
     public void initialize() {

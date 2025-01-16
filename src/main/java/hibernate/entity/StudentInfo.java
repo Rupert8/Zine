@@ -28,8 +28,8 @@ public class StudentInfo {
     @OneToOne(mappedBy = "studentInfo", cascade = CascadeType.ALL)
     private EducationInfo educationInfo;
 
-    @OneToOne(mappedBy = "studentInfo",cascade = CascadeType.ALL)
-    private IndividualSupport individualSupport;
+    @OneToMany(mappedBy = "studentInfo",cascade = CascadeType.ALL)
+    private List<IndividualSupport> individualSupport;
 
     @OneToMany(mappedBy = "studentInfo")
     private List<MilitaryService> militaryServiceList;
@@ -37,8 +37,8 @@ public class StudentInfo {
     @OneToMany(mappedBy = "studentInfo")
     private List<StudentJob> studentJobList;
 
-    @OneToOne(mappedBy = "studentInfo", cascade = CascadeType.ALL)
-    private Promotion promotion;
+    @OneToMany(mappedBy = "studentInfo", cascade = CascadeType.ALL)
+    private List<Promotion> promotion;
 
     @OneToMany(mappedBy = "studentInfo")
     private List<SocialActivity> socialActivityList;

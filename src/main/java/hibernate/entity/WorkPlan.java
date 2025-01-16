@@ -35,4 +35,7 @@ public class WorkPlan {
 
     @Column(name = "CompletionNote")
     private String completionNote;
+
+    @Column(name = "ConfirmationNote")
+    private String confirmationNote;
 }

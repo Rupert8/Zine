@@ -1,6 +1,7 @@
 package controller;
 
 import hiberante.sessionFactory.HibernateUtil;
+import hibernate.entity.Curators;
 import hibernate.entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,11 +9,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 import start.zine.HelloApplication;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,6 +36,7 @@ public class LoginController extends HelloApplication implements Initializable {
     private Dialog<Boolean> dialog;
 
     public static String curatorEmail;
+    public static String curatorGroupName;
 
     private void loadAndShowLoginWarning(String linkFxml){
         try {
@@ -59,6 +65,7 @@ public class LoginController extends HelloApplication implements Initializable {
 
     @FXML
     public void login(ActionEvent event) {
+        int idCurator;
         try  {
             Session session = HibernateUtil.getSession();
             session.beginTransaction();
@@ -71,7 +78,18 @@ public class LoginController extends HelloApplication implements Initializable {
             if (user != null) {
                 if (user.isStatus() == true) {
                     curatorEmail = emailField.getText();
+                    idCurator = user.getCurators().getId();
+                    System.out.println(idCurator);
+
+                    Curators curators = session.get(Curators.class, idCurator);
+                    if(curators != null){
+                        curatorGroupName = curators.getGroup();
+                    }else{
+                        throw new IllegalArgumentException("куратор за таким id не знайдено");
+                    }
+
                     switchScene((Node) event.getSource(), "/fxml/WorkGroupPage.fxml");
+                    System.out.print(curatorGroupName);
                 } else if(user.isStatus() == false){
                     switchScene((Node) event.getSource(), "/fxml/admin/AdminMain.fxml");
                 }

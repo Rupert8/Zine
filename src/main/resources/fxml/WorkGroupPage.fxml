@@ -41,7 +41,7 @@
             <Font name="Kharkiv Tone Regular" size="24.0" />
          </font>
       </Button>
-      <TableView fx:id="GroupTable" layoutX="25.0" layoutY="181.0" prefHeight="605.0" prefWidth="1230.0" styleClass="table" stylesheets="@../css/style.css">
+      <TableView fx:id="GroupTable" layoutX="20.0" layoutY="195.0" prefHeight="550.0" prefWidth="1240.0" styleClass="table" stylesheets="@../css/style.css">
         <columns>
           <TableColumn fx:id="NumberColumn" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
           <TableColumn fx:id="SurnameColumn" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
@@ -59,6 +59,11 @@
       <Button layoutX="568.0" layoutY="123.0" mnemonicParsing="false" styleClass="mainButton" stylesheets="@../css/button.css" text="2-KT-21">
          <font>
             <Font name="Kharkiv Tone Regular" size="24.0" />
+         </font>
+      </Button>
+      <Button layoutX="1160.0" layoutY="754.0" mnemonicParsing="false" onAction="#showAddStudentDialog" prefHeight="38.0" prefWidth="100.0" styleClass="Button" stylesheets="@../css/button.css" text="Додати">
+         <font>
+            <Font name="Kharkiv Tone Regular" size="20.0" />
          </font>
       </Button>
     </children>

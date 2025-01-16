@@ -18,7 +18,7 @@ public class IndividualSupport {
     @Column(name = "id")
     private int id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "student_id")
     private StudentInfo studentInfo;
 

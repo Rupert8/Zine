@@ -1,7 +1,6 @@
 package controller.admin.adminDialog;
 
-import controller.admin.AdminSocialPassportController;
-import controller.services.TableService;
+import services.TableService;
 import data.AddData;
 import data.DisplayDate;
 import javafx.collections.FXCollections;

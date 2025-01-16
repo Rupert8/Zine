@@ -1,17 +1,21 @@
 package controller.admin;
 
 import data.DisplayDate;
+import data.SearchStudentData;
 import hibernate.entity.StudentInfo;
+import hibernate.entity.WorkPlan;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import start.zine.HelloApplication;
 
 import java.sql.Date;
+import java.util.List;
 
 public class AdminMainController extends HelloApplication {
     @FXML
@@ -33,12 +37,17 @@ public class AdminMainController extends HelloApplication {
     private TableColumn<StudentInfo, String> MiddleNameColumn;
 
     @FXML
+    private ComboBox<String> SortStudentComboBox,SortByGroupComboBox;
+
+    @FXML
     private Button extendedInfo;
 
     public static int studentId;
     public static String studentName;
     public static String studentSurname;
     public static String studentMiddleName;
+    public static String studentAddress;
+    public static String studentPhoneNumber;
     private static ObservableList<StudentInfo> list;
 
     private void setDataInGroupTable(ObservableList<StudentInfo> studentInfo){
@@ -58,13 +67,27 @@ public class AdminMainController extends HelloApplication {
             if (newValue != null) {
                 StudentInfo studentInfo = newValue;
 
-                studentId = studentInfo.getId();
                 studentName = studentInfo.getName();
                 studentSurname = studentInfo.getSurname();
                 studentMiddleName = studentInfo.getMiddleName();
+                studentAddress = studentInfo.getAddress();
+                studentPhoneNumber = studentInfo.getPhoneNumber();
                 extendedInfo.setVisible(true);
+
+                studentId = SearchStudentData.getIdStudentForAdmin(studentAddress,studentPhoneNumber);
             }
         });
+    }
+
+    public void displayDataByGroupName(){
+        String semester = SortByGroupComboBox.getValue();
+        if(semester != null){
+            ObservableList<StudentInfo> semesterList = DisplayDate.getDataByGroupNameForAdminStudentInfo(semester);
+            setDataInGroupTable(semesterList);
+        }else {
+            throw new IllegalArgumentException("Семестер не може бути null");
+        }
+
     }
 
     private void displayGroupData(){
@@ -73,8 +96,42 @@ public class AdminMainController extends HelloApplication {
         setDataInGroupTable(list);
     }
 
-    public void initialize() {
+
+    private void setSortStudentComboBox(){
+        SortStudentComboBox.getItems().setAll("Показати все","Групою");
+    }
+
+    private void setSortByGroupComboBox(){
+        List<String> groupName = DisplayDate.getGroupName();
+        SortByGroupComboBox.getItems().setAll(groupName);
+    }
+
+    public void selectSortStudentComboBox(){
+        if(SortStudentComboBox.getValue().equals("Показати все")){
+            displayGroupData();
+            SortByGroupComboBox.setVisible(false);
+            SortByGroupComboBox.getItems().clear();
+            GroupTable.getSelectionModel().clearSelection();
+        }else if(SortStudentComboBox.getValue().equals("Групою")){
+            SortByGroupComboBox.setVisible(true);
+            SortByGroupComboBox.getItems().clear();
+            setSortByGroupComboBox();
+            GroupTable.getSelectionModel().clearSelection();
+        }
+    }
+
+
+
+    private void correctVisible(){
+        SortByGroupComboBox.setVisible(false);
+        GroupTable.getSelectionModel().clearSelection();
         displayGroupData();
         selectItems();
+        setSortStudentComboBox();
+        GroupTable.getSelectionModel().clearSelection();
+    }
+
+    public void initialize() {
+        correctVisible();
     }
 }

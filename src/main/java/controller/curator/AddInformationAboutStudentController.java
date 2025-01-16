@@ -1,10 +1,9 @@
 package controller.curator;
 
-import controller.services.TextFieldService;
+import services.TextFieldService;
 import data.AddData;
 import data.DisplayDate;
 import data.SearchStudentData;
-import hibernate.entity.StudentInfo;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,17 +17,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import start.zine.HelloApplication;
-import tableView.SocialPassportCategoryPrototype;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
+
+import static controller.LoginController.curatorGroupName;
 
 
 public class AddInformationAboutStudentController extends TextFieldService implements Initializable {
@@ -217,7 +213,7 @@ public class AddInformationAboutStudentController extends TextFieldService imple
     }
 
     private void setStudentPIP() {
-        List<String> list = DisplayDate.getStudentFullNames();
+        List<String> list = DisplayDate.getStudentFullNames(curatorGroupName);
         ObservableList<String> pipStudent = FXCollections.observableArrayList(list);
         StudentPIPEducation.getItems().addAll(pipStudent);
         StudentPIPMilitary.getItems().addAll(pipStudent);
@@ -396,6 +392,7 @@ public class AddInformationAboutStudentController extends TextFieldService imple
         String note = NoteSocialPassport.getText();
 
         int id = SearchStudentData.getIdStudent(name,surname,middleName);
+        System.out.print(id);
         AddData.addGeneralSocialPassportInfo(id,nameCategory,semester,startDate,endDate,note);
     }
 

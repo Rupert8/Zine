@@ -41,7 +41,6 @@ public class AdditionalGroupDialogController extends AdminGroupController implem
         levelOfEducation = GroupLevelOfEducation.getText();
         educationAndProfessionalProgram = GroupEducationAndProfessionalProgram.getText();
         course = Integer.parseInt(GroupCourse.getValue());
-        curator = GroupCurator.getValue();
     }
 
     private void setValueInTextFields(){
@@ -51,13 +50,12 @@ public class AdditionalGroupDialogController extends AdminGroupController implem
         GroupYearOfStudy.setText(groupYearOfStudy);
         GroupLevelOfEducation.setText(groupLevelOfEducation);
         GroupCourse.setValue(String.valueOf(groupCourse));
-        GroupCurator.setValue(groupCurator);
         GroupEducationAndProfessionalProgram.setText(groupEducationAndProfessionProgram);
     }
 
     public void updateGroup(){
         getData();
-        UpdateData.updateGroupDataById(groupId,name,curator,profession,educationAndProfessionalProgram,levelOfEducation,course,yearOfStudy, formOfEducation);
+        UpdateData.updateGroupDataById(groupId,name,profession,educationAndProfessionalProgram,levelOfEducation,course,yearOfStudy, formOfEducation);
         closeDialog();
     }
 
@@ -71,11 +69,6 @@ public class AdditionalGroupDialogController extends AdminGroupController implem
         saveDialog.close();
     }
 
-    public void setCuratorComboBox(){
-        List<String> groups = DisplayDate.getCuratorName();
-        GroupCurator.getItems().setAll(groups);
-
-    }
 
     public void setCourseComboBox(){
         GroupCourse.getItems().setAll("1","2","3","4");
@@ -85,6 +78,5 @@ public class AdditionalGroupDialogController extends AdminGroupController implem
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setValueInTextFields();
         setCourseComboBox();
-        setCuratorComboBox();
     }
 }

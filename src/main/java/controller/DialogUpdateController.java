@@ -55,7 +55,6 @@ public class DialogUpdateController extends WorkPlanController implements Initia
 
     public void setField(){
         NameEvent.setText(passEventName);
-        DialogPerformer.setText(passPerformer);
         dateExecution.setValue(passExecutionDate.toLocalDate());
         SemesterComboBox.setValue(passSemester);
         CompletionComboBox.setValue(passDone);

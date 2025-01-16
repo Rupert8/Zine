@@ -17,7 +17,7 @@
                         <Font name="Kharkiv Tone Regular" size="36.0" />
                     </font>
                 </Label>
-            <Pane layoutX="521.0" layoutY="105.0" prefHeight="49.0" prefWidth="120.7" style="-fx-background-color: #e8d58c;">
+            <Pane layoutX="760.0" layoutY="105.0" prefHeight="49.0" prefWidth="120.7" style="-fx-background-color: #e8d58c;">
                <children>
                   <Button layoutY="27.0" mnemonicParsing="false" styleClass="mainButton" stylesheets="@../../css/button.css" text="Групи">
                      <font>
@@ -41,10 +41,10 @@
       </Button>
       <TableView fx:id="GroupTable" layoutX="20.0" layoutY="190.0" prefHeight="550.0" prefWidth="1240.0" styleClass="table" stylesheets="@../../css/style.css">
         <columns>
-          <TableColumn fx:id="GroupNumberColumn" prefWidth="65.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
-          <TableColumn fx:id="GroupNameColumn" prefWidth="327.0" style="-fx-background-color: #fff;" styleClass="column" text="Назва" />
-            <TableColumn fx:id="GroupCuratorNameColumn" prefWidth="463.0" style="-fx-background-color: #fff;" styleClass="column" text="Куратор" />
-            <TableColumn fx:id="GroupProffesionColumn" minWidth="0.0" prefWidth="394.0" style="-fx-background-color: #fff;" styleClass="column" text="Спеціальність" />
+          <TableColumn fx:id="GroupNumberColumn" prefWidth="43.0" resizable="false" style="-fx-background-color: #fff;" styleClass="column" text="№" />
+          <TableColumn fx:id="GroupNameColumn" prefWidth="356.0" resizable="false" style="-fx-background-color: #fff;" styleClass="column" text="Назва" />
+            <TableColumn fx:id="GroupCuratorNameColumn" prefWidth="463.0" resizable="false" style="-fx-background-color: #fff;" styleClass="column" text="Куратор" />
+            <TableColumn fx:id="GroupProffesionColumn" minWidth="0.0" prefWidth="394.0" resizable="false" style="-fx-background-color: #fff;" styleClass="column" text="Спеціальність" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -60,7 +60,7 @@
             <Font name="Kharkiv Tone Regular" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="695.0" layoutY="125.0" mnemonicParsing="false" onAction="#switchToAdminMain" style="-fx-background-color: #fff; -fx-text-fill: #000000; -fx-background-radius: 30px;" text="Студенти">
+      <Button layoutX="541.0" layoutY="125.0" mnemonicParsing="false" onAction="#switchToAdminMain" style="-fx-background-color: #fff; -fx-text-fill: #000000; -fx-background-radius: 30px;" text="Студенти">
          <font>
             <Font name="Kharkiv Tone Regular" size="24.0" />
          </font>
@@ -70,7 +70,7 @@
             <Font name="Kharkiv Tone Regular" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="40.0" layoutY="125.0" mnemonicParsing="false" onAction="#switchToAdminCurator" style="-fx-background-color: #fff; -fx-text-fill: #000000; -fx-background-radius: 30px;" text="План роботи">
+      <Button layoutX="40.0" layoutY="125.0" mnemonicParsing="false" onAction="#switchToAdminWorkPlanPage" style="-fx-background-color: #fff; -fx-text-fill: #000000; -fx-background-radius: 30px;" text="План роботи">
          <font>
             <Font name="Kharkiv Tone Regular" size="24.0" />
          </font>

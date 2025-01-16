@@ -41,7 +41,6 @@
     -fx-background-color: transparent;
     -fx-tab-min-width: 100px;
     -fx-tab-min-height: 30px;
-    -fx-tab-max-height: px;
 }
 .tab-pane .tab {
     -fx-background-color: transparent;

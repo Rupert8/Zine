@@ -26,32 +26,32 @@
             </AnchorPane>
          </children>
         </Pane>
-        <Pane layoutX="369.0" layoutY="269.0" prefHeight="262.0" prefWidth="542.0" style="-fx-border-color: #e8d58c; -fx-background-color: #fff; -fx-border-radius: 30px;">
+        <Pane layoutX="341.0" layoutY="267.0" prefHeight="312.0" prefWidth="599.0" style="-fx-border-color: #e8d58c; -fx-background-color: #fff; -fx-border-radius: 30px;">
             <children>
             <Button layoutX="225.0" layoutY="239.0" mnemonicParsing="false" onAction="#login" prefHeight="17.0" prefWidth="87.0" style="-fx-background-color: #fff; -fx-background-radius: 30px; -fx-text-fill: #fff;" text="УВІЙТИ" textFill="#fffefe">
                <font>
                   <Font name="Gotham-Bold" size="10.0" />
                </font>
             </Button>
-                <Label layoutX="147.0" layoutY="69.0" text="Email">
+                <Label layoutX="143.0" layoutY="81.0" text="Email">
                     <font>
                         <Font name="Gotham-Bold" size="20.0" />
                     </font>
                 </Label>
-                <TextField fx:id="emailField" layoutX="225.0" layoutY="64.0" styleClass="textField" stylesheets="@../css/textField.css" />
-                <Label layoutX="136.0" layoutY="119.0" text="Пароль">
+                <TextField fx:id="emailField" layoutX="225.0" layoutY="75.0" prefWidth="240.0" styleClass="textField" stylesheets="@../css/textField.css" />
+                <Label layoutX="132.0" layoutY="136.0" text="Пароль">
                     <font>
                         <Font name="Gotham-Bold" size="20.0" />
                     </font>
                 </Label>
-                <Button layoutX="157.0" layoutY="164.0" mnemonicParsing="false" onAction="#login" prefHeight="36.0" prefWidth="258.0" styleClass="loginButton" stylesheets="@../css/button.css" text="УВІЙТИ" textFill="WHITE">
+                <Button layoutX="171.0" layoutY="183.0" mnemonicParsing="false" onAction="#login" prefHeight="36.0" prefWidth="258.0" styleClass="loginButton" stylesheets="@../css/button.css" text="УВІЙТИ" textFill="WHITE">
                     <font>
                         <Font name="Gotham-Bold" size="18.0" />
                     </font>
                 </Button>
-                <Label layoutX="225.0" layoutY="239.0" text="Забули пароль?" textFill="#9e9898" />
-                <Button layoutX="222.0" layoutY="235.0" mnemonicParsing="false" onAction="#switchToPassPage" opacity="0.0" prefHeight="25.0" prefWidth="87.0" text="Button" />
-            <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="114.0" styleClass="textField" stylesheets="@../css/textField.css" />
+                <Label layoutX="257.0" layoutY="277.0" text="Забули пароль?" textFill="#9e9898" />
+                <Button layoutX="256.0" layoutY="273.0" mnemonicParsing="false" onAction="#switchToPassPage" opacity="0.0" prefHeight="25.0" prefWidth="87.0" text="Button" />
+            <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="130.0" prefWidth="240.0" styleClass="textField" stylesheets="@../css/textField.css" />
             </children>
         </Pane>
     </children>

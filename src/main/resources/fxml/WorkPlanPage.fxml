@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WorkPlanController">
+<Pane fx:id="PlanPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WorkPlanController">
     <children>
         <Pane layoutY="-11.0" prefHeight="133.0" prefWidth="1280.0" style="-fx-background-color: #e8d58c;">
             <children>
@@ -50,19 +50,19 @@
                   <Font name="Kharkiv Tone Regular" size="24.0" />
               </font>
           </Button>
-      <ComboBox fx:id="SemesterComboBox" layoutX="523.0" layoutY="199.0" onAction="#displayDataBySemester" prefHeight="32.0" prefWidth="235.0" promptText="Виберіть Cиместр" style="-fx-cursor: pointer;" styleClass="comboBox" stylesheets="@../css/textField.css" />
+      <ComboBox fx:id="SortSemesterComboBox" layoutX="523.0" layoutY="202.0" onAction="#displayDataBySemester" prefHeight="32.0" prefWidth="235.0" promptText="Виберіть Cиместр" style="-fx-cursor: pointer;" styleClass="comboBox" stylesheets="@../css/textField.css" visible="false" />
       <TableView fx:id="PlanTable" editable="true" layoutX="25.0" layoutY="322.0" prefHeight="401.0" prefWidth="1230.0" styleClass="table" stylesheets="@../css/style.css">
         <columns>
-          <TableColumn fx:id="NumberColumn" editable="false" prefWidth="134.0" resizable="false" styleClass="column" text="№ з/п" />
-          <TableColumn fx:id="NameEventColumn" prefWidth="402.0" resizable="false" styleClass="column" text="Назва заходів" />
-            <TableColumn fx:id="ExecutionDateColumn" editable="false" prefWidth="169.0" resizable="false" styleClass="column" text="Дата виконання" />
-            <TableColumn fx:id="Performer" editable="false" minWidth="0.0" prefWidth="248.0" resizable="false" styleClass="column" text="Виконавець" />
-            <TableColumn fx:id="CompletionColumn" editable="false" minWidth="0.0" prefWidth="271.0" resizable="false" styleClass="column" text="Відмітка про виконання" />
+          <TableColumn fx:id="NumberColumn" editable="false" prefWidth="71.0" resizable="false" styleClass="column" text="№ з/п" />
+          <TableColumn fx:id="NameEventColumn" prefWidth="628.7999496459961" resizable="false" styleClass="column" text="Назва заходів" />
+            <TableColumn fx:id="ExecutionDateColumn" editable="false" minWidth="0.0" prefWidth="244.800048828125" resizable="false" styleClass="column" text="Дата виконання" />
+            <TableColumn fx:id="CompletionColumn" editable="false" minWidth="0.0" prefWidth="121.5999755859375" resizable="false" styleClass="column" text="Виконано" />
+            <TableColumn fx:id="ConfirmationNote" editable="false" prefWidth="156.4000244140625" styleClass="column" text="Затверджено" />
         </columns>
       </TableView>
-      <DatePicker fx:id="StartDatePicker" editable="false" layoutX="25.0" layoutY="200.0" prefHeight="35.0" prefWidth="155.0" promptText="Дата Початку" styleClass="data_picker" stylesheets="@../css/datePicker.css" />
-      <DatePicker fx:id="EndDatePicker" editable="false" layoutX="213.0" layoutY="200.0" prefHeight="26.0" prefWidth="155.0" promptText="Дата Кінця" styleClass="data_picker" stylesheets="@../css/datePicker.css" />
-      <Label layoutX="186.0" layoutY="199.0" style="-fx-text-fill: #e8d58c; -fx-font-size: 24px;" text="~" />
+      <DatePicker fx:id="StartDatePicker" editable="false" layoutX="470.0" layoutY="202.0" prefHeight="35.0" prefWidth="155.0" promptText="Дата Початку" styleClass="data_picker" stylesheets="@../css/datePicker.css" visible="false" />
+      <DatePicker fx:id="EndDatePicker" editable="false" layoutX="661.0" layoutY="202.0" prefHeight="26.0" prefWidth="155.0" promptText="Дата Кінця" styleClass="data_picker" stylesheets="@../css/datePicker.css" visible="false" />
+      <Label fx:id="SortDateLabel" layoutX="633.0" layoutY="200.0" style="-fx-text-fill: #e8d58c; -fx-font-size: 24px;" text="~" visible="false" />
         <Button layoutX="1199.0" layoutY="737.0" mnemonicParsing="false" onAction="#showAddDialogPane" prefHeight="23.0" prefWidth="0.0" style="-fx-background-color: #e8d58c;" styleClass="plus_btn" stylesheets="@../css/style.css">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
@@ -71,12 +71,12 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button layoutX="141.0" layoutY="245.0" mnemonicParsing="false" onAction="#displayPlanData" prefHeight="35.0" prefWidth="106.0" styleClass="plus_btn" stylesheets="@../css/button.css" text="Шукати">
+      <Button fx:id="SortDateButton" layoutX="588.0" layoutY="246.0" mnemonicParsing="false" onAction="#displayPlanData" prefHeight="35.0" prefWidth="106.0" styleClass="plus_btn" stylesheets="@../css/button.css" text="Шукати" visible="false">
          <font>
             <Font name="Kharkiv Tone Regular" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="1126.0" layoutY="737.0" mnemonicParsing="false" onAction="#showUpdateDialogPane" prefHeight="48.0" prefWidth="56.0" style="-fx-background-color: #e8d58c;" styleClass="plus_btn" stylesheets="@../css/style.css">
+      <Button fx:id="UpdatePlanButton" layoutX="1126.0" layoutY="737.0" mnemonicParsing="false" onAction="#showUpdateDialogPane" prefHeight="48.0" prefWidth="56.0" style="-fx-background-color: #e8d58c;" styleClass="plus_btn" stylesheets="@../css/style.css">
          <graphic>
             <ImageView fitHeight="34.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -85,7 +85,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="1053.0" layoutY="737.0" mnemonicParsing="false" onAction="#delete" prefHeight="23.0" prefWidth="0.0" style="-fx-background-color: #e8d58c;" styleClass="plus_btn" stylesheets="@../css/style.css">
+      <Button fx:id="DeletePlanButton" layoutX="1053.0" layoutY="737.0" mnemonicParsing="false" onAction="#delete" prefHeight="23.0" prefWidth="0.0" style="-fx-background-color: #e8d58c;" styleClass="plus_btn" stylesheets="@../css/style.css">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -94,5 +94,11 @@
             </ImageView>
          </graphic>
       </Button>
+      <ComboBox fx:id="SortComboBox" layoutX="156.0" layoutY="197.0" onAction="#selectedSortComboBox" prefHeight="45.0" prefWidth="165.0" promptText="Показати все" style="-fx-cursor: pointer; -fx-border-color: #fff;" styleClass="sortComboBox" stylesheets="@../css/textField.css" />
+      <Label layoutX="25.0" layoutY="206.0" text="Сортувати за:">
+         <font>
+            <Font name="Gotham-Bold" size="18.0" />
+         </font>
+      </Label>
     </children>
 </Pane>
