@@ -6,15 +6,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import start.zine.HelloApplication;
 
 import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
 
-import static controller.admin.AdminWorkPlanController.performerNameForAdd;
 import static controller.admin.AdminWorkPlanController.saveDialog;
 
-public class AddPlanDialogController implements Initializable {
+public class AddPlanDialogController extends HelloApplication implements Initializable {
     @FXML
     private ComboBox<String> CompletionComboBox;
 
@@ -46,9 +46,14 @@ public class AddPlanDialogController implements Initializable {
     }
 
     public void addEvent(){
-        getData();
-        AddData.addPlanForAdminData(nameEvent,date,status,semester);
-        closeAddDialog();
+        if(isAllFieldsFilled()){
+            getData();
+            AddData.addPlanForAdminData(nameEvent,date,status,semester);
+            closeAddDialog();
+        }else{
+            loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+        }
+
     }
 
     public void closeAddDialog(){
@@ -68,5 +73,16 @@ public class AddPlanDialogController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCompletionComboBox();
         setSemesterComboBox();
+    }
+
+    private boolean isAllFieldsFilled() {
+        if (!NameEvent.getText().isEmpty() &&
+                dateExecution.getValue() != null &&
+                SemesterComboBox.getValue() != null &&
+                CompletionComboBox.getValue() != null) {
+            return true; // Усі поля заповнені
+        } else {
+            return false; // Є незаповнені поля
+        }
     }
 }

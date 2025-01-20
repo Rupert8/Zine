@@ -8,9 +8,8 @@ import lombok.Setter;
 import org.hibernate.type.NumericBooleanConverter;
 
 @Entity
-@Table(name = "user")
-@Getter
-@Setter
+@Table(name = "user_nefk")
+//@Getter @Setter
 @NoArgsConstructor
 public class User {
     @Id
@@ -31,4 +30,44 @@ public class User {
     @Column
     @Convert(converter = NumericBooleanConverter.class)
     private boolean Status;
+
+    public long getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public Curators getCurators() {
+        return curators;
+    }
+
+    public boolean isStatus() {
+        return Status;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
+
+    public void setCurators(Curators curators) {
+        this.curators = curators;
+    }
+
+    public void setStatus(boolean status) {
+        Status = status;
+    }
 }

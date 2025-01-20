@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.sql.Date;
 
 @Entity
-@Table(name = "dropped_out_students")
+@Table(name = "dropped_out_students_nefk")
 @Getter
 @Setter
 @NoArgsConstructor

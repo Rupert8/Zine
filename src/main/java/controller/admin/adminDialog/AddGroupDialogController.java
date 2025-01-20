@@ -3,6 +3,7 @@ package controller.admin.adminDialog;
 import controller.admin.AdminGroupController;
 import data.AddData;
 import data.DisplayDate;
+import data.SearchStudentData;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,15 +49,44 @@ public class AddGroupDialogController extends AdminGroupController implements In
     }
 
     public void addGroup(){
-        getData();
-        AddData.addGroupInfo(groupName,groupProfession,groupFormOfEducation,groupGroupYearOfStudy,groupLevelOfEducation,groupEducationAndProfessionalProgram,groupCourse);
-        closeDialog();
+        if(isAllFieldsFilled()){
+            if(!isExist()){
+                getData();
+                AddData.addGroupInfo(groupName,groupProfession,groupFormOfEducation,groupGroupYearOfStudy,groupLevelOfEducation,groupEducationAndProfessionalProgram,groupCourse);
+                closeDialog();
+            }else {
+                loadAndShowLoginAlarm("/fxml/notifications/WarningExistGroupName.fxml");
+            }
+        }else{
+            loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+        }
+
     }
 
 
     public void setCourseComboBox(){
         GroupCourse.getItems().setAll("1","2","3","4");
     }
+
+    private boolean isAllFieldsFilled() {
+        if (!GroupName.getText().isEmpty() &&
+                !GroupProfession.getText().isEmpty() &&
+                !GroupFormOfEducation.getText().isEmpty() &&
+                GroupCourse.getValue() != null &&
+                !GroupYearOfStudy.getText().isEmpty() &&
+                !GroupLevelOfEducation.getText().isEmpty() &&
+                !EducationAndProfessionalProgram.getText().isEmpty()) {
+            return true; // Усі поля заповнені
+        } else {
+            return false; // Є незаповнені поля
+        }
+    }
+
+    private boolean isExist(){
+        String groupName = GroupName.getText();
+        return SearchStudentData.validateGroupName(groupName);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCourseComboBox();

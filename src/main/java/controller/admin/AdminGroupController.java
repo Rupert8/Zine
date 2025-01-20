@@ -37,6 +37,7 @@ public class AdminGroupController extends HelloApplication implements Initializa
 
     public static int groupId;
     public static String groupName;
+    public static String groupNameForDelete;
     public static String groupCurator;
     public static String groupProfession;
     public static int groupCourse;
@@ -47,10 +48,12 @@ public class AdminGroupController extends HelloApplication implements Initializa
 
     public void loadAddGroupDialog(){
         saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AddGroupDialogPane.fxml",saveDialog);
+        saveDialog.setOnHidden(event -> startAdminGroup());
     }
 
     public void loadAdditionInfoDialog(){
         saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AdditionalGroupDialogPane.fxml",saveDialog);
+        saveDialog.setOnHidden(event -> startAdminGroup());
     }
 
 
@@ -70,10 +73,15 @@ public class AdminGroupController extends HelloApplication implements Initializa
 
                 groupCurator = groups.getCurator();
                 groupId = SearchStudentData.getIdGroup(groupCurator);
+                groupNameForDelete = groups.getGroupName();
 
-                DisplayDate.setFullGroupInfo(groupId);
-
-                AdditionInfoButton.setVisible(true);
+                if(groupId == 0){
+                    loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateGroupInfo.fxml");
+                    GroupTable.getSelectionModel().clearSelection();
+                }else{
+                    DisplayDate.setFullGroupInfo(groupId);
+                    AdditionInfoButton.setVisible(true);
+                }
             }
         });
     }

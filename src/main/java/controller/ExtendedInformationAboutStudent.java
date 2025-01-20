@@ -4,21 +4,23 @@ import controller.admin.AdminMainController;
 import data.DisplayDate;
 import data.UpdateData;
 import hibernate.entity.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
-import org.hibernate.sql.Update;
+import services.ValidateValueService;
 
 import java.net.URL;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class ExtendedInformationAboutStudent extends AdminMainController implements Initializable {
     @FXML
-    private ToggleGroup RadioGroup;
+    private Tab GeneralInfoTab,SocialAndGroupActivityTab,IndividualSupportTab,PromotionTab,SocialPassportTab;
 
     @FXML
     private Label FullNameStudentGeneralInfoLabel,FullNameStudentSocialLabel,FullNameStudentPromotionLabel,FullStudentNameSocialPassport,FullNameStudentSupportLabel;
@@ -43,6 +45,8 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     private Label StartDateMilitaryLabel,EndDateMilitaryLabel,UnitMilitaryLabel;
     @FXML
     private RadioButton UpdateMilitaryInfoRadioButton;
+    @FXML
+    private Button UpdateMilitaryInfoButton;
     public static Date startDateMilitary;
     public static Date endDateMilitary;
     public static String unitMilitary;
@@ -57,6 +61,8 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     private ComboBox<String> ChooseJobComboBox;
     @FXML
     private RadioButton UpdateJobInfoRadioButton;
+    @FXML
+    private Button UpdateJobInfoButton;
     public static Date startDateJob;
     public static Date endDateJob;
     public static String placeJob;
@@ -68,6 +74,8 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     private TextField PhoneFatherParents,PhoneMotherParents;
     @FXML
     private RadioButton UpdateParentsInfoRadioButton;
+    @FXML
+    private Button UpdateParentsInfoButton;
     public static String pipFatherParent;
     public static String pipMotherParent;
     public static String phoneFatherParent;
@@ -83,6 +91,10 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     private Label SemesterSocialActivityLabel,DateSocialActivityLabel,ActivitySocialActivityLabel;
     @FXML
     private ComboBox<String> ChooseSocialActivityComboBox;
+    @FXML
+    private RadioButton UpdateSocialActivityRadioButton;
+    @FXML
+    private Button UpdateSocialActivityButton;
     public static int semesterSocial;
     public static Date dateSocial;
     public static String activitySocial;
@@ -95,6 +107,10 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     private Label SemesterGroupActivityLabel,NameGroupActivityLabel,NoteGroupActivityLabel;
     @FXML
     private ComboBox<String> ChooseGroupActivityComboBox;
+    @FXML
+    private RadioButton UpdateGroupActivityRadioButton;
+    @FXML
+    private Button UpdateGroupActivityButton;
     public static int semesterGroup;
     public static String groupNameGroup;
     public static String noteGroup;
@@ -109,9 +125,12 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     private Label SemesterSupportLabel,DateSupportLabel,ContentSupportLabel;
     @FXML
     private ComboBox<String> ChooseIndividualSupportComboBox;
+    @FXML
+    private Button UpdateIndividualSupportButtonInDB;
     public static int semesterSupport;
     public static Date dateSupport;
     public static String contentSupport;
+    public static String tmpContentSupport;
 
     @FXML
     private DatePicker DatePromotion;
@@ -123,9 +142,12 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     private Label SemesterPromotionLabel,DatePromotionLabel,ContentPromotionLabel;
     @FXML
     private ComboBox<String> ChoosePromotionComboBox;
+    @FXML
+    private Button UpdatePromotionButtonInDB;
     public static int semesterPromotion;
     public static Date datePromotion;
     public static String contentPromotion;
+    public static String tmpContentPromotion;
 
     @FXML
     private DatePicker StartDateSocialPassport,EndDateSocialPassport;
@@ -139,11 +161,16 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     private Label StartDateSocialPassportLabel,EndDateSocialPassportLabel,SemesterSocialPassportLabel,CategorySocialPassportLabel,NoteSocialPassportLabel;
     @FXML
     private TextField NoteSocialPassport;
+    @FXML
+    private RadioButton UpdateSocialPassportRadioButton;
+    @FXML
+    private Button UpdateSocialPassportButton;
     public static Date startDateSocialPassport;
     public static Date endDateSocialPassport;
     public static String categorySocialPassport;
     public static int semesterSocialPassport;
     public static String noteSocialPassport;
+    public static String tmpCategorySocialPassport;
 
     @FXML
     private DatePicker StartDateInvalid,EndDateInvalid;
@@ -153,11 +180,16 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     private ComboBox<String> CategoryInvalid;
     @FXML
     private TextField NoteInvalid;
+    @FXML
+    private RadioButton UpdateInvalidRadioButton;
+    @FXML
+    private Button UpdateInvalidPassportButton;
     public static Date startDateInvalid;
     public static Date endDateInvalid;
     public static String categoryInvalid;
     public static String noteInvalid;
     public static int semesterInvalid;
+    public static String tmpCategoryInvalid = "Інвалід";
 
     @FXML
     private DatePicker StartDateFamily,EndDateFamily;
@@ -165,6 +197,10 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     private ComboBox<Integer> SemesterFamily;
     @FXML
     private TextField  CountChildrenFamily,LessThan18Family,MuchThan18Family,NoteFamily;
+    @FXML
+    private RadioButton UpdateFamilyRadioButton;
+    @FXML
+    private Button UpdateManyChildrenFamilyPassportButton;
     public static Date startDateFamily;
     public static Date endDateFamily;
     public static int countChildrenFamily;
@@ -172,6 +208,7 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     public static int muchThan18Family;
     public static String noteFamily;
     public static int semesterFamily;
+    public static String tmpManyChildrenFamily = "Багатодітна родина";
 
     //Зміна інформації про студента
     @FXML
@@ -180,10 +217,40 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     private Button UpdateStudentInfoButton;
     @FXML
     private Button BackButton;
+    @FXML
+    private Button CancelUpdateSocialAndGroupActivityButton;
+    @FXML
+    private Button UpdateSocialAndGroupActivityButton;
+    @FXML
+    private Button BackSocialActivityButton;
+    @FXML
+    private Button CancelUpdateIndividualSupportButton;
+    @FXML
+    private Button UpdateIndividualSupportButton;
+    @FXML
+    private Button BackIndividualSupportButton;
+    @FXML
+    private Button CancelUpdatePromotionButton;
+    @FXML
+    private Button UpdatePromotionButton;
+    @FXML
+    private Button BackPromotionButton;
+    @FXML
+    private Button CancelUpdateSocialPassportButton;
+    @FXML
+    private Button UpdateAllSocialPassportButton;
+    @FXML
+    private Button BackAllSocialPassportButton;
 
+
+    private int semesterSocialValue;
+    private int semesterGroupValue;
+    private int semesterSupportValue;
+    private int semesterInvalidValue;
+    private int semesterFamilyValue;
+    private int semesterSocialPassportValue;
 
     private boolean statusPane = false;
-    private final StudentInfo studentInfo = new StudentInfo();
 
     public void back(ActionEvent event) {
         switchToAdminMain(event);
@@ -545,6 +612,11 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
         if(socialPassport != null){
             StartDateInvalid.setValue(startDateInvalid.toLocalDate());
             EndDateInvalid.setValue(endDateInvalid.toLocalDate());
+//            if(EndDateInvalid.getValue() == null){
+//
+//            }else{
+//                EndDateInvalid.setValue(null);
+//            }
             CategoryInvalid.setValue(categoryInvalid);
             SemesterInvalid.setValue(semesterInvalid);
             NoteInvalid.setText(noteInvalid);
@@ -653,7 +725,7 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
         }
     }
 
-    public void updateStudentInfo(){
+    public void updateGeneralInfoStudentInfo(){
         CancelUpdateStudentInfoButton.setVisible(true);
         BackButton.setVisible(false);
         UpdateStudentInfoButton.setVisible(false);
@@ -681,6 +753,187 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
         UpdateMilitaryInfoRadioButton.setVisible(true);
         UpdateJobInfoRadioButton.setVisible(true);
 
+        SocialAndGroupActivityTab.setDisable(true);
+        IndividualSupportTab.setDisable(true);
+        PromotionTab.setDisable(true);
+        SocialPassportTab.setDisable(true);
+
+    }
+
+    public void updateSocialAndGroupActivityStudentInfo(){
+        CancelUpdateSocialAndGroupActivityButton.setVisible(true);
+        BackSocialActivityButton.setVisible(false);
+        UpdateSocialAndGroupActivityButton.setVisible(false);
+
+        SemesterSocial.setDisable(true);
+        ActivitySocial.setDisable(true);
+        DateSocial.setDisable(true);
+
+        SemesterGroup.setDisable(true);
+        GroupName.setDisable(true);
+        NoteGroup.setDisable(true);
+
+        UpdateSocialActivityRadioButton.setVisible(true);
+        UpdateGroupActivityRadioButton.setVisible(true);
+
+        GeneralInfoTab.setDisable(true);
+        PromotionTab.setDisable(true);
+        IndividualSupportTab.setDisable(true);
+        SocialPassportTab.setDisable(true);
+    }
+
+    public void updateIndividualSupportStudentInfo(){
+        if(ValidateValueService.isIndividualSupportFieldEmpty(SemesterSupport,DateSupport,ContentSupport)){
+            tmpContentSupport = ContentSupport.getText();
+            CancelUpdateIndividualSupportButton.setVisible(true);
+            BackIndividualSupportButton.setVisible(false);
+            UpdateIndividualSupportButton.setVisible(false);
+            UpdateIndividualSupportButtonInDB.setVisible(true);
+            setSemesterComboBox(SemesterSupport);
+
+            GeneralInfoTab.setDisable(true);
+            SocialAndGroupActivityTab.setDisable(true);
+            PromotionTab.setDisable(true);
+            SocialPassportTab.setDisable(true);
+        }else{
+            loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+            cancelUpdateIndividualSupportButton();
+        }
+
+    }
+
+    public void updatePromotionStudentInfo(){
+        if(ValidateValueService.isPromotionFieldEmpty(SemesterPromotion,DatePromotion,ContentPromotion)){
+            tmpContentPromotion = ContentPromotion.getText();
+            CancelUpdatePromotionButton.setVisible(true);
+            BackPromotionButton.setVisible(false);
+            UpdatePromotionButton.setVisible(false);
+            UpdatePromotionButtonInDB.setVisible(true);
+            setSemesterComboBox(SemesterPromotion);
+
+            GeneralInfoTab.setDisable(true);
+            SocialAndGroupActivityTab.setDisable(true);
+            IndividualSupportTab.setDisable(true);
+            SocialPassportTab.setDisable(true);
+        }else{
+            loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+            cancelUpdatePromotionInfo();
+        }
+
+    }
+
+    public void updateAllSocialPassportStudentInfo(){
+        String categoryName = CategorySocialPassport.getValue();
+
+        CategorySocialPassport.getItems().clear();
+        CategorySocialPassport.getItems().add(categoryName);
+        CategorySocialPassport.setValue(categoryName);
+
+        CancelUpdateSocialPassportButton.setVisible(true);
+        BackAllSocialPassportButton.setVisible(false);
+        UpdateAllSocialPassportButton.setVisible(false);
+
+        StartDateSocialPassport.setDisable(true);
+        EndDateSocialPassport.setDisable(true);
+        SemesterSocialPassport.setDisable(true);
+        CategorySocialPassport.setDisable(true);
+        NoteSocialPassport.setDisable(true);
+
+        StartDateInvalid.setDisable(true);
+        EndDateInvalid.setDisable(true);
+        SemesterInvalid.setDisable(true);
+        CategoryInvalid.setDisable(true);
+        NoteInvalid.setDisable(true);
+
+        StartDateFamily.setDisable(true);
+        EndDateFamily.setDisable(true);
+        SemesterFamily.setDisable(true);
+        CountChildrenFamily.setDisable(true);
+        LessThan18Family.setDisable(true);
+        MuchThan18Family.setDisable(true);
+        NoteFamily.setDisable(true);
+
+        UpdateSocialPassportRadioButton.setVisible(true);
+        UpdateInvalidRadioButton.setVisible(true);
+        UpdateFamilyRadioButton.setVisible(true);
+
+        GeneralInfoTab.setDisable(true);
+        SocialAndGroupActivityTab.setDisable(true);
+        IndividualSupportTab.setDisable(true);
+        PromotionTab.setDisable(true);
+    }
+
+    public void cancelUpdatePromotionInfo(){
+        CancelUpdatePromotionButton.setVisible(false);
+        BackPromotionButton.setVisible(true);
+        UpdatePromotionButton.setVisible(true);
+        UpdatePromotionButtonInDB.setVisible(false);
+
+        GeneralInfoTab.setDisable(false);
+        SocialAndGroupActivityTab.setDisable(false);
+        IndividualSupportTab.setDisable(false);
+        SocialPassportTab.setDisable(false);
+    }
+
+    public void cancelUpdateIndividualSupportButton(){
+        if(SemesterSupport.getValue() != null){
+            semesterSupportValue = SemesterSupport.getValue();
+        }
+
+        CancelUpdateIndividualSupportButton.setVisible(false);
+        BackIndividualSupportButton.setVisible(true);
+        UpdateIndividualSupportButton.setVisible(true);
+        UpdateIndividualSupportButtonInDB.setVisible(false);
+
+        SemesterSupport.getItems().clear();
+        SemesterSupport.getItems().add(semesterSupportValue);
+        SemesterSupport.setValue(semesterSupportValue);
+
+        GeneralInfoTab.setDisable(false);
+        SocialAndGroupActivityTab.setDisable(false);
+        PromotionTab.setDisable(false);
+        SocialPassportTab.setDisable(false);
+    }
+
+    public void cancelUpdateSocialAndGroupActivityStudentInfo() {
+        if(SemesterSocial.getValue() != null){
+            semesterSocialValue = SemesterSocial.getValue();
+        }
+        if(SemesterGroup.getValue() != null){
+            semesterGroupValue = SemesterGroup.getValue();
+        }
+        CancelUpdateSocialAndGroupActivityButton.setVisible(false);
+        BackSocialActivityButton.setVisible(true);
+        UpdateSocialAndGroupActivityButton.setVisible(true);
+
+        SemesterSocial.getItems().clear();
+        SemesterSocial.getItems().add(semesterSocialValue);
+        SemesterSocial.setValue(semesterSocialValue);
+
+        SemesterGroup.getItems().clear();
+        SemesterGroup.getItems().add(semesterGroupValue);
+        SemesterGroup.setValue(semesterGroupValue);
+
+        UpdateSocialActivityButton.setVisible(false);
+        UpdateGroupActivityButton.setVisible(false);
+
+        SemesterSocial.setDisable(false);
+        ActivitySocial.setDisable(false);
+        DateSocial.setDisable(false);
+
+        SemesterGroup.setDisable(false);
+        GroupName.setDisable(false);
+        NoteGroup.setDisable(false);
+
+        UpdateSocialActivityRadioButton.setVisible(false);
+        UpdateGroupActivityRadioButton.setVisible(false);
+        UpdateSocialActivityRadioButton.setSelected(false);
+        UpdateGroupActivityRadioButton.setSelected(false);
+
+        GeneralInfoTab.setDisable(false);
+        PromotionTab.setDisable(false);
+        IndividualSupportTab.setDisable(false);
+        SocialPassportTab.setDisable(false);
     }
 
     public void cancelUpdateStudentInfo(){
@@ -689,6 +942,9 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
         UpdateStudentInfoButton.setVisible(true);
 
         UpdateEducationInfoButton.setVisible(false);
+        UpdateMilitaryInfoButton.setVisible(false);
+        UpdateJobInfoButton.setVisible(false);
+        UpdateParentsInfoButton.setVisible(false);
 
         EndDateEducation.setDisable(false);
         SchoolNameEducation.setDisable(false);
@@ -716,39 +972,394 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
         UpdateEducationInfoRadioButton.setSelected(false);
         UpdateMilitaryInfoRadioButton.setSelected(false);
         UpdateJobInfoRadioButton.setSelected(false);
+
+        SocialAndGroupActivityTab.setDisable(false);
+        PromotionTab.setDisable(false);
+        IndividualSupportTab.setDisable(false);
+        SocialPassportTab.setDisable(false);
+    }
+
+    public void cancelAllSocialPassportStudentInfo(){
+        if(SemesterSocialPassport.getValue() != null){
+            semesterSocialPassportValue = SemesterSocialPassport.getValue();
+        }else if(SemesterInvalid.getValue() != null){
+            semesterInvalidValue = SemesterInvalid.getValue();
+        }else if(SemesterFamily.getValue() != null){
+            semesterFamilyValue = SemesterFamily.getValue();
+        }
+        String categoryName = CategorySocialPassport.getValue();
+
+        CancelUpdateSocialPassportButton.setVisible(false);
+        BackAllSocialPassportButton.setVisible(true);
+        UpdateAllSocialPassportButton.setVisible(true);
+
+        UpdateSocialPassportButton.setVisible(false);
+        UpdateInvalidPassportButton.setVisible(false);
+        UpdateManyChildrenFamilyPassportButton.setVisible(false);
+
+        SemesterSocialPassport.getItems().clear();
+        SemesterSocialPassport.getItems().add(semesterSocialPassportValue);
+        SemesterSocialPassport.setValue(semesterSocialPassportValue);
+
+        CategorySocialPassport.getItems().clear();
+        CategorySocialPassport.getItems().add(categoryName);
+        CategorySocialPassport.setValue(categoryName);
+
+        SemesterInvalid.getItems().clear();
+        SemesterInvalid.getItems().add(semesterInvalidValue);
+        SemesterInvalid.setValue(semesterInvalidValue);
+
+        SemesterFamily.getItems().clear();
+        SemesterFamily.getItems().add(semesterFamilyValue);
+        SemesterFamily.setValue(semesterFamilyValue);
+
+        StartDateSocialPassport.setDisable(false);
+        EndDateSocialPassport.setDisable(false);
+        SemesterSocialPassport.setDisable(false);
+        CategorySocialPassport.setDisable(false);
+        NoteSocialPassport.setDisable(false);
+
+        StartDateInvalid.setDisable(false);
+        EndDateInvalid.setDisable(false);
+        SemesterInvalid.setDisable(false);
+        CategoryInvalid.setDisable(false);
+        NoteInvalid.setDisable(false);
+
+        StartDateFamily.setDisable(false);
+        EndDateFamily.setDisable(false);
+        SemesterFamily.setDisable(false);
+        CountChildrenFamily.setDisable(false);
+        LessThan18Family.setDisable(false);
+        MuchThan18Family.setDisable(false);
+        NoteFamily.setDisable(false);
+
+        UpdateSocialPassportRadioButton.setVisible(false);
+        UpdateInvalidRadioButton.setVisible(false);
+        UpdateFamilyRadioButton.setVisible(false);
+        UpdateSocialPassportRadioButton.setSelected(false);
+        UpdateInvalidRadioButton.setSelected(false);
+        UpdateFamilyRadioButton.setSelected(false);
+
+        GeneralInfoTab.setDisable(false);
+        SocialAndGroupActivityTab.setDisable(false);
+        IndividualSupportTab.setDisable(false);
+        PromotionTab.setDisable(false);
     }
 
     @FXML
-    public void handleRadioButtonAction(ActionEvent event) {
-
+    public void handleGeneralInfoRadioButtonAction() {
         if (UpdateEducationInfoRadioButton.isSelected()) {
-            EndDateEducation.setDisable(false);
-            SchoolNameEducation.setDisable(false);
-            GradeAvarageEducation.setDisable(false);
+            if(ValidateValueService.isEducationFieldEmpty(EndDateEducation,SchoolNameEducation,GradeAvarageEducation)){
+                EndDateEducation.setDisable(false);
+                SchoolNameEducation.setDisable(false);
+                GradeAvarageEducation.setDisable(false);
 
-            UpdateEducationInfoButton.setVisible(true);
+                UpdateEducationInfoButton.setVisible(true);
 
-            UpdateParentsInfoRadioButton.setDisable(true);
-            UpdateMilitaryInfoRadioButton.setDisable(true);
-            UpdateJobInfoRadioButton.setDisable(true);
-            System.out.print("Привіт");
+                UpdateParentsInfoRadioButton.setDisable(true);
+                UpdateMilitaryInfoRadioButton.setDisable(true);
+                UpdateJobInfoRadioButton.setDisable(true);
+            }else{
+                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                cancelUpdateStudentInfo();
+            }
         } else if (UpdateMilitaryInfoRadioButton.isSelected()) {
-            System.out.println("Військова служба вибрана");
+            if(ValidateValueService.isMilitaryFieldEmpty(StartDateMilitary,EndDateMilitary,UnitMilitary)){
+                StartDateMilitary.setDisable(false);
+                EndDateMilitary.setDisable(false);
+                UnitMilitary.setDisable(false);
+
+                UpdateMilitaryInfoButton.setVisible(true);
+
+                UpdateParentsInfoRadioButton.setDisable(true);
+                UpdateEducationInfoRadioButton.setDisable(true);
+                UpdateJobInfoRadioButton.setDisable(true);
+            }else{
+                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                cancelUpdateStudentInfo();
+            }
         } else if (UpdateJobInfoRadioButton.isSelected()) {
-            System.out.println("Трудова діяльність вибрана");
+            if(ValidateValueService.isStudentJobFieldEmpty(StartDateJob,PlaceJob,PositionJob)){
+                StartDateJob.setDisable(false);
+                EndDateJob.setDisable(false);
+                PlaceJob.setDisable(false);
+                PositionJob.setDisable(false);
+
+                UpdateJobInfoButton.setVisible(true);
+
+                UpdateParentsInfoRadioButton.setDisable(true);
+                UpdateEducationInfoRadioButton.setDisable(true);
+                UpdateMilitaryInfoRadioButton.setDisable(true);
+            }else {
+                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                cancelUpdateStudentInfo();
+            }
         } else if (UpdateParentsInfoRadioButton.isSelected()) {
+            if(ValidateValueService.isStudentParentsFieldEmpty(PIPFatherParents,PIPMotherParents,PhoneFatherParents,PhoneMotherParents)){
+                PIPFatherParents.setDisable(false);
+                PIPMotherParents.setDisable(false);
+                PhoneFatherParents.setDisable(false);
+                PhoneMotherParents.setDisable(false);
+
+                UpdateParentsInfoButton.setVisible(true);
+
+                UpdateEducationInfoRadioButton.setDisable(true);
+                UpdateMilitaryInfoRadioButton.setDisable(true);
+                UpdateJobInfoRadioButton.setDisable(true);
+            }else {
+                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                cancelUpdateStudentInfo();
+            }
+        }
+    }
+
+    public void handleSocialAndGroupActivityInfoRadioButtonAction() {
+        if (UpdateSocialActivityRadioButton.isSelected()) {
+            if(ValidateValueService.isSocialActivityFieldEmpty(SemesterSocial,DateSocial,ActivitySocial)){
+                SemesterSocial.setDisable(false);
+                DateSocial.setDisable(false);
+                ActivitySocial.setDisable(false);
+
+                UpdateSocialActivityButton.setVisible(true);
+
+                setSemesterComboBox(SemesterSocial);
+                UpdateGroupActivityRadioButton.setDisable(true);
+            }else{
+                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                cancelUpdateSocialAndGroupActivityStudentInfo();
+            }
+
+        }else if (UpdateGroupActivityRadioButton.isSelected()) {
+            if(ValidateValueService.isGroupActivityFieldEmpty(SemesterGroup,GroupName,NoteGroup)){
+                SemesterGroup.setDisable(false);
+                GroupName.setDisable(false);
+                NoteGroup.setDisable(false);
+
+                UpdateGroupActivityButton.setVisible(true);
+
+                setSemesterComboBox(SemesterGroup);
+                UpdateSocialActivityRadioButton.setDisable(true);
+            }else{
+                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                cancelUpdateSocialAndGroupActivityStudentInfo();
+            }
+        }
+    }
+
+    public void handleAllSocialPassportStudentInfoRadioButtonAction() {
+        if (UpdateSocialPassportRadioButton.isSelected()) {
+            if(ValidateValueService.isSocialPassportFieldEmpty(StartDateSocialPassport,SemesterSocialPassport,CategorySocialPassport)){
+                tmpCategorySocialPassport = CategorySocialPassport.getValue();
+                StartDateSocialPassport.setDisable(false);
+                EndDateSocialPassport.setDisable(false);
+                SemesterSocialPassport.setDisable(false);
+                CategorySocialPassport.setDisable(false);
+                NoteSocialPassport.setDisable(false);
+
+                setSemesterComboBox(SemesterSocialPassport);
+                setSocialPassportCategoryComboBox();
+                UpdateSocialPassportButton.setVisible(true);
+
+                UpdateInvalidRadioButton.setDisable(true);
+                UpdateFamilyRadioButton.setDisable(true);
+            }else{
+                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                cancelAllSocialPassportStudentInfo();
+            }
+
+        }else if (UpdateInvalidRadioButton.isSelected()) {
+            if(ValidateValueService.isInvalidSocialPassportFieldEmpty(StartDateInvalid,SemesterInvalid,CategoryInvalid)){
+                StartDateInvalid.setDisable(false);
+                EndDateInvalid.setDisable(false);
+                SemesterInvalid.setDisable(false);
+                CategoryInvalid.setDisable(false);
+                NoteInvalid.setDisable(false);
+
+                setSemesterComboBox(SemesterInvalid);
+                setInvalidCategoryComboBox();
+                UpdateInvalidPassportButton.setVisible(true);
+
+                UpdateSocialPassportRadioButton.setDisable(true);
+                UpdateFamilyRadioButton.setDisable(true);
+            }else {
+                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                cancelAllSocialPassportStudentInfo();
+            }
+        }else if (UpdateFamilyRadioButton.isSelected()) {
+            if(ValidateValueService.isManyChildrenFieldEmpty(StartDateFamily,SemesterFamily,CountChildrenFamily,LessThan18Family,MuchThan18Family)){
+                StartDateFamily.setDisable(false);
+                EndDateFamily.setDisable(false);
+                SemesterFamily.setDisable(false);
+                CountChildrenFamily.setDisable(false);
+                LessThan18Family.setDisable(false);
+                MuchThan18Family.setDisable(false);
+                NoteFamily.setDisable(false);
+
+                setSemesterComboBox(SemesterFamily);
+                UpdateManyChildrenFamilyPassportButton.setVisible(true);
+
+                UpdateSocialPassportRadioButton.setDisable(true);
+                UpdateInvalidRadioButton.setDisable(true);
+            }else {
+                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                cancelAllSocialPassportStudentInfo();
+            }
 
         }
     }
 
-
     public void setNewValueEducationInfo(){
-        Date endDate = Date.valueOf(EndDateEducation.getValue());
-        String schoolName = SchoolNameEducation.getText();
-        float grade = Float.parseFloat(GradeAvarageEducation.getText());
-        UpdateData.updateStudentEducationInfo(endDate,schoolName,grade);
+            Date endDate = Date.valueOf(EndDateEducation.getValue());
+            String schoolName = SchoolNameEducation.getText();
+            float grade = Float.parseFloat(GradeAvarageEducation.getText());
+            UpdateData.updateStudentEducationInfo(endDate,schoolName,grade);
+            cancelUpdateStudentInfo();
+    }
+
+    public void setNewValueMilitaryInfo(){
+        Date startDate = Date.valueOf(StartDateMilitary.getValue());
+        Date endDate = Date.valueOf(EndDateMilitary.getValue());
+        String unit = UnitMilitary.getText();
+        UpdateData.updateStudentMilitaryInfo(startDate,endDate,unit);
         cancelUpdateStudentInfo();
-        //setStudentEducationInfoField();
+    }
+
+    public void setNewValueJobInfo(){
+        Date startDate = Date.valueOf(StartDateJob.getValue());
+        Date endDate = Date.valueOf(EndDateJob.getValue());
+        String place = PlaceJob.getText();
+        String position = PositionJob.getText();
+        UpdateData.updateStudentJobInfo(startDate,endDate,place,position);
+        cancelUpdateStudentInfo();
+    }
+
+    public void setNewValueParentsInfo(){
+        String pipFather = PIPFatherParents.getText();
+        String pipMother = PIPMotherParents.getText();
+        String phoneFather = PhoneFatherParents.getText();
+        String phoneMother = PhoneMotherParents.getText();
+        UpdateData.updateStudentParentsInfo(pipFather,pipMother,phoneFather,phoneMother);
+        cancelUpdateStudentInfo();
+    }
+
+    public void setNewValueSocialActivityInfo(){
+        int semester = SemesterSocial.getValue();
+        String activity = ActivitySocial.getText();
+        Date date  = Date.valueOf(DateSocial.getValue());
+        UpdateData.updateStudentSocialActivityInfo(semester,activity,date);
+        cancelUpdateSocialAndGroupActivityStudentInfo();
+
+    }
+
+    public void setNewValueGroupActivityInfo(){
+        int semester = SemesterGroup.getValue();
+        String groupName = GroupName.getText();
+        String note = NoteGroup.getText();
+        UpdateData.updateStudentGroupActivityInfo(semester,groupName,note);
+        cancelUpdateSocialAndGroupActivityStudentInfo();
+    }
+
+    public void setNewValueIndividualSupportInfo(){
+        int semester = SemesterSupport.getValue();
+        Date date  = Date.valueOf(DateSupport.getValue());
+        String content = ContentSupport.getText();
+        UpdateData.updateStudentIndividualSupportInfo(semester,date,content,tmpContentSupport);
+        cancelUpdateIndividualSupportButton();
+    }
+
+    public void setNewValuePromotionInfo(){
+        int semester = SemesterPromotion.getValue();
+        Date date  = Date.valueOf(DatePromotion.getValue());
+        String content = ContentPromotion.getText();
+        UpdateData.updateStudentPromotionInfo(semester,date,content,tmpContentPromotion);
+        cancelUpdatePromotionInfo();
+    }
+
+    public void setNewValueSocialPassport(){
+        Date startDate = Date.valueOf(StartDateSocialPassport.getValue());
+        Date endDate = null;
+        if(EndDateSocialPassport.getValue() != null){
+            endDate = Date.valueOf(EndDateSocialPassport.getValue());
+        }
+        int semester = SemesterSocialPassport.getValue();
+        String category = CategorySocialPassport.getValue();
+        String note = NoteSocialPassport.getText();
+        UpdateData.updateStudentSocialPassportInfo(startDate,endDate,semester,category,note,tmpCategorySocialPassport);
+        cancelAllSocialPassportStudentInfo();
+    }
+
+    public void setNewValueSocialInvalidPassport(){
+        Date startDate = Date.valueOf(StartDateInvalid.getValue());
+        Date endDate = null;
+        if(EndDateInvalid.getValue() != null){
+            endDate = Date.valueOf(EndDateInvalid.getValue());
+        }
+        int semester = SemesterInvalid.getValue();
+        String category = CategoryInvalid.getValue();
+        String note = NoteInvalid.getText();
+        UpdateData.updateStudentInvalidPassportInfo(startDate,endDate,semester,category,note,tmpCategoryInvalid);
+        cancelAllSocialPassportStudentInfo();
+    }
+
+    public void setNewValueManyChildrenFamilyPassport(){
+        Date startDate = Date.valueOf(StartDateFamily.getValue());
+        Date endDate = null;
+        if(EndDateFamily.getValue() != null){
+            endDate = Date.valueOf(EndDateFamily.getValue());
+        }
+        int semester = SemesterFamily.getValue();
+        int countChildren = Integer.parseInt(CountChildrenFamily.getText());
+        int lessThan18 = Integer.parseInt(LessThan18Family.getText());
+        int muchThan18 = Integer.parseInt(MuchThan18Family.getText());
+        String note = NoteFamily.getText();
+        UpdateData.updateStudentManyChildrenFamilyPassportInfo(startDate,endDate,semester,countChildren,lessThan18,muchThan18,note,tmpManyChildrenFamily);
+        cancelAllSocialPassportStudentInfo();
+    }
+
+    public void setSemesterComboBox(ComboBox<Integer> semesterComboBox) {
+        ObservableList<Integer> existingItems = semesterComboBox.getItems();
+
+        // Створюємо список семестрів, який потрібно додати
+        ObservableList<Integer> semesterList = FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8);
+
+        // Фільтруємо унікальні значення
+        ObservableList<Integer> uniqueItems = FXCollections.observableArrayList();
+        for (Integer semester : semesterList) {
+            if (!existingItems.contains(semester)) {
+                uniqueItems.add(semester);
+            }
+        }
+
+        // Додаємо тільки унікальні значення до ComboBox
+        semesterComboBox.getItems().addAll(uniqueItems);
+    }
+
+
+    public void setSocialPassportCategoryComboBox() {
+        ObservableList<String> socialCategoryList = DisplayDate.getCategoryInComboBox();
+
+        // Перевіряємо, чи список ComboBox не порожній і чи потрібно оновлювати
+        if (!socialCategoryList.isEmpty()) {
+            // Отримуємо існуючі елементи з ComboBox
+            ObservableList<String> existingItems = CategorySocialPassport.getItems();
+
+            // Фільтруємо нові елементи, які ще не додані в ComboBox
+            ObservableList<String> uniqueItems = FXCollections.observableArrayList();
+            for (String category : socialCategoryList) {
+                if (!existingItems.contains(category)) {
+                    uniqueItems.add(category);
+                }
+            }
+
+            ObservableList<String> filteredList = uniqueItems.filtered(category ->
+                    !category.equals("Багатодітна родина") && !category.equals("Інвалід"));
+
+            CategorySocialPassport.getItems().addAll(filteredList);
+        }
+    }
+
+    private void setInvalidCategoryComboBox(){
+        CategoryInvalid.getItems().addAll("І група інвалідності","ІІ група інвалідності","ІІІ група інвалідності","Дитяча інвалідність");
     }
 
     @Override

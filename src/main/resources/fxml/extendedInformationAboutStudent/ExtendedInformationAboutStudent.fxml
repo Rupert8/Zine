@@ -19,7 +19,7 @@
    <children>
       <TabPane layoutY="100.0" prefHeight="600.0" prefWidth="1280.0" stylesheets="@../../css/tabPane.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Загальні відомості">
+          <Tab fx:id="GeneralInfoTab" text="Загальні відомості">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -117,23 +117,26 @@
                                     <Font name="Gotham-Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="UpdateStudentInfoButton" layoutX="1149.0" layoutY="500.0" mnemonicParsing="false" onAction="#updateStudentInfo" stylesheets="@../../css/button.css" text="Змінити" />
+                              <Button fx:id="UpdateStudentInfoButton" layoutX="1149.0" layoutY="500.0" mnemonicParsing="false" onAction="#updateGeneralInfoStudentInfo" stylesheets="@../../css/button.css" text="Змінити" />
                               <Button fx:id="BackButton" layoutX="16.0" layoutY="500.0" mnemonicParsing="false" onAction="#back" stylesheets="@../../css/button.css" text="Повернутися" />
-                              <RadioButton fx:id="UpdateEducationInfoRadioButton" layoutX="144.0" layoutY="61.0" mnemonicParsing="false" onAction="#handleRadioButtonAction" visible="false">
+                              <RadioButton fx:id="UpdateEducationInfoRadioButton" layoutX="144.0" layoutY="61.0" mnemonicParsing="false" onAction="#handleGeneralInfoRadioButtonAction" visible="false">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="RadioButton" />
                                  </toggleGroup></RadioButton>
-                              <RadioButton fx:id="UpdateMilitaryInfoRadioButton" layoutX="467.0" layoutY="61.0" mnemonicParsing="false" toggleGroup="$RadioButton" visible="false" />
-                              <RadioButton fx:id="UpdateJobInfoRadioButton" layoutX="779.0" layoutY="61.0" mnemonicParsing="false" toggleGroup="$RadioButton" visible="false" />
-                              <RadioButton fx:id="UpdateParentsInfoRadioButton" layoutX="1090.0" layoutY="61.0" mnemonicParsing="false" toggleGroup="$RadioButton" visible="false" />
+                              <RadioButton fx:id="UpdateMilitaryInfoRadioButton" layoutX="467.0" layoutY="61.0" mnemonicParsing="false" onAction="#handleGeneralInfoRadioButtonAction" toggleGroup="$RadioButton" visible="false" />
+                              <RadioButton fx:id="UpdateJobInfoRadioButton" layoutX="779.0" layoutY="61.0" mnemonicParsing="false" onAction="#handleGeneralInfoRadioButtonAction" toggleGroup="$RadioButton" visible="false" />
+                              <RadioButton fx:id="UpdateParentsInfoRadioButton" layoutX="1090.0" layoutY="61.0" mnemonicParsing="false" onAction="#handleGeneralInfoRadioButtonAction" toggleGroup="$RadioButton" visible="false" />
                               <Button fx:id="CancelUpdateStudentInfoButton" layoutX="16.0" layoutY="500.0" mnemonicParsing="false" onAction="#cancelUpdateStudentInfo" stylesheets="@../../css/button.css" text="Скасувати" visible="false" />
-                              <Button fx:id="UpdateEducationInfoButton" layoutX="1149.0" layoutY="500.0" mnemonicParsing="false" onAction="#setNewValueEducationInfo" stylesheets="@../../css/button.css" text="Змінити e" visible="false" />
+                              <Button fx:id="UpdateEducationInfoButton" layoutX="1149.0" layoutY="500.0" mnemonicParsing="false" onAction="#setNewValueEducationInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false" />
+                              <Button fx:id="UpdateMilitaryInfoButton" layoutX="1149.0" layoutY="500.0" mnemonicParsing="false" onAction="#setNewValueMilitaryInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false" />
+                              <Button fx:id="UpdateJobInfoButton" layoutX="1149.0" layoutY="500.0" mnemonicParsing="false" onAction="#setNewValueJobInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false" />
                            </children>
                         </Pane>
+                        <Button fx:id="UpdateParentsInfoButton" layoutX="1159.0" layoutY="510.0" mnemonicParsing="false" onAction="#setNewValueParentsInfo" stylesheets="@../../css/button.css" text="Змінити p" visible="false" />
                      </children></AnchorPane>
             </content>
           </Tab>
-          <Tab text="Громадська діяльність">
+          <Tab fx:id="SocialAndGroupActivityTab" text="Громадська діяльність">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -182,14 +185,27 @@
                                     <Font name="Gotham-Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="1149.0" layoutY="500.0" mnemonicParsing="false" stylesheets="@../../css/button.css" text="Змінити" />
-                              <Button layoutX="16.0" layoutY="500.0" mnemonicParsing="false" stylesheets="@../../css/button.css" text="Повернутися" />
+                              <Button fx:id="CancelUpdateSocialAndGroupActivityButton" layoutX="16.0" layoutY="500.0" mnemonicParsing="false" onAction="#cancelUpdateSocialAndGroupActivityStudentInfo" stylesheets="@../../css/button.css" text="Скасувати" visible="false" />
+                              <Button fx:id="UpdateSocialAndGroupActivityButton" layoutX="1149.0" layoutY="500.0" mnemonicParsing="false" onAction="#updateSocialAndGroupActivityStudentInfo" stylesheets="@../../css/button.css" text="Змінити" />
+                              <Button fx:id="BackSocialActivityButton" layoutX="16.0" layoutY="500.0" mnemonicParsing="false" onAction="#back" stylesheets="@../../css/button.css" text="Повернутися" />
+                              <RadioButton fx:id="UpdateGroupActivityRadioButton" layoutX="823.0" layoutY="60.0" mnemonicParsing="false" onAction="#handleSocialAndGroupActivityInfoRadioButtonAction" visible="false">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="RadioButton1" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="UpdateSocialActivityRadioButton" layoutX="377.0" layoutY="60.0" mnemonicParsing="false" onAction="#handleSocialAndGroupActivityInfoRadioButtonAction" visible="false">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="RadioButton11" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <Button fx:id="UpdateSocialActivityButton" layoutX="1149.0" layoutY="500.0" mnemonicParsing="false" onAction="#setNewValueSocialActivityInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false" />
                            </children>
                         </Pane>
+                        <Button fx:id="UpdateGroupActivityButton" layoutX="1159.0" layoutY="510.0" mnemonicParsing="false" onAction="#setNewValueGroupActivityInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false" />
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="Супровід">
+            <Tab fx:id="IndividualSupportTab" text="Супровід">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -222,14 +238,16 @@
                                     <Font name="Gotham-Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="1149.0" layoutY="500.0" mnemonicParsing="false" stylesheets="@../../css/button.css" text="Змінити" />
-                              <Button layoutX="16.0" layoutY="500.0" mnemonicParsing="false" stylesheets="@../../css/button.css" text="Повернутися" />
+                              <Button fx:id="UpdateIndividualSupportButton" layoutX="1149.0" layoutY="500.0" mnemonicParsing="false" onAction="#updateIndividualSupportStudentInfo" stylesheets="@../../css/button.css" text="Змінити" />
+                              <Button fx:id="BackIndividualSupportButton" layoutX="16.0" layoutY="500.0" mnemonicParsing="false" onAction="#back" stylesheets="@../../css/button.css" text="Повернутися" />
+                              <Button fx:id="UpdateIndividualSupportButtonInDB" layoutX="1149.0" layoutY="500.0" mnemonicParsing="false" onAction="#setNewValueIndividualSupportInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false" />
+                              <Button fx:id="CancelUpdateIndividualSupportButton" layoutX="16.0" layoutY="499.0" mnemonicParsing="false" onAction="#cancelUpdateIndividualSupportButton" stylesheets="@../../css/button.css" text="Скасувати" visible="false" />
                            </children>
                         </Pane>
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab text="Заохочення">
+            <Tab fx:id="PromotionTab" text="Заохочення">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -262,14 +280,16 @@
                                     <Font name="Gotham-Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="1149.0" layoutY="500.0" mnemonicParsing="false" stylesheets="@../../css/button.css" text="Змінити" />
-                              <Button layoutX="16.0" layoutY="500.0" mnemonicParsing="false" stylesheets="@../../css/button.css" text="Повернутися" />
+                              <Button fx:id="UpdatePromotionButton" layoutX="1149.0" layoutY="500.0" mnemonicParsing="false" onAction="#updatePromotionStudentInfo" stylesheets="@../../css/button.css" text="Змінити" />
+                              <Button fx:id="BackPromotionButton" layoutX="16.0" layoutY="500.0" mnemonicParsing="false" onAction="#back" stylesheets="@../../css/button.css" text="Повернутися" />
+                              <Button fx:id="CancelUpdatePromotionButton" layoutX="16.0" layoutY="500.0" mnemonicParsing="false" onAction="#cancelUpdatePromotionInfo" stylesheets="@../../css/button.css" text="Скасувати" visible="false" />
                            </children>
                         </Pane>
+                        <Button fx:id="UpdatePromotionButtonInDB" layoutX="1159.0" layoutY="510.0" mnemonicParsing="false" onAction="#setNewValuePromotionInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false" />
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab text="Соціальний паспорт">
+            <Tab fx:id="SocialPassportTab" text="Соціальний паспорт">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -328,8 +348,8 @@
                                     <TextField fx:id="NoteFamily" layoutX="21.0" layoutY="294.0" prefHeight="35.0" prefWidth="422.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" />
                                  </children>
                               </Pane>
-                              <Label fx:id="FullStudentNameSocialPassport" layoutX="124.0" layoutY="21.0" styleClass="mainFont" stylesheets="@../../css/font.css" text="Ім'я студента" />
-                              <Label layoutX="14.0" layoutY="21.0" styleClass="mainFont" stylesheets="@../../css/font.css" text="Студент:">
+                              <Label fx:id="FullStudentNameSocialPassport" layoutX="124.0" layoutY="12.0" styleClass="mainFont" stylesheets="@../../css/font.css" text="Ім'я студента" />
+                              <Label layoutX="14.0" layoutY="12.0" styleClass="mainFont" stylesheets="@../../css/font.css" text="Студент:">
                                  <font>
                                     <Font name="Gotham-Bold" size="20.0" />
                                  </font>
@@ -349,8 +369,8 @@
                                     <Font name="Gotham-Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="1149.0" layoutY="500.0" mnemonicParsing="false" stylesheets="@../../css/button.css" text="Змінити" />
-                              <Button layoutX="16.0" layoutY="500.0" mnemonicParsing="false" stylesheets="@../../css/button.css" text="Повернутися" />
+                              <Button fx:id="UpdateAllSocialPassportButton" layoutX="1149.0" layoutY="500.0" mnemonicParsing="false" onAction="#updateAllSocialPassportStudentInfo" stylesheets="@../../css/button.css" text="Змінити" />
+                              <Button fx:id="BackAllSocialPassportButton" layoutX="16.0" layoutY="500.0" mnemonicParsing="false" onAction="#back" stylesheets="@../../css/button.css" text="Повернутися" />
                               <Pane layoutX="395.0" layoutY="108.0" prefHeight="370.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
                                  <children>
                                     <Label layoutX="68.0" layoutY="14.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата початку" />
@@ -375,8 +395,15 @@
                                     <TextField fx:id="NoteInvalid" layoutX="20.0" layoutY="323.0" prefWidth="222.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" />
                                  </children>
                               </Pane>
+                              <RadioButton fx:id="UpdateSocialPassportRadioButton" layoutX="160.0" layoutY="42.0" mnemonicParsing="false" onAction="#handleAllSocialPassportStudentInfoRadioButtonAction" visible="false" />
+                              <RadioButton fx:id="UpdateInvalidRadioButton" layoutX="520.0" layoutY="42.0" mnemonicParsing="false" onAction="#handleAllSocialPassportStudentInfoRadioButtonAction" visible="false" />
+                              <RadioButton fx:id="UpdateFamilyRadioButton" layoutX="977.0" layoutY="42.0" mnemonicParsing="false" onAction="#handleAllSocialPassportStudentInfoRadioButtonAction" visible="false" />
+                              <Button fx:id="CancelUpdateSocialPassportButton" layoutX="16.0" layoutY="500.0" mnemonicParsing="false" onAction="#cancelAllSocialPassportStudentInfo" stylesheets="@../../css/button.css" text="Скасувати" visible="false" />
                            </children>
                         </Pane>
+                        <Button fx:id="UpdateSocialPassportButton" layoutX="1159.0" layoutY="510.0" mnemonicParsing="false" onAction="#setNewValueSocialPassport" stylesheets="@../../css/button.css" text="Змінити" visible="false" />
+                        <Button fx:id="UpdateInvalidPassportButton" layoutX="1159.0" layoutY="510.0" mnemonicParsing="false" onAction="#setNewValueSocialInvalidPassport" stylesheets="@../../css/button.css" text="Змінити" visible="false" />
+                        <Button fx:id="UpdateManyChildrenFamilyPassportButton" layoutX="1159.0" layoutY="510.0" mnemonicParsing="false" onAction="#setNewValueManyChildrenFamilyPassport" stylesheets="@../../css/button.css" text="Змінити" visible="false" />
                      </children></AnchorPane>
               </content>
             </Tab>

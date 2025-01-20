@@ -6,7 +6,6 @@ import hibernate.entity.*;
 
 import org.hibernate.Session;
 
-import javax.swing.*;
 import java.sql.Date;
 
 import static controller.LoginController.curatorGroupName;
@@ -103,7 +102,7 @@ public class AddData {
                 session.persist(user);
                 session.getTransaction().commit();
 
-                UpdateData.updateGroupCurator(curatorFullName,group);
+                UpdateData.updateGroupCurator(curatorFullName,group,true);
             }
 
         } catch (RuntimeException e) {
@@ -127,6 +126,7 @@ public class AddData {
             groups.setEducationProgram(groupEducationAndProfessionalProgram);
             groups.setCourse(groupCourse);
             groups.setStatus(false);
+            groups.setActive(true);
 
             session.persist(groups);
             session.getTransaction().commit();
@@ -350,7 +350,7 @@ public class AddData {
         }
     }
 
-    public static void addInvalidPassportCategoryInfo(int studentId,String nameCategory,int semester,Date startDate,Date endDate,String note) {
+    public static void addInvalidPassportCategoryInfo(int studentId,String nameCategory,int semester,Date startDate,Date endDate,String note,boolean adultStatus) {
         Session session = null;
         try {
             session = HibernateUtil.getSession();
@@ -371,6 +371,7 @@ public class AddData {
             socialPassport.setNote(note);
             socialPassport.setSemester(semester);
             socialPassport.setInvalidStatus(true);
+            socialPassport.setStatusAdult(adultStatus);
 
             session.persist(socialPassport);
             session.getTransaction().commit();
@@ -403,7 +404,7 @@ public class AddData {
 
     }
 
-    public static void addManyChildrenPassportInfo(int studentId,int semester,Date startDate,Date endDate,String note,int countChildren,int lessThan18,int muchThan18) {
+    public static void addManyChildrenPassportInfo(int studentId,int semester,Date startDate,Date endDate,String note,int countChildren,int lessThan18,int muchThan18,boolean adultStatus) {
         Session session = null;
         try {
             session = HibernateUtil.getSession();
@@ -425,6 +426,7 @@ public class AddData {
             socialPassport.setSemester(semester);
             socialPassport.setInvalidStatus(false);
             socialPassport.setManyChildrenStatus(true);
+            socialPassport.setStatusAdult(adultStatus);
 
             session.persist(socialPassport);
             session.getTransaction().commit();
@@ -473,6 +475,7 @@ public class AddData {
             studentInfo.setPhoneNumber(phoneNumber);
             studentInfo.setDate_of_birth(dateOfBirth);
             studentInfo.setGroupName(curatorGroupName);
+            studentInfo.setStatus(true);
 
 
             session.persist(studentInfo);

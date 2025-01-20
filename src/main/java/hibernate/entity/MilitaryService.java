@@ -8,9 +8,8 @@ import lombok.Setter;
 import java.sql.Date;
 
 @Entity
-@Table(name = "military_service")
-@Getter
-@Setter
+@Table(name = "military_service_nefk")
+//@Getter @Setter
 @NoArgsConstructor
 public class MilitaryService {
     @Id
@@ -31,6 +30,43 @@ public class MilitaryService {
     @Column(name = "unit")
     private String unit;
 
+    public int getId() {
+        return id;
+    }
 
+    public StudentInfo getStudentInfo() {
+        return studentInfo;
+    }
 
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setStudentInfo(StudentInfo studentInfo) {
+        this.studentInfo = studentInfo;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 }

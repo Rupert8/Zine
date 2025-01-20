@@ -6,15 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.management.ConstructorParameters;
 import java.sql.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "student_info")
-@Getter
-@Setter
-@NoArgsConstructor
+@Table(name = "student_info_nefk")
+//@Getter @Setter
+//@NoArgsConstructor
 @AllArgsConstructor
 public class StudentInfo {
     @Id
@@ -76,10 +74,20 @@ public class StudentInfo {
     @Column(name = "groupName")
     private String groupName;
 
+    @Column(name = "is_active")
+    private boolean status;
+
+    @Column(name = "removed_Date")
+    private Date removedDate;
+
     private StudentInfo(String name, String surname, String middleName) {
         this.name = name;
         this.surname = surname;
         this.middleName = middleName;
+    }
+
+    public StudentInfo() {
+
     }
 
     public String getFullName(){
@@ -90,5 +98,83 @@ public class StudentInfo {
         return surname + " " + name + " " + middleName;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public Date getDate_of_birth() {
+        return date_of_birth;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public Date getRemovedDate() {
+        return removedDate;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setDate_of_birth(Date date_of_birth) {
+        this.date_of_birth = date_of_birth;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public void setRemovedDate(Date removedDate) {
+        this.removedDate = removedDate;
+    }
 }

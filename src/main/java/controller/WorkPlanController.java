@@ -2,6 +2,7 @@ package controller;
 
 import data.DeleteData;
 import data.DisplayDate;
+import data.SearchStudentData;
 import hibernate.entity.WorkPlan;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -137,13 +138,13 @@ public class WorkPlanController extends HelloApplication implements Initializabl
             if(newValue != null){
                 WorkPlan workPlan = newValue;
 
-                planId = workPlan.getId();
                 passEventName = workPlan.getEventName();
                 passPerformer = workPlan.getPerformer();
                 passExecutionDate = workPlan.getExecutionDate();
                 passSemester = workPlan.getSemester();
                 passDone = workPlan.getCompletionNote();
 
+                planId = SearchStudentData.getIdWorkPlan(passEventName,passPerformer);
                 UpdatePlanButton.setVisible(true);
                 DeletePlanButton.setVisible(true);
                 System.out.println("Selected plan: " + workPlan);
@@ -166,11 +167,13 @@ public class WorkPlanController extends HelloApplication implements Initializabl
         saveDialog = loadAndShowDialog("/fxml/dialogPane.fxml",saveDialog);
         performerNameForAdd = CuratorName.getText();
         PlanTable.getSelectionModel().clearSelection();
+        saveDialog.setOnHidden(event -> startWorkPlan());
     }
 
     public void showUpdateDialogPane(){
         saveDialog =  loadAndShowDialog("/fxml/UpdateDialogPane.fxml",saveDialog);
         PlanTable.getSelectionModel().clearSelection();
+        saveDialog.setOnHidden(event -> startWorkPlan());
     }
 
     public void setCuratorName(){
@@ -212,7 +215,7 @@ public class WorkPlanController extends HelloApplication implements Initializabl
 
     }
 
-    public void start(){
+    public void startWorkPlan(){
         DeletePlanButton.setVisible(false);
         UpdatePlanButton.setVisible(false);
         StartDatePicker.setVisible(false);
@@ -235,6 +238,6 @@ public class WorkPlanController extends HelloApplication implements Initializabl
         setPlanComboBox();
         setCuratorName();
         setSortComboBox();
-        start();
+        startWorkPlan();
     }
 }

@@ -7,9 +7,9 @@ module start.zine {
     requires org.hibernate.orm.core;
     requires java.naming;
     requires java.management;
-    requires java.desktop;
     requires jakarta.mail;
     requires jakarta.activation;
+    requires org.apache.poi.ooxml;
 
 
     opens start.zine to javafx.fxml;

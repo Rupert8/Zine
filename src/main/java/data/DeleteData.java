@@ -1,14 +1,15 @@
 package data;
 
 import hiberante.sessionFactory.HibernateUtil;
-import hibernate.entity.Curators;
-import hibernate.entity.Groups;
-import hibernate.entity.WorkPlan;
+import hibernate.entity.*;
 import org.hibernate.Session;
+import start.zine.HelloApplication;
 
-import javax.swing.*;
+import java.sql.Date;
+import java.time.LocalDate;
 
-public class DeleteData {
+
+public class DeleteData extends HelloApplication {
 
 
     public static void deletePlanDataById (int planId) {
@@ -22,10 +23,10 @@ public class DeleteData {
             session.getTransaction().commit();
             HibernateUtil.closeSession(session);
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
     }
-    public static void deleteCurator (int curatorId) {
+    public static void deleteCurator (int curatorId,String group) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
 
@@ -33,6 +34,7 @@ public class DeleteData {
             Curators curators = session.get(Curators.class, curatorId);
             session.remove(curators);
 
+            UpdateData.updateGroupCurator(null,group,false);
             session.getTransaction().commit();
             HibernateUtil.closeSession(session);
         }catch (Exception e){
@@ -41,13 +43,48 @@ public class DeleteData {
 
     }
 
-    public static void deleteGroup (int curatorId) {
+    public static void deleteGroup (int groupId,String groupName) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
 
         try{
-            Groups groups = session.get(Groups.class, curatorId);
-            session.remove(groups);
+            Groups groups = session.get(Groups.class, groupId);
+            groups.setActive(false);
+
+            UpdateData.updateStudentActiveStatus(groupName);
+            UpdateData.updateGroupCurator(null,groupName,false);
+            session.getTransaction().commit();
+            HibernateUtil.closeSession(session);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void deleteCategorySocialPassport(int idCategory) {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        try{
+            SpCategoryName spCategoryName = session.get(SpCategoryName.class, idCategory);
+            session.remove(spCategoryName);
+
+            session.getTransaction().commit();
+            HibernateUtil.closeSession(session);
+        }catch (Exception ignored){
+
+        }
+
+    }
+
+    public static void deleteStudent (int studentId) {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        try{
+            StudentInfo studentInfo = session.get(StudentInfo.class, studentId);
+            studentInfo.setStatus(false);
+            studentInfo.setRemovedDate(Date.valueOf(LocalDate.now()));
 
             session.getTransaction().commit();
             HibernateUtil.closeSession(session);

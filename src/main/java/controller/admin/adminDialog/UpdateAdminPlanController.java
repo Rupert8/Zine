@@ -65,9 +65,14 @@ public class UpdateAdminPlanController extends AdminWorkPlanController {
     }
 
     public void updateEvent(){
-        getData();
-        UpdateData.updateAdminPlanDataById(nameEvent,date,confirmationNote,status,semester);
-        closeDialog();
+        if(isAllFieldsFilled()){
+            getData();
+            UpdateData.updateAdminPlanDataById(nameEvent,date,confirmationNote,status,semester);
+            closeDialog();
+        }else{
+            loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+        }
+
     }
 
     public void setCompletionComboBox(){
@@ -81,6 +86,17 @@ public class UpdateAdminPlanController extends AdminWorkPlanController {
     public void closeDialog(){
         saveDialog.setResult(Boolean.TRUE);
         saveDialog.close();
+    }
+
+    private boolean isAllFieldsFilled() {
+        if (!NameEvent.getText().isEmpty() &&
+                dateExecution.getValue() != null &&
+                SemesterComboBox.getValue() != null &&
+                CompletionComboBox.getValue() != null) {
+            return true; // Усі поля заповнені
+        } else {
+            return false; // Є незаповнені поля
+        }
     }
 
     @Override

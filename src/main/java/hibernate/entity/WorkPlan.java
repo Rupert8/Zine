@@ -11,8 +11,8 @@ import java.sql.Date;
 
 
 @Entity
-@Table(name = "work_plan")
-@Getter @Setter
+@Table(name = "work_plan_nefk")
+//@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class WorkPlan {
@@ -38,4 +38,60 @@ public class WorkPlan {
 
     @Column(name = "ConfirmationNote")
     private String confirmationNote;
+
+    public int getId() {
+        return id;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public Date getExecutionDate() {
+        return executionDate;
+    }
+
+    public String getPerformer() {
+        return performer;
+    }
+
+    public String getCompletionNote() {
+        return completionNote;
+    }
+
+    public String getConfirmationNote() {
+        return confirmationNote;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public void setExecutionDate(Date executionDate) {
+        this.executionDate = executionDate;
+    }
+
+    public void setPerformer(String performer) {
+        this.performer = performer;
+    }
+
+    public void setCompletionNote(String completionNote) {
+        this.completionNote = completionNote;
+    }
+
+    public void setConfirmationNote(String confirmationNote) {
+        this.confirmationNote = confirmationNote;
+    }
 }

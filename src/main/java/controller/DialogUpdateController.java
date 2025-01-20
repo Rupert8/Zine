@@ -48,7 +48,6 @@ public class DialogUpdateController extends WorkPlanController implements Initia
         }
 
         nameEvent = String.valueOf(NameEvent.getText());
-        performer = String.valueOf(DialogPerformer.getText());
         date = Date.valueOf(dateExecution.getValue());
         semester = SemesterComboBox.getValue();
     }
@@ -62,7 +61,7 @@ public class DialogUpdateController extends WorkPlanController implements Initia
 
     public void updateEvent(){
         getData();
-        UpdateData.updatePlanDataById(nameEvent,date,performer,status,semester);
+        UpdateData.updatePlanDataById(nameEvent,date,status,semester);
         closeDialog();
     }
 

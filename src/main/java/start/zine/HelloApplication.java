@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
+import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -30,8 +31,60 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1280, 800);
         stage.setTitle("Журнал куратора");
         stage.centerOnScreen();
+        stage.getIcons().add(new Image(getClass().getResource("/icon/App-icon.png").toExternalForm()));
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void loadAndShowLoginAlarm(String linkFxml){
+        try {
+            // Завантаження FXML файлу
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(linkFxml));
+            DialogPane dialogPane = loader.load();
+
+            // Створення діалогового вікна
+            Dialog<Boolean> dialog = new Dialog<>();
+            dialog.setDialogPane(dialogPane);
+            dialog.getDialogPane().getScene().getWindow().setOnCloseRequest(event -> {
+                dialog.close();
+            });
+            dialog.getDialogPane().getScene().getWindow().setOnHidden(event -> {
+
+            });
+            Stage dialogStage = (Stage) dialog.getDialogPane().getScene().getWindow();
+            dialogStage.getIcons().add(new Image(getClass().getResource("/icon/info-icon.png").toExternalForm())); // Замініть "icon.png" на шлях до вашого файл
+            dialog.setTitle("Помилка!");
+            dialog.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void loadAndShowLoginSuccess(String linkFxml){
+        try {
+            // Завантаження FXML файлу
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(linkFxml));
+            DialogPane dialogPane = loader.load();
+
+            // Створення діалогового вікна
+            Dialog<Boolean> dialog = new Dialog<>();
+            dialog.setDialogPane(dialogPane);
+            dialog.getDialogPane().getScene().getWindow().setOnCloseRequest(event -> {
+                dialog.close();
+            });
+            dialog.getDialogPane().getScene().getWindow().setOnHidden(event -> {
+            });
+            Stage dialogStage = (Stage) dialog.getDialogPane().getScene().getWindow();
+            dialogStage.getIcons().add(new Image(getClass().getResource("/icon/icon-success.png").toExternalForm())); // Замініть "icon.png" на шлях до вашого файл
+            dialog.setTitle("Помилка!");
+            dialog.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Dialog<Boolean> loadAndShowDialog(String linkFxml, Dialog<Boolean> saveDialog){
@@ -47,6 +100,9 @@ public class HelloApplication extends Application {
                 dialog.close();
             });
             saveDialog = dialog;
+            Stage dialogStage = (Stage) dialog.getDialogPane().getScene().getWindow();
+            dialogStage.getIcons().add(new Image(getClass().getResource("/icon/App-icon.png").toExternalForm())); // Замініть "icon.png" на шлях до вашого файл
+            dialog.setTitle("Діалогове вікно");
             dialog.show();
 
         } catch (IOException e) {
@@ -90,6 +146,9 @@ public class HelloApplication extends Application {
                 fadeIn.setToValue(1.0);
                 fadeIn.play();
 
+                stage.getIcons().add(new Image(getClass().getResource("/icon/App-icon.png").toExternalForm())); // Замініть "icon.png" на шлях до вашого файл
+                stage.setTitle("Журнал Куратора");
+                stage.setResizable(false);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -156,6 +215,10 @@ public class HelloApplication extends Application {
 
     public void switchToAdminMain(ActionEvent event) {
         switchScene((Node) event.getSource(), "/fxml/admin/AdminMain.fxml");
+    }
+
+    public void switchToRemovedStudent(ActionEvent event) {
+        switchScene((Node) event.getSource(), "/fxml/admin/RemovedStudent.fxml");
     }
 
     public void switchToAdminCurator(ActionEvent event) {

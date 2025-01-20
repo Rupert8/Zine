@@ -1,6 +1,7 @@
 package controller;
 
 import data.AddData;
+import data.SearchStudentData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,13 +47,23 @@ public class DialogController extends WorkPlanController implements Initializabl
         semester = SemesterComboBox.getValue();
     }
 
-    public void addEvent(ActionEvent event){
-        getData();
-        AddData.addPlanForCuratorData(nameEvent,date,performerNameForAdd,status,semester);
+    public void addEvent(){
+        if(isAllFieldsFilled()){
+            if(!isExist()){
+                getData();
+                AddData.addPlanForCuratorData(nameEvent,date,performerNameForAdd,status,semester);
+                closeAddDialog();
+            }else{
+                loadAndShowLoginAlarm("/fxml/notifications/WarningExistEvent.fxml");
+            }
+
+        }else{
+            loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+        }
 
     }
 
-    public void closeAddDialog(ActionEvent event){
+    public void closeAddDialog(){
         saveDialog.setResult(Boolean.TRUE);
         saveDialog.close();
     }
@@ -65,6 +76,21 @@ public class DialogController extends WorkPlanController implements Initializabl
         SemesterComboBox.getItems().addAll(1,2,3,4,5,6,7,8);
     }
 
+    private boolean isAllFieldsFilled() {
+        if (!NameEvent.getText().isEmpty() &&
+                dateExecution.getValue() != null &&
+                SemesterComboBox.getValue() != null &&
+                CompletionComboBox.getValue() != null) {
+            return true; // Усі поля заповнені
+        } else {
+            return false; // Є незаповнені поля
+        }
+    }
+
+    private boolean isExist(){
+        String eventName = NameEvent.getText();
+        return SearchStudentData.validateCuratorEventName(eventName);
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCompletionComboBox();

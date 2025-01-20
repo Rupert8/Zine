@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -51,11 +53,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="20.0" layoutY="748.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="235.0" styleClass="Button" stylesheets="@../../css/button.css" text="Додаткова інформація">
-         <font>
-            <Font name="Kharkiv Tone Regular" size="20.0" />
-         </font>
-      </Button>
       <Button layoutX="541.0" layoutY="125.0" mnemonicParsing="false" onAction="#switchToAdminMain" style="-fx-background-color: #fff; -fx-text-fill: #000000; -fx-background-radius: 30px;" text="Студенти">
          <font>
             <Font name="Kharkiv Tone Regular" size="24.0" />
@@ -88,5 +85,14 @@
       </Label>
       <ComboBox fx:id="SortByGroupComboBox" layoutX="523.0" layoutY="194.0" onAction="#displayDataByGroupName" prefHeight="32.0" prefWidth="235.0" promptText="Виберіть групу" style="-fx-cursor: pointer;" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false" />
       <ComboBox fx:id="SortCategoryComboBox" layoutX="523.0" layoutY="194.0" onAction="#displayDataByCategoryName" prefHeight="32.0" prefWidth="235.0" promptText="Виберіть категорію" style="-fx-cursor: pointer;" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false" />
+      <Button layoutX="20.0" layoutY="746.0" mnemonicParsing="false" onAction="#exportExelSocialPassport" prefHeight="23.0" prefWidth="0.0" style="-fx-background-color: #e8d58c;" styleClass="plus_btn" stylesheets="@../../css/style.css">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+               <image>
+                  <Image url="@../../icon/icon-import.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
     </children>
 </Pane>

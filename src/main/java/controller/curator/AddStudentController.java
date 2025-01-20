@@ -1,6 +1,7 @@
 package controller.curator;
 
 import data.AddData;
+import data.SearchStudentData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -21,15 +22,42 @@ public class AddStudentController extends HelloApplication {
     @FXML
     private DatePicker StudentDateOfBirth;
 
-    public void addStudent(ActionEvent event) {
-        String name = StudentName.getText();
-        String surname = StudentSurname.getText();
-        String middleName = StudentMiddleName.getText();
+    public void addStudent() {
+        if(isAllFieldFilled()){
+            if(!isExist()){
+                String name = StudentName.getText();
+                String surname = StudentSurname.getText();
+                String middleName = StudentMiddleName.getText();
+                String phoneNumber = StudentPhoneNumber.getText();
+                String address = StudentAddress.getText();
+                Date dateOfBirth = Date.valueOf(StudentDateOfBirth.getValue());
+                AddData.addStudent(name,surname,middleName,address,phoneNumber,dateOfBirth);
+                closeDialog();
+            }else{
+                loadAndShowLoginAlarm("/fxml/notifications/WarningExistStudent.fxml");
+            }
+        }else{
+            loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+        }
+
+    }
+
+    public boolean isAllFieldFilled() {
+        if(!StudentName.getText().isEmpty() &&
+               !StudentSurname.getText().isEmpty() &&
+               !StudentMiddleName.getText().isEmpty() &&
+               StudentDateOfBirth.getValue() != null &&
+               !StudentPhoneNumber.getText().isEmpty() &&
+               !StudentAddress.getText().isEmpty()){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public boolean isExist(){
         String phoneNumber = StudentPhoneNumber.getText();
-        String address = StudentAddress.getText();
-        Date dateOfBirth = Date.valueOf(StudentDateOfBirth.getValue());
-        AddData.addStudent(name,surname,middleName,address,phoneNumber,dateOfBirth);
-        closeDialog();
+        return SearchStudentData.validateStudentExist(phoneNumber);
     }
 
     public void closeDialog(){

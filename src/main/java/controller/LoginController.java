@@ -17,7 +17,6 @@ import javafx.stage.Stage;
 import org.hibernate.Session;
 import start.zine.HelloApplication;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -94,7 +93,7 @@ public class LoginController extends HelloApplication implements Initializable {
                     switchScene((Node) event.getSource(), "/fxml/admin/AdminMain.fxml");
                 }
             } else {
-                loadAndShowLoginWarning("/fxml/WarningLoginFxml.fxml");
+                loadAndShowLoginWarning("/fxml/notifications/WarningLoginFxml.fxml");
             }
 
             session.getTransaction().commit();

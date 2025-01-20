@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "circle_activity")
-@Getter
-@Setter
+@Table(name = "circle_activity_nefk")
+//@Getter @Setter
 @NoArgsConstructor
 public class CircleActivity {
     @Id
@@ -30,4 +29,43 @@ public class CircleActivity {
     @Column(name = "note")
     private String note;
 
+    public int getId() {
+        return id;
+    }
+
+    public StudentInfo getStudentInfo() {
+        return studentInfo;
+    }
+
+    public int getSemestr() {
+        return semestr;
+    }
+
+    public String getCircleName() {
+        return circleName;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setStudentInfo(StudentInfo studentInfo) {
+        this.studentInfo = studentInfo;
+    }
+
+    public void setSemestr(int semestr) {
+        this.semestr = semestr;
+    }
+
+    public void setCircleName(String circleName) {
+        this.circleName = circleName;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
 }

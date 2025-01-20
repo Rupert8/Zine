@@ -1,5 +1,6 @@
 package controller.admin;
 
+import hibernate.entity.SocialPassport;
 import services.TableService;
 import data.DisplayDate;
 import javafx.collections.FXCollections;
@@ -14,8 +15,12 @@ import start.zine.HelloApplication;
 import tableView.SocialPassportPrototype;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static services.exportExel.ExelExportService.exportToExcel;
 
 public class AdminSocialPassportController extends HelloApplication implements Initializable {
 
@@ -63,6 +68,7 @@ public class AdminSocialPassportController extends HelloApplication implements I
 
     public void loadAddCategoryDialog(){
         saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AddCategoryDialogPane.fxml",saveDialog);
+        saveDialog.setOnHidden(event -> startSocialPassport());
     }
 
     private void setSocialPassportTable(){
@@ -119,7 +125,7 @@ public class AdminSocialPassportController extends HelloApplication implements I
     }
 
 
-    private void start(){
+    private void startSocialPassport(){
         setSocialPassportTable();
         setSortSocialPassportComboBox();
         setSortByGroupComboBox();
@@ -150,8 +156,18 @@ public class AdminSocialPassportController extends HelloApplication implements I
         }
     }
 
+    public void exportExelSocialPassport(){
+        List<SocialPassport> socialPassportList = DisplayDate.selectStudentSocialPassportInfoForExport();
+        String downloadFolder = System.getProperty("user.home") + "\\Downloads";
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDate = dateFormat.format(new Date());
+        String filePath = downloadFolder + "\\Соціальний_паспорт_експорт_" + currentDate + ".xlsx";
+        exportToExcel(socialPassportList, filePath);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        start();
+        startSocialPassport();
     }
 }

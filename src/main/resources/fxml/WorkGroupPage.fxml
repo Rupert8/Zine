@@ -43,14 +43,13 @@
       </Button>
       <TableView fx:id="GroupTable" layoutX="20.0" layoutY="195.0" prefHeight="550.0" prefWidth="1240.0" styleClass="table" stylesheets="@../css/style.css">
         <columns>
-          <TableColumn fx:id="NumberColumn" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
-          <TableColumn fx:id="SurnameColumn" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
-            <TableColumn fx:id="NameColumn" prefWidth="141.60000610351562" style="-fx-background-color: #fff;" styleClass="column" text="Ім`я" />
-            <TableColumn fx:id="MiddleNameColumn" prefWidth="195.99996948242188" style="-fx-background-color: #fff;" styleClass="column" text="По-батькові" />
-            <TableColumn fx:id="DateBirthDayColumn" prefWidth="201.60000610351562" style="-fx-background-color: #fff;" styleClass="column" text="Дата Народження" />
-            <TableColumn fx:id="PhoneNumberColumn" prefWidth="157.0" style="-fx-background-color: #fff;" styleClass="column" text="Телефон" />
-            <TableColumn fx:id="AddressColumn" prefWidth="206.0" style="-fx-background-color: #fff;" styleClass="column" text="Адреса" />
-            <TableColumn fx:id="ExitDateColumn" prefWidth="174.0" style="-fx-background-color: #fff;" styleClass="column" text="Дата Вибуття" />
+          <TableColumn fx:id="NumberColumn" prefWidth="43.0" resizable="false" style="-fx-background-color: #fff;" styleClass="column" text="№" />
+          <TableColumn fx:id="SurnameColumn" prefWidth="178.3" resizable="false" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
+            <TableColumn fx:id="NameColumn" prefWidth="178.3" resizable="false" style="-fx-background-color: #fff;" styleClass="column" text="Ім`я" />
+            <TableColumn fx:id="MiddleNameColumn" prefWidth="178.3" resizable="false" style="-fx-background-color: #fff;" styleClass="column" text="По-батькові" />
+            <TableColumn fx:id="DateBirthDayColumn" prefWidth="210.0" resizable="false" style="-fx-background-color: #fff;" styleClass="column" text="Дата Народження" />
+            <TableColumn fx:id="PhoneNumberColumn" prefWidth="182.0" resizable="false" style="-fx-background-color: #fff;" styleClass="column" text="Телефон" />
+            <TableColumn fx:id="AddressColumn" prefWidth="262.0" resizable="false" style="-fx-background-color: #fff;" styleClass="column" text="Адреса" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -62,6 +61,21 @@
          </font>
       </Button>
       <Button layoutX="1160.0" layoutY="754.0" mnemonicParsing="false" onAction="#showAddStudentDialog" prefHeight="38.0" prefWidth="100.0" styleClass="Button" stylesheets="@../css/button.css" text="Додати">
+         <font>
+            <Font name="Kharkiv Tone Regular" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="UpdateStudentButton" layoutX="277.0" layoutY="754.0" mnemonicParsing="false" onAction="#showUpdateStudentDialog" prefHeight="38.0" prefWidth="100.0" styleClass="Button" stylesheets="@../css/button.css" text="Змінити" visible="false">
+         <font>
+            <Font name="Kharkiv Tone Regular" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="DeleteStudentButton" layoutX="383.0" layoutY="754.0" mnemonicParsing="false" onAction="#delete" prefHeight="38.0" prefWidth="122.0" styleClass="Button" stylesheets="@../css/button.css" text="Видалити" visible="false">
+         <font>
+            <Font name="Kharkiv Tone Regular" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="extendedInfo" layoutX="20.0" layoutY="754.0" mnemonicParsing="false" onAction="#switchToExtendedStudentInfo" prefHeight="38.0" prefWidth="225.0" styleClass="Button" stylesheets="@../css/button.css" text="Додаткова інформація" visible="false">
          <font>
             <Font name="Kharkiv Tone Regular" size="20.0" />
          </font>

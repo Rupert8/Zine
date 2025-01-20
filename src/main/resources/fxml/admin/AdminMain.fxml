@@ -5,8 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -67,26 +65,12 @@
             <Font name="Kharkiv Tone Regular" size="24.0" />
          </font>
       </Button>
-      <Button layoutX="86.0" layoutY="751.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="235.0" styleClass="Button" stylesheets="@../../css/button.css" text="додаткова інформація" visible="false">
+      <Button layoutX="1073.0" layoutY="751.0" mnemonicParsing="false" onAction="#switchToRemovedStudent" prefHeight="38.0" prefWidth="187.0" styleClass="Button" stylesheets="@../../css/button.css" text="Вилучені студенти">
          <font>
             <Font name="Kharkiv Tone Regular" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="20.0" layoutY="748.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="0.0" style="-fx-background-color: #e8d58c;" styleClass="plus_btn" stylesheets="@../../css/style.css">
-         <graphic>
-            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-               <image>
-                  <Image url="@../../icon/icon-import.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button layoutX="1160.0" layoutY="751.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="Button" stylesheets="@../../css/button.css" text="Додати">
-         <font>
-            <Font name="Kharkiv Tone Regular" size="20.0" />
-         </font>
-      </Button>
-      <Button fx:id="extendedInfo" layoutX="92.0" layoutY="751.0" mnemonicParsing="false" onAction="#switchToExtendedStudentInfo" prefHeight="38.0" prefWidth="225.0" styleClass="Button" stylesheets="@../../css/button.css" text="Додаткова інформація" visible="false">
+      <Button fx:id="extendedInfo" layoutX="20.0" layoutY="751.0" mnemonicParsing="false" onAction="#switchToExtendedStudentInfo" prefHeight="38.0" prefWidth="225.0" styleClass="Button" stylesheets="@../../css/button.css" text="Додаткова інформація" visible="false">
          <font>
             <Font name="Kharkiv Tone Regular" size="20.0" />
          </font>

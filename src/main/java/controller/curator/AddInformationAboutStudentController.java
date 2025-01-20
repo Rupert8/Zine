@@ -18,8 +18,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import services.ValidateValueService;
+import start.zine.HelloApplication;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
@@ -28,7 +29,7 @@ import java.util.ResourceBundle;
 import static controller.LoginController.curatorGroupName;
 
 
-public class AddInformationAboutStudentController extends TextFieldService implements Initializable {
+public class AddInformationAboutStudentController extends HelloApplication implements Initializable {
     @FXML
     private Button GeneralInfoButton,SocialActivityButton,IndividualSupportButton,PromotionButton,SocialPassportButton;
     @FXML
@@ -135,6 +136,8 @@ public class AddInformationAboutStudentController extends TextFieldService imple
     private DatePicker StartDateInvalidPassport,EndDateInvalidPassport;
     @FXML
     private TextField NoteInvalidPassport;
+    @FXML
+    private RadioButton AdultStudentInvalidStatusRadioButton;
 
     @FXML   //Дані про багатодітну сім'ю
     private TextField SurnameFamily,NameFamily,MiddleNameFamily;
@@ -146,37 +149,9 @@ public class AddInformationAboutStudentController extends TextFieldService imple
     private ComboBox<String> StudentPIPFamily;
     @FXML
     private TextField CountFamily,LessThan18Family,MuchThan18Family,NoteFamily;
+    @FXML
+    private RadioButton AdultStudentManyChildrenStatusRadioButton;
 
-    private void switchScene(Node currentNode, String fxmlFile) {
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(200), currentNode);
-        fadeOut.setFromValue(1.0);
-        fadeOut.setToValue(0.0);
-
-        fadeOut.setOnFinished(event -> {
-            try {
-                // Load the new FXML after the fade-out animation finishes
-                Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
-
-                // Create a new scene
-                Stage stage = (Stage) currentNode.getScene().getWindow();
-                Scene scene = new Scene(root);
-                // Add your CSS file here:
-                //scene.getStylesheets().add(getClass().getResource("/css/workPlanPageCss/changeButtonColor.css").toExternalForm());
-
-                // Apply fade-in animation for the new scene
-                stage.setScene(scene);
-                FadeTransition fadeIn = new FadeTransition(Duration.millis(200), root);
-                fadeIn.setFromValue(0.0);
-                fadeIn.setToValue(1.0);
-                fadeIn.play();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        fadeOut.play();
-    }
     public void back(ActionEvent event) {
         switchScene((Node) event.getSource(), "/fxml/WorkStudPage.fxml");
     }
@@ -287,162 +262,291 @@ public class AddInformationAboutStudentController extends TextFieldService imple
     }
 
     public void addEducationInfo(){
-        String name = NameEducation.getText();
-        String surname = SurnameEducation.getText();
-        String middleName = MiddleNameEducation.getText();
-        String schoolName = SchoolNameEducation.getText();
-        Date endDate = Date.valueOf(EndDateEducation.getValue());
-        float averageGrade = Float.valueOf(GradeAvarageEducation.getText());
+        if(ValidateValueService.isStudentSelected(NameEducation,SurnameEducation,MiddleNameEducation)){
+            if(ValidateValueService.isEducationFieldEmpty(EndDateEducation,SchoolNameEducation,GradeAvarageEducation)){
+                if(!ValidateValueService.isExistEducation(NameEducation.getText(),SurnameEducation.getText(),MiddleNameEducation.getText())){
+                    String name = NameEducation.getText();
+                    String surname = SurnameEducation.getText();
+                    String middleName = MiddleNameEducation.getText();
+                    String schoolName = SchoolNameEducation.getText();
+                    Date endDate = Date.valueOf(EndDateEducation.getValue());
+                    float averageGrade = Float.valueOf(GradeAvarageEducation.getText());
 
-        int id = SearchStudentData.getIdStudent(name,surname,middleName);
-        AddData.addEducationInfo(id,endDate,schoolName,averageGrade);
-        ClearValueService.clearEducationInfo(EndDateEducation,SchoolNameEducation,GradeAvarageEducation);
+
+                    int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
+                    AddData.addEducationInfo(id,endDate,schoolName,averageGrade);
+                    ClearValueService.clearEducationInfo(EndDateEducation,SchoolNameEducation,GradeAvarageEducation);
+                }else{
+                    loadAndShowLoginAlarm("/fxml/notifications/WarningExistEducationInfo.fxml");
+                }
+            }else {
+                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            }
+        }else {
+            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+        }
+
     }
 
     public void addMilitaryInfo(){
-        String name = NameMilitary.getText();
-        String surname = SurnameMilitary.getText();
-        String middleName = MiddleNameMilitary.getText();
-        Date startDate = Date.valueOf(StartDateMilitary.getValue());
-        Date endDate = Date.valueOf(EndDateMilitary.getValue());
-        String unit = UnitMilitary.getText();
+        if(ValidateValueService.isStudentSelected(NameMilitary,SurnameMilitary,MiddleNameMilitary)){
+            if(ValidateValueService.isMilitaryFieldEmpty(StartDateMilitary,EndDateMilitary,UnitMilitary)){
+                if(!ValidateValueService.isExistMilitary(NameMilitary.getText(),SurnameMilitary.getText(),MiddleNameMilitary.getText())){
+                    String name = NameMilitary.getText();
+                    String surname = SurnameMilitary.getText();
+                    String middleName = MiddleNameMilitary.getText();
+                    Date startDate = Date.valueOf(StartDateMilitary.getValue());
+                    Date endDate = Date.valueOf(EndDateMilitary.getValue());
+                    String unit = UnitMilitary.getText();
 
-        int id = SearchStudentData.getIdStudent(name,surname,middleName);
-        AddData.addMilitaryInfo(id,startDate,endDate,unit);
-        ClearValueService.clearMilitaryInfo(StartDateMilitary,EndDateMilitary,UnitMilitary);
+                    int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
+                    AddData.addMilitaryInfo(id,startDate,endDate,unit);
+                    ClearValueService.clearMilitaryInfo(StartDateMilitary,EndDateMilitary,UnitMilitary);
+                }else{
+                    loadAndShowLoginAlarm("/fxml/notifications/WarningExistMilitaryInfo.fxml");
+                }
+            }else {
+                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            }
+        }else {
+            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+        }
     }
 
     public void addJobInfo(){
-        String name = NameJob.getText();
-        String surname = SurnameJob.getText();
-        String middleName = MiddleNameJob.getText();
-        Date startDate = Date.valueOf(StartDateJob.getValue());
-        Date endDate = Date.valueOf(EndDateJob.getValue());
-        String place = PlaceJob.getText();
-        String position = PositionJob.getText();
+        if(ValidateValueService.isStudentSelected(NameJob,SurnameJob,MiddleNameJob)){
+            if(ValidateValueService.isStudentJobFieldEmpty(StartDateJob,PlaceJob,PositionJob)){
+                String name = NameJob.getText();
+                String surname = SurnameJob.getText();
+                String middleName = MiddleNameJob.getText();
+                Date startDate = Date.valueOf(StartDateJob.getValue());
+                Date endDate = Date.valueOf(EndDateJob.getValue());
+                String place = PlaceJob.getText();
+                String position = PositionJob.getText();
 
-        int id = SearchStudentData.getIdStudent(name,surname,middleName);
-        AddData.addJobInfo(id,startDate,endDate,place,position);
-        ClearValueService.clearJobInfo(StartDateJob,EndDateJob,PlaceJob,PositionJob);
+                int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
+                AddData.addJobInfo(id,startDate,endDate,place,position);
+                ClearValueService.clearJobInfo(StartDateJob,EndDateJob,PlaceJob,PositionJob);
+            }else {
+                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            }
+        }else {
+            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+        }
     }
 
     public void addFamilyInfo(){
-        String name = NameParents.getText();
-        String surname = SurnameParents.getText();
-        String middleName = MiddleNameParents.getText();
-        String pipFather = PIPFatherParents.getText();
-        String pipMother = PIPMotherParents.getText();
-        String phoneFather = PhoneFatherParents.getText();
-        String phoneMother = PhoneMotherParents.getText();
+        if(ValidateValueService.isStudentSelected(NameParents,SurnameParents,MiddleNameParents)){
+            if(ValidateValueService.isStudentParentsFieldEmpty(PIPFatherParents,PIPMotherParents,PhoneFatherParents,PhoneMotherParents)){
+                if(!ValidateValueService.isExistStudentParents(NameParents.getText(),SurnameParents.getText(),MiddleNameParents.getText())){
+                    String name = NameParents.getText();
+                    String surname = SurnameParents.getText();
+                    String middleName = MiddleNameParents.getText();
+                    String pipFather = PIPFatherParents.getText();
+                    String pipMother = PIPMotherParents.getText();
+                    String phoneFather = PhoneFatherParents.getText();
+                    String phoneMother = PhoneMotherParents.getText();
 
-        int id = SearchStudentData.getIdStudent(name,surname,middleName);
-        AddData.addParentsInfo(id,pipFather,pipMother,phoneFather,phoneMother);
-        ClearValueService.clearFamilyInfo(PIPFatherParents,PIPMotherParents,PhoneFatherParents,PhoneMotherParents);
+                    int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
+                    AddData.addParentsInfo(id,pipFather,pipMother,phoneFather,phoneMother);
+                    ClearValueService.clearFamilyInfo(PIPFatherParents,PIPMotherParents,PhoneFatherParents,PhoneMotherParents);
+                }else{
+                    loadAndShowLoginAlarm("/fxml/notifications/WarningExistParentsInfo.fxml");
+                }
+            }else {
+                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            }
+        }else {
+            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+        }
     }
 
     public void addSocialActivityInfo(){
-        String name = NameSocial.getText();
-        String surname = SurnameSocial.getText();
-        String middleName = MiddleNameSocial.getText();
-        int semester = SemesterSocial.getValue();
-        Date date = Date.valueOf(DateSocial.getValue());
-        String activity = ActivitySocial.getText();
+        if(ValidateValueService.isStudentSelected(NameSocial,SurnameSocial,MiddleNameSocial)){
+            if(ValidateValueService.isSocialActivityFieldEmpty(SemesterSocial,DateSocial,ActivitySocial)){
+                String name = NameSocial.getText();
+                String surname = SurnameSocial.getText();
+                String middleName = MiddleNameSocial.getText();
+                int semester = SemesterSocial.getValue();
+                Date date = Date.valueOf(DateSocial.getValue());
+                String activity = ActivitySocial.getText();
 
-        int id = SearchStudentData.getIdStudent(name,surname,middleName);
-        AddData.addSocialActivityInfo(id,semester,date,activity);
-        ClearValueService.clearSocialActivityInfo(SemesterSocial,DateSocial,ActivitySocial);
+                int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
+                AddData.addSocialActivityInfo(id,semester,date,activity);
+                ClearValueService.clearSocialActivityInfo(SemesterSocial,DateSocial,ActivitySocial);
+            }else {
+                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            }
+        }else {
+            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+        }
+
     }
 
     public void addGroupActivityInfo(){
-        String name = NameGroup.getText();
-        String surname = SurnameGroup.getText();
-        String middleName = MiddleNameGroup.getText();
-        int semester = SemesterGroup.getValue();
-        String groupName = GroupName.getText();
-        String note = NoteGroup.getText();
+        if(ValidateValueService.isStudentSelected(NameGroup,SurnameGroup,MiddleNameGroup)){
+            if(ValidateValueService.isGroupActivityFieldEmpty(SemesterGroup,GroupName,NoteGroup)){
+                String name = NameGroup.getText();
+                String surname = SurnameGroup.getText();
+                String middleName = MiddleNameGroup.getText();
+                int semester = SemesterGroup.getValue();
+                String groupName = GroupName.getText();
+                String note = NoteGroup.getText();
 
-        int id = SearchStudentData.getIdStudent(name,surname,middleName);
-        AddData.addGroupActivityInfo(id,semester,groupName,note);
-        ClearValueService.clearGroupActivity(SemesterGroup,GroupName,NoteGroup);
+                int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
+                AddData.addGroupActivityInfo(id,semester,groupName,note);
+                ClearValueService.clearGroupActivity(SemesterGroup,GroupName,NoteGroup);
+            }else {
+                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            }
+        }else {
+            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+        }
+
     }
 
     public void addIndividualSupportInfo(){
-        String name = NameSupport.getText();
-        String surname = SurnameSupport.getText();
-        String middleName = MiddleNameSupport.getText();
-        int semester = SemesterSupport.getValue();
-        Date date = Date.valueOf(DateSupport.getValue());
-        String content = ContentSupport.getText();
+        if(ValidateValueService.isStudentSelected(NameSupport,SurnameSupport,MiddleNameSupport)){
+            if(ValidateValueService.isIndividualSupportFieldEmpty(SemesterSupport,DateSupport,ContentSupport)){
+                String name = NameSupport.getText();
+                String surname = SurnameSupport.getText();
+                String middleName = MiddleNameSupport.getText();
+                int semester = SemesterSupport.getValue();
+                Date date = Date.valueOf(DateSupport.getValue());
+                String content = ContentSupport.getText();
 
-        int id  = SearchStudentData.getIdStudent(name,surname,middleName);
-        AddData.addIndividualSupportInfo(id,semester,date,content);
-        ClearValueService.clearIndividualSupport(SemesterSupport,DateSupport,ContentSupport);
+                int id  = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
+                AddData.addIndividualSupportInfo(id,semester,date,content);
+                ClearValueService.clearIndividualSupport(SemesterSupport,DateSupport,ContentSupport);
+            }else {
+                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            }
+        }else {
+            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+        }
     }
 
     public void addPromotionInfo(){
-        String name = NamePromotion.getText();
-        String surname = SurnamePromotion.getText();
-        String middleName = MiddleNamePromotion.getText();
-        int semester = SemesterPromotion.getValue();
-        Date date = Date.valueOf(DatePromotion.getValue());
-        String content = ContentPromotion.getText();
+        if(ValidateValueService.isStudentSelected(NamePromotion,SurnamePromotion,MiddleNamePromotion)){
+            if(ValidateValueService.isPromotionFieldEmpty(SemesterPromotion,DatePromotion,ContentPromotion)){
+                String name = NamePromotion.getText();
+                String surname = SurnamePromotion.getText();
+                String middleName = MiddleNamePromotion.getText();
+                int semester = SemesterPromotion.getValue();
+                Date date = Date.valueOf(DatePromotion.getValue());
+                String content = ContentPromotion.getText();
 
-        int id = SearchStudentData.getIdStudent(name,surname,middleName);
-        AddData.addPromotionInfo(id,semester,date,content);
-        ClearValueService.clearPromotionInfo(SemesterPromotion,DatePromotion,ContentPromotion);
+                int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
+                AddData.addPromotionInfo(id,semester,date,content);
+                ClearValueService.clearPromotionInfo(SemesterPromotion,DatePromotion,ContentPromotion);
+            }else {
+                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            }
+        }else {
+            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+        }
     }
 
     public void addSocialPassportInfo(){
-        String name = NameSocialPassport.getText();
-        String surname = SurNameSocialPassport.getText();
-        String middleName = MiddleNameSocialPassport.getText();
-        int semester = SemesterSocialPassport.getValue();
-        String nameCategory = CategorySocialPassport.getValue();
-        Date startDate = Date.valueOf(StartDateSocialPassport.getValue());
-        Date endDate = Date.valueOf(EndDateSocialPassport.getValue());
-        String note = NoteSocialPassport.getText();
-        boolean statusAdult;
-        if(AdultStudentStatusRadioButton.isSelected()){
-            statusAdult = true;
-        }else{
-            statusAdult = false;
-        }
+        if(ValidateValueService.isStudentSelected(NameSocialPassport,SurNameSocialPassport,MiddleNameSocialPassport)){
+            if(ValidateValueService.isSocialPassportFieldEmpty(StartDateSocialPassport,SemesterSocialPassport,CategorySocialPassport)){
+                String name = NameSocialPassport.getText();
+                String surname = SurNameSocialPassport.getText();
+                String middleName = MiddleNameSocialPassport.getText();
+                int semester = SemesterSocialPassport.getValue();
+                String nameCategory = CategorySocialPassport.getValue();
+                Date startDate = Date.valueOf(StartDateSocialPassport.getValue());
+                Date endDate = null;
+                if(EndDateSocialPassport.getValue() != null){
+                    endDate = Date.valueOf(EndDateSocialPassport.getValue());
+                }
+                String note = NoteSocialPassport.getText();
+                boolean statusAdult;
+                if(AdultStudentStatusRadioButton.isSelected()){
+                    statusAdult = true;
+                }else{
+                    statusAdult = false;
+                }
 
-        int id = SearchStudentData.getIdStudent(name,surname,middleName);
-        System.out.print(id);
-        AddData.addGeneralSocialPassportInfo(id,nameCategory,semester,startDate,endDate,note,statusAdult);
-        ClearValueService.clearSocialPassportField(StartDateSocialPassport,EndDateSocialPassport,SemesterSocialPassport,CategorySocialPassport,NoteSocialPassport,AdultStudentStatusRadioButton);
+                int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
+                System.out.print(id);
+                AddData.addGeneralSocialPassportInfo(id,nameCategory,semester,startDate,endDate,note,statusAdult);
+                ClearValueService.clearSocialPassportField(StartDateSocialPassport,EndDateSocialPassport,SemesterSocialPassport,CategorySocialPassport,NoteSocialPassport,AdultStudentStatusRadioButton);
+            }else {
+                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            }
+        }else {
+            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+        }
     }
 
     public void addInvalidPassportInfo(){
-         String name = NameInvalidPassport.getText();
-         String surname = SurnameInvalidPassport.getText();
-         String middleName = MiddleNameInvalidPassport.getText();
-         int semester = SemesterInvalidPassport.getValue();
-         String category = CategoryInvalidPassport.getValue();
-         Date startDate = Date.valueOf(StartDateInvalidPassport.getValue());
-         Date endDate = Date.valueOf(EndDateInvalidPassport.getValue());
-         String note = NoteInvalidPassport.getText();
+        if(ValidateValueService.isStudentSelected(NameInvalidPassport,SurnameInvalidPassport,MiddleNameInvalidPassport)){
+            if(ValidateValueService.isInvalidSocialPassportFieldEmpty(StartDateInvalidPassport,SemesterInvalidPassport,CategoryInvalidPassport)){
+                if(!ValidateValueService.isInvalidSocialPassportExist(NameInvalidPassport.getText(),SurnameInvalidPassport.getText(),MiddleNameInvalidPassport.getText())){
+                    String name = NameInvalidPassport.getText();
+                    String surname = SurnameInvalidPassport.getText();
+                    String middleName = MiddleNameInvalidPassport.getText();
+                    int semester = SemesterInvalidPassport.getValue();
+                    String category = CategoryInvalidPassport.getValue();
+                    Date startDate = Date.valueOf(StartDateInvalidPassport.getValue());
+                    Date endDate = null;
+                    if(EndDateInvalidPassport.getValue() != null){
+                        endDate = Date.valueOf(EndDateInvalidPassport.getValue());
+                    }
+                    String note = NoteInvalidPassport.getText();
+                    boolean statusAdult;
+                    if(AdultStudentInvalidStatusRadioButton.isSelected()){
+                        statusAdult = true;
+                    }else{
+                        statusAdult = false;
+                    }
 
-         int id = SearchStudentData.getIdStudent(name,surname,middleName);
-         AddData.addInvalidPassportCategoryInfo(id,category,semester,startDate,endDate,note);
+                    int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
+                    AddData.addInvalidPassportCategoryInfo(id,category,semester,startDate,endDate,note,statusAdult);
+                }else{
+                    loadAndShowLoginAlarm("/fxml/notifications/WarningExistInvalidPassport.fxml");
+                }
+            }else {
+                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            }
+        }else {
+            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+        }
     }
 
     public void addManyChildrenFamily(){
-        String name = NameFamily.getText();
-        String surname = SurnameFamily.getText();
-        String middleName = MiddleNameFamily.getText();
-        int semester = SemesterFamily.getValue();
-        Date startDate = Date.valueOf(StartDateFamily.getValue());
-        Date endDate = Date.valueOf(EndDateFamily.getValue());
-        String note = NoteFamily.getText();
-        int countChildren = Integer.parseInt(CountFamily.getText());
-        int lessThan18 = Integer.parseInt(LessThan18Family.getText());
-        int muchThan18 = Integer.parseInt(MuchThan18Family.getText());
+        if(ValidateValueService.isStudentSelected(NameFamily,SurnameFamily,MiddleNameFamily)){
+            if(ValidateValueService.isManyChildrenFieldEmpty(StartDateFamily,SemesterFamily,CountFamily,LessThan18Family,MuchThan18Family)){
+                if(!ValidateValueService.isManyChildrenExist(NameFamily.getText(),SurnameFamily.getText(),MiddleNameFamily.getText())){
+                    String name = NameFamily.getText();
+                    String surname = SurnameFamily.getText();
+                    String middleName = MiddleNameFamily.getText();
+                    int semester = SemesterFamily.getValue();
+                    Date startDate = Date.valueOf(StartDateFamily.getValue());
+                    Date endDate = Date.valueOf(EndDateFamily.getValue());
+                    String note = NoteFamily.getText();
+                    int countChildren = Integer.parseInt(CountFamily.getText());
+                    int lessThan18 = Integer.parseInt(LessThan18Family.getText());
+                    int muchThan18 = Integer.parseInt(MuchThan18Family.getText());
+                    boolean statusAdult;
+                    if(AdultStudentManyChildrenStatusRadioButton.isSelected()){
+                        statusAdult = true;
+                    }else{
+                        statusAdult = false;
+                    }
 
-        int id = SearchStudentData.getIdStudent(name,surname,middleName);
-        AddData.addManyChildrenPassportInfo(id,semester,startDate,endDate,note,countChildren,lessThan18,muchThan18);
-
+                    int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
+                    AddData.addManyChildrenPassportInfo(id,semester,startDate,endDate,note,countChildren,lessThan18,muchThan18,statusAdult);
+                }else{
+                    loadAndShowLoginAlarm("/fxml/notifications/WarningExistManyChildrenFamily.fxml");
+                }
+            }else {
+                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            }
+        }else {
+            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+        }
     }
 
     public void setSemesterComboBox(){
@@ -465,7 +569,6 @@ public class AddInformationAboutStudentController extends TextFieldService imple
     public void setInvalidCategoryComboBox(){
          CategoryInvalidPassport.getItems().addAll("І група інвалідності","ІІ група інвалідності","ІІІ група інвалідності","Дитяча інвалідність");
     }
-     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setStudentPIP();

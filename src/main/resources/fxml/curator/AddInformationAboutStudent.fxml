@@ -44,7 +44,7 @@
                            <children>
                               <AnchorPane layoutX="5.0" layoutY="351.0" prefHeight="316.0" prefWidth="1070.0">
                                  <children>
-                                    <TableView fx:id="GroupTable41" prefHeight="314.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css">
+                                    <TableView fx:id="GroupTable41" prefHeight="314.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css" visible="false">
                                        <columns>
                                           <TableColumn fx:id="NumberColumn41" prefWidth="36.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
                                           <TableColumn fx:id="SurnameColumn41" prefWidth="88.0" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
@@ -102,7 +102,7 @@
                            <children>
                               <AnchorPane layoutX="5.0" layoutY="351.0" prefHeight="316.0" prefWidth="1070.0">
                                  <children>
-                                    <TableView fx:id="GroupTable" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css">
+                                    <TableView fx:id="GroupTable" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css" visible="false">
                                        <columns>
                                           <TableColumn fx:id="NumberColumn" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
                                           <TableColumn fx:id="SurnameColumn" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
@@ -165,7 +165,7 @@
                            <children>
                               <AnchorPane layoutX="5.0" layoutY="351.0" prefHeight="316.0" prefWidth="1070.0">
                                  <children>
-                                    <TableView fx:id="GroupTable1" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css">
+                                    <TableView fx:id="GroupTable1" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css" visible="false">
                                        <columns>
                                           <TableColumn fx:id="NumberColumn1" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
                                           <TableColumn fx:id="SurnameColumn1" prefWidth="170.0" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
@@ -231,7 +231,7 @@
                            <children>
                               <AnchorPane layoutX="5.0" layoutY="351.0" prefHeight="316.0" prefWidth="1070.0">
                                  <children>
-                                    <TableView fx:id="GroupTable2" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css">
+                                    <TableView fx:id="GroupTable2" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css" visible="false">
                                        <columns>
                                           <TableColumn fx:id="NumberColumn2" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
                                           <TableColumn fx:id="SurnameColumn2" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
@@ -292,7 +292,7 @@
                            <children>
                               <AnchorPane layoutX="5.0" layoutY="351.0" prefHeight="316.0" prefWidth="1070.0">
                                  <children>
-                                    <TableView fx:id="GroupTable11" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css">
+                                    <TableView fx:id="GroupTable11" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css" visible="false">
                                        <columns>
                                           <TableColumn fx:id="NumberColumn11" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
                                           <TableColumn fx:id="SurnameColumn11" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
@@ -348,7 +348,7 @@
                            <children>
                               <AnchorPane layoutX="5.0" layoutY="351.0" prefHeight="316.0" prefWidth="1070.0">
                                  <children>
-                                    <TableView fx:id="GroupTable12" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css">
+                                    <TableView fx:id="GroupTable12" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css" visible="false">
                                        <columns>
                                           <TableColumn fx:id="NumberColumn12" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
                                           <TableColumn fx:id="SurnameColumn12" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
@@ -405,7 +405,7 @@
                            <children>
                               <AnchorPane layoutX="5.0" layoutY="351.0" prefHeight="316.0" prefWidth="1070.0">
                                  <children>
-                                    <TableView fx:id="GroupTable3" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css">
+                                    <TableView fx:id="GroupTable3" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css" visible="false">
                                        <columns>
                                           <TableColumn fx:id="NumberColumn3" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
                                           <TableColumn fx:id="SurnameColumn3" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
@@ -467,7 +467,7 @@
                            <children>
                               <AnchorPane layoutX="5.0" layoutY="351.0" prefHeight="316.0" prefWidth="1070.0">
                                  <children>
-                                    <TableView fx:id="GroupTable31" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css">
+                                    <TableView fx:id="GroupTable31" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css" visible="false">
                                        <columns>
                                           <TableColumn fx:id="NumberColumn31" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
                                           <TableColumn fx:id="SurnameColumn31" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
@@ -529,7 +529,7 @@
                            <children>
                               <AnchorPane layoutX="5.0" layoutY="351.0" prefHeight="316.0" prefWidth="1070.0">
                                  <children>
-                                    <TableView fx:id="GroupTable4" layoutY="30.0" prefHeight="281.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css">
+                                    <TableView fx:id="GroupTable4" layoutY="30.0" prefHeight="281.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css" visible="false">
                                        <columns>
                                           <TableColumn fx:id="NumberColumn4" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
                                           <TableColumn fx:id="SurnameColumn4" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
@@ -600,7 +600,7 @@
                            <children>
                               <AnchorPane layoutX="5.0" layoutY="351.0" prefHeight="316.0" prefWidth="1070.0">
                                  <children>
-                                    <TableView fx:id="GroupTable43" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css">
+                                    <TableView fx:id="GroupTable43" layoutY="30.0" prefHeight="281.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css" visible="false">
                                        <columns>
                                           <TableColumn fx:id="NumberColumn43" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
                                           <TableColumn fx:id="SurnameColumn43" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
@@ -618,7 +618,7 @@
                                     </TableView>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="5.0" layoutY="6.0" prefHeight="338.0" prefWidth="1070.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-background-color: #fff; -fx-background-radius: 5; -fx-border-width: 2;">
+                              <AnchorPane layoutX="5.0" layoutY="6.0" prefHeight="369.0" prefWidth="1070.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-background-color: #fff; -fx-background-radius: 5; -fx-border-width: 2;">
                                  <children>
                                     <Label layoutX="23.0" layoutY="28.0" styleClass="font" stylesheets="@../../css/font.css" text="Студент">
                                        <font>
@@ -636,11 +636,11 @@
                                     <Label layoutX="22.0" layoutY="185.0" styleClass="font" stylesheets="@../../css/font.css" text="Дата початку" />
                                     <Label layoutX="375.0" layoutY="185.0" styleClass="font" stylesheets="@../../css/font.css" text="Дата закінчення" />
                                     <Label layoutX="754.0" layoutY="185.0" styleClass="font" stylesheets="@../../css/font.css" text="Семестр" />
-                                    <TextField fx:id="SurnameInvalidPassport" layoutX="159.0" layoutY="98.0" prefHeight="35.0" prefWidth="200.0" promptText="Прізвище" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="NameInvalidPassport" layoutX="527.0" layoutY="98.0" promptText="Ім'я" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="MiddleNameInvalidPassport" layoutX="855.0" layoutY="97.0" promptText="По-батькові" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="SurnameInvalidPassport" disable="true" layoutX="159.0" layoutY="98.0" prefHeight="35.0" prefWidth="200.0" promptText="Прізвище" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="NameInvalidPassport" disable="true" layoutX="527.0" layoutY="98.0" promptText="Ім'я" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="MiddleNameInvalidPassport" disable="true" layoutX="855.0" layoutY="97.0" promptText="По-батькові" styleClass="textField" stylesheets="@../../css/textField.css" />
                                     <TextField fx:id="NoteInvalidPassport" layoutX="527.0" layoutY="259.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <Button layoutX="956.0" layoutY="287.0" mnemonicParsing="false" onAction="#addInvalidPassportInfo" stylesheets="@../../css/button.css" text="Додати" />
+                                    <Button layoutX="956.0" layoutY="320.0" mnemonicParsing="false" onAction="#addInvalidPassportInfo" stylesheets="@../../css/button.css" text="Додати" />
                                     <DatePicker fx:id="StartDateInvalidPassport" editable="false" layoutX="159.0" layoutY="178.0" prefHeight="35.0" prefWidth="200.0" promptText="Дата Початку" styleClass="data_picker">
                                        <stylesheets>
                                           <URL value="@../../css/style.css" />
@@ -657,6 +657,8 @@
                                     <ComboBox fx:id="CategoryInvalidPassport" layoutX="159.0" layoutY="258.0" prefHeight="36.0" prefWidth="200.0" promptText="Виберіть категорію" styleClass="comboBox" stylesheets="@../../css/textField.css" />
                                     <ComboBox fx:id="SemesterInvalidPassport" layoutX="855.0" layoutY="178.0" prefHeight="36.0" prefWidth="191.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" />
                                     <Label layoutX="411.0" layoutY="267.0" styleClass="font" stylesheets="@../../css/font.css" text="Примітка" />
+                                    <RadioButton fx:id="AdultStudentInvalidStatusRadioButton" layoutX="376.0" layoutY="329.0" mnemonicParsing="false" />
+                                    <Label layoutX="37.0" layoutY="327.0" styleClass="font" stylesheets="@../../css/font.css" text="Відмітка про повнолітність студента" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -669,7 +671,7 @@
                            <children>
                               <AnchorPane layoutX="5.0" layoutY="351.0" prefHeight="316.0" prefWidth="1070.0">
                                  <children>
-                                    <TableView fx:id="GroupTable42" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css">
+                                    <TableView fx:id="GroupTable42" layoutY="30.0" prefHeight="281.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css" visible="false">
                                        <columns>
                                           <TableColumn fx:id="NumberColumn42" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
                                           <TableColumn fx:id="SurnameColumn42" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
@@ -687,7 +689,7 @@
                                     </TableView>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="5.0" layoutY="6.0" prefHeight="338.0" prefWidth="1070.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-background-color: #fff; -fx-background-radius: 5; -fx-border-width: 2;">
+                              <AnchorPane layoutX="5.0" layoutY="6.0" prefHeight="369.0" prefWidth="1070.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-background-color: #fff; -fx-background-radius: 5; -fx-border-width: 2;">
                                  <children>
                                     <Label layoutX="23.0" layoutY="28.0" styleClass="font" stylesheets="@../../css/font.css" text="Студент">
                                        <font>
@@ -705,9 +707,9 @@
                                     <Label layoutX="23.0" layoutY="159.0" styleClass="font" stylesheets="@../../css/font.css" text="Дата початку" />
                                     <Label layoutX="370.0" layoutY="159.0" styleClass="font" stylesheets="@../../css/font.css" text="Дата закінчення" />
                                     <Label layoutX="746.0" layoutY="159.0" styleClass="font" stylesheets="@../../css/font.css" text="Семестр" />
-                                    <TextField fx:id="SurnameFamily" layoutX="159.0" layoutY="98.0" prefHeight="35.0" prefWidth="200.0" promptText="Прізвище" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="NameFamily" layoutX="515.0" layoutY="97.0" promptText="Ім'я" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="MiddleNameFamily" layoutX="855.0" layoutY="97.0" promptText="По-батькові" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="SurnameFamily" disable="true" layoutX="159.0" layoutY="98.0" prefHeight="35.0" prefWidth="200.0" promptText="Прізвище" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="NameFamily" disable="true" layoutX="515.0" layoutY="97.0" promptText="Ім'я" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="MiddleNameFamily" disable="true" layoutX="855.0" layoutY="97.0" promptText="По-батькові" styleClass="textField" stylesheets="@../../css/textField.css" />
                                     <TextField fx:id="LessThan18Family" layoutX="515.0" layoutY="206.0" promptText="Менше 18 років" styleClass="textField" stylesheets="@../../css/textField.css" />
                                     <Button layoutX="956.0" layoutY="287.0" mnemonicParsing="false" onAction="#addManyChildrenFamily" stylesheets="@../../css/button.css" text="Додати" />
                                     <DatePicker fx:id="StartDateFamily" editable="false" layoutX="159.0" layoutY="152.0" prefHeight="35.0" prefWidth="200.0" promptText="Дата Початку" styleClass="data_picker">
@@ -732,6 +734,8 @@
                                     <Label layoutX="41.0" layoutY="265.0" styleClass="font" stylesheets="@../../css/font.css" text="Примітка" />
                                  </children>
                               </AnchorPane>
+                              <Label layoutX="37.0" layoutY="327.0" styleClass="font" stylesheets="@../../css/font.css" text="Відмітка про повнолітність студента" />
+                              <RadioButton fx:id="AdultStudentManyChildrenStatusRadioButton" layoutX="379.0" layoutY="330.0" mnemonicParsing="false" />
                            </children>
                         </AnchorPane>
                      </content>

@@ -54,10 +54,12 @@ public class AdminCuratorController extends HelloApplication implements Initiali
 
     public void showAddDialog(){
         saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AddCuratorDialogPane.fxml",saveDialog);
+        saveDialog.setOnHidden(event -> correctLoadPane());
     }
 
     public void showAdditionDialog(){
         saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AdditionalCuratorDialogPane.fxml",saveDialog);
+        saveDialog.setOnHidden(event -> correctLoadPane());
     }
 
     private void setDataInPlanTable(ObservableList<Curators> curatorInfo){

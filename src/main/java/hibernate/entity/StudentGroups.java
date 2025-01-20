@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "student_groups")
+@Table(name = "student_groups_nefk")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,4 +23,6 @@ public class StudentGroups {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "groups_id")
     private Groups groups;
+
+
 }

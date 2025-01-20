@@ -1,5 +1,11 @@
 package controller.admin.adminDialog;
 
+import data.DeleteData;
+import data.SearchStudentData;
+import hibernate.entity.SpCategoryName;
+import javafx.scene.control.Button;
+import javafx.scene.control.cell.PropertyValueFactory;
+import org.hibernate.exception.ConstraintViolationException;
 import services.TableService;
 import data.AddData;
 import data.DisplayDate;
@@ -10,14 +16,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import start.zine.HelloApplication;
 import tableView.SocialPassportCategoryPrototype;
+import tableView.SocialPassportPrototype;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import static controller.admin.AdminSocialPassportController.saveDialog;
 
-public class AddSocialCategoryDialogPane implements Initializable {
+public class AddSocialCategoryDialogPane extends HelloApplication implements Initializable {
     @FXML
     private TableView<SocialPassportCategoryPrototype> SocialPassportCategory;
 
@@ -27,8 +35,11 @@ public class AddSocialCategoryDialogPane implements Initializable {
     @FXML
     private TextField CategoryNameTextField;
 
-    public ObservableList<SocialPassportCategoryPrototype> category = FXCollections.observableArrayList();
+    @FXML
+    private Button DeleteCategoryButton;
 
+    public ObservableList<SocialPassportCategoryPrototype> category = FXCollections.observableArrayList();
+    public static int categoryId;
 
     public void close(){
         saveDialog.setResult(Boolean.TRUE);
@@ -36,9 +47,38 @@ public class AddSocialCategoryDialogPane implements Initializable {
     }
 
     private void addCategoryInfo(){
-        String nameCategory = CategoryNameTextField.getText();
-        AddData.addSocialPassportCategoryInfo(nameCategory);
+        if(isEmpty()){
+            if(!isExist()){
+                String nameCategory = CategoryNameTextField.getText();
+                AddData.addSocialPassportCategoryInfo(nameCategory);
+            }else{
+                loadAndShowLoginAlarm("/fxml/notifications/WarningExistSocialPassportCategory.fxml");
+            }
+        }else{
+            loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+        }
+    }
 
+    public void selectTableRows(){
+        SocialPassportCategory.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                SocialPassportCategoryPrototype socialPassportCategoryPrototype = newValue;
+                categoryId = SearchStudentData.getIdCategorySocialPassport(socialPassportCategoryPrototype.getNameCategory());
+                DeleteCategoryButton.setVisible(true);
+
+            }
+        });
+    }
+
+    public void deleteCategoryInfo() {
+        try {
+            DeleteData.deleteCategorySocialPassport(categoryId);
+            setCategoryColumn(); // Оновлення таблиці
+            DeleteCategoryButton.setVisible(false);
+
+        } catch (ConstraintViolationException e) {
+            loadAndShowLoginAlarm("/fxml/notifications/WarningExistCategory.fxml");
+        }
     }
 
     public void setButtonAddCategory(){
@@ -60,10 +100,18 @@ public class AddSocialCategoryDialogPane implements Initializable {
         category = DisplayDate.getSocialPassportCategoryInfo();
     }
 
+    public boolean isEmpty(){
+        return !CategoryNameTextField.getText().isEmpty();
+    }
 
+    public boolean isExist(){
+        String categoryName = CategoryNameTextField.getText();
+        return SearchStudentData.validateSocialPassportCategoryName(categoryName);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCategoryColumn();
+        selectTableRows();
     }
 }

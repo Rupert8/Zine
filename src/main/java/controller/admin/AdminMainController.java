@@ -17,6 +17,7 @@ import start.zine.HelloApplication;
 import java.sql.Date;
 import java.util.List;
 
+
 public class AdminMainController extends HelloApplication {
     @FXML
     private TableView<StudentInfo> GroupTable;
@@ -48,6 +49,7 @@ public class AdminMainController extends HelloApplication {
     public static String studentMiddleName;
     public static String studentAddress;
     public static String studentPhoneNumber;
+    public static String studentGroupName;
     private static ObservableList<StudentInfo> list;
 
     private void setDataInGroupTable(ObservableList<StudentInfo> studentInfo){
@@ -72,6 +74,7 @@ public class AdminMainController extends HelloApplication {
                 studentMiddleName = studentInfo.getMiddleName();
                 studentAddress = studentInfo.getAddress();
                 studentPhoneNumber = studentInfo.getPhoneNumber();
+                studentGroupName = studentInfo.getGroupName();
                 extendedInfo.setVisible(true);
 
                 studentId = SearchStudentData.getIdStudentForAdmin(studentAddress,studentPhoneNumber);
@@ -85,7 +88,7 @@ public class AdminMainController extends HelloApplication {
             ObservableList<StudentInfo> semesterList = DisplayDate.getDataByGroupNameForAdminStudentInfo(semester);
             setDataInGroupTable(semesterList);
         }else {
-            throw new IllegalArgumentException("Семестер не може бути null");
+            throw new IllegalArgumentException("Група не може бути null");
         }
 
     }

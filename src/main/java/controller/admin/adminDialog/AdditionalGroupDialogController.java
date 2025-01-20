@@ -3,6 +3,7 @@ package controller.admin.adminDialog;
 import controller.admin.AdminGroupController;
 import data.DeleteData;
 import data.DisplayDate;
+import data.SearchStudentData;
 import data.UpdateData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -54,13 +55,18 @@ public class AdditionalGroupDialogController extends AdminGroupController implem
     }
 
     public void updateGroup(){
-        getData();
-        UpdateData.updateGroupDataById(groupId,name,profession,educationAndProfessionalProgram,levelOfEducation,course,yearOfStudy, formOfEducation);
-        closeDialog();
+        if(isAllFieldsFilled()){
+                getData();
+                UpdateData.updateGroupDataById(groupId,name,profession,educationAndProfessionalProgram,levelOfEducation,course,yearOfStudy, formOfEducation);
+                closeDialog();
+        }else{
+            loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+        }
+
     }
 
     public void deleteGroup(){
-        DeleteData.deleteGroup(groupId);
+        DeleteData.deleteGroup(groupId,groupNameForDelete);
         closeDialog();
     }
 
@@ -69,10 +75,29 @@ public class AdditionalGroupDialogController extends AdminGroupController implem
         saveDialog.close();
     }
 
+    private boolean isAllFieldsFilled() {
+        if (!GroupName.getText().isEmpty() &&
+                !GroupProfession.getText().isEmpty() &&
+                !GroupFormOfEducation.getText().isEmpty() &&
+                GroupCourse.getValue() != null &&
+                !GroupYearOfStudy.getText().isEmpty() &&
+                !GroupLevelOfEducation.getText().isEmpty() &&
+                !GroupEducationAndProfessionalProgram.getText().isEmpty()) {
+            return true; // Усі поля заповнені
+        } else {
+            return false; // Є незаповнені поля
+        }
+    }
+
+    private boolean isExist(){
+        String groupName = GroupName.getText();
+        return SearchStudentData.validateGroupName(groupName);
+    }
 
     public void setCourseComboBox(){
         GroupCourse.getItems().setAll("1","2","3","4");
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

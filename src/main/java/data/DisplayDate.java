@@ -4,6 +4,7 @@ import hibernate.entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.hibernate.Session;
+import tableView.RemovedStudentPrototype;
 import tableView.SocialPassportCategoryPrototype;
 import tableView.SocialPassportPrototype;
 
@@ -23,21 +24,24 @@ public class DisplayDate  {
 
     public static final String GET_SOCIAL_PASSPORT_INFO = "SELECT s.id,s.studentInfo.name,s.studentInfo.surname,s.studentInfo.middleName,s.studentInfo.groupName,c.category,s.semester\n" +
                                                           "FROM SocialPassport s\n" +
-                                                          "INNER JOIN SpCategoryName c on s.spCategoryName.id = c.id";
+                                                          "INNER JOIN SpCategoryName c on s.spCategoryName.id = c.id Where s.studentInfo.status = true";
 
     public static final String GET_SOCIAL_BY_GROUP_NAME_PASSPORT_INFO = "SELECT s.id,s.studentInfo.name,s.studentInfo.surname,s.studentInfo.middleName,s.studentInfo.groupName,c.category,s.semester\n" +
                                                                         "FROM SocialPassport s\n" +
                                                                         "INNER JOIN SpCategoryName c on s.spCategoryName.id = c.id\n" +
-                                                                        "WHERE s.studentInfo.groupName = :groupName";
+                                                                        "WHERE s.studentInfo.groupName = :groupName and s.studentInfo.status = true";
 
     public static final String GET_SOCIAL_BY_CATEGORY_NAME_PASSPORT_INFO = "SELECT s.id,s.studentInfo.name,s.studentInfo.surname,s.studentInfo.middleName,s.studentInfo.groupName,c.category,s.semester\n" +
                                                                            "FROM SocialPassport s\n" +
                                                                            "INNER JOIN SpCategoryName c on s.spCategoryName.id = c.id\n" +
-                                                                           "WHERE c.category = :categoryName";
+                                                                           "WHERE c.category = :categoryName and s.studentInfo.status = true";
 
     public static final String GET_INVALID_INFO = "SELECT s\n" +
                                                   "FROM SocialPassport s\n" +
                                                   "WHERE s.studentInfo.id = :studentId  And s.invalidStatus = true";
+
+    public static final String GET_STUDENT_SOCIAL_PASSPORT_INFO_LIST_FOR_EXPORT = "SELECT s\n" +
+                                                                                  "FROM SocialPassport s Where s.studentInfo.status = true";
 
     public static final String GET_MANY_CHILDREN_FAMILY = "SELECT s FROM SocialPassport s Where s.studentInfo.id = :studentId AND s.manyChildrenStatus = true";
     public static final String GET_MANY_CHILDREN_FAMILY_FROM_TABLE = "SELECT m FROM SpManyChildrenFamily m Where m.socialPassport.id = :passportId";
@@ -47,7 +51,7 @@ public class DisplayDate  {
     public static final String GET_SOCIAL_PASSPORT_CATEGORY_NAME_IN_TABLE = "SELECT c FROM SpCategoryName c Where c.id = :categoryId ";
 
     public static final String GET_STUDENT_CATEGORY = "SELECT c.category FROM SpCategoryName c";
-    public static final String GET_GROUP_INFO = "SELECT id,groupName,curator,profession FROM Groups";
+    public static final String GET_GROUP_INFO = "SELECT id,groupName,curator,profession FROM Groups WHERE Active = true";
     public static final String GET_CURATOR_NAME = "SELECT CONCAT(name, ' ', surname, ' ', middleName) FROM Curators";
     public static final String GET_STUDENT_EDUCATION_INFO = "FROM EducationInfo WHERE studentInfo.id = :studentId";
     public static final String GET_STUDENT_MILITARY_INFO = "FROM MilitaryService WHERE studentInfo.id = :studentId";
@@ -93,14 +97,41 @@ public class DisplayDate  {
         return studentInfo;
     }
 
+    public static ObservableList<RemovedStudentPrototype> getRemovedStudentInfo() {
+        ObservableList<RemovedStudentPrototype> studentInfo = FXCollections.observableArrayList();
+        try {
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            List<RemovedStudentPrototype> resoultlist = session.createQuery("SELECT NEW tableView.RemovedStudentPrototype(" +
+                                                                            "s.id, s.name, s.surname, s.middleName, s.date_of_birth ,s.phoneNumber, s.address, s.removedDate) " +
+                                                                            "FROM StudentInfo s WHERE s.status = false", RemovedStudentPrototype.class).getResultList();
+            studentInfo.addAll(resoultlist);
+
+            session.getTransaction().commit();
+            for (int i = 0; i < resoultlist.size(); i++) {
+                resoultlist.get(i).setStudentId(i + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            HibernateUtil.rollback(session);
+        }
+        return studentInfo;
+    }
+
     public static ObservableList<StudentInfo> getStudentInfo() {
         ObservableList<StudentInfo> studentInfo = FXCollections.observableArrayList();
         try{
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            List<StudentInfo> resultList = session.createQuery("FROM StudentInfo", StudentInfo.class).getResultList();
+            List<StudentInfo> resultList = session.createQuery("FROM StudentInfo WHERE status = true", StudentInfo.class).getResultList();
             studentInfo.addAll(resultList);
+
+            session.getTransaction().commit();
+            for (int i = 0; i < resultList.size(); i++) {
+                resultList.get(i).setId(i + 1);
+            }
         }catch (Exception e) {
             e.printStackTrace();
             HibernateUtil.rollback(session);
@@ -252,7 +283,7 @@ public class DisplayDate  {
     }
 
     public static ObservableList<StudentInfo> getDataByGroupNameForAdminStudentInfo(String groupName) {
-        String hql = "FROM StudentInfo WHERE groupName = :groupName";
+        String hql = "FROM StudentInfo WHERE groupName = :groupName and status = true";
         ObservableList<StudentInfo> studentInfo = FXCollections.observableArrayList();
         try {
             session = HibernateUtil.getSession();
@@ -338,7 +369,7 @@ public class DisplayDate  {
         List<String> studentNames = new ArrayList<>();
         session = HibernateUtil.getSession();
         try {
-            List<StudentInfo> students = session.createQuery("FROM StudentInfo WHERE groupName = :groupName", StudentInfo.class)
+            List<StudentInfo> students = session.createQuery("FROM StudentInfo WHERE groupName = :groupName and status = true", StudentInfo.class)
                                                             .setParameter("groupName", groupName).list();
 
             for (StudentInfo student : students) {
@@ -354,7 +385,7 @@ public class DisplayDate  {
         List<String> groupNames = new ArrayList<>();
         session = HibernateUtil.getSession();
         try {
-            List<String> students = session.createQuery("SELECT groupName FROM Groups", String.class).list();
+            List<String> students = session.createQuery("SELECT groupName FROM Groups WHERE Active = true", String.class).list();
             groupNames.addAll(students);
         }catch (Exception e){
             e.printStackTrace();
@@ -366,7 +397,7 @@ public class DisplayDate  {
         List<String> groupNames = new ArrayList<>();
         session = HibernateUtil.getSession();
         try {
-            List<String> students = session.createQuery("SELECT groupName FROM Groups WHERE status = false", String.class).list();
+            List<String> students = session.createQuery("SELECT groupName FROM Groups WHERE status = false and Active = true", String.class).list();
             groupNames.addAll(students);
         }catch (Exception e){
             e.printStackTrace();
@@ -415,6 +446,7 @@ public class DisplayDate  {
                     .uniqueResult();
         }
     }
+
 
     public static ObservableList<Groups> getFullGroupInfo() {
         ObservableList<Groups> groupNames = FXCollections.observableArrayList();
@@ -1075,4 +1107,20 @@ public class DisplayDate  {
         return socialPassport;
     }
 
+    public static List<SocialPassport> selectStudentSocialPassportInfoForExport(){
+        List<SocialPassport> socialPassport = null;
+        try{
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            socialPassport = session.createQuery(GET_STUDENT_SOCIAL_PASSPORT_INFO_LIST_FOR_EXPORT, SocialPassport.class).getResultList();
+
+            session.getTransaction().commit();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        return socialPassport;
+    }
 }

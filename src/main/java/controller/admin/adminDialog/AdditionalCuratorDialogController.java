@@ -1,10 +1,7 @@
 package controller.admin.adminDialog;
 
 import controller.admin.AdminCuratorController;
-import data.AddData;
-import data.DeleteData;
-import data.DisplayDate;
-import data.UpdateData;
+import data.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -44,9 +41,14 @@ public class AdditionalCuratorDialogController extends AdminCuratorController im
     }
 
     public void updateCurator(){
-        getData();
-        UpdateData.updateCuratorDataById(name,surname,middleName,group,email);
-        closeDialog();
+        if(isAllFieldsFilled()){
+                getData();
+                UpdateData.updateCuratorDataById(name,surname,middleName,group,email);
+                closeDialog();
+        }else{
+            loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+        }
+        
     }
 
     private void setValueInTextFields(){
@@ -63,9 +65,25 @@ public class AdditionalCuratorDialogController extends AdminCuratorController im
     }
 
     public void deleteCurator(){
-
-        DeleteData.deleteCurator(curatorId);
+        DeleteData.deleteCurator(curatorId,curatorGroupName);
         closeDialog();
+    }
+
+    private boolean isAllFieldsFilled() {
+        if (!CuratorName.getText().isEmpty() &&
+                !CuratorSurname.getText().isEmpty() &&
+                !CuratorMiddleName.getText().isEmpty() &&
+                CuratorGroup.getValue() != null &&
+                !CuratorEmail.getText().isEmpty()) {
+            return true; // Усі поля заповнені
+        } else {
+            return false; // Є незаповнені поля
+        }
+    }
+
+    private boolean isExist(){
+        String email = CuratorEmail.getText();
+        return SearchStudentData.validateUserEmail(email);
     }
 
     @Override

@@ -5,8 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
-@Getter
-@Setter
+//@Getter @Setter
 public class SocialPassportPrototype {
     private Integer id;
     private String name;
@@ -15,4 +14,60 @@ public class SocialPassportPrototype {
     private String nameCategory;
     private String groupName;
     private Integer semester;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public String getNameCategory() {
+        return nameCategory;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public Integer getSemester() {
+        return semester;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public void setNameCategory(String nameCategory) {
+        this.nameCategory = nameCategory;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public void setSemester(Integer semester) {
+        this.semester = semester;
+    }
 }

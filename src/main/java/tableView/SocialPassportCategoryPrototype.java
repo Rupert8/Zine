@@ -5,13 +5,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
-@Getter
-@Setter
+//@Getter @Setter
 public class SocialPassportCategoryPrototype {
     private String nameCategory;
 
     @Override
     public String toString(){
         return nameCategory;
+    }
+
+    public String getNameCategory() {
+        return nameCategory;
+    }
+
+    public void setNameCategory(String nameCategory) {
+        this.nameCategory = nameCategory;
     }
 }

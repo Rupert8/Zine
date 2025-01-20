@@ -6,9 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "sp_chornobiltsi")
-@Getter
-@Setter
+@Table(name = "sp_chornobiltsi_nefk")
+@Getter @Setter
 @NoArgsConstructor
 public class SpChornobiltsi {
     @Id
@@ -22,4 +21,5 @@ public class SpChornobiltsi {
 
     @Column(name = "group_name")
     private String group_name;
+
 }
