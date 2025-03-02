@@ -79,7 +79,7 @@ public class AddData {
         }
     }
 
-    public static void addCuratorData(String name, String surname, String middleName, String group, String email, String password) {
+    public static void addCuratorData(String name, String surname, String middleName, String email, String password) {
         Session session = null;
         try {
             session = HibernateUtil.getSession();
@@ -90,7 +90,7 @@ public class AddData {
                 curator.setName(name);
                 curator.setSurname(surname);
                 curator.setMiddleName(middleName);
-                curator.setGroup(group);
+                curator.setGroup(null);
 
                 User user = new User();
                 user.setEmail(email);
@@ -98,11 +98,8 @@ public class AddData {
                 user.setCurators(curator);
                 user.setStatus(true);
 
-                String curatorFullName = curator.getSurname() + " " + curator.getName() + " " + curator.getMiddleName();
                 session.persist(user);
                 session.getTransaction().commit();
-
-                UpdateData.updateGroupCurator(curatorFullName,group,true);
             }
 
         } catch (RuntimeException e) {

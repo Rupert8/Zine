@@ -15,8 +15,8 @@ public class SearchStudentData {
     private static final String SELECT_SOCIAL_MANY_CHILDREN_PASSPORT_ID = "SELECT с.id FROM SocialPassport с WHERE с.studentInfo.id = :studentId AND с.manyChildrenStatus = true";
 
     private static final String SELECT_WORK_PLAN_ID = "SELECT id FROM WorkPlan WHERE eventName = :eventName AND performer = :performer";
-    private static final String SELECT_CURATOR_ID = "SELECT id FROM Curators WHERE group = :groupName";
-    private static final String SELECT_GROUP_ID = "SELECT id FROM Groups WHERE curator = :curatorName";
+    private static final String SELECT_CURATOR_ID = "SELECT id FROM Curators WHERE user.Email = :email";
+    private static final String SELECT_GROUP_ID = "SELECT id FROM Groups WHERE groupName = :groupName";
 
     private static final String SELECT_USER_ID = "SELECT u.id FROM User u WHERE u.Email = :userEmail";
 
@@ -139,14 +139,14 @@ public class SearchStudentData {
         return id;
     }
 
-    public static int getIdGroup(String curator){
+    public static int getIdGroup(String groupName){
         int id = 0;
         try{
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
             id = session.createQuery(SELECT_GROUP_ID, Integer.class)
-                    .setParameter("curatorName" , curator).getSingleResult();
+                    .setParameter("groupName" , groupName).getSingleResult();
 
             session.getTransaction().commit();
         }catch(RuntimeException e){
@@ -158,14 +158,14 @@ public class SearchStudentData {
         return id;
     }
 
-    public static int getIdCurator(String groupName){
+    public static int getIdCurator(String email){
         int id = 0;
         try{
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
             id = session.createQuery(SELECT_CURATOR_ID, Integer.class)
-                    .setParameter("groupName" , groupName).getSingleResult();
+                    .setParameter("email" , email).getSingleResult();
             session.getTransaction().commit();
         }catch(RuntimeException e){
             e.printStackTrace();
@@ -359,7 +359,7 @@ public class SearchStudentData {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            String invalid = session.createQuery("SELECT s.spCategoryName.category FROM SocialPassport s WHERE s.studentInfo.name = :name and s.studentInfo.surname = :surName and s.studentInfo.middleName = :middleName and s.studentInfo.groupName = :groupName and s.spCategoryName = 'Інвалід'", String.class)
+            String invalid = session.createQuery("SELECT s.spCategoryName.category FROM SocialPassport s WHERE s.studentInfo.name = :name and s.studentInfo.surname = :surName and s.studentInfo.middleName = :middleName and s.studentInfo.groupName = :groupName and s.spCategoryName.category = 'Інвалід'", String.class)
                     .setParameter("name", name)
                     .setParameter("surName", surName)
                     .setParameter("middleName", middleName)
@@ -382,7 +382,7 @@ public class SearchStudentData {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            String family = session.createQuery("SELECT s.spCategoryName.category FROM SocialPassport s WHERE s.studentInfo.name = :name and s.studentInfo.surname = :surName and s.studentInfo.middleName = :middleName and s.studentInfo.groupName = :groupName and s.spCategoryName = 'Багатодітна родина'", String.class)
+            String family = session.createQuery("SELECT s.spCategoryName.category FROM SocialPassport s WHERE s.studentInfo.name = :name and s.studentInfo.surname = :surName and s.studentInfo.middleName = :middleName and s.studentInfo.groupName = :groupName and s.spCategoryName.category = 'Багатодітна родина'", String.class)
                     .setParameter("name", name)
                     .setParameter("surName", surName)
                     .setParameter("middleName", middleName)

@@ -5,21 +5,17 @@ import data.DisplayDate;
 import data.SearchStudentData;
 import hibernate.entity.WorkPlan;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import services.ClearValueService;
 import start.zine.HelloApplication;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
-
-import static controller.WorkGroupController.curatorFullName;
 
 public class AdminWorkPlanController extends HelloApplication implements Initializable {
     @FXML
@@ -101,26 +97,28 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
         Date endDate = Date.valueOf(EndDatePicker.getValue());
 
         ObservableList<WorkPlan> list = DisplayDate.getDataWithParameterForAdminPlanInfo(startDate, endDate);
-        if(list == null){
-            System.out.println("List is null");
+        if(list.isEmpty()){
+            loadAndShowLoginAlarm("/fxml/notifications/emptyResultNotifications/NoRecordsDateFound.fxml");
         }else {
             setDataInPlanTable(list);
         }
 
     }
     private void setPlanComboBox(){
-        SortSemesterComboBox.getItems().addAll(1,2,3,4,5,6,7,8);
+        if(SortComboBox.getItems().isEmpty()){
+            SortSemesterComboBox.getItems().addAll(1,2,3,4,5,6,7,8);
+        }
     }
 
     public void displayDataBySemester(){
         Integer semester = SortSemesterComboBox.getValue();
-        if(semester != null){
-            ObservableList<WorkPlan> semesterList = DisplayDate.getDataBySemesterForAdminPlanInfo(semester);
-            setDataInPlanTable(semesterList);
-        }else {
-            throw new IllegalArgumentException("Семестер не може бути null");
-        }
 
+        ObservableList<WorkPlan> semesterList = DisplayDate.getDataBySemesterForAdminPlanInfo(semester);
+        if(semesterList.isEmpty()) {
+            loadAndShowLoginAlarm("/fxml/notifications/emptyResultNotifications/NoRecordsSemesterFound.fxml");
+        }else{
+            setDataInPlanTable(semesterList);
+        }
     }
 
     public void displayPlanInfo(){
@@ -159,16 +157,23 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
         deletePlanData();
         displayDataBySemester();
         setPlanComboBox();
+        loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessDeleteNotification.fxml");
     }
 
     public void showAddDialogPane(){
         saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AddPlanDialog.fxml",saveDialog);
         PlanTable.getSelectionModel().clearSelection();
+        saveDialog.setOnHidden(event -> start());
     }
 
     public void showUpdateDialogPane(){
-        saveDialog =  loadAndShowDialog("/fxml/admin/adminDialogFxml/UpdateAdminPlanDialog.fxml",saveDialog);
-        PlanTable.getSelectionModel().clearSelection();
+        if(passConfirmationNote.equals("Затверджено")){
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningConfirmationNote.fxml");
+        }else{
+            saveDialog =  loadAndShowDialog("/fxml/admin/adminDialogFxml/UpdateAdminPlanDialog.fxml",saveDialog);
+            PlanTable.getSelectionModel().clearSelection();
+            saveDialog.setOnHidden(event -> start());
+        }
     }
 
 
@@ -193,6 +198,7 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
             SortSemesterComboBox.setVisible(false);
             SortDateButton.setVisible(true);
             displayPlanInfo();
+            ClearValueService.clearSortByDateField(StartDatePicker, EndDatePicker);
             PlanTable.getSelectionModel().clearSelection();
         }else if(SortComboBox.getValue().equals("Семестром")){
             StartDatePicker.setVisible(false);
@@ -201,6 +207,7 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
             SortSemesterComboBox.setVisible(true);
             SortDateButton.setVisible(false);
             displayPlanInfo();
+            ClearValueService.clearSortBySemesterField(SortSemesterComboBox);
             PlanTable.getSelectionModel().clearSelection();
         }
 
@@ -219,7 +226,6 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
         displayPlanInfo();
         PlanTable.getSelectionModel().clearSelection();
     }
-
 
 
     @Override

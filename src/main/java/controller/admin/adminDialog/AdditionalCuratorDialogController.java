@@ -32,7 +32,7 @@ public class AdditionalCuratorDialogController extends AdminCuratorController im
         surname = CuratorSurname.getText();
         middleName = CuratorMiddleName.getText();
         email = CuratorEmail.getText();
-        group = CuratorGroup.getValue();
+        //group = CuratorGroup.getValue();
     }
 
     public void closeDialog(){
@@ -43,8 +43,9 @@ public class AdditionalCuratorDialogController extends AdminCuratorController im
     public void updateCurator(){
         if(isAllFieldsFilled()){
                 getData();
-                UpdateData.updateCuratorDataById(name,surname,middleName,group,email);
+                UpdateData.updateCuratorDataById(name,surname,middleName,email);
                 closeDialog();
+                loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessUpdateNotification.fxml");
         }else{
             loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
         }
@@ -56,24 +57,24 @@ public class AdditionalCuratorDialogController extends AdminCuratorController im
         CuratorSurname.setText(curatorSurname);
         CuratorMiddleName.setText(curatorMiddleName);
         CuratorEmail.setText(curatorEmail);
-        CuratorGroup.setValue(curatorGroupName);
+        //CuratorGroup.setValue(curatorGroupName);
     }
 
-    public void setComboBox(){
-        List<String> groups = DisplayDate.getGroupName();
-        CuratorGroup.getItems().setAll(groups);
-    }
+//    public void setComboBox(){
+//        List<String> groups = DisplayDate.getGroupName();
+//        CuratorGroup.getItems().setAll(groups);
+//    }
 
     public void deleteCurator(){
         DeleteData.deleteCurator(curatorId,curatorGroupName);
         closeDialog();
+        loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessDeleteNotification.fxml");
     }
 
     private boolean isAllFieldsFilled() {
         if (!CuratorName.getText().isEmpty() &&
                 !CuratorSurname.getText().isEmpty() &&
                 !CuratorMiddleName.getText().isEmpty() &&
-                CuratorGroup.getValue() != null &&
                 !CuratorEmail.getText().isEmpty()) {
             return true; // Усі поля заповнені
         } else {
@@ -88,7 +89,7 @@ public class AdditionalCuratorDialogController extends AdminCuratorController im
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setComboBox();
+//        setComboBox();
         setValueInTextFields();
     }
 }

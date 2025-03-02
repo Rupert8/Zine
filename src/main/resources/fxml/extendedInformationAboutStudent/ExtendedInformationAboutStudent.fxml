@@ -36,8 +36,8 @@
                                           <URL value="@../../css/datePicker.css" />
                                        </stylesheets>
                                     </DatePicker>
-                                    <TextField fx:id="SchoolNameEducation" layoutX="21.0" layoutY="125.0" prefWidth="222.0" promptText="Заклад" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="GradeAvarageEducation" layoutX="21.0" layoutY="205.0" prefWidth="222.0" promptText="Середній бал" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="SchoolNameEducation" editable="false" layoutX="21.0" layoutY="125.0" prefWidth="222.0" promptText="Заклад" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="GradeAvarageEducation" editable="false" layoutX="21.0" layoutY="205.0" prefWidth="222.0" promptText="Середній бал" styleClass="textField" stylesheets="@../../css/textField.css" />
                                  </children></Pane>
                               <Pane layoutX="343.0" layoutY="124.0" prefHeight="340.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
                                  <children>
@@ -55,7 +55,7 @@
                                        </stylesheets>
                                     </DatePicker>
                                     <Label fx:id="EndDateMilitaryLabel" layoutX="54.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата закінчення" />
-                                    <TextField fx:id="UnitMilitary" layoutX="21.0" layoutY="205.0" prefWidth="222.0" promptText="Підрозділ" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="UnitMilitary" editable="false" layoutX="21.0" layoutY="205.0" prefWidth="222.0" promptText="Підрозділ" styleClass="textField" stylesheets="@../../css/textField.css" />
                                     <Label fx:id="UnitMilitaryLabel" layoutX="85.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Підрозділ" />
                                  </children></Pane>
                               <Pane layoutX="655.0" layoutY="124.0" prefHeight="340.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
@@ -75,8 +75,8 @@
                                     </DatePicker>
                                     <Label fx:id="EndDateJobLabel" layoutX="54.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата закінчення" visible="false" />
                                     <Label fx:id="PlaceJobLabel" layoutX="104.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Місце" visible="false" />
-                                    <TextField fx:id="PlaceJob" layoutX="21.0" layoutY="205.0" prefWidth="222.0" promptText="Місце" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
-                                    <TextField fx:id="PositionJob" layoutX="21.0" layoutY="283.0" prefWidth="222.0" promptText="Посада" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
+                                    <TextField fx:id="PlaceJob" editable="false" layoutX="21.0" layoutY="205.0" prefWidth="222.0" promptText="Місце" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
+                                    <TextField fx:id="PositionJob" editable="false" layoutX="21.0" layoutY="283.0" prefWidth="222.0" promptText="Посада" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
                                     <Label fx:id="PositionJobLabel" layoutX="96.0" layoutY="251.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Посада" visible="false" />
                                     <ComboBox fx:id="ChooseJobComboBox" layoutX="20.0" layoutY="16.0" onAction="#setStudentJobInfoField" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть Запис" styleClass="comboBox" stylesheets="@../../css/textField.css" />
                                  </children></Pane>
@@ -85,11 +85,11 @@
                                     <Label layoutX="81.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="ПІП батька" />
                                     <Label layoutX="78.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="ПІП матері" />
                                     <Label layoutX="56.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Телефон батька" />
-                                    <TextField fx:id="PIPFatherParents" layoutX="21.0" layoutY="45.0" prefWidth="222.0" promptText="ПІП батька" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="PIPMotherParents" layoutX="21.0" layoutY="125.0" prefWidth="222.0" promptText="ПІП матері" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="PhoneFatherParents" layoutX="21.0" layoutY="205.0" prefWidth="222.0" promptText="Телефон батька" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="PIPFatherParents" editable="false" layoutX="21.0" layoutY="45.0" prefWidth="222.0" promptText="ПІП батька" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="PIPMotherParents" editable="false" layoutX="21.0" layoutY="125.0" prefWidth="222.0" promptText="ПІП матері" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="PhoneFatherParents" editable="false" layoutX="21.0" layoutY="205.0" prefWidth="222.0" promptText="Телефон батька" styleClass="textField" stylesheets="@../../css/textField.css" />
                                     <Label layoutX="53.0" layoutY="251.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Телефон матері" />
-                                    <TextField fx:id="PhoneMotherParents" layoutX="21.0" layoutY="283.0" prefWidth="222.0" promptText="Телефон матері" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="PhoneMotherParents" editable="false" layoutX="21.0" layoutY="283.0" prefWidth="222.0" promptText="Телефон матері" styleClass="textField" stylesheets="@../../css/textField.css" />
                                  </children></Pane>
                               <Label fx:id="FullNameStudentGeneralInfoLabel" layoutX="124.0" layoutY="21.0" styleClass="mainFont" stylesheets="@../../css/font.css" text="Ім'я студента" />
                               <Label layoutX="14.0" layoutY="21.0" styleClass="mainFont" stylesheets="@../../css/font.css" text="Студент:">
@@ -107,7 +107,7 @@
                                     <Font name="Gotham-Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="663.0" layoutY="78.0" stylesheets="@../../css/font.css" text="Трудова Діяльність">
+                              <Label layoutX="663.0" layoutY="78.0" stylesheets="@../../css/font.css" text="Трудова діяльність">
                                  <font>
                                     <Font name="Gotham-Bold" size="24.0" />
                                  </font>
@@ -148,7 +148,7 @@
                                     <Label fx:id="SemesterSocialActivityLabel" layoutX="90.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Семестр" visible="false" />
                                     <Label fx:id="DateSocialActivityLabel" layoutX="106.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата" visible="false" />
                                     <Label fx:id="ActivitySocialActivityLabel" layoutX="79.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Діяльність" visible="false" />
-                                    <TextField fx:id="ActivitySocial" layoutX="18.0" layoutY="205.0" prefWidth="222.0" promptText="Діяльність" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
+                                    <TextField fx:id="ActivitySocial" editable="false" layoutX="18.0" layoutY="205.0" prefWidth="222.0" promptText="Діяльність" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
                                     <DatePicker fx:id="DateSocial" editable="false" layoutX="20.0" layoutY="125.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата" styleClass="data_picker" visible="false">
                                        <stylesheets>
                                           <URL value="@../../css/style.css" />
@@ -164,8 +164,8 @@
                                     <ComboBox fx:id="SemesterGroup" layoutX="20.0" layoutY="45.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false" />
                                     <Label fx:id="NameGroupActivityLabel" layoutX="68.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Назва гуртка" visible="false" />
                                     <Label fx:id="NoteGroupActivityLabel" layoutX="83.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Примітка" visible="false" />
-                                    <TextField fx:id="GroupName" layoutX="20.0" layoutY="125.0" prefWidth="222.0" promptText="Назва гуртка" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
-                                    <TextField fx:id="NoteGroup" layoutX="20.0" layoutY="205.0" prefWidth="222.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
+                                    <TextField fx:id="GroupName" editable="false" layoutX="20.0" layoutY="125.0" prefWidth="222.0" promptText="Назва гуртка" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
+                                    <TextField fx:id="NoteGroup" editable="false" layoutX="20.0" layoutY="205.0" prefWidth="222.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
                                     <ComboBox fx:id="ChooseGroupActivityComboBox" layoutX="22.0" layoutY="16.0" onAction="#setStudentGroupInfoField" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть Запис" styleClass="comboBox" stylesheets="@../../css/textField.css" />
                                  </children>
                               </Pane>
@@ -217,7 +217,7 @@
                                     <Label fx:id="SemesterSupportLabel" layoutX="88.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Семестр" visible="false" />
                                     <Label fx:id="DateSupportLabel" layoutX="105.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата" visible="false" />
                                     <Label fx:id="ContentSupportLabel" layoutX="102.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Зміст" visible="false" />
-                                    <TextField fx:id="ContentSupport" layoutX="18.0" layoutY="205.0" prefWidth="222.0" promptText="Зміст" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
+                                    <TextField fx:id="ContentSupport" editable="false" layoutX="18.0" layoutY="205.0" prefWidth="222.0" promptText="Зміст" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
                                     <DatePicker fx:id="DateSupport" editable="false" layoutX="18.0" layoutY="125.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата" styleClass="data_picker" visible="false">
                                        <stylesheets>
                                           <URL value="@../../css/style.css" />
@@ -259,7 +259,7 @@
                                     <Label fx:id="SemesterPromotionLabel" layoutX="91.0" layoutY="14.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Семестр" visible="false" />
                                     <Label fx:id="DatePromotionLabel" layoutX="106.0" layoutY="93.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата" visible="false" />
                                     <Label fx:id="ContentPromotionLabel" layoutX="103.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Зміст" visible="false" />
-                                    <TextField fx:id="ContentPromotion" layoutX="20.0" layoutY="205.0" prefWidth="222.0" promptText="Зміст" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
+                                    <TextField fx:id="ContentPromotion" editable="false" layoutX="20.0" layoutY="205.0" prefWidth="222.0" promptText="Зміст" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
                                     <DatePicker fx:id="DatePromotion" editable="false" layoutX="20.0" layoutY="125.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата" styleClass="data_picker" visible="false">
                                        <stylesheets>
                                           <URL value="@../../css/style.css" />
@@ -316,7 +316,7 @@
                                     </DatePicker>
                                     <ComboBox fx:id="SemesterSocialPassport" layoutX="20.0" layoutY="183.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false" />
                                     <ComboBox fx:id="CategorySocialPassport" layoutX="20.0" layoutY="253.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть категорію" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false" />
-                                    <TextField fx:id="NoteSocialPassport" layoutX="20.0" layoutY="323.0" prefWidth="222.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
+                                    <TextField fx:id="NoteSocialPassport" editable="false" layoutX="20.0" layoutY="323.0" prefWidth="222.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
                                     <ComboBox fx:id="ChooseSocialPassportComboBox" layoutX="22.0" layoutY="20.0" onAction="#setSocialPassportInfoField" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть Запис" styleClass="comboBox" stylesheets="@../../css/textField.css" />
                                  </children>
                               </Pane>
@@ -339,13 +339,13 @@
                                     <Label layoutX="87.0" layoutY="92.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Семест" />
                                     <ComboBox fx:id="SemesterFamily" layoutX="19.0" layoutY="123.0" prefHeight="35.0" prefWidth="205.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" />
                                     <Label layoutX="279.0" layoutY="92.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Кількість дітей" />
-                                    <TextField fx:id="CountChildrenFamily" layoutX="247.0" layoutY="123.0" prefWidth="205.0" promptText="Кількість дітей" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="CountChildrenFamily" editable="false" layoutX="247.0" layoutY="123.0" prefWidth="205.0" promptText="Кількість дітей" styleClass="textField" stylesheets="@../../css/textField.css" />
                                     <Label layoutX="48.0" layoutY="172.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Менше 18 років" />
-                                    <TextField fx:id="LessThan18Family" layoutX="19.0" layoutY="203.0" prefWidth="205.0" promptText="Менше 18 років" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="LessThan18Family" editable="false" layoutX="19.0" layoutY="203.0" prefWidth="205.0" promptText="Менше 18 років" styleClass="textField" stylesheets="@../../css/textField.css" />
                                     <Label layoutX="276.0" layoutY="172.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Більше 18 років" />
-                                    <TextField fx:id="MuchThan18Family" layoutX="247.0" layoutY="203.0" prefWidth="205.0" promptText="Більше 18 років" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="MuchThan18Family" editable="false" layoutX="247.0" layoutY="203.0" prefWidth="205.0" promptText="Більше 18 років" styleClass="textField" stylesheets="@../../css/textField.css" />
                                     <Label layoutX="188.0" layoutY="262.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Примітка" />
-                                    <TextField fx:id="NoteFamily" layoutX="21.0" layoutY="294.0" prefHeight="35.0" prefWidth="422.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="NoteFamily" editable="false" layoutX="21.0" layoutY="294.0" prefHeight="35.0" prefWidth="422.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" />
                                  </children>
                               </Pane>
                               <Label fx:id="FullStudentNameSocialPassport" layoutX="124.0" layoutY="12.0" styleClass="mainFont" stylesheets="@../../css/font.css" text="Ім'я студента" />
@@ -392,7 +392,7 @@
                                     </DatePicker>
                                     <ComboBox fx:id="SemesterInvalid" layoutX="20.0" layoutY="183.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" />
                                     <ComboBox fx:id="CategoryInvalid" layoutX="20.0" layoutY="253.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть категорію" styleClass="comboBox" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="NoteInvalid" layoutX="20.0" layoutY="323.0" prefWidth="222.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                    <TextField fx:id="NoteInvalid" editable="false" layoutX="20.0" layoutY="323.0" prefWidth="222.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" />
                                  </children>
                               </Pane>
                               <RadioButton fx:id="UpdateSocialPassportRadioButton" layoutX="160.0" layoutY="42.0" mnemonicParsing="false" onAction="#handleAllSocialPassportStudentInfoRadioButtonAction" visible="false" />

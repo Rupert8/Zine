@@ -30,7 +30,7 @@
             </AnchorPane>
             </children>
         </Pane>
-      <Pane layoutX="567.0" layoutY="98.0" prefHeight="49.0" prefWidth="152.0" style="-fx-background-color: #e8d58c;" />
+      <Pane fx:id="GroupButtonPane" layoutX="567.0" layoutY="98.0" prefHeight="49.0" prefWidth="152.0" style="-fx-background-color: #e8d58c;" />
       <Button layoutX="152.0" layoutY="125.0" mnemonicParsing="false" onAction="#switchPlanPage" style="-fx-background-color: #fff; -fx-text-fill: #000000; -fx-background-radius: 30px;" text="План роботи">
          <font>
             <Font name="Kharkiv Tone Regular" size="24.0" />
@@ -55,7 +55,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="568.0" layoutY="123.0" mnemonicParsing="false" styleClass="mainButton" stylesheets="@../css/button.css" text="2-KT-21">
+      <Button fx:id="GroupNameButton" layoutX="567.0" layoutY="123.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="152.0" styleClass="mainButton" stylesheets="@../css/button.css" text="2-KT-21">
          <font>
             <Font name="Kharkiv Tone Regular" size="24.0" />
          </font>
@@ -75,7 +75,7 @@
             <Font name="Kharkiv Tone Regular" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="extendedInfo" layoutX="20.0" layoutY="754.0" mnemonicParsing="false" onAction="#switchToExtendedStudentInfo" prefHeight="38.0" prefWidth="225.0" styleClass="Button" stylesheets="@../css/button.css" text="Додаткова інформація" visible="false">
+      <Button fx:id="extendedInfo" layoutX="20.0" layoutY="754.0" mnemonicParsing="false" onAction="#loadExtendedStudentDialog" prefHeight="38.0" prefWidth="225.0" styleClass="Button" stylesheets="@../css/button.css" text="Додаткова інформація" visible="false">
          <font>
             <Font name="Kharkiv Tone Regular" size="20.0" />
          </font>

@@ -90,7 +90,7 @@ public class AdminCuratorController extends HelloApplication implements Initiali
                 curatorEmail = curators.getEmail();
                 curatorGroupName = curators.getGroup();
 
-                curatorId = SearchStudentData.getIdCurator(curatorGroupName);
+                curatorId = SearchStudentData.getIdCurator(curatorEmail);
 
                 AdditionCuratorButton.setVisible(true);
             }

@@ -33,6 +33,7 @@ public class AddStudentController extends HelloApplication {
                 Date dateOfBirth = Date.valueOf(StudentDateOfBirth.getValue());
                 AddData.addStudent(name,surname,middleName,address,phoneNumber,dateOfBirth);
                 closeDialog();
+                loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
             }else{
                 loadAndShowLoginAlarm("/fxml/notifications/WarningExistStudent.fxml");
             }

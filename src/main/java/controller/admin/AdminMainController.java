@@ -17,6 +17,8 @@ import start.zine.HelloApplication;
 import java.sql.Date;
 import java.util.List;
 
+import static controller.ExtendedInformationAboutStudent.userStatus;
+
 
 public class AdminMainController extends HelloApplication {
     @FXML
@@ -123,7 +125,10 @@ public class AdminMainController extends HelloApplication {
         }
     }
 
-
+    public void loadExtendedStudentDialog(ActionEvent event){
+        userStatus = 0;
+        switchToExtendedStudentInfo(event);
+    }
 
     private void correctVisible(){
         SortByGroupComboBox.setVisible(false);

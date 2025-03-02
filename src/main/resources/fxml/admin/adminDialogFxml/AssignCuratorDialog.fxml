@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane prefHeight="251.0" prefWidth="600.0" styleClass="dialogPane" stylesheets="@../../../css/dialogPane.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.admin.adminDialog.AssignCuratorDialogController">
+   <content>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="600.0" style="-fx-background-color: #fff;">
+         <children>
+            <AnchorPane layoutX="24.0" layoutY="65.0" prefHeight="120.0" prefWidth="549.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 2;">
+               <children>
+                  <Label layoutX="61.0" layoutY="77.0" text="Куратор">
+                     <font>
+                        <Font name="Gotham-Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="75.0" layoutY="21.0" text="Група">
+                     <font>
+                        <Font name="Gotham-Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="GroupNameField" layoutX="193.0" layoutY="16.0" prefHeight="35.0" prefWidth="300.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
+                  <ComboBox fx:id="CuratorComboBox" layoutX="193.0" layoutY="72.0" prefHeight="35.0" prefWidth="300.0" styleClass="comboBox" stylesheets="@../../../css/textField.css" />
+               </children></AnchorPane>
+            <Button fx:id="applyButton" layoutX="441.0" layoutY="200.0" mnemonicParsing="false" onAction="#assignCurator" styleClass="Button" stylesheets="@../../../css/button.css" text="підтвердити" />
+            <Button fx:id="cancelButton" layoutX="24.0" layoutY="200.0" mnemonicParsing="false" onAction="#closeDialog" styleClass="Button" stylesheets="@../../../css/button.css" text="скасувати" />
+            <Label layoutX="151.0" layoutY="14.0" text="Додати Куратора">
+               <font>
+                  <Font name="Kharkiv Tone Regular" size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </content>
+</DialogPane>

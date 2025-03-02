@@ -69,6 +69,7 @@ public class UpdateAdminPlanController extends AdminWorkPlanController {
             getData();
             UpdateData.updateAdminPlanDataById(nameEvent,date,confirmationNote,status,semester);
             closeDialog();
+            loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessUpdateNotification.fxml");
         }else{
             loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
         }
@@ -81,6 +82,10 @@ public class UpdateAdminPlanController extends AdminWorkPlanController {
 
     public void setConfirmationNoteComboBox(){
         ConfirmationNoteComboBox.getItems().addAll("Затверджено","Не затверджено");
+    }
+
+    private void setSemesterComboBox(){
+        SemesterComboBox.getItems().addAll(1,2,3,4,5,6,7,8);
     }
 
     public void closeDialog(){
@@ -104,5 +109,6 @@ public class UpdateAdminPlanController extends AdminWorkPlanController {
         setField();
         setCompletionComboBox();
         setConfirmationNoteComboBox();
+        setSemesterComboBox();
     }
 }

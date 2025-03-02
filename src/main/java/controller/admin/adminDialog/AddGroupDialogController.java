@@ -54,6 +54,7 @@ public class AddGroupDialogController extends AdminGroupController implements In
                 getData();
                 AddData.addGroupInfo(groupName,groupProfession,groupFormOfEducation,groupGroupYearOfStudy,groupLevelOfEducation,groupEducationAndProfessionalProgram,groupCourse);
                 closeDialog();
+                loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
             }else {
                 loadAndShowLoginAlarm("/fxml/notifications/WarningExistGroupName.fxml");
             }

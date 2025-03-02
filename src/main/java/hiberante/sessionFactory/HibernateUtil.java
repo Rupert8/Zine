@@ -15,7 +15,7 @@ public class HibernateUtil {
 
     static {
         try{
-            Configuration configuration = new Configuration().configure(new File("src\\main\\resources\\hibernate.xml\\hibernate.cfg.xml"));
+            Configuration configuration = new Configuration().configure();
             configuration.addAnnotatedClass(User.class);
             configuration.addAnnotatedClass(StudentInfo.class);
             configuration.addAnnotatedClass(WorkPlan.class);

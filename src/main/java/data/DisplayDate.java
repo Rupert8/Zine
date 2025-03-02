@@ -22,7 +22,7 @@ public class DisplayDate  {
                                                         "FROM Curators c\n" +
                                                         "LEFT JOIN User u ON c.id = u.curators.id";
 
-    public static final String GET_SOCIAL_PASSPORT_INFO = "SELECT s.id,s.studentInfo.name,s.studentInfo.surname,s.studentInfo.middleName,s.studentInfo.groupName,c.category,s.semester\n" +
+    public static final String GET_SOCIAL_PASSPORT_INFO = "SELECT new tableView.SocialPassportPrototype(s.id,s.studentInfo.name,s.studentInfo.surname,s.studentInfo.middleName,c.category,s.studentInfo.groupName,s.semester)\n" +
                                                           "FROM SocialPassport s\n" +
                                                           "INNER JOIN SpCategoryName c on s.spCategoryName.id = c.id Where s.studentInfo.status = true";
 
@@ -52,7 +52,7 @@ public class DisplayDate  {
 
     public static final String GET_STUDENT_CATEGORY = "SELECT c.category FROM SpCategoryName c";
     public static final String GET_GROUP_INFO = "SELECT id,groupName,curator,profession FROM Groups WHERE Active = true";
-    public static final String GET_CURATOR_NAME = "SELECT CONCAT(name, ' ', surname, ' ', middleName) FROM Curators";
+    public static final String GET_CURATOR_NAME = "SELECT CONCAT(surname, ' ', name, ' ', middleName) FROM Curators Where group is null";
     public static final String GET_STUDENT_EDUCATION_INFO = "FROM EducationInfo WHERE studentInfo.id = :studentId";
     public static final String GET_STUDENT_MILITARY_INFO = "FROM MilitaryService WHERE studentInfo.id = :studentId";
     public static final String GET_STUDENT_JOB_INFO = "FROM StudentJob WHERE studentInfo.id = :studentId and place = :place";
@@ -185,10 +185,8 @@ public class DisplayDate  {
         ObservableList<String> nameCategory = FXCollections.observableArrayList();
         session = HibernateUtil.getSession();
         try {
-            List<SocialPassportCategoryPrototype> resultList = session.createQuery(GET_SOCIAL_PASSPORT_CATEGORY_NAME, SocialPassportCategoryPrototype.class).getResultList();
-            for (SocialPassportCategoryPrototype category : resultList) {
-                nameCategory.add(category.getNameCategory());
-            }
+            List<String> resultList = session.createQuery(GET_SOCIAL_PASSPORT_CATEGORY_NAME, String.class).getResultList();
+            nameCategory.addAll(resultList);
         } finally {
             session.close();
         }
@@ -206,11 +204,11 @@ public class DisplayDate  {
             List<WorkPlan> resoultlist = session.createQuery(hql, WorkPlan.class).setParameter("startDate", startDate).setParameter("endDate", endDate).getResultList();
             planInfo.addAll(resoultlist);
 
+            session.getTransaction().commit();
+
             for (int i = 0; i < resoultlist.size(); i++) {
                 resoultlist.get(i).setId(i + 1);
             }
-
-            session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
             HibernateUtil.rollback(session);

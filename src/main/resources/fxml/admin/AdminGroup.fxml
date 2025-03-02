@@ -55,7 +55,7 @@
             <Font name="Kharkiv Tone Regular" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="AdditionInfoButton" layoutX="20.0" layoutY="748.0" mnemonicParsing="false" onAction="#loadAdditionInfoDialog" prefHeight="38.0" prefWidth="225.0" styleClass="Button" stylesheets="@../../css/button.css" text="Додаткова інформація" visible="false">
+      <Button fx:id="AdditionInfoButton" layoutX="230.0" layoutY="748.0" mnemonicParsing="false" onAction="#loadAdditionInfoDialog" prefHeight="38.0" prefWidth="225.0" styleClass="Button" stylesheets="@../../css/button.css" text="Додаткова інформація" visible="false">
          <font>
             <Font name="Kharkiv Tone Regular" size="20.0" />
          </font>
@@ -73,6 +73,11 @@
       <Button layoutX="40.0" layoutY="125.0" mnemonicParsing="false" onAction="#switchToAdminWorkPlanPage" style="-fx-background-color: #fff; -fx-text-fill: #000000; -fx-background-radius: 30px;" text="План роботи">
          <font>
             <Font name="Kharkiv Tone Regular" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="AssignCuratorButton" layoutX="20.0" layoutY="748.0" mnemonicParsing="false" onAction="#loadAssignCuratorDialog" prefHeight="38.0" prefWidth="200.0" styleClass="Button" stylesheets="@../../css/button.css" text="Присвоїти Куратора" visible="false">
+         <font>
+            <Font name="Kharkiv Tone Regular" size="20.0" />
          </font>
       </Button>
     </children>

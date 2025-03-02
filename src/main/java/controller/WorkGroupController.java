@@ -11,12 +11,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import start.zine.HelloApplication;
 
 import java.sql.Date;
 import java.util.List;
 
+import static controller.ExtendedInformationAboutStudent.userStatus;
 import static controller.LoginController.curatorEmail;
+import static controller.LoginController.curatorGroupName;
 import static controller.admin.AdminMainController.studentGroupName;
 import static controller.admin.AdminMainController.*;
 
@@ -46,6 +49,12 @@ public class WorkGroupController extends HelloApplication {
     private Label CuratorName;
     @FXML
     private Button extendedInfo;
+
+    @FXML
+    private Button GroupNameButton;
+
+    @FXML
+    private Pane GroupButtonPane;
 
     public static String curatorFullName;
     public static int studentWorkId;
@@ -134,24 +143,37 @@ public class WorkGroupController extends HelloApplication {
     public void showAddStudentDialog(){
         saveDialog = loadAndShowDialog("/fxml/curator/curatorDialogFxml/AddStudent.fxml",saveDialog);
         saveDialog.setOnHidden(event -> startWorkGroup());
+        //saveDialog.setOnHidden(event -> extendedInfo.setVisible(false));
     }
 
     public void showUpdateStudentDialog(){
         saveDialog = loadAndShowDialog("/fxml/curator/curatorDialogFxml/UpdateStudent.fxml",saveDialog);
         saveDialog.setOnHidden(event -> startWorkGroup());
+        //saveDialog.setOnHidden(event -> extendedInfo.setVisible(false));
+    }
+
+    public void loadExtendedStudentDialog(ActionEvent event){
+        userStatus = 1;
+        switchToExtendedStudentInfo(event);
     }
 
     public void delete(){
         DeleteData.deleteStudent(studentId);
         startWorkGroup();
+        loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessDeleteNotification.fxml");
     }
 
     public void startWorkGroup(){
         selectRows();
         displayGroupData();
         displayCuratorName();
+        GroupNameButton.setText(curatorGroupName);
+        GroupButtonPane.prefHeightProperty().bind(GroupNameButton.heightProperty());
+        GroupButtonPane.prefWidthProperty().bind(GroupNameButton.widthProperty());
         UpdateStudentButton.setVisible(false);
         DeleteStudentButton.setVisible(false);
+        extendedInfo.setVisible(false);
+        GroupTable.getSelectionModel().clearSelection();
     }
 
     public void initialize() {

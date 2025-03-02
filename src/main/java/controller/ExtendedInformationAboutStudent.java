@@ -251,9 +251,15 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     private int semesterSocialPassportValue;
 
     private boolean statusPane = false;
+    public static int userStatus = 2;
 
     public void back(ActionEvent event) {
-        switchToAdminMain(event);
+        if(userStatus == 0){
+            switchToAdminMain(event);
+        }else{
+            switchWorkGroupPage(event);
+        }
+
     }
 
     private void setStudentEducationInfoField(){
@@ -791,6 +797,8 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
             UpdateIndividualSupportButtonInDB.setVisible(true);
             setSemesterComboBox(SemesterSupport);
 
+            ContentSupport.setEditable(true);
+
             GeneralInfoTab.setDisable(true);
             SocialAndGroupActivityTab.setDisable(true);
             PromotionTab.setDisable(true);
@@ -810,6 +818,8 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
             UpdatePromotionButton.setVisible(false);
             UpdatePromotionButtonInDB.setVisible(true);
             setSemesterComboBox(SemesterPromotion);
+
+            ContentPromotion.setEditable(true);
 
             GeneralInfoTab.setDisable(true);
             SocialAndGroupActivityTab.setDisable(true);
@@ -869,6 +879,8 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
         UpdatePromotionButton.setVisible(true);
         UpdatePromotionButtonInDB.setVisible(false);
 
+        ContentPromotion.setEditable(false);
+
         GeneralInfoTab.setDisable(false);
         SocialAndGroupActivityTab.setDisable(false);
         IndividualSupportTab.setDisable(false);
@@ -884,6 +896,8 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
         BackIndividualSupportButton.setVisible(true);
         UpdateIndividualSupportButton.setVisible(true);
         UpdateIndividualSupportButtonInDB.setVisible(false);
+
+        ContentSupport.setEditable(true);
 
         SemesterSupport.getItems().clear();
         SemesterSupport.getItems().add(semesterSupportValue);
@@ -921,14 +935,26 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
         ActivitySocial.setDisable(false);
         DateSocial.setDisable(false);
 
+        SemesterSocial.setEditable(false);
+        ActivitySocial.setEditable(false);
+        DateSocial.setEditable(false);
+
         SemesterGroup.setDisable(false);
         GroupName.setDisable(false);
         NoteGroup.setDisable(false);
 
+        SemesterGroup.setEditable(false);
+        GroupName.setEditable(false);
+        NoteGroup.setEditable(false);
+
         UpdateSocialActivityRadioButton.setVisible(false);
         UpdateGroupActivityRadioButton.setVisible(false);
+
         UpdateSocialActivityRadioButton.setSelected(false);
         UpdateGroupActivityRadioButton.setSelected(false);
+
+        UpdateSocialActivityRadioButton.setDisable(false);
+        UpdateGroupActivityRadioButton.setDisable(false);
 
         GeneralInfoTab.setDisable(false);
         PromotionTab.setDisable(false);
@@ -950,24 +976,48 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
         SchoolNameEducation.setDisable(false);
         GradeAvarageEducation.setDisable(false);
 
+        EndDateEducation.setEditable(false);
+        SchoolNameEducation.setEditable(false);
+        GradeAvarageEducation.setEditable(false);
+
         StartDateMilitary.setDisable(false);
         EndDateMilitary.setDisable(false);
         UnitMilitary.setDisable(false);
+
+        StartDateMilitary.setEditable(false);
+        EndDateMilitary.setEditable(false);
+        UnitMilitary.setEditable(false);
 
         StartDateJob.setDisable(false);
         EndDateJob.setDisable(false);
         PlaceJob.setDisable(false);
         PositionJob.setDisable(false);
 
+        StartDateJob.setEditable(false);
+        EndDateJob.setEditable(false);
+        PlaceJob.setEditable(false);
+        PositionJob.setEditable(false);
+
         PIPFatherParents.setDisable(false);
         PIPMotherParents.setDisable(false);
         PhoneFatherParents.setDisable(false);
         PhoneMotherParents.setDisable(false);
 
+        PIPFatherParents.setEditable(false);
+        PIPMotherParents.setEditable(false);
+        PhoneFatherParents.setEditable(false);
+        PhoneMotherParents.setEditable(false);
+
         UpdateParentsInfoRadioButton.setVisible(false);
         UpdateEducationInfoRadioButton.setVisible(false);
         UpdateMilitaryInfoRadioButton.setVisible(false);
         UpdateJobInfoRadioButton.setVisible(false);
+
+        UpdateParentsInfoRadioButton.setDisable(false);
+        UpdateEducationInfoRadioButton.setDisable(false);
+        UpdateMilitaryInfoRadioButton.setDisable(false);
+        UpdateJobInfoRadioButton.setDisable(false);
+
         UpdateParentsInfoRadioButton.setSelected(false);
         UpdateEducationInfoRadioButton.setSelected(false);
         UpdateMilitaryInfoRadioButton.setSelected(false);
@@ -982,9 +1032,11 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     public void cancelAllSocialPassportStudentInfo(){
         if(SemesterSocialPassport.getValue() != null){
             semesterSocialPassportValue = SemesterSocialPassport.getValue();
-        }else if(SemesterInvalid.getValue() != null){
+        }
+        if(SemesterInvalid.getValue() != null){
             semesterInvalidValue = SemesterInvalid.getValue();
-        }else if(SemesterFamily.getValue() != null){
+        }
+        if(SemesterFamily.getValue() != null){
             semesterFamilyValue = SemesterFamily.getValue();
         }
         String categoryName = CategorySocialPassport.getValue();
@@ -1019,11 +1071,15 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
         CategorySocialPassport.setDisable(false);
         NoteSocialPassport.setDisable(false);
 
+        NoteSocialPassport.setEditable(false);
+
         StartDateInvalid.setDisable(false);
         EndDateInvalid.setDisable(false);
         SemesterInvalid.setDisable(false);
         CategoryInvalid.setDisable(false);
         NoteInvalid.setDisable(false);
+
+        NoteInvalid.setEditable(false);
 
         StartDateFamily.setDisable(false);
         EndDateFamily.setDisable(false);
@@ -1033,12 +1089,22 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
         MuchThan18Family.setDisable(false);
         NoteFamily.setDisable(false);
 
+        CountChildrenFamily.setEditable(false);
+        LessThan18Family.setEditable(false);
+        MuchThan18Family.setEditable(false);
+        NoteFamily.setEditable(false);
+
         UpdateSocialPassportRadioButton.setVisible(false);
         UpdateInvalidRadioButton.setVisible(false);
         UpdateFamilyRadioButton.setVisible(false);
+
         UpdateSocialPassportRadioButton.setSelected(false);
         UpdateInvalidRadioButton.setSelected(false);
         UpdateFamilyRadioButton.setSelected(false);
+
+        UpdateSocialPassportRadioButton.setDisable(false);
+        UpdateInvalidRadioButton.setDisable(false);
+        UpdateFamilyRadioButton.setDisable(false);
 
         GeneralInfoTab.setDisable(false);
         SocialAndGroupActivityTab.setDisable(false);
@@ -1054,6 +1120,10 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 SchoolNameEducation.setDisable(false);
                 GradeAvarageEducation.setDisable(false);
 
+                EndDateEducation.setEditable(true);
+                SchoolNameEducation.setEditable(true);
+                GradeAvarageEducation.setEditable(true);
+
                 UpdateEducationInfoButton.setVisible(true);
 
                 UpdateParentsInfoRadioButton.setDisable(true);
@@ -1068,6 +1138,10 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 StartDateMilitary.setDisable(false);
                 EndDateMilitary.setDisable(false);
                 UnitMilitary.setDisable(false);
+
+                StartDateMilitary.setEditable(true);
+                EndDateMilitary.setEditable(true);
+                UnitMilitary.setEditable(true);
 
                 UpdateMilitaryInfoButton.setVisible(true);
 
@@ -1085,6 +1159,11 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 PlaceJob.setDisable(false);
                 PositionJob.setDisable(false);
 
+                StartDateJob.setEditable(true);
+                EndDateJob.setEditable(true);
+                PlaceJob.setEditable(true);
+                PositionJob.setEditable(true);
+
                 UpdateJobInfoButton.setVisible(true);
 
                 UpdateParentsInfoRadioButton.setDisable(true);
@@ -1100,6 +1179,11 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 PIPMotherParents.setDisable(false);
                 PhoneFatherParents.setDisable(false);
                 PhoneMotherParents.setDisable(false);
+
+                PIPFatherParents.setEditable(true);
+                PIPMotherParents.setEditable(true);
+                PhoneFatherParents.setEditable(true);
+                PhoneMotherParents.setEditable(true);
 
                 UpdateParentsInfoButton.setVisible(true);
 
@@ -1120,6 +1204,8 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 DateSocial.setDisable(false);
                 ActivitySocial.setDisable(false);
 
+                ActivitySocial.setEditable(true);
+
                 UpdateSocialActivityButton.setVisible(true);
 
                 setSemesterComboBox(SemesterSocial);
@@ -1134,6 +1220,9 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 SemesterGroup.setDisable(false);
                 GroupName.setDisable(false);
                 NoteGroup.setDisable(false);
+
+                GroupName.setEditable(true);
+                NoteGroup.setEditable(true);
 
                 UpdateGroupActivityButton.setVisible(true);
 
@@ -1156,6 +1245,8 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 CategorySocialPassport.setDisable(false);
                 NoteSocialPassport.setDisable(false);
 
+                NoteSocialPassport.setEditable(true);
+
                 setSemesterComboBox(SemesterSocialPassport);
                 setSocialPassportCategoryComboBox();
                 UpdateSocialPassportButton.setVisible(true);
@@ -1174,6 +1265,8 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 SemesterInvalid.setDisable(false);
                 CategoryInvalid.setDisable(false);
                 NoteInvalid.setDisable(false);
+
+                NoteInvalid.setEditable(true);
 
                 setSemesterComboBox(SemesterInvalid);
                 setInvalidCategoryComboBox();
@@ -1194,6 +1287,11 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 LessThan18Family.setDisable(false);
                 MuchThan18Family.setDisable(false);
                 NoteFamily.setDisable(false);
+
+                CountChildrenFamily.setEditable(true);
+                LessThan18Family.setEditable(true);
+                MuchThan18Family.setEditable(true);
+                NoteFamily.setEditable(true);
 
                 setSemesterComboBox(SemesterFamily);
                 UpdateManyChildrenFamilyPassportButton.setVisible(true);

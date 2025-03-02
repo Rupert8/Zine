@@ -43,7 +43,7 @@ public class DeleteData extends HelloApplication {
 
     }
 
-    public static void deleteGroup (int groupId,String groupName) {
+    public static void deleteGroup(int groupId,String groupName) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
 
@@ -53,6 +53,8 @@ public class DeleteData extends HelloApplication {
 
             UpdateData.updateStudentActiveStatus(groupName);
             UpdateData.updateGroupCurator(null,groupName,false);
+
+            UpdateData.updateCuratorAfterDeleteGroup(groupName);
             session.getTransaction().commit();
             HibernateUtil.closeSession(session);
         }catch (Exception e){

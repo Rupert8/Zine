@@ -23,9 +23,9 @@ public class TableService {
         studentName.setCellValueFactory(new PropertyValueFactory<SocialPassportPrototype, String>("name"));
         studentMiddleName.setCellValueFactory(new PropertyValueFactory<SocialPassportPrototype, String>("middleName"));
         studentSurname.setCellValueFactory(new PropertyValueFactory<SocialPassportPrototype, String>("surname"));
-        groupName.setCellValueFactory(new PropertyValueFactory<SocialPassportPrototype, String>("nameCategory"));
+        groupName.setCellValueFactory(new PropertyValueFactory<SocialPassportPrototype, String>("groupName"));
         semester.setCellValueFactory(new PropertyValueFactory<SocialPassportPrototype, Integer>("semester"));
-        categoryName.setCellValueFactory(new PropertyValueFactory<SocialPassportPrototype, String>("groupName"));
+        categoryName.setCellValueFactory(new PropertyValueFactory<SocialPassportPrototype, String>("category"));
     }
 
     public static void setDataInSocialPassportCategoryTable(ObservableList<SocialPassportCategoryPrototype> CategoryName,TableView<SocialPassportCategoryPrototype> SocialPassportCategoryTable, TableColumn<SocialPassportCategoryPrototype, String> nameCategory) {

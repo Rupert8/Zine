@@ -13,6 +13,7 @@ import start.zine.HelloApplication;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static controller.LoginController.curatorGroupName;
 import static controller.WorkGroupController.curatorFullName;
 
 public class WorkStudController extends HelloApplication implements Initializable {
@@ -33,6 +34,9 @@ public class WorkStudController extends HelloApplication implements Initializabl
 
     @FXML
     private Button addInformationAboutStudentButton;
+
+    @FXML
+    private Button GroupNameButton;
 
     @FXML
     private Label CuratorName;
@@ -132,6 +136,10 @@ public class WorkStudController extends HelloApplication implements Initializabl
         CuratorName.setText(curatorFullName);
     }
 
+    public void setGroupName(){
+        GroupNameButton.setText(curatorGroupName);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showAndHideComboBox();
@@ -141,5 +149,6 @@ public class WorkStudController extends HelloApplication implements Initializabl
         switchIndividualSupportPage();
         switchPromotionPage();
         setCuratorName();
+        setGroupName();
     }
 }

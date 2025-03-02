@@ -275,6 +275,7 @@ public class AddInformationAboutStudentController extends HelloApplication imple
 
                     int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
                     AddData.addEducationInfo(id,endDate,schoolName,averageGrade);
+                    loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                     ClearValueService.clearEducationInfo(EndDateEducation,SchoolNameEducation,GradeAvarageEducation);
                 }else{
                     loadAndShowLoginAlarm("/fxml/notifications/WarningExistEducationInfo.fxml");
@@ -301,6 +302,7 @@ public class AddInformationAboutStudentController extends HelloApplication imple
 
                     int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
                     AddData.addMilitaryInfo(id,startDate,endDate,unit);
+                    loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                     ClearValueService.clearMilitaryInfo(StartDateMilitary,EndDateMilitary,UnitMilitary);
                 }else{
                     loadAndShowLoginAlarm("/fxml/notifications/WarningExistMilitaryInfo.fxml");
@@ -326,6 +328,7 @@ public class AddInformationAboutStudentController extends HelloApplication imple
 
                 int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
                 AddData.addJobInfo(id,startDate,endDate,place,position);
+                loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                 ClearValueService.clearJobInfo(StartDateJob,EndDateJob,PlaceJob,PositionJob);
             }else {
                 loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
@@ -349,6 +352,7 @@ public class AddInformationAboutStudentController extends HelloApplication imple
 
                     int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
                     AddData.addParentsInfo(id,pipFather,pipMother,phoneFather,phoneMother);
+                    loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                     ClearValueService.clearFamilyInfo(PIPFatherParents,PIPMotherParents,PhoneFatherParents,PhoneMotherParents);
                 }else{
                     loadAndShowLoginAlarm("/fxml/notifications/WarningExistParentsInfo.fxml");
@@ -373,6 +377,7 @@ public class AddInformationAboutStudentController extends HelloApplication imple
 
                 int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
                 AddData.addSocialActivityInfo(id,semester,date,activity);
+                loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                 ClearValueService.clearSocialActivityInfo(SemesterSocial,DateSocial,ActivitySocial);
             }else {
                 loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
@@ -395,7 +400,8 @@ public class AddInformationAboutStudentController extends HelloApplication imple
 
                 int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
                 AddData.addGroupActivityInfo(id,semester,groupName,note);
-                ClearValueService.clearGroupActivity(SemesterGroup,GroupName,NoteGroup);
+                loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
+                ClearValueService.clearGroupActivity(SemesterGroup,GroupName);
             }else {
                 loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
             }
@@ -417,6 +423,7 @@ public class AddInformationAboutStudentController extends HelloApplication imple
 
                 int id  = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
                 AddData.addIndividualSupportInfo(id,semester,date,content);
+                loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                 ClearValueService.clearIndividualSupport(SemesterSupport,DateSupport,ContentSupport);
             }else {
                 loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
@@ -438,6 +445,7 @@ public class AddInformationAboutStudentController extends HelloApplication imple
 
                 int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
                 AddData.addPromotionInfo(id,semester,date,content);
+                loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                 ClearValueService.clearPromotionInfo(SemesterPromotion,DatePromotion,ContentPromotion);
             }else {
                 loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
@@ -471,6 +479,7 @@ public class AddInformationAboutStudentController extends HelloApplication imple
                 int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
                 System.out.print(id);
                 AddData.addGeneralSocialPassportInfo(id,nameCategory,semester,startDate,endDate,note,statusAdult);
+                loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                 ClearValueService.clearSocialPassportField(StartDateSocialPassport,EndDateSocialPassport,SemesterSocialPassport,CategorySocialPassport,NoteSocialPassport,AdultStudentStatusRadioButton);
             }else {
                 loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
@@ -504,6 +513,7 @@ public class AddInformationAboutStudentController extends HelloApplication imple
 
                     int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
                     AddData.addInvalidPassportCategoryInfo(id,category,semester,startDate,endDate,note,statusAdult);
+                    loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                 }else{
                     loadAndShowLoginAlarm("/fxml/notifications/WarningExistInvalidPassport.fxml");
                 }
@@ -538,6 +548,7 @@ public class AddInformationAboutStudentController extends HelloApplication imple
 
                     int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
                     AddData.addManyChildrenPassportInfo(id,semester,startDate,endDate,note,countChildren,lessThan18,muchThan18,statusAdult);
+                    loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                 }else{
                     loadAndShowLoginAlarm("/fxml/notifications/WarningExistManyChildrenFamily.fxml");
                 }

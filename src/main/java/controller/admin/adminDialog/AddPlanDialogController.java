@@ -50,6 +50,7 @@ public class AddPlanDialogController extends HelloApplication implements Initial
             getData();
             AddData.addPlanForAdminData(nameEvent,date,status,semester);
             closeAddDialog();
+            loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
         }else{
             loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
         }

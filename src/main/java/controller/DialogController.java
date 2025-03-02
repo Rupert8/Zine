@@ -53,6 +53,7 @@ public class DialogController extends WorkPlanController implements Initializabl
                 getData();
                 AddData.addPlanForCuratorData(nameEvent,date,performerNameForAdd,status,semester);
                 closeAddDialog();
+                loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
             }else{
                 loadAndShowLoginAlarm("/fxml/notifications/WarningExistEvent.fxml");
             }

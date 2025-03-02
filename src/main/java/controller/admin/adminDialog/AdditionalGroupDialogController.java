@@ -59,6 +59,7 @@ public class AdditionalGroupDialogController extends AdminGroupController implem
                 getData();
                 UpdateData.updateGroupDataById(groupId,name,profession,educationAndProfessionalProgram,levelOfEducation,course,yearOfStudy, formOfEducation);
                 closeDialog();
+                loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessUpdateNotification.fxml");
         }else{
             loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
         }
@@ -68,6 +69,7 @@ public class AdditionalGroupDialogController extends AdminGroupController implem
     public void deleteGroup(){
         DeleteData.deleteGroup(groupId,groupNameForDelete);
         closeDialog();
+        loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessDeleteNotification.fxml");
     }
 
     public void closeDialog(){

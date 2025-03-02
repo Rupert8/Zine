@@ -4,24 +4,21 @@ import data.DeleteData;
 import data.DisplayDate;
 import data.SearchStudentData;
 import hibernate.entity.WorkPlan;
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import services.ClearValueService;
 import start.zine.HelloApplication;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static controller.LoginController.curatorGroupName;
 import static controller.WorkGroupController.curatorFullName;
 
 public class WorkPlanController extends HelloApplication implements Initializable {
@@ -73,12 +70,16 @@ public class WorkPlanController extends HelloApplication implements Initializabl
     @FXML
     public Button DeletePlanButton,UpdatePlanButton;
 
+    @FXML
+    public Button GroupNameButton;
+
     public static int planId;
     public static String passEventName;
     public static String passPerformer;
     public static Date passExecutionDate;
     public static int passSemester;
     public static String passDone;
+    public static String passConfirmationNote;
 
     public static String performerNameForAdd;
 
@@ -106,26 +107,28 @@ public class WorkPlanController extends HelloApplication implements Initializabl
         Date endDate = Date.valueOf(EndDatePicker.getValue());
 
         ObservableList<WorkPlan> list = DisplayDate.getDataWithParameterPlanInfo(startDate, endDate,curatorFullName);
-        if(list == null){
-            System.out.println("List is null");
+        if(list.isEmpty()){
+            loadAndShowLoginAlarm("/fxml/notifications/emptyResultNotifications/NoRecordsDateFound.fxml");
         }else {
             setDataInPlanTable(list);
         }
 
     }
     private void setPlanComboBox(){
-        SortSemesterComboBox.getItems().addAll(1,2,3,4,5,6,7,8);
+        if(SortSemesterComboBox.getItems().isEmpty()){
+            SortSemesterComboBox.getItems().addAll(1,2,3,4,5,6,7,8);
+        }
     }
 
     public void displayDataBySemester(){
         Integer semester = SortSemesterComboBox.getValue();
-        if(semester != null){
-            ObservableList<WorkPlan> semesterList = DisplayDate.getDataBySemesterPlanInfo(semester,curatorFullName);
-            setDataInPlanTable(semesterList);
-        }else {
-            System.out.println("Semester is null");
-        }
 
+        ObservableList<WorkPlan> semesterList = DisplayDate.getDataBySemesterPlanInfo(semester,curatorFullName);
+        if(semesterList.isEmpty()) {
+            loadAndShowLoginAlarm("/fxml/notifications/emptyResultNotifications/NoRecordsSemesterFound.fxml");
+        }else{
+            setDataInPlanTable(semesterList);
+        }
     }
 
     public void displayPlanInfo(){
@@ -143,6 +146,7 @@ public class WorkPlanController extends HelloApplication implements Initializabl
                 passExecutionDate = workPlan.getExecutionDate();
                 passSemester = workPlan.getSemester();
                 passDone = workPlan.getCompletionNote();
+                passConfirmationNote = workPlan.getConfirmationNote();
 
                 planId = SearchStudentData.getIdWorkPlan(passEventName,passPerformer);
                 UpdatePlanButton.setVisible(true);
@@ -159,21 +163,26 @@ public class WorkPlanController extends HelloApplication implements Initializabl
 
     public void delete(){
         deletePlanData();
-        displayDataBySemester();
+        displayPlanInfo();
         setPlanComboBox();
+        loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessDeleteNotification.fxml");
     }
 
     public void showAddDialogPane(){
         saveDialog = loadAndShowDialog("/fxml/dialogPane.fxml",saveDialog);
         performerNameForAdd = CuratorName.getText();
-        PlanTable.getSelectionModel().clearSelection();
         saveDialog.setOnHidden(event -> startWorkPlan());
+        PlanTable.getSelectionModel().clearSelection();
     }
 
     public void showUpdateDialogPane(){
-        saveDialog =  loadAndShowDialog("/fxml/UpdateDialogPane.fxml",saveDialog);
-        PlanTable.getSelectionModel().clearSelection();
-        saveDialog.setOnHidden(event -> startWorkPlan());
+        if(passConfirmationNote.equals("Затверджено")){
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningConfirmationNote.fxml");
+        }else{
+            saveDialog =  loadAndShowDialog("/fxml/UpdateDialogPane.fxml",saveDialog);
+            PlanTable.getSelectionModel().clearSelection();
+            saveDialog.setOnHidden(event -> startWorkPlan());
+        }
     }
 
     public void setCuratorName(){
@@ -201,6 +210,7 @@ public class WorkPlanController extends HelloApplication implements Initializabl
             SortSemesterComboBox.setVisible(false);
             SortDateButton.setVisible(true);
             displayPlanInfo();
+            ClearValueService.clearSortByDateField(StartDatePicker, EndDatePicker);
             PlanTable.getSelectionModel().clearSelection();
         }else if(SortComboBox.getValue().equals("Семестром")){
             StartDatePicker.setVisible(false);
@@ -209,6 +219,7 @@ public class WorkPlanController extends HelloApplication implements Initializabl
             SortSemesterComboBox.setVisible(true);
             SortDateButton.setVisible(false);
             displayPlanInfo();
+            ClearValueService.clearSortBySemesterField(SortSemesterComboBox);
             PlanTable.getSelectionModel().clearSelection();
         }
 
@@ -228,7 +239,9 @@ public class WorkPlanController extends HelloApplication implements Initializabl
         PlanTable.getSelectionModel().clearSelection();
     }
 
-
+    public void setGroupNameButton(){
+        GroupNameButton.setText(curatorGroupName);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -238,6 +251,7 @@ public class WorkPlanController extends HelloApplication implements Initializabl
         setPlanComboBox();
         setCuratorName();
         setSortComboBox();
+        setGroupNameButton();
         startWorkPlan();
     }
 }

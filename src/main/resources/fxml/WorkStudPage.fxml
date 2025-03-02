@@ -40,7 +40,7 @@
                 <Font name="Kharkiv Tone Regular" size="24.0" />
             </font>
         </Button>
-        <Button alignment="CENTER" layoutX="567.0" layoutY="125.0" mnemonicParsing="false" onAction="#switchGroupPage" style="-fx-background-color: #fff; -fx-text-fill: #000000; -fx-background-radius: 30px; -fx-text-alignment: center;" text="2-KT-21">
+        <Button fx:id="GroupNameButton" alignment="CENTER" layoutX="567.0" layoutY="125.0" mnemonicParsing="false" onAction="#switchGroupPage" style="-fx-background-color: #fff; -fx-text-fill: #000000; -fx-background-radius: 30px; -fx-text-alignment: center;" text="2-KT-21">
             <font>
                 <Font name="Kharkiv Tone Regular" size="24.0" />
             </font>

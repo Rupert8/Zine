@@ -7,18 +7,15 @@ import lombok.Setter;
 @AllArgsConstructor
 //@Getter @Setter
 public class SocialPassportCategoryPrototype {
-    private String nameCategory;
+    private String category;
 
     @Override
     public String toString(){
-        return nameCategory;
+        return category;
     }
 
     public String getNameCategory() {
-        return nameCategory;
+        return category;
     }
 
-    public void setNameCategory(String nameCategory) {
-        this.nameCategory = nameCategory;
-    }
 }

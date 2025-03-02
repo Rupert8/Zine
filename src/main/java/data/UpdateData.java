@@ -68,7 +68,40 @@ public class UpdateData {
         }
     }
 
-    public static void updateCuratorDataById (String name, String surname, String middleName, String groupName, String Email) {
+    public static void updateCuratorAfterDeleteGroup(String groupName) {
+        try {
+            Session session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            Curators curators = session.createQuery("From Curators Where group = :groupName", Curators.class).setParameter("groupName",groupName).getSingleResult();
+            curators.setGroup(null);
+
+            session.getTransaction().commit();
+            HibernateUtil.closeSession(session);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateCuratorGroup(String name, String surname, String middleName, String groupName) {
+        try {
+            Session session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            Curators curators = session.createQuery("From Curators Where name = :name and surname = :surname and middleName = :middleName", Curators.class)
+                    .setParameter("name",name)
+                    .setParameter("surname", surname)
+                    .setParameter("middleName", middleName).getSingleResult();
+            curators.setGroup(groupName);
+
+            session.getTransaction().commit();
+            HibernateUtil.closeSession(session);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateCuratorDataById (String name, String surname, String middleName, String Email) {
         try {
             Session session = HibernateUtil.getSession();
             session.beginTransaction();

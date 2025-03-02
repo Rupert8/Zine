@@ -11,7 +11,7 @@ public class SocialPassportPrototype {
     private String name;
     private String surname;
     private String middleName;
-    private String nameCategory;
+    private String category;
     private String groupName;
     private Integer semester;
 
@@ -31,8 +31,8 @@ public class SocialPassportPrototype {
         return middleName;
     }
 
-    public String getNameCategory() {
-        return nameCategory;
+    public String getCategory() {
+        return category;
     }
 
     public String getGroupName() {
@@ -59,8 +59,8 @@ public class SocialPassportPrototype {
         this.middleName = middleName;
     }
 
-    public void setNameCategory(String nameCategory) {
-        this.nameCategory = nameCategory;
+    public void setCategory(String nameCategory) {
+        this.category = nameCategory;
     }
 
     public void setGroupName(String groupName) {

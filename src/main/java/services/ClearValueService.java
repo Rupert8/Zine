@@ -8,6 +8,15 @@ import javafx.scene.control.TextField;
 import java.util.Date;
 
 public class ClearValueService {
+    public static void clearSortByDateField(DatePicker startDate, DatePicker endDate) {
+        startDate.setValue(null);
+        endDate.setValue(null);
+    }
+
+    public static void clearSortBySemesterField(ComboBox<Integer> comboBox){
+        comboBox.setValue(null);
+    }
+
     public static void clearSocialPassportField(DatePicker StartDateSocialPassport, DatePicker EndDateSocialPassport, ComboBox<Integer> SemesterSocialPassport, ComboBox<String> CategorySocialPassport, TextField NoteSocialPassport, RadioButton AdultStudentStatusRadioButton) {
         StartDateSocialPassport.setValue(null);
         EndDateSocialPassport.setValue(null);
@@ -54,10 +63,9 @@ public class ClearValueService {
         Activity.clear();
     }
 
-    public static void clearGroupActivity(ComboBox<Integer> SemesterComboBox,TextField GroupName,TextField Note){
+    public static void clearGroupActivity(ComboBox<Integer> SemesterComboBox,TextField GroupName){
         SemesterComboBox.setValue(null);
         GroupName.clear();
-        Note.clear();
     }
 
     public static void clearIndividualSupport(ComboBox<Integer> SemesterComboBox,DatePicker Date,TextField Content){

@@ -30,7 +30,7 @@
                         <Font name="Gotham-Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="GroupName" layoutX="189.0" layoutY="30.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
+                  <TextField fx:id="GroupName" editable="false" layoutX="189.0" layoutY="30.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
                   <TextField fx:id="GroupProfession" layoutX="189.0" layoutY="100.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
                   <TextField fx:id="GroupLevelOfEducation" layoutX="640.0" layoutY="100.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
                   <TextField fx:id="GroupYearOfStudy" layoutX="640.0" layoutY="170.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../../../css/textField.css" />

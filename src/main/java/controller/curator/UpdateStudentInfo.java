@@ -34,6 +34,7 @@ public class UpdateStudentInfo extends WorkGroupController implements Initializa
                 Date dateOfBirth = Date.valueOf(StudentDateOfBirth.getValue());
                 UpdateData.updateStudent(name, surname, middleName, address, phoneNumber , dateOfBirth,studentWorkId);
                 closeDialog();
+                loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessUpdateNotification.fxml");
         }else{
             loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
         }

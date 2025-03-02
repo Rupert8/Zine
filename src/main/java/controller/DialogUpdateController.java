@@ -63,10 +63,15 @@ public class DialogUpdateController extends WorkPlanController implements Initia
         getData();
         UpdateData.updatePlanDataById(nameEvent,date,status,semester);
         closeDialog();
+        loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessUpdateNotification.fxml");
     }
 
     public void setCompletionComboBox(){
         CompletionComboBox.getItems().addAll("Виконано","Невиконано");
+    }
+
+    private void setSemesterComboBox(){
+        SemesterComboBox.getItems().addAll(1,2,3,4,5,6,7,8);
     }
 
     public void closeDialog(){
@@ -78,5 +83,6 @@ public class DialogUpdateController extends WorkPlanController implements Initia
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setField();
         setCompletionComboBox();
+        setSemesterComboBox();
     }
 }

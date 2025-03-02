@@ -62,6 +62,30 @@ public class HelloApplication extends Application {
         }
     }
 
+    public void loadAndShowSuccessNotification(String linkFxml){
+        try {
+            // Завантаження FXML файлу
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(linkFxml));
+            DialogPane dialogPane = loader.load();
+
+            // Створення діалогового вікна
+            Dialog<Boolean> dialog = new Dialog<>();
+            dialog.setDialogPane(dialogPane);
+            dialog.getDialogPane().getScene().getWindow().setOnCloseRequest(event -> {
+                dialog.close();
+            });
+            dialog.getDialogPane().getScene().getWindow().setOnHidden(event -> {
+
+            });
+            Stage dialogStage = (Stage) dialog.getDialogPane().getScene().getWindow();
+            dialogStage.getIcons().add(new Image(getClass().getResource("/icon/icon-success.png").toExternalForm())); // Замініть "icon.png" на шлях до вашого файл
+            dialog.setTitle("Успішно!");
+            dialog.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void loadAndShowLoginSuccess(String linkFxml){
         try {

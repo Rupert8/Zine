@@ -1,8 +1,8 @@
 module start.zine {
     requires javafx.controls;
     requires javafx.fxml;
-    requires jakarta.persistence;
     requires static lombok;
+    requires jakarta.persistence;
     requires mysql.connector.j;
     requires org.hibernate.orm.core;
     requires java.naming;
@@ -10,7 +10,6 @@ module start.zine {
     requires jakarta.mail;
     requires jakarta.activation;
     requires org.apache.poi.ooxml;
-
 
     opens start.zine to javafx.fxml;
     exports start.zine;

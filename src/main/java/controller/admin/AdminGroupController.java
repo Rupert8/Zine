@@ -5,6 +5,7 @@ import data.SearchStudentData;
 import hibernate.entity.Curators;
 import hibernate.entity.Groups;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -13,6 +14,8 @@ import start.zine.HelloApplication;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static controller.ExtendedInformationAboutStudent.userStatus;
 
 public class AdminGroupController extends HelloApplication implements Initializable {
     @FXML
@@ -32,6 +35,8 @@ public class AdminGroupController extends HelloApplication implements Initializa
 
     @FXML
     private Button AdditionInfoButton;
+    @FXML
+    private Button AssignCuratorButton;
 
     public static Dialog<Boolean> saveDialog;
 
@@ -56,6 +61,10 @@ public class AdminGroupController extends HelloApplication implements Initializa
         saveDialog.setOnHidden(event -> startAdminGroup());
     }
 
+    public void loadAssignCuratorDialog(){
+        saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AssignCuratorDialog.fxml",saveDialog);
+        saveDialog.setOnHidden(event -> startAdminGroup());
+    }
 
     private void setDataInPlanTable(ObservableList<Groups> groupInfo){
         GroupTable.setItems(groupInfo);
@@ -72,17 +81,22 @@ public class AdminGroupController extends HelloApplication implements Initializa
                 Groups groups = newValue;
 
                 groupCurator = groups.getCurator();
-                groupId = SearchStudentData.getIdGroup(groupCurator);
+                groupName = groups.getGroupName();
+                groupId = SearchStudentData.getIdGroup(groupName);
                 groupNameForDelete = groups.getGroupName();
 
-                if(groupId == 0){
-                    loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateGroupInfo.fxml");
-                    GroupTable.getSelectionModel().clearSelection();
+                if(groupCurator == null){
+                    DisplayDate.setFullGroupInfo(groupId);
+                    AdditionInfoButton.setVisible(true);
+                    AssignCuratorButton.setVisible(true);
                 }else{
                     DisplayDate.setFullGroupInfo(groupId);
                     AdditionInfoButton.setVisible(true);
+                    AssignCuratorButton.setVisible(false);
                 }
-            }
+
+
+                }
         });
     }
 
@@ -95,6 +109,7 @@ public class AdminGroupController extends HelloApplication implements Initializa
     public void startAdminGroup(){
         displayCurators();
         AdditionInfoButton.setVisible(false);
+        AssignCuratorButton.setVisible(false);
         GroupTable.getSelectionModel().clearSelection();
         selectRows();
     }

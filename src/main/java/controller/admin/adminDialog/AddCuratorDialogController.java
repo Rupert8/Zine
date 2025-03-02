@@ -13,14 +13,16 @@ import start.zine.HelloApplication;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class AddCuratorDialogController extends AdminCuratorController implements Initializable {
     @FXML
     private ComboBox<String> CuratorGroup;
 
     @FXML
-    private TextField CuratorMiddleName,CuratorName,CuratorSurname,CuratorEmail,CuratorPassword;
+    private TextField CuratorMiddleName, CuratorName, CuratorSurname, CuratorEmail, CuratorPassword;
 
     private String name;
     private String surname;
@@ -29,52 +31,63 @@ public class AddCuratorDialogController extends AdminCuratorController implement
     private String group;
     private String middleName;
 
+    private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
-    private void getData(){
+    private final Random random = new Random();
+
+    private void getData() {
         name = CuratorName.getText();
         surname = CuratorSurname.getText();
         middleName = CuratorMiddleName.getText();
         email = CuratorEmail.getText();
-        password = CuratorPassword.getText();
-        group = CuratorGroup.getValue();
+        password = String.valueOf( 10000 + random.nextInt(90000));
     }
 
-    public void closeDialog(){
+    public void closeDialog() {
         saveDialog.setResult(Boolean.TRUE);
         saveDialog.close();
     }
 
-    public void addCurator(){
-        if(isAllFieldsFilled()){
-            if(!isExist()){
-                getData();
-                AddData.addCuratorData(name,surname,middleName,group,email,password);
-                closeDialog();
-            }else {
+    public void addCurator() {
+        if (isAllFieldsFilled()) {
+            if (!isExist()) {
+                if(isValidEmail()){
+                    getData();
+                    AddData.addCuratorData(name, surname, middleName, email, password);
+                    closeDialog();
+                    loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
+                }else{
+                    loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningInvalidEmail.fxml");
+                }
+            } else {
                 loadAndShowLoginAlarm("/fxml/notifications/WarningExistCuratorEmail.fxml");
             }
-        }else{
+        } else {
             loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
         }
 
     }
 
-    public void setComboBox(){
-        List<String> groups = DisplayDate.getGroupForAddCuratorName();
-        CuratorGroup.getItems().setAll(groups);
-    }
+//    public void setComboBox() {
+//        List<String> groups = DisplayDate.getGroupForAddCuratorName();
+//        CuratorGroup.getItems().setAll(groups);
+//    }
 
     private boolean isAllFieldsFilled() {
         if (!CuratorName.getText().isEmpty() &&
                 !CuratorSurname.getText().isEmpty() &&
                 !CuratorMiddleName.getText().isEmpty() &&
-                CuratorGroup.getValue() != null &&
-                !CuratorEmail.getText().isEmpty() &&
-                !CuratorPassword.getText().isEmpty()) {
+                !CuratorEmail.getText().isEmpty() ) {
             return true; // Усі поля заповнені
         } else {
             return false; // Є незаповнені поля
         }
+    }
+
+    private boolean isValidEmail() {
+        String email = CuratorEmail.getText().trim();
+        return EMAIL_PATTERN.matcher(email).matches();
     }
 
     private boolean isExist(){
@@ -84,6 +97,6 @@ public class AddCuratorDialogController extends AdminCuratorController implement
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setComboBox();
+        //setComboBox();
     }
 }
