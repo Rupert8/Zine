@@ -82,7 +82,9 @@ public class AdminSocialPassportController extends HelloApplication implements I
     }
 
     private void setSortSocialPassportComboBox(){
-        SortSocialPassportComboBox.getItems().addAll("Показати все","Групою","Категорією");
+        if(SortSocialPassportComboBox.getSelectionModel().getSelectedItem() == null){
+            SortSocialPassportComboBox.getItems().addAll("Показати все","Групою","Категорією");
+        }
     }
 
     public void displayDataByGroupName(){
@@ -164,6 +166,7 @@ public class AdminSocialPassportController extends HelloApplication implements I
         String currentDate = dateFormat.format(new Date());
         String filePath = downloadFolder + "\\Соціальний_паспорт_експорт_" + currentDate + ".xlsx";
         exportToExcel(socialPassportList, filePath);
+        loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessExportNotification.fxml");
     }
 
     @Override

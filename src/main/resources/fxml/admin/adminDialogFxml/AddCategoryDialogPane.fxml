@@ -31,9 +31,9 @@
                   <Font name="Kharkiv Tone Regular" size="32.0" />
                </font>
             </Label>
-            <TableView fx:id="SocialPassportCategory" layoutX="200.0" layoutY="141.0" prefHeight="220.0" prefWidth="238.0" styleClass="table" stylesheets="@../../../css/table.css">
+            <TableView fx:id="SocialPassportCategory" layoutX="24.0" layoutY="141.0" prefHeight="220.0" prefWidth="549.0" styleClass="table" stylesheets="@../../../css/style.css">
               <columns>
-                <TableColumn fx:id="NameCategory" prefWidth="232.0" styleClass="column" text="Назва категорії" />
+                <TableColumn fx:id="NameCategory" editable="false" prefWidth="543.0" styleClass="column" text="Назва категорії" />
               </columns>
                <cursor>
                   <Cursor fx:constant="HAND" />

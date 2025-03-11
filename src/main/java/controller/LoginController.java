@@ -1,5 +1,6 @@
 package controller;
 
+import data.AddData;
 import hiberante.sessionFactory.HibernateUtil;
 import hibernate.entity.Curators;
 import hibernate.entity.User;
@@ -14,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.apache.commons.math3.analysis.function.Add;
 import org.hibernate.Session;
 import start.zine.HelloApplication;
 
@@ -90,6 +92,7 @@ public class LoginController extends HelloApplication implements Initializable {
                     switchScene((Node) event.getSource(), "/fxml/WorkGroupPage.fxml");
                     System.out.print(curatorGroupName);
                 } else if(user.isStatus() == false){
+                    AddData.insertCategoriesIfNotExist();
                     switchScene((Node) event.getSource(), "/fxml/admin/AdminMain.fxml");
                 }
             } else {

@@ -30,7 +30,7 @@ public class WorkStudController extends HelloApplication implements Initializabl
     private ComboBox<String> SocialActivityComboBox;
 
     @FXML
-    private ComboBox<String> SocialPassport;
+    private ComboBox<String> SocialPassportComboBox;
 
     @FXML
     private Button addInformationAboutStudentButton;
@@ -42,11 +42,11 @@ public class WorkStudController extends HelloApplication implements Initializabl
     private Label CuratorName;
 
     private void setAllComboBox(){
-        GeneralInfoComboBox.getItems().setAll("Загальні Дані","Дані про освіту","Служба в ЗСУ","Інформація про батьків","Трудова Діяльність");
-        SocialActivityComboBox.getItems().setAll("Громадьська діяльність","Гурткова Діяльність");
+        GeneralInfoComboBox.getItems().setAll("Дані про освіту","Служба в ЗСУ","Інформація про батьків","Трудова Діяльність");
+        SocialActivityComboBox.getItems().setAll("Громадська діяльність","Гурткова Діяльність");
         IndividualSupportComboBox.getItems().setAll("Індивідуальний супровід");
         PromotionComboBox.getItems().setAll("Заохочення");
-        SocialPassport.getItems().setAll("Соціальний паспорт");
+        SocialPassportComboBox.getItems().setAll("Соціальний паспорт");
     }
 
     public void switchAddInformationAboutStudentPane(ActionEvent event) {
@@ -73,7 +73,7 @@ public class WorkStudController extends HelloApplication implements Initializabl
     public void switchSocialActivityPage(){
         SocialActivityComboBox.setOnAction(event -> {
             String selectedModel = SocialActivityComboBox.getSelectionModel().getSelectedItem();
-            if (selectedModel.equals("Громадьська діяльність")){
+            if (selectedModel.equals("Громадська діяльність")){
                 switchWorkSocialActivityPage(event);
             } else if (selectedModel.equals("Гурткова Діяльність")) {
                 switchWorkGroupActivityPage(event);
@@ -99,6 +99,15 @@ public class WorkStudController extends HelloApplication implements Initializabl
         });
     }
 
+    public void switchSocialPassportPage(){
+        SocialPassportComboBox.setOnAction(event -> {
+            String selectedModel = SocialPassportComboBox.getSelectionModel().getSelectedItem();
+            if(selectedModel.equals("Соціальний паспорт")){
+                switchWorkSocialPassport(event);
+            }
+        });
+    }
+
     public void switchGroupPage(ActionEvent event) {
         switchWorkGroupPage(event);
     }
@@ -112,13 +121,13 @@ public class WorkStudController extends HelloApplication implements Initializabl
         SocialActivityComboBox.setOnMouseEntered(event -> handleComboBoxShow(SocialActivityComboBox));
         IndividualSupportComboBox.setOnMouseEntered(event -> handleComboBoxShow(IndividualSupportComboBox));
         PromotionComboBox.setOnMouseEntered(event -> handleComboBoxShow(PromotionComboBox));
-        SocialPassport.setOnMouseEntered(event -> handleComboBoxShow(SocialPassport));
+        SocialPassportComboBox.setOnMouseEntered(event -> handleComboBoxShow(SocialPassportComboBox));
     }
 
     private void handleComboBoxShow(ComboBox<?> activeComboBox) {
         ComboBox<?>[] comboBoxes = {
                 GeneralInfoComboBox, SocialActivityComboBox,
-                IndividualSupportComboBox, PromotionComboBox, SocialPassport
+                IndividualSupportComboBox, PromotionComboBox, SocialPassportComboBox
         };
 
         for (ComboBox<?> comboBox : comboBoxes) {
@@ -148,6 +157,7 @@ public class WorkStudController extends HelloApplication implements Initializabl
         switchSocialActivityPage();
         switchIndividualSupportPage();
         switchPromotionPage();
+        switchSocialPassportPage();
         setCuratorName();
         setGroupName();
     }

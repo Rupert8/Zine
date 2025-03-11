@@ -10,6 +10,7 @@ module start.zine {
     requires jakarta.mail;
     requires jakarta.activation;
     requires org.apache.poi.ooxml;
+    requires commons.math3;
 
     opens start.zine to javafx.fxml;
     exports start.zine;
@@ -18,6 +19,7 @@ module start.zine {
     exports controller.individualSupport;
     exports controller.socialActivity;
     exports controller.admin;
+    exports controller.socialPassport;
     exports controller;
     exports data;
     exports tableView to org.hibernate.orm.core;
@@ -29,6 +31,7 @@ module start.zine {
     opens controller.promotion to javafx.fxml;
     opens controller.individualSupport to javafx.fxml;
     opens controller.socialActivity to javafx.fxml;
+    opens controller.socialPassport to javafx.fxml;
     opens controller to javafx.fxml;
     opens data to javafx.fxml;
 

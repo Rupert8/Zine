@@ -45,11 +45,11 @@
                 <Font name="Kharkiv Tone Regular" size="24.0" />
             </font>
         </Button>
-      <ComboBox fx:id="GeneralInfoComboBox" layoutX="20.0" layoutY="220.0" onAction="#switchGeneralDataPage" prefHeight="37.0" prefWidth="225.0" promptText="Виберіть категорію" stylesheets="@../css/comboBox.css" visible="false" />
-      <ComboBox fx:id="SocialActivityComboBox" layoutX="273.0" layoutY="220.0" prefWidth="225.0" promptText="Виберіть категорію" stylesheets="@../css/comboBox.css" visible="false" />
-      <ComboBox fx:id="IndividualSupportComboBox" layoutX="529.0" layoutY="220.0" prefWidth="225.0" promptText="Виберіть категорію" stylesheets="@../css/comboBox.css" visible="false" />
-      <ComboBox fx:id="PromotionComboBox" layoutX="785.0" layoutY="220.0" prefWidth="225.0" promptText="Виберіть категорію" stylesheets="@../css/comboBox.css" visible="false" />
-      <ComboBox fx:id="SocialPassport" layoutX="1036.0" layoutY="220.0" prefWidth="225.0" promptText="Виберіть категорію" stylesheets="@../css/comboBox.css" visible="false" />
+      <ComboBox fx:id="GeneralInfoComboBox" layoutX="20.0" layoutY="220.0" onAction="#switchGeneralDataPage" prefHeight="37.0" prefWidth="225.0" promptText="Виберіть категорію" stylesheets="@../css/comboBox.css" />
+      <ComboBox fx:id="SocialActivityComboBox" layoutX="273.0" layoutY="220.0" prefWidth="225.0" promptText="Виберіть категорію" stylesheets="@../css/comboBox.css" />
+      <ComboBox fx:id="IndividualSupportComboBox" layoutX="529.0" layoutY="220.0" prefWidth="225.0" promptText="Виберіть категорію" stylesheets="@../css/comboBox.css" />
+      <ComboBox fx:id="PromotionComboBox" layoutX="785.0" layoutY="220.0" prefWidth="225.0" promptText="Виберіть категорію" stylesheets="@../css/comboBox.css" />
+      <ComboBox fx:id="SocialPassportComboBox" layoutX="1036.0" layoutY="220.0" prefWidth="225.0" promptText="Виберіть категорію" stylesheets="@../css/comboBox.css" />
       <Button fx:id="addInformationAboutStudentButton" layoutX="1137.0" layoutY="751.0" mnemonicParsing="false" onAction="#switchAddInformationAboutStudentPane" prefHeight="35.0" prefWidth="125.0" stylesheets="@../css/button.css" text="Додати" />
     </children>
 </Pane>

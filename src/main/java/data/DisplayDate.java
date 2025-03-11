@@ -50,7 +50,7 @@ public class DisplayDate  {
     public static final String GET_SOCIAL_PASSPORT_CATEGORY_NAME = "SELECT c.category FROM SpCategoryName c";
     public static final String GET_SOCIAL_PASSPORT_CATEGORY_NAME_IN_TABLE = "SELECT c FROM SpCategoryName c Where c.id = :categoryId ";
 
-    public static final String GET_STUDENT_CATEGORY = "SELECT c.category FROM SpCategoryName c";
+    public static final String GET_STUDENT_CATEGORY = "SELECT new tableView.SocialPassportCategoryPrototype(c.category) FROM SpCategoryName c";
     public static final String GET_GROUP_INFO = "SELECT id,groupName,curator,profession FROM Groups WHERE Active = true";
     public static final String GET_CURATOR_NAME = "SELECT CONCAT(surname, ' ', name, ' ', middleName) FROM Curators Where group is null";
     public static final String GET_STUDENT_EDUCATION_INFO = "FROM EducationInfo WHERE studentInfo.id = :studentId";
@@ -1120,5 +1120,165 @@ public class DisplayDate  {
             session.getTransaction().rollback();
         }
         return socialPassport;
+    }
+
+    public static ObservableList<StudentInfo> tableGeneralInfo() {
+        ObservableList<StudentInfo> list = FXCollections.observableArrayList();
+        session = HibernateUtil.getSession();
+        try {
+            assert session != null;
+            List<StudentInfo> data = session.createQuery("FROM StudentInfo ", StudentInfo.class).list();
+            list.addAll(data);
+            for (int i = 0; i < data.size(); i++) {
+                data.get(i).setId(i + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static ObservableList<EducationInfo> tableEducationInfo() {
+        ObservableList<EducationInfo> list = FXCollections.observableArrayList();
+        session = HibernateUtil.getSession();
+        try {
+            assert session != null;
+            List<EducationInfo> data = session.createQuery("FROM EducationInfo ", EducationInfo.class).list();
+            list.addAll(data);
+            for (int i = 0; i < data.size(); i++) {
+                data.get(i).setId(i + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static ObservableList<MilitaryService> tableMilitaryService() {
+        ObservableList<MilitaryService> list = FXCollections.observableArrayList();
+        session = HibernateUtil.getSession();
+        try {
+            assert session != null;
+            List<MilitaryService> data = session.createQuery("FROM MilitaryService ", MilitaryService.class).list();
+            list.addAll(data);
+            for (int i = 0; i < data.size(); i++) {
+                data.get(i).setId(i + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static ObservableList<StudentParents> tableStudentParents() {
+        ObservableList<StudentParents> list = FXCollections.observableArrayList();
+        session = HibernateUtil.getSession();
+        try {
+            assert session != null;
+            List<StudentParents> data = session.createQuery("FROM StudentParents ", StudentParents.class).list();
+            list.addAll(data);
+            for (int i = 0; i < data.size(); i++) {
+                data.get(i).setId(i + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static ObservableList<StudentJob> tableStudentJob() {
+        ObservableList<StudentJob> list = FXCollections.observableArrayList();
+        session = HibernateUtil.getSession();
+        try {
+            assert session != null;
+            List<StudentJob> data = session.createQuery("FROM StudentJob ", StudentJob.class).list();
+            list.addAll(data);
+            for (int i = 0; i < data.size(); i++) {
+                data.get(i).setId(i + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static ObservableList<IndividualSupport> tableIndividualSupport() {
+        ObservableList<IndividualSupport> list = FXCollections.observableArrayList();
+        session = HibernateUtil.getSession();
+        try {
+            assert session != null;
+            List<IndividualSupport> data = session.createQuery("FROM IndividualSupport ", IndividualSupport.class).list();
+            list.addAll(data);
+            for (int i = 0; i < data.size(); i++) {
+                data.get(i).setId(i + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static ObservableList<Promotion> tablePromotion() {
+        ObservableList<Promotion> list = FXCollections.observableArrayList();
+        session = HibernateUtil.getSession();
+        try {
+            assert session != null;
+            List<Promotion> data = session.createQuery("FROM Promotion ", Promotion.class).list();
+            list.addAll(data);
+            for (int i = 0; i < data.size(); i++) {
+                data.get(i).setId(i + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static ObservableList<CircleActivity> tableCircleActivity() {
+        ObservableList<CircleActivity> list = FXCollections.observableArrayList();
+        session = HibernateUtil.getSession();
+        try {
+            assert session != null;
+            List<CircleActivity> data = session.createQuery("FROM CircleActivity ", CircleActivity.class).list();
+            list.addAll(data);
+            for (int i = 0; i < data.size(); i++) {
+                data.get(i).setId(i + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static ObservableList<SocialActivity> tableSocialActivity() {
+        ObservableList<SocialActivity> list = FXCollections.observableArrayList();
+        session = HibernateUtil.getSession();
+        try {
+            assert session != null;
+            List<SocialActivity> data = session.createQuery("FROM SocialActivity ", SocialActivity.class).list();
+            list.addAll(data);
+            for (int i = 0; i < data.size(); i++) {
+                data.get(i).setId(i + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static ObservableList<SocialPassport> tableSocialPassport() {
+        ObservableList<SocialPassport> list = FXCollections.observableArrayList();
+        session = HibernateUtil.getSession();
+        try {
+            assert session != null;
+            List<SocialPassport> data = session.createQuery("FROM SocialPassport ", SocialPassport.class).list();
+            list.addAll(data);
+            for (int i = 0; i < data.size(); i++) {
+                data.get(i).setId(i + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

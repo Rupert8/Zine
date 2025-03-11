@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@AllArgsConstructor
+//@AllArgsConstructor
 //@Getter @Setter
 public class SocialPassportPrototype {
     private Integer id;
@@ -14,6 +14,19 @@ public class SocialPassportPrototype {
     private String category;
     private String groupName;
     private Integer semester;
+
+    public SocialPassportPrototype(Integer id, String name, String surname, String middleName,
+                                   String category, String groupName, Integer semester) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.middleName = middleName;
+        this.category = category;
+        this.groupName = groupName;
+        this.semester = semester;
+    }
+
+    public SocialPassportPrototype(){}
 
     public Integer getId() {
         return id;

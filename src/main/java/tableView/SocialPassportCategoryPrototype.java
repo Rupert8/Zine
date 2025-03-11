@@ -4,10 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@AllArgsConstructor
+//@AllArgsConstructor
 //@Getter @Setter
 public class SocialPassportCategoryPrototype {
     private String category;
+
+    public SocialPassportCategoryPrototype(String category) {
+        this.category = category;
+    }
+
+    public SocialPassportCategoryPrototype(){}
 
     @Override
     public String toString(){

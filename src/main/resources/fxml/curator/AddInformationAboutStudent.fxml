@@ -36,7 +36,7 @@
       </AnchorPane>
       <AnchorPane layoutX="200.0" prefHeight="700.0" prefWidth="800.0">
          <children>
-            <TabPane fx:id="GeneralInfoTab" prefHeight="700.0" prefWidth="1080.0" stylesheets="@../../css/tabPane.css" tabClosingPolicy="UNAVAILABLE" visible="false">
+            <TabPane fx:id="GeneralInfoTab" prefHeight="700.0" prefWidth="1080.0" stylesheets="@../../css/tabPane.css" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                   <Tab text="Дані про освіту">
                      <content>
@@ -521,7 +521,7 @@
                   </Tab>
                </tabs>
             </TabPane>
-            <TabPane fx:id="SocialPassportTab" prefHeight="700.0" prefWidth="1080.0" stylesheets="@../../css/tabPane.css" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="SocialPassportTab" prefHeight="700.0" prefWidth="1080.0" stylesheets="@../../css/tabPane.css" tabClosingPolicy="UNAVAILABLE" visible="false">
                <tabs>
                   <Tab text="Загальні категорії">
                      <content>

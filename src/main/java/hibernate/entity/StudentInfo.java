@@ -20,25 +20,25 @@ public class StudentInfo {
     @Column(name = "id")
     private int id;
 
-    @OneToMany(mappedBy = "studentInfo")
+    @OneToMany(mappedBy = "studentInfo",fetch = FetchType.LAZY)
     private List<CircleActivity> circleActivityList;
 
     @OneToOne(mappedBy = "studentInfo", cascade = CascadeType.ALL)
     private EducationInfo educationInfo;
 
-    @OneToMany(mappedBy = "studentInfo",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "studentInfo",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<IndividualSupport> individualSupport;
 
-    @OneToMany(mappedBy = "studentInfo")
+    @OneToMany(mappedBy = "studentInfo",fetch = FetchType.LAZY)
     private List<MilitaryService> militaryServiceList;
 
-    @OneToMany(mappedBy = "studentInfo")
+    @OneToMany(mappedBy = "studentInfo",fetch = FetchType.LAZY)
     private List<StudentJob> studentJobList;
 
-    @OneToMany(mappedBy = "studentInfo", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "studentInfo", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Promotion> promotion;
 
-    @OneToMany(mappedBy = "studentInfo")
+    @OneToMany(mappedBy = "studentInfo",fetch = FetchType.LAZY)
     private List<SocialActivity> socialActivityList;
 
     @OneToOne(mappedBy = "studentInfo", cascade = CascadeType.ALL)
@@ -47,10 +47,10 @@ public class StudentInfo {
     @OneToOne(mappedBy = "studentInfo", cascade = CascadeType.ALL)
     private DroppedOutStudents droppedOutStudents;
 
-    @OneToMany(mappedBy = "studentInfo")
+    @OneToMany(mappedBy = "studentInfo",fetch = FetchType.LAZY)
     private List<SocialPassport> socialPassportList;
 
-    @OneToMany(mappedBy = "studentInfo")
+    @OneToMany(mappedBy = "studentInfo",fetch = FetchType.LAZY)
     private List<StudentGroups> socialGroupList;
 
     @Column(name = "Name")

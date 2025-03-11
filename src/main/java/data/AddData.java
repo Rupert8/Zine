@@ -5,8 +5,10 @@ import hiberante.sessionFactory.HibernateUtil;
 import hibernate.entity.*;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.sql.Date;
+import java.util.List;
 
 import static controller.LoginController.curatorGroupName;
 
@@ -458,9 +460,9 @@ public class AddData {
 
     }
 
-    public static void addStudent(String name,String surname,String middleName,String address,String phoneNumber,Date dateOfBirth){
+    public static void addStudent(String name,String surname,String middleName,String address,String phoneNumber,Date dateOfBirth) {
         Session session = null;
-        try{
+        try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
@@ -477,9 +479,45 @@ public class AddData {
 
             session.persist(studentInfo);
             session.getTransaction().commit();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+
+    public static void insertCategoriesIfNotExist() {
+        Session session = null;
+
+        try {
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            // Список категорій, які треба перевірити
+            String[] categories = {"Багатодітна родина", "Інвалід"};
+
+            for (String category : categories) {
+                // Перевіряємо, чи існує така категорія в БД
+                Query<SpCategoryName> query = session.createQuery(
+                        "FROM SpCategoryName WHERE category = :category", SpCategoryName.class);
+                query.setParameter("category", category);
+
+                List<SpCategoryName> resultList = query.getResultList();
+
+                if (resultList.isEmpty()) { // Якщо не знайдено, додаємо новий запис
+                    SpCategoryName newCategory = new SpCategoryName();
+                    newCategory.setCategory(category);
+                    session.persist(newCategory);
+                    System.out.println("Додано категорію: " + category);
+                } else {
+                    System.out.println("Категорія вже існує: " + category);
+                }
+            }
+
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 }

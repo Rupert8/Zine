@@ -390,7 +390,7 @@ public class AddInformationAboutStudentController extends HelloApplication imple
 
     public void addGroupActivityInfo(){
         if(ValidateValueService.isStudentSelected(NameGroup,SurnameGroup,MiddleNameGroup)){
-            if(ValidateValueService.isGroupActivityFieldEmpty(SemesterGroup,GroupName,NoteGroup)){
+            if(ValidateValueService.isGroupActivityFieldEmpty(SemesterGroup,GroupName)){
                 String name = NameGroup.getText();
                 String surname = SurnameGroup.getText();
                 String middleName = MiddleNameGroup.getText();

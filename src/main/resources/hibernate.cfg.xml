@@ -4,13 +4,13 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-<!--    <property name="connection.url">jdbc:mysql://gek.mysql.tools:3306/gek_nemkzurnal</property>-->
-<!--    <property name="connection.username">gek_nemkzurnal</property>-->
-<!--    <property name="connection.password">6N3b85kxXA</property>-->
+    <property name="connection.url">jdbc:mysql://gek.mysql.tools:3306/gek_nemk654</property>
+    <property name="connection.username">gek_nemk654</property>
+    <property name="connection.password">ku&amp;&amp;P6X5f6</property>
 
-    <property name="connection.url">jdbc:mysql://localhost:3306/electronic_magazine</property>
-    <property name="connection.username">root</property>
-    <property name="connection.password">1111</property>
+<!--    <property name="connection.url">jdbc:mysql://localhost:3306/electronic_magazine</property>-->
+<!--    <property name="connection.username">root</property>-->
+<!--    <property name="connection.password">1111</property>-->
 
     <property name="show_sql">true</property>
     <property name="format_sql">true</property>

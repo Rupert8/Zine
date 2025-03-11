@@ -1216,7 +1216,7 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
             }
 
         }else if (UpdateGroupActivityRadioButton.isSelected()) {
-            if(ValidateValueService.isGroupActivityFieldEmpty(SemesterGroup,GroupName,NoteGroup)){
+            if(ValidateValueService.isGroupActivityFieldEmpty(SemesterGroup,GroupName)){
                 SemesterGroup.setDisable(false);
                 GroupName.setDisable(false);
                 NoteGroup.setDisable(false);

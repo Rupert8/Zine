@@ -44,8 +44,8 @@ public class ValidateValueService {
         return semester.getValue() != null && date.getValue() != null && !NameActivity.getText().isEmpty();
     }
 
-    public static boolean isGroupActivityFieldEmpty(ComboBox<Integer> semester,TextField groupName,TextField note){
-        return semester.getValue() != null && !groupName.getText().isEmpty() && !note.getText().isEmpty();
+    public static boolean isGroupActivityFieldEmpty(ComboBox<Integer> semester,TextField groupName){
+        return semester.getValue() != null && !groupName.getText().isEmpty();
     }
 
     public static boolean isIndividualSupportFieldEmpty(ComboBox<Integer> semester,DatePicker date,TextField content){
