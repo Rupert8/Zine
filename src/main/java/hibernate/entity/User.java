@@ -23,7 +23,7 @@ public class User {
     @Column(name = "password")
     private String Password;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "curator_id")
     private Curators curators;
 

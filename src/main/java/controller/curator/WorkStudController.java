@@ -1,22 +1,24 @@
-package controller;
+package controller.curator;
 
-import javafx.collections.ObservableList;
+import controller.interfaces.WindowActions.WindowControl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import services.ScreenService;
 import start.zine.HelloApplication;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static controller.LoginController.curatorGroupName;
-import static controller.WorkGroupController.curatorFullName;
+import static controller.login.LoginController.curatorGroupName;
+import static controller.curator.WorkGroupController.curatorFullName;
 
-public class WorkStudController extends HelloApplication implements Initializable {
+public class WorkStudController extends HelloApplication implements Initializable, WindowControl {
     @FXML
     private ComboBox<String> GeneralInfoComboBox;
 
@@ -40,6 +42,13 @@ public class WorkStudController extends HelloApplication implements Initializabl
 
     @FXML
     private Label CuratorName;
+
+    @FXML
+    private HBox MenuBarHBox;
+    @FXML
+    public Button minimizeWindowButton,maximizeWindowButton,closeWindowButton;
+
+
 
     private void setAllComboBox(){
         GeneralInfoComboBox.getItems().setAll("Дані про освіту","Служба в ЗСУ","Інформація про батьків","Трудова Діяльність");
@@ -160,5 +169,30 @@ public class WorkStudController extends HelloApplication implements Initializabl
         switchSocialPassportPage();
         setCuratorName();
         setGroupName();
+    }
+
+    @Override
+    public void setMinimizeWindowButton() {
+        ScreenService.minimized_Window(minimizeWindowButton);
+    }
+
+    @Override
+    public void setMaximizeWindowButton() {
+        ScreenService.maximized_Window(maximizeWindowButton.getScene().getWindow());
+    }
+
+    @Override
+    public void setCloseWindow() {
+        ScreenService.close_Window();
+    }
+
+    @Override
+    public void setDragWindow(MouseEvent dragEvent) {
+        ScreenService.paneDragged(dragEvent,MenuBarHBox);
+    }
+
+    @Override
+    public void setPressedWindow(MouseEvent mouseEvent) {
+        ScreenService.panePressed(mouseEvent);
     }
 }

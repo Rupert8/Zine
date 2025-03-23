@@ -2,16 +2,14 @@ package controller.curator;
 
 import data.AddData;
 import data.SearchStudentData;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import start.zine.HelloApplication;
 
 import java.sql.Date;
 
-import static controller.WorkGroupController.saveDialog;
+import static controller.curator.WorkGroupController.saveDialog;
 
 
 public class AddStudentController extends HelloApplication {

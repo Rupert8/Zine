@@ -1,6 +1,6 @@
 package start.zine;
 
-import controller.WorkPlanController;
+import controller.curator.WorkPlanController;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -14,7 +14,9 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import services.ScreenService;
 
 import java.io.IOException;
 
@@ -27,13 +29,18 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/fxml/Login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/fxml/login/Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 800);
         stage.setTitle("Журнал куратора");
         stage.centerOnScreen();
         stage.getIcons().add(new Image(getClass().getResource("/icon/App-icon.png").toExternalForm()));
-        stage.setResizable(false);
+        stage.setResizable(true);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setMinHeight(600);
+        stage.setMinWidth(800);
         stage.setScene(scene);
+        ScreenService.maximized_Window(stage.getScene().getWindow());
+        ScreenService.makeResizable(stage,scene);
         stage.show();
     }
 
@@ -172,7 +179,10 @@ public class HelloApplication extends Application {
 
                 stage.getIcons().add(new Image(getClass().getResource("/icon/App-icon.png").toExternalForm())); // Замініть "icon.png" на шлях до вашого файл
                 stage.setTitle("Журнал Куратора");
-                stage.setResizable(false);
+                stage.setMinHeight(600);
+                stage.setMinWidth(1000);
+                //stage.setHeight();
+                ScreenService.makeResizable(stage,scene);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -182,15 +192,15 @@ public class HelloApplication extends Application {
     }
 
     public void switchWorkPlanPage(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/fxml/WorkPlanPage.fxml");
+        switchScene((Node) event.getSource(), "/fxml/curator/WorkPlanPane.fxml");
     }
 
     public void switchWorkStudPage(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/fxml/WorkStudPage.fxml");
+        switchScene((Node) event.getSource(), "/fxml/curator/WorkWithStudentPane.fxml");
     }
 
     public void switchWorkGroupPage(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/fxml/WorkGroupPage.fxml");
+        switchScene((Node) event.getSource(), "/fxml/curator/WorkGroupPane.fxml");
     }
 
     public void switchWorkGeneralInfoPage(ActionEvent event) {
@@ -262,7 +272,7 @@ public class HelloApplication extends Application {
     }
 
     public void switchToLoginPage(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/fxml/Login.fxml");
+        switchScene((Node) event.getSource(), "/fxml/login/Login.fxml");
     }
 
     public void switchToExtendedStudentInfo(ActionEvent event) {

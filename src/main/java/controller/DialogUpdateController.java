@@ -1,5 +1,6 @@
 package controller;
 
+import controller.curator.WorkPlanController;
 import data.UpdateData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

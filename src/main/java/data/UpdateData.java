@@ -7,8 +7,8 @@ import org.hibernate.Session;
 import java.sql.Date;
 import java.util.List;
 
-import static controller.LoginController.curatorGroupName;
-import static controller.WorkPlanController.planId;
+import static controller.login.LoginController.curatorGroupName;
+import static controller.curator.WorkPlanController.planId;
 import static controller.admin.AdminCuratorController.curatorId;
 import static controller.admin.AdminMainController.*;
 import static controller.admin.AdminWorkPlanController.AdminPlanId;

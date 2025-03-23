@@ -1,5 +1,6 @@
-package controller;
+package controller.curator;
 
+import controller.interfaces.WindowActions.WindowControl;
 import data.DeleteData;
 import data.DisplayDate;
 import data.SearchStudentData;
@@ -10,18 +11,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import services.ClearValueService;
+import services.ScreenService;
 import start.zine.HelloApplication;
 
 import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
 
-import static controller.LoginController.curatorGroupName;
-import static controller.WorkGroupController.curatorFullName;
+import static controller.login.LoginController.curatorGroupName;
+import static controller.curator.WorkGroupController.curatorFullName;
 
-public class WorkPlanController extends HelloApplication implements Initializable {
+public class WorkPlanController extends HelloApplication implements Initializable, WindowControl {
     @FXML
     private TableColumn<WorkPlan, Boolean> CompletionColumn;
 
@@ -72,6 +77,20 @@ public class WorkPlanController extends HelloApplication implements Initializabl
 
     @FXML
     public Button GroupNameButton;
+    @FXML
+    public Button minimizeWindowButton,maximizeWindowButton,closeWindowButton;
+
+
+    @FXML
+    private HBox MenuBarHBox;
+    @FXML
+    private BorderPane BorderSortPane;
+    @FXML
+    private HBox WorkPlanPaneHBox,WorkPlanHBox,WorkStudHBox,GroupHbox;
+    @FXML
+    private HBox SortLabelHBox,ShowAllHbox,ChooseSemesterHbox,SearchButtonHbox,StartDateHbox,EndDateHbox,DateHbox;
+    @FXML
+    private HBox DeleteHbox,UpdateHbox,AddHbox;
 
     public static int planId;
     public static String passEventName;
@@ -227,6 +246,12 @@ public class WorkPlanController extends HelloApplication implements Initializabl
     }
 
     public void startWorkPlan(){
+        displayPlanInfo();
+        selectRows();
+        setPlanComboBox();
+        setCuratorName();
+        setSortComboBox();
+        setGroupNameButton();
         DeletePlanButton.setVisible(false);
         UpdatePlanButton.setVisible(false);
         StartDatePicker.setVisible(false);
@@ -237,6 +262,25 @@ public class WorkPlanController extends HelloApplication implements Initializabl
         SortComboBox.setValue("Показати все");
         displayPlanInfo();
         PlanTable.getSelectionModel().clearSelection();
+        //MenuBarHBox.setPickOnBounds(false);
+        WorkPlanHBox.setPickOnBounds(false);
+        WorkStudHBox.setPickOnBounds(false);
+        GroupHbox.setPickOnBounds(false);
+        WorkPlanPaneHBox.setPickOnBounds(false);
+        SortLabelHBox.setPickOnBounds(false);
+        ShowAllHbox.setPickOnBounds(false);
+        AddHbox.setPickOnBounds(false);
+        UpdateHbox.setPickOnBounds(false);
+        DeleteHbox.setPickOnBounds(false);
+        ChooseSemesterHbox.setPickOnBounds(false);
+        SearchButtonHbox.setPickOnBounds(false);
+        StartDateHbox.setPickOnBounds(false);
+        EndDateHbox.setPickOnBounds(false);
+        DateHbox.setPickOnBounds(false);
+        AddHbox.setPickOnBounds(false);
+        UpdateHbox.setPickOnBounds(false);
+        DeleteHbox.setPickOnBounds(false);
+        BorderSortPane.setPickOnBounds(false);
     }
 
     public void setGroupNameButton(){
@@ -246,12 +290,31 @@ public class WorkPlanController extends HelloApplication implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //displayPlanData();
-        displayPlanInfo();
-        selectRows();
-        setPlanComboBox();
-        setCuratorName();
-        setSortComboBox();
-        setGroupNameButton();
         startWorkPlan();
+    }
+
+    @Override
+    public void setMinimizeWindowButton() {
+        ScreenService.minimized_Window(minimizeWindowButton);
+    }
+
+    @Override
+    public void setMaximizeWindowButton() {
+        ScreenService.maximized_Window(maximizeWindowButton.getScene().getWindow());
+    }
+
+    @Override
+    public void setCloseWindow() {
+        ScreenService.close_Window();
+    }
+
+    @Override
+    public void setDragWindow(MouseEvent dragEvent) {
+        ScreenService.paneDragged(dragEvent,MenuBarHBox);
+    }
+
+    @Override
+    public void setPressedWindow(MouseEvent mouseEvent) {
+        ScreenService.panePressed(mouseEvent);
     }
 }

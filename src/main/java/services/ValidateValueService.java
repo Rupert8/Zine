@@ -5,7 +5,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
-import static controller.LoginController.curatorGroupName;
+import static controller.login.LoginController.curatorGroupName;
 
 public class ValidateValueService {
     public static boolean isStudentSelected(TextField name,TextField surName,TextField middleName){

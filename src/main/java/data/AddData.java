@@ -1,6 +1,5 @@
 package data;
 
-import controller.socialActivity.GroupActivity;
 import hiberante.sessionFactory.HibernateUtil;
 import hibernate.entity.*;
 
@@ -10,7 +9,7 @@ import org.hibernate.query.Query;
 import java.sql.Date;
 import java.util.List;
 
-import static controller.LoginController.curatorGroupName;
+import static controller.login.LoginController.curatorGroupName;
 
 public class AddData {
     public static final String GET_CATEGORYNAME_ID = "SELECT s FROM SpCategoryName s WHERE s.category = :categoryName";
@@ -492,18 +491,17 @@ public class AddData {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            // Список категорій, які треба перевірити
             String[] categories = {"Багатодітна родина", "Інвалід"};
 
             for (String category : categories) {
-                // Перевіряємо, чи існує така категорія в БД
+
                 Query<SpCategoryName> query = session.createQuery(
                         "FROM SpCategoryName WHERE category = :category", SpCategoryName.class);
                 query.setParameter("category", category);
 
                 List<SpCategoryName> resultList = query.getResultList();
 
-                if (resultList.isEmpty()) { // Якщо не знайдено, додаємо новий запис
+                if (resultList.isEmpty()) {
                     SpCategoryName newCategory = new SpCategoryName();
                     newCategory.setCategory(category);
                     session.persist(newCategory);

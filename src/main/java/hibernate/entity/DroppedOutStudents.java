@@ -21,7 +21,7 @@ public class DroppedOutStudents {
     @Column(name = "exit_date")
     private Date exitDate;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")
     private StudentInfo studentInfo;
 }

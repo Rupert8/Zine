@@ -5,19 +5,13 @@ import services.TextFieldService;
 import data.AddData;
 import data.DisplayDate;
 import data.SearchStudentData;
-import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 import services.ValidateValueService;
 import start.zine.HelloApplication;
 
@@ -26,7 +20,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static controller.LoginController.curatorGroupName;
+import static controller.login.LoginController.curatorGroupName;
 
 
 public class AddInformationAboutStudentController extends HelloApplication implements Initializable {
@@ -153,7 +147,7 @@ public class AddInformationAboutStudentController extends HelloApplication imple
     private RadioButton AdultStudentManyChildrenStatusRadioButton;
 
     public void back(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/fxml/WorkStudPage.fxml");
+        switchScene((Node) event.getSource(), "/fxml/curator/WorkWithStudentPane.fxml");
     }
 
     public void visiblePane(){

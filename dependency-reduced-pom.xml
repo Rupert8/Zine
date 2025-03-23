@@ -59,7 +59,7 @@
                 <argument>--main-class</argument>
                 <argument>start.zine.Launcher</argument>
                 <argument>--app-version</argument>
-                <argument>2.2</argument>
+                <argument>1.1</argument>
                 <argument>--icon</argument>
                 <argument>${project.basedir}/src/main/resources/icon/App-icon.ico</argument>
               </arguments>

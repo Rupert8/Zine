@@ -18,7 +18,7 @@ public class SocialPassport {
     @Column(name = "id")
     private int id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")
     private StudentInfo studentInfo;
 

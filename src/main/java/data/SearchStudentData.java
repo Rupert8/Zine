@@ -1,11 +1,9 @@
 package data;
 
 import hiberante.sessionFactory.HibernateUtil;
-import hibernate.entity.StudentInfo;
-import hibernate.entity.User;
 import org.hibernate.Session;
 
-import static controller.WorkPlanController.performerNameForAdd;
+import static controller.curator.WorkPlanController.performerNameForAdd;
 
 public class SearchStudentData {
     private static final String SELECT_STUDENT_FOR_ADD_ID = "SELECT id FROM StudentInfo WHERE name = :name and surname = :surname and middleName = :middleName and groupName = :groupName";

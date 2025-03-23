@@ -1,29 +1,35 @@
-package controller;
+package controller.curator;
 
+import controller.interfaces.WindowActions.WindowControl;
 import data.DeleteData;
 import data.DisplayDate;
 import data.SearchStudentData;
 import hibernate.entity.Curators;
 import hibernate.entity.StudentInfo;
-import hibernate.entity.WorkPlan;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import services.ScreenService;
 import start.zine.HelloApplication;
 
+import java.net.URL;
 import java.sql.Date;
-import java.util.List;
+import java.util.ResourceBundle;
 
 import static controller.ExtendedInformationAboutStudent.userStatus;
-import static controller.LoginController.curatorEmail;
-import static controller.LoginController.curatorGroupName;
+import static controller.login.LoginController.curatorEmail;
+import static controller.login.LoginController.curatorGroupName;
 import static controller.admin.AdminMainController.studentGroupName;
 import static controller.admin.AdminMainController.*;
 
-public class WorkGroupController extends HelloApplication {
+public class WorkGroupController extends HelloApplication implements Initializable, WindowControl {
     @FXML
     private TableView<StudentInfo> GroupTable;
 
@@ -56,6 +62,20 @@ public class WorkGroupController extends HelloApplication {
     @FXML
     private Pane GroupButtonPane;
 
+    @FXML
+    private Button minimizeWindowButton;
+    @FXML
+    private Button closeWindowButton;
+    @FXML
+    private Button maximizeWindowButton;
+
+    @FXML
+    private HBox Hbox,DeleteHbox,ExtendedInfoHbox,UpdateHbox,AddHbox;
+    @FXML
+    private HBox WorkPlanHBox,WorkStudHBox,GroupPaneHBox,GroupHbox;
+    @FXML
+    private StackPane CrudStackPane;
+
     public static String curatorFullName;
     public static int studentWorkId;
     public static String studentWorkName;
@@ -68,6 +88,8 @@ public class WorkGroupController extends HelloApplication {
     private static ObservableList<StudentInfo> list;
 
     public static Dialog<Boolean> saveDialog;
+
+    public Curators curator;
 
     public void switchPlanPage(ActionEvent event) {
         switchWorkPlanPage(event);
@@ -123,17 +145,14 @@ public class WorkGroupController extends HelloApplication {
     }
 
     private void displayGroupData(){
-        String hql = "FROM StudentInfo WHERE groupName = :groupName and status = true";
-        Curators curatorName = DisplayDate.getCuratorByUserEmail(curatorEmail);
-        String groupName = curatorName.getGroup();
-        list = DisplayDate.getDataStudentInfo(hql,groupName);
+        String groupName = curator.getGroup();
+        list = DisplayDate.getDataStudentInfo(groupName);
         setDataInGroupTable(list);
     }
 
     private void displayCuratorName(){
         if(curatorFullName == null){
-            Curators curatorName = DisplayDate.getCuratorByUserEmail(curatorEmail);
-            curatorFullName = curatorName.getSurname() + " " + curatorName.getName() + " " + curatorName.getMiddleName();
+            curatorFullName = curator.getSurname() + " " + curator.getName() + " " + curator.getMiddleName();
             CuratorName.setText(curatorFullName);
         }else{
             CuratorName.setText(curatorFullName);
@@ -174,9 +193,46 @@ public class WorkGroupController extends HelloApplication {
         DeleteStudentButton.setVisible(false);
         extendedInfo.setVisible(false);
         GroupTable.getSelectionModel().clearSelection();
+        CrudStackPane.setPickOnBounds(false);
+        DeleteHbox.setPickOnBounds(false);
+        UpdateHbox.setPickOnBounds(false);
+        ExtendedInfoHbox.setPickOnBounds(false);
+        AddHbox.setPickOnBounds(false);
+        WorkPlanHBox.setPickOnBounds(false);
+        WorkStudHBox.setPickOnBounds(false);
+        GroupPaneHBox.setPickOnBounds(false);
+        GroupHbox.setPickOnBounds(false);
     }
 
-    public void initialize() {
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        curator = DisplayDate.getCuratorByUserEmail(curatorEmail);
         startWorkGroup();
+    }
+
+    @Override
+    public void setMinimizeWindowButton() {
+        ScreenService.minimized_Window(minimizeWindowButton);
+    }
+
+    @Override
+    public void setMaximizeWindowButton() {
+        ScreenService.maximized_Window(maximizeWindowButton.getScene().getWindow());
+    }
+
+    @Override
+    public void setCloseWindow() {
+        ScreenService.close_Window();
+    }
+
+    @Override
+    public void setDragWindow(MouseEvent dragEvent) {
+        ScreenService.paneDragged(dragEvent,Hbox);
+    }
+
+    @Override
+    public void setPressedWindow(MouseEvent mouseEvent) {
+        ScreenService.panePressed(mouseEvent);
     }
 }

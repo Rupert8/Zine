@@ -11,6 +11,7 @@ import java.io.File;
 
 
 public class HibernateUtil {
+    @Getter
     private static SessionFactory factory;
 
     static {
@@ -70,7 +71,4 @@ public class HibernateUtil {
         }
     }
 
-    public static SessionFactory getFactory() {
-        return factory;
-    }
 }

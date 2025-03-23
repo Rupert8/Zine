@@ -11,6 +11,7 @@ module start.zine {
     requires jakarta.activation;
     requires org.apache.poi.ooxml;
     requires commons.math3;
+    requires jdk.compiler;
 
     opens start.zine to javafx.fxml;
     exports start.zine;
@@ -39,4 +40,7 @@ module start.zine {
     opens hibernate.entity to javafx.base, org.hibernate.orm.core;
     exports controller.passwordRecovery;
     opens controller.passwordRecovery to javafx.fxml;
+    exports controller.login;
+    opens controller.login to javafx.fxml;
+    exports controller.curator;
 }

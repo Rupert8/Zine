@@ -15,7 +15,7 @@ public class StudentParents {
     @Column(name = "id")
     private int id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id")
     private StudentInfo studentInfo;
 

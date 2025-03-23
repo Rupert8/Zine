@@ -1,0 +1,11 @@
+.basicMenuButton{
+    -fx-background-color:  #e8d58c;
+    -fx-background-radius: 0;
+    -fx-border-color: #cdbb7c;
+    -fx-border-width: 0px;
+}
+
+.basicMenuButton:hover{
+    -fx-background-color:  #cdbb7c;
+
+}

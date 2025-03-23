@@ -1,20 +1,15 @@
 package controller.curator;
 
-import controller.WorkGroupController;
-import data.AddData;
 import data.SearchStudentData;
 import data.UpdateData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import start.zine.HelloApplication;
 
 import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
-
-import static controller.WorkGroupController.*;
 
 public class UpdateStudentInfo extends WorkGroupController implements Initializable {
     @FXML

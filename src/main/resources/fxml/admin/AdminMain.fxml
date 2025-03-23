@@ -60,7 +60,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="928.0" layoutY="125.0" mnemonicParsing="false" onAction="#switchToAdminSocialPassport" prefHeight="45.0" prefWidth="318.0" style="-fx-background-color: #fff; -fx-text-fill: #000000; -fx-background-radius: 30px;" text="Соцальний паспорт">
+      <Button layoutX="921.0" layoutY="125.0" mnemonicParsing="false" onAction="#switchToAdminSocialPassport" prefHeight="45.0" prefWidth="330.0" style="-fx-background-color: #fff; -fx-text-fill: #000000; -fx-background-radius: 30px;" text="Соціальний паспорт">
          <font>
             <Font name="Kharkiv Tone Regular" size="24.0" />
          </font>

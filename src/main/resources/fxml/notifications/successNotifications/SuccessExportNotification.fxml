@@ -13,16 +13,16 @@
          <children>
             <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="40.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../icon/info-icon.png" />
+                  <Image url="@../../../icon/icon-success.png" />
                </image>
             </ImageView>
-            <Label layoutX="113.0" layoutY="50.0" style="-fx-text-fill: #E5B218;" text="Помилка">
+            <Label layoutX="113.0" layoutY="50.0" style="-fx-text-fill: #E5B218;" text="Успішно">
                <font>
                   <Font name="Gotham-Bold" size="32.0" />
                </font>
             </Label>
             <Pane layoutY="130.0" prefHeight="1.0" prefWidth="600.0" style="-fx-background-color: #E5B218;" />
-            <Label layoutX="40.0" layoutY="150.0" style="-fx-text-fill: #E5B218; -fx-font-family: bold;" text="Email має містити @ наприклад: example@gmail.com">
+            <Label layoutX="40.0" layoutY="150.0" style="-fx-text-fill: #E5B218; -fx-font-family: bold;" text="Документ успішно експортовано у папку документи">
                <font>
                   <Font name="Gotham-Bold" size="20.0" />
                </font>

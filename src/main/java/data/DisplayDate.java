@@ -77,13 +77,13 @@ public class DisplayDate  {
     public static Session session = null;
 
 
-    public static ObservableList<StudentInfo> getDataStudentInfo(String hqlQuery,String groupName) {
+    public static ObservableList<StudentInfo> getDataStudentInfo(String groupName) {
         ObservableList<StudentInfo> studentInfo = FXCollections.observableArrayList();
         try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            List<StudentInfo> resoultlist = session.createQuery(hqlQuery, StudentInfo.class).setParameter("groupName", groupName).getResultList();
+            List<StudentInfo> resoultlist = session.createQuery("SELECT si.id, si.name,si.surname,si.middleName,si.date_of_birth,si.phoneNumber,si.address FROM StudentInfo si WHERE si.groupName = :groupName and si.status = true", StudentInfo.class).setParameter("groupName", groupName).list();
             studentInfo.addAll(resoultlist);
 
             session.getTransaction().commit();

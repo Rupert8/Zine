@@ -1,5 +1,6 @@
-package controller;
+package controller.login;
 
+import controller.interfaces.WindowActions.WindowControl;
 import data.AddData;
 import hiberante.sessionFactory.HibernateUtil;
 import hibernate.entity.Curators;
@@ -14,24 +15,37 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import org.apache.commons.math3.analysis.function.Add;
 import org.hibernate.Session;
+import services.ScreenService;
 import start.zine.HelloApplication;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController extends HelloApplication implements Initializable {
+public class LoginController extends HelloApplication implements Initializable, WindowControl {
     @FXML
     private Label magazineCurator;
     @FXML
     private TextField emailField;
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private Button minimizeWindowButton;
+    @FXML
+    private Button closeWindowButton;
+    @FXML
+    private Button maximizeWindowButton;
+    @FXML
+    private BorderPane borderPane;
+    @FXML
+    private HBox Hbox;
 
-    private final String hql = "FROM User WHERE Email = :email and Password = :password";
+
     private final LoginController loginController = this;
 
     private Dialog<Boolean> dialog;
@@ -71,13 +85,14 @@ public class LoginController extends HelloApplication implements Initializable {
             Session session = HibernateUtil.getSession();
             session.beginTransaction();
 
+            String hql = "FROM User WHERE Email = :email and Password = :password";
             User user = session.createQuery(hql, User.class)
                     .setParameter("email", emailField.getText())
                     .setParameter("password", passwordField.getText())
                     .getSingleResultOrNull();
 
             if (user != null) {
-                if (user.isStatus() == true) {
+                if (user.isStatus()) {
                     curatorEmail = emailField.getText();
                     idCurator = user.getCurators().getId();
                     System.out.println(idCurator);
@@ -89,9 +104,9 @@ public class LoginController extends HelloApplication implements Initializable {
                         throw new IllegalArgumentException("куратор за таким id не знайдено");
                     }
 
-                    switchScene((Node) event.getSource(), "/fxml/WorkGroupPage.fxml");
+                    switchScene((Node) event.getSource(), "/fxml/curator/WorkGroupPane.fxml");
                     System.out.print(curatorGroupName);
-                } else if(user.isStatus() == false){
+                } else if(!user.isStatus()){
                     AddData.insertCategoriesIfNotExist();
                     switchScene((Node) event.getSource(), "/fxml/admin/AdminMain.fxml");
                 }
@@ -101,7 +116,7 @@ public class LoginController extends HelloApplication implements Initializable {
 
             session.getTransaction().commit();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new IllegalArgumentException("немає інтернету");
         }
     }
 
@@ -114,4 +129,30 @@ public class LoginController extends HelloApplication implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
+    @Override
+    public void setMinimizeWindowButton(){
+        ScreenService.minimized_Window(minimizeWindowButton);
+    }
+
+    @Override
+    public void setMaximizeWindowButton(){
+        ScreenService.maximized_Window(maximizeWindowButton.getScene().getWindow());
+    }
+
+    @Override
+    public void setCloseWindow(){
+        ScreenService.close_Window();
+    }
+
+    @Override
+    public void setDragWindow(MouseEvent dragEvent){
+        ScreenService.paneDragged(dragEvent,Hbox);
+    }
+
+    @Override
+    public void setPressedWindow(MouseEvent mouseEvent) {
+        ScreenService.panePressed(mouseEvent);
+    }
+
 }
