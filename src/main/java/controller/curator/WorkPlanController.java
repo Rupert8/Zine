@@ -260,7 +260,6 @@ public class WorkPlanController extends HelloApplication implements Initializabl
         SortDateLabel.setVisible(false);
         SortDateButton.setVisible(false);
         SortComboBox.setValue("Показати все");
-        displayPlanInfo();
         PlanTable.getSelectionModel().clearSelection();
         //MenuBarHBox.setPickOnBounds(false);
         WorkPlanHBox.setPickOnBounds(false);

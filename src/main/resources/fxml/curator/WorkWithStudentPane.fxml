@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
@@ -158,58 +159,39 @@
          <center>
             <BorderPane fx:id="BorderSortPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <top>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" StackPane.alignment="BOTTOM_LEFT">
+                        <FlowPane prefWidth="1280.0">
                            <children>
-                              <ComboBox fx:id="GeneralInfoComboBox" minHeight="50.0" minWidth="210.0" onAction="#switchGeneralDataPage" prefHeight="50.0" prefWidth="210.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css">
-                                 <HBox.margin>
-                                    <Insets left="50.0" />
-                                 </HBox.margin>
-                              </ComboBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="256.0">
+                                 <children>
+                                    <ComboBox fx:id="GeneralInfoComboBox" minHeight="50.0" minWidth="210.0" onAction="#switchGeneralDataPage" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="256.0">
+                                 <children>
+                                    <ComboBox fx:id="SocialActivityComboBox" minHeight="50.0" minWidth="210.0" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="256.0">
+                                 <children>
+                                    <ComboBox fx:id="IndividualSupportComboBox" minHeight="50.0" minWidth="210.0" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="256.0">
+                                 <children>
+                                    <ComboBox fx:id="PromotionComboBox" minHeight="50.0" minWidth="210.0" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="256.0">
+                                 <children>
+                                    <ComboBox fx:id="SocialPassportComboBox" minHeight="50.0" minWidth="210.0" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
+                                 </children>
+                              </HBox>
                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="150.0">
-                           <children>
-                              <ComboBox fx:id="SocialActivityComboBox" minHeight="51.0" minWidth="210.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css">
-                                 <HBox.margin>
-                                    <Insets right="505.0" />
-                                 </HBox.margin>
-                              </ComboBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <ComboBox fx:id="IndividualSupportComboBox" minHeight="50.0" minWidth="210.0" prefWidth="225.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css">
-                                 <HBox.margin>
-                                    <Insets right="12.0" />
-                                 </HBox.margin>
-                              </ComboBox>
-                           </children>
-                           <StackPane.margin>
-                              <Insets right="11.0" />
-                           </StackPane.margin>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <ComboBox fx:id="PromotionComboBox" prefWidth="225.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css">
-                                 <HBox.margin>
-                                    <Insets right="295.0" />
-                                 </HBox.margin>
-                              </ComboBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <ComboBox fx:id="SocialPassportComboBox" prefWidth="225.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css">
-                                 <HBox.margin>
-                                    <Insets right="50.0" />
-                                 </HBox.margin>
-                              </ComboBox>
-                           </children>
-                        </HBox>
+                        </FlowPane>
                      </children>
-                  </StackPane>
+                  </HBox>
                </top>
             </BorderPane>
          </center>
