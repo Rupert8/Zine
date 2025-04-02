@@ -1,7 +1,8 @@
 package controller.login;
 
-import controller.interfaces.WindowActions.WindowControl;
+import interfaces.WindowActions.WindowControl;
 import data.AddData;
+import enums.UserStatus;
 import hiberante.sessionFactory.HibernateUtil;
 import hibernate.entity.Curators;
 import hibernate.entity.User;
@@ -20,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.hibernate.Session;
+
 import services.ScreenService;
 import start.zine.HelloApplication;
 
@@ -45,6 +47,7 @@ public class LoginController extends HelloApplication implements Initializable, 
     @FXML
     private HBox Hbox;
 
+    private Session session;
 
     private final LoginController loginController = this;
 
@@ -82,41 +85,46 @@ public class LoginController extends HelloApplication implements Initializable, 
     public void login(ActionEvent event) {
         int idCurator;
         try  {
-            Session session = HibernateUtil.getSession();
-            session.beginTransaction();
+            session = HibernateUtil.getSession();
+            if(session != null){
+                session.beginTransaction();
 
-            String hql = "FROM User WHERE Email = :email and Password = :password";
-            User user = session.createQuery(hql, User.class)
-                    .setParameter("email", emailField.getText())
-                    .setParameter("password", passwordField.getText())
-                    .getSingleResultOrNull();
+                User user = session.createQuery("FROM User WHERE Email = :email and Password = :password", User.class)
+                        .setParameter("email", emailField.getText())
+                        .setParameter("password", passwordField.getText())
+                        .getSingleResultOrNull();
 
-            if (user != null) {
-                if (user.isStatus()) {
-                    curatorEmail = emailField.getText();
-                    idCurator = user.getCurators().getId();
-                    System.out.println(idCurator);
+                if (user != null) {
+                    if (UserStatus.USER == user.getStatus()) {
+                        curatorEmail = emailField.getText();
+                        idCurator = user.getCurators().getId();
+                        System.out.println(idCurator);
 
-                    Curators curators = session.get(Curators.class, idCurator);
-                    if(curators != null){
-                        curatorGroupName = curators.getGroup();
-                    }else{
-                        throw new IllegalArgumentException("куратор за таким id не знайдено");
+                        Curators curators = session.get(Curators.class, idCurator);
+                        if(curators != null){
+                            curatorGroupName = curators.getGroup();
+                        }else{
+                            throw new IllegalArgumentException("куратор за таким id не знайдено");
+                        }
+
+                        switchScene((Node) event.getSource(), "/fxml/curator/WorkGroupPane.fxml");
+                        System.out.print(curatorGroupName);
+                    } else if(UserStatus.ADMIN == user.getStatus()){
+                        AddData.insertCategoriesIfNotExist();
+                        switchScene((Node) event.getSource(), "/fxml/admin/AdminMain.fxml");
                     }
-
-                    switchScene((Node) event.getSource(), "/fxml/curator/WorkGroupPane.fxml");
-                    System.out.print(curatorGroupName);
-                } else if(!user.isStatus()){
-                    AddData.insertCategoriesIfNotExist();
-                    switchScene((Node) event.getSource(), "/fxml/admin/AdminMain.fxml");
+                } else {
+                    loadAndShowLoginWarning("/fxml/notifications/WarningLoginFxml.fxml");
                 }
-            } else {
-                loadAndShowLoginWarning("/fxml/notifications/WarningLoginFxml.fxml");
-            }
 
-            session.getTransaction().commit();
+                session.getTransaction().commit();
+            } else{
+                throw new IllegalArgumentException("Сесія null");
+            }
         } catch (Exception e) {
             throw new IllegalArgumentException("немає інтернету");
+        }finally {
+            HibernateUtil.closeSession(session);
         }
     }
 

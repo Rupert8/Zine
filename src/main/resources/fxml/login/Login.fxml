@@ -125,8 +125,7 @@
                         <Font name="Gotham-Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Label layoutX="257.0" layoutY="277.0" text="Забули пароль?" textFill="#9e9898" />
-                  <Button layoutX="256.0" layoutY="273.0" mnemonicParsing="false" onAction="#switchToPassPage" opacity="0.0" prefHeight="25.0" prefWidth="87.0" text="Button" />
+                  <Label layoutX="257.0" layoutY="277.0" onMouseClicked="#switchToPassPage" text="Забули пароль?" textFill="#9e9898" />
                   <PasswordField fx:id="passwordField" layoutX="225.0" layoutY="130.0" prefWidth="240.0" styleClass="textField" stylesheets="@../../css/textField.css" />
                </children>
                <StackPane.margin>

@@ -1,4 +1,5 @@
 module start.zine {
+
     requires javafx.controls;
     requires javafx.fxml;
     requires static lombok;
@@ -12,26 +13,30 @@ module start.zine {
     requires org.apache.poi.ooxml;
     requires commons.math3;
     requires jdk.compiler;
+    requires java.desktop;
 
     opens start.zine to javafx.fxml;
     exports start.zine;
-    exports controller.generalInfo;
-    exports controller.promotion;
-    exports controller.individualSupport;
-    exports controller.socialActivity;
+    exports controller.curator.generalInfo;
+    exports controller.curator.promotion;
+    exports controller.curator.individualSupport;
+    exports controller.curator.socialActivity;
     exports controller.admin;
     exports controller.socialPassport;
     exports controller;
     exports data;
     exports tableView to org.hibernate.orm.core;
+    exports hiberante.sessionFactory;
+    exports hibernate.entity;
+    exports enums;
 
     opens controller.admin.adminDialog to javafx.fxml;
     opens controller.admin to javafx.fxml;
     opens controller.curator to javafx.fxml;
-    opens controller.generalInfo to javafx.fxml;
-    opens controller.promotion to javafx.fxml;
-    opens controller.individualSupport to javafx.fxml;
-    opens controller.socialActivity to javafx.fxml;
+    opens controller.curator.generalInfo to javafx.fxml;
+    opens controller.curator.promotion to javafx.fxml;
+    opens controller.curator.individualSupport to javafx.fxml;
+    opens controller.curator.socialActivity to javafx.fxml;
     opens controller.socialPassport to javafx.fxml;
     opens controller to javafx.fxml;
     opens data to javafx.fxml;

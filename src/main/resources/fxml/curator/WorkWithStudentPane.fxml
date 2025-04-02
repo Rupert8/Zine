@@ -165,27 +165,27 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="256.0">
                                  <children>
-                                    <ComboBox fx:id="GeneralInfoComboBox" minHeight="50.0" minWidth="210.0" onAction="#switchGeneralDataPage" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
+                                    <ComboBox fx:id="GeneralInfoComboBox" minHeight="50.0" minWidth="212.0" onAction="#switchGeneralDataPage" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="256.0">
                                  <children>
-                                    <ComboBox fx:id="SocialActivityComboBox" minHeight="50.0" minWidth="210.0" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
+                                    <ComboBox fx:id="SocialActivityComboBox" minHeight="50.0" minWidth="212.0" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="256.0">
                                  <children>
-                                    <ComboBox fx:id="IndividualSupportComboBox" minHeight="50.0" minWidth="210.0" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
+                                    <ComboBox fx:id="IndividualSupportComboBox" minHeight="50.0" minWidth="212.0" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="256.0">
                                  <children>
-                                    <ComboBox fx:id="PromotionComboBox" minHeight="50.0" minWidth="210.0" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
+                                    <ComboBox fx:id="PromotionComboBox" minHeight="50.0" minWidth="212.0" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="256.0">
                                  <children>
-                                    <ComboBox fx:id="SocialPassportComboBox" minHeight="50.0" minWidth="210.0" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
+                                    <ComboBox fx:id="SocialPassportComboBox" minHeight="50.0" minWidth="212.0" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
                                  </children>
                               </HBox>
                            </children>

@@ -1,16 +1,20 @@
 package controller.passwordRecovery;
 
 import data.UpdateData;
+import interfaces.WindowActions.WindowControl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import services.email.EmailSender;
+import services.ScreenService;
 import services.email.EmailService;
 import start.zine.HelloApplication;
 
@@ -18,7 +22,7 @@ import java.io.IOException;
 
 import static controller.passwordRecovery.PassPageController.userEmail;
 
-public class VerifyCodeController extends HelloApplication {
+public class VerifyCodeController extends HelloApplication implements WindowControl {
     @FXML
     private Pane CodePane;
 
@@ -30,6 +34,12 @@ public class VerifyCodeController extends HelloApplication {
 
     @FXML
     private TextField NewPasswordField;
+
+    @FXML
+    private HBox Hbox;
+    @FXML
+    private Button minimizeWindowButton,maximizeWindowButton,closeWindowButton;
+
 
     private void loadAndShowCodeWarning(String linkFxml){
         try {
@@ -64,7 +74,7 @@ public class VerifyCodeController extends HelloApplication {
             System.out.print("код правильний");
             NewPasswordPane.setVisible(true);
         }else{
-            loadAndShowCodeWarning("/recoveryPassword/Message.fxml");
+            loadAndShowCodeWarning("/fxml/recoveryPassword/Message.fxml");
             throw new IllegalArgumentException("Код неправильний");
         }
     }
@@ -73,5 +83,30 @@ public class VerifyCodeController extends HelloApplication {
         String newPassword = NewPasswordField.getText();
         UpdateData.updateUserPassword(userEmail, newPassword);
         switchToLoginPage(event);
+    }
+
+    @Override
+    public void setMinimizeWindowButton() {
+        ScreenService.minimized_Window(minimizeWindowButton);
+    }
+
+    @Override
+    public void setMaximizeWindowButton() {
+        ScreenService.maximized_Window(maximizeWindowButton.getScene().getWindow());
+    }
+
+    @Override
+    public void setCloseWindow() {
+        ScreenService.close_Window();
+    }
+
+    @Override
+    public void setDragWindow(MouseEvent dragEvent) {
+        ScreenService.paneDragged(dragEvent,Hbox);
+    }
+
+    @Override
+    public void setPressedWindow(MouseEvent mouseEvent) {
+        ScreenService.panePressed(mouseEvent);
     }
 }

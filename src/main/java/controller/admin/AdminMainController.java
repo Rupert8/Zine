@@ -1,9 +1,9 @@
 package controller.admin;
 
+import interfaces.WindowActions.WindowControl;
 import data.DisplayDate;
 import data.SearchStudentData;
 import hibernate.entity.StudentInfo;
-import hibernate.entity.WorkPlan;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +12,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import services.ScreenService;
 import start.zine.HelloApplication;
 
 import java.sql.Date;
@@ -20,7 +23,7 @@ import java.util.List;
 import static controller.ExtendedInformationAboutStudent.userStatus;
 
 
-public class AdminMainController extends HelloApplication {
+public class AdminMainController extends HelloApplication implements WindowControl {
     @FXML
     private TableView<StudentInfo> GroupTable;
 
@@ -44,6 +47,18 @@ public class AdminMainController extends HelloApplication {
 
     @FXML
     private Button extendedInfo;
+
+    @FXML
+    private HBox Hbox;
+    @FXML
+    private Button minimizeWindowButton,maximizeWindowButton,closeWindowButton;
+
+    @FXML
+    private HBox WorkPlanHBox,WorkTeacherHBox,StudentBackPane,StudentHBox,GroupHBox,SocialPassportHBox;
+    @FXML
+    private HBox SortLabelHBox,SortComboBoxHBox,SortByGroupHBox;
+    @FXML
+    private HBox ExtendedInfoHbox,AddHbox;
 
     public static int studentId;
     public static String studentName;
@@ -137,9 +152,45 @@ public class AdminMainController extends HelloApplication {
         selectItems();
         setSortStudentComboBox();
         GroupTable.getSelectionModel().clearSelection();
+        StudentHBox.setPickOnBounds(false);
+        WorkTeacherHBox.setPickOnBounds(false);
+        SocialPassportHBox.setPickOnBounds(false);
+        GroupHBox.setPickOnBounds(false);
+        WorkPlanHBox.setPickOnBounds(false);
+        SortComboBoxHBox.setPickOnBounds(false);
+        SortLabelHBox.setPickOnBounds(false);
+        AddHbox.setPickOnBounds(false);
+        ExtendedInfoHbox.setPickOnBounds(false);
+        StudentBackPane.setPickOnBounds(false);
+        SortByGroupHBox.setPickOnBounds(false);
     }
 
     public void initialize() {
         correctVisible();
+    }
+
+    @Override
+    public void setMinimizeWindowButton() {
+        ScreenService.minimized_Window(minimizeWindowButton);
+    }
+
+    @Override
+    public void setMaximizeWindowButton() {
+        ScreenService.maximized_Window(maximizeWindowButton.getScene().getWindow());
+    }
+
+    @Override
+    public void setCloseWindow() {
+        ScreenService.close_Window();
+    }
+
+    @Override
+    public void setDragWindow(MouseEvent dragEvent) {
+        ScreenService.paneDragged(dragEvent,Hbox);
+    }
+
+    @Override
+    public void setPressedWindow(MouseEvent mouseEvent) {
+        ScreenService.panePressed(mouseEvent);
     }
 }

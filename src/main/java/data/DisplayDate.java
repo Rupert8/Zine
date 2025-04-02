@@ -3,6 +3,7 @@ import hiberante.sessionFactory.HibernateUtil;
 import hibernate.entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lombok.NonNull;
 import org.hibernate.Session;
 import tableView.RemovedStudentPrototype;
 import tableView.SocialPassportCategoryPrototype;

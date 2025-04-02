@@ -1,23 +1,23 @@
 package controller.admin;
 
+import interfaces.WindowActions.WindowControl;
 import data.DisplayDate;
 import data.SearchStudentData;
-import hibernate.entity.Curators;
 import hibernate.entity.Groups;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import services.ScreenService;
 import start.zine.HelloApplication;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static controller.ExtendedInformationAboutStudent.userStatus;
-
-public class AdminGroupController extends HelloApplication implements Initializable {
+public class AdminGroupController extends HelloApplication implements Initializable, WindowControl {
     @FXML
     private TableColumn<Groups, String> GroupCuratorNameColumn;
 
@@ -37,6 +37,16 @@ public class AdminGroupController extends HelloApplication implements Initializa
     private Button AdditionInfoButton;
     @FXML
     private Button AssignCuratorButton;
+
+    @FXML
+    private HBox Hbox;
+    @FXML
+    private Button minimizeWindowButton,maximizeWindowButton,closeWindowButton;
+
+    @FXML
+    private HBox WorkPlanHBox,WorkTeacherHBox,GroupPaneHBox,StudentHBox,GroupHBox,SocialPassportHBox;
+    @FXML
+    private HBox ExtendedInfoHbox,AddHbox,SetCuratorGroupHBox;
 
     public static Dialog<Boolean> saveDialog;
 
@@ -112,11 +122,46 @@ public class AdminGroupController extends HelloApplication implements Initializa
         AssignCuratorButton.setVisible(false);
         GroupTable.getSelectionModel().clearSelection();
         selectRows();
+        GroupTable.getSelectionModel().clearSelection();
+        StudentHBox.setPickOnBounds(false);
+        WorkTeacherHBox.setPickOnBounds(false);
+        SocialPassportHBox.setPickOnBounds(false);
+        GroupHBox.setPickOnBounds(false);
+        WorkPlanHBox.setPickOnBounds(false);
+        AddHbox.setPickOnBounds(false);
+        ExtendedInfoHbox.setPickOnBounds(false);
+        GroupPaneHBox.setPickOnBounds(false);
+        SetCuratorGroupHBox.setPickOnBounds(false);
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         startAdminGroup();
+    }
+
+    @Override
+    public void setMinimizeWindowButton() {
+        ScreenService.minimized_Window(minimizeWindowButton);
+    }
+
+    @Override
+    public void setMaximizeWindowButton() {
+        ScreenService.maximized_Window(maximizeWindowButton.getScene().getWindow());
+    }
+
+    @Override
+    public void setCloseWindow() {
+        ScreenService.close_Window();
+    }
+
+    @Override
+    public void setDragWindow(MouseEvent dragEvent) {
+        ScreenService.paneDragged(dragEvent,Hbox);
+    }
+
+    @Override
+    public void setPressedWindow(MouseEvent mouseEvent) {
+        ScreenService.panePressed(mouseEvent);
     }
 }

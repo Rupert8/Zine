@@ -1,6 +1,6 @@
 package controller.admin;
 
-import data.DeleteData;
+import interfaces.WindowActions.WindowControl;
 import data.DisplayDate;
 import data.SearchStudentData;
 import hibernate.entity.Curators;
@@ -12,12 +12,15 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import services.ScreenService;
 import start.zine.HelloApplication;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AdminCuratorController extends HelloApplication implements Initializable{
+public class AdminCuratorController extends HelloApplication implements Initializable, WindowControl {
 
     @FXML
     private TableColumn<Curators, String> CuratorGroupColumn;
@@ -42,6 +45,16 @@ public class AdminCuratorController extends HelloApplication implements Initiali
 
     @FXML
     private Button AdditionCuratorButton;
+
+    @FXML
+    private HBox Hbox;
+    @FXML
+    private Button minimizeWindowButton,maximizeWindowButton;
+
+    @FXML
+    private HBox WorkPlanHBox,WorkTeacherHBox,CuratorPaneHBox,StudentHBox,GroupHBox,SocialPassportHBox;
+    @FXML
+    private HBox ExtendedInfoHbox,AddHbox;
 
     public static Dialog<Boolean> saveDialog;
 
@@ -102,10 +115,43 @@ public class AdminCuratorController extends HelloApplication implements Initiali
         displayCurators();
         selectRows();
         CuratorTable.getSelectionModel().clearSelection();
+        StudentHBox.setPickOnBounds(false);
+        WorkTeacherHBox.setPickOnBounds(false);
+        SocialPassportHBox.setPickOnBounds(false);
+        GroupHBox.setPickOnBounds(false);
+        WorkPlanHBox.setPickOnBounds(false);
+        AddHbox.setPickOnBounds(false);
+        ExtendedInfoHbox.setPickOnBounds(false);
+        CuratorPaneHBox.setPickOnBounds(false);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         correctLoadPane();
+    }
+
+    @Override
+    public void setMinimizeWindowButton() {
+        ScreenService.minimized_Window(minimizeWindowButton);
+    }
+
+    @Override
+    public void setMaximizeWindowButton() {
+        ScreenService.maximized_Window(maximizeWindowButton.getScene().getWindow());
+    }
+
+    @Override
+    public void setCloseWindow() {
+        ScreenService.close_Window();
+    }
+
+    @Override
+    public void setDragWindow(MouseEvent dragEvent) {
+        ScreenService.paneDragged(dragEvent,Hbox);
+    }
+
+    @Override
+    public void setPressedWindow(MouseEvent mouseEvent) {
+        ScreenService.panePressed(mouseEvent);
     }
 }

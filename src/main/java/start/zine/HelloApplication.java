@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -204,43 +205,43 @@ public class HelloApplication extends Application {
     }
 
     public void switchWorkGeneralInfoPage(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/fxml/generalInfoFxml/GeneralData.fxml");
+        switchScene((Node) event.getSource(), "/fxml/curator/generalInfoFxml/GeneralData.fxml");
     }
 
     public void switchWorkEducationInfoPage(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/fxml/generalInfoFxml/EducationInfo.fxml");
+        switchScene((Node) event.getSource(), "/fxml/curator/generalInfoFxml/EducationInfo.fxml");
     }
 
     public void switchWorkLaborActivityPage(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/fxml/generalInfoFxml/StudentJob.fxml");
+        switchScene((Node) event.getSource(), "/fxml/curator/generalInfoFxml/StudentJob.fxml");
     }
 
     public void switchWorkParentsInfoPage(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/fxml/generalInfoFxml/ParentsInfo.fxml");
+        switchScene((Node) event.getSource(), "/fxml/curator/generalInfoFxml/ParentsInfo.fxml");
     }
 
     public void switchWorkMilitaryServicePage(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/fxml/generalInfoFxml/MilitaryService.fxml");
+        switchScene((Node) event.getSource(), "/fxml/curator/generalInfoFxml/MilitaryService.fxml");
     }
 
     public void switchWorkGroupActivityPage(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/fxml/socialActivityFxml/GroupActivity.fxml");
+        switchScene((Node) event.getSource(), "/fxml/curator/socialActivityFxml/GroupActivity.fxml");
     }
 
     public void switchWorkSocialActivityPage(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/fxml/socialActivityFxml/SocialActivity.fxml");
+        switchScene((Node) event.getSource(), "/fxml/curator/socialActivityFxml/SocialActivity.fxml");
     }
 
     public void switchWorkIndividualSupportPage(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/fxml/individualSupportFxml/IndividualSupport.fxml");
+        switchScene((Node) event.getSource(), "/fxml/curator/individualSupportFxml/IndividualSupport.fxml");
     }
 
     public void switchWorkPromotionPage(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/fxml/promotionFxml/Promotion.fxml");
+        switchScene((Node) event.getSource(), "/fxml/curator/promotionFxml/Promotion.fxml");
     }
 
     public void switchWorkSocialPassport(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/fxml/socialPassport/CuratorSocialPassport.fxml");
+        switchScene((Node) event.getSource(), "/fxml/curator/socialPassport/CuratorSocialPassport.fxml");
     }
 
     public void switchAddInformationAboutStudent(ActionEvent event) {
@@ -267,8 +268,8 @@ public class HelloApplication extends Application {
         switchScene((Node) event.getSource(), "/fxml/admin/AdminSocialPassport.fxml");
     }
 
-    public void switchToPassPage(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/fxml/passPage.fxml");
+    public void switchToPassPage(MouseEvent event) {
+        switchScene((Node) event.getSource(), "/fxml/recoveryPassword/PassPane.fxml");
     }
 
     public void switchToLoginPage(ActionEvent event) {
@@ -288,7 +289,7 @@ public class HelloApplication extends Application {
     }
 
     public void switchToCodeFxml(ActionEvent event) {
-        switchScene((Node) event.getSource(), "/recoveryPassword/CodeFxml.fxml");
+        switchScene((Node) event.getSource(), "/fxml/recoveryPassword/CodeFxml.fxml");
     }
 
     public void switchToUpdateEducationInfo(ActionEvent event) {

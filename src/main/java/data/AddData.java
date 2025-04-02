@@ -1,9 +1,11 @@
 package data;
 
+import enums.UserStatus;
 import hiberante.sessionFactory.HibernateUtil;
 import hibernate.entity.*;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.sql.Date;
@@ -13,7 +15,6 @@ import static controller.login.LoginController.curatorGroupName;
 
 public class AddData {
     public static final String GET_CATEGORYNAME_ID = "SELECT s FROM SpCategoryName s WHERE s.category = :categoryName";
-
 
     public static void addPlanForCuratorData(String eventName, Date executionDate, String Performer, String execution, int semester) {
         try {
@@ -81,11 +82,10 @@ public class AddData {
     }
 
     public static void addCuratorData(String name, String surname, String middleName, String email, String password) {
-        Session session = null;
-        try {
-            session = HibernateUtil.getSession();
+        Transaction transaction = null;
+        try(Session session = HibernateUtil.getSession()) {
             if (session != null) {
-                session.beginTransaction();
+                transaction = session.beginTransaction();
 
                 Curators curator = new Curators();
                 curator.setName(name);
@@ -97,23 +97,23 @@ public class AddData {
                 user.setEmail(email);
                 user.setPassword(password);
                 user.setCurators(curator);
-                user.setStatus(true);
+                user.setStatus(UserStatus.USER);
 
                 session.persist(user);
-                session.getTransaction().commit();
+                transaction.commit();
+                HibernateUtil.closeSession(session);
+            }else{
+                throw new IllegalArgumentException("Сесія null");
             }
-
         } catch (RuntimeException e) {
             e.printStackTrace();
-            session.getTransaction().rollback();
         }
     }
 
     public static void addGroupInfo(String groupName, String groupProfession, String groupFormOfEducation, String groupGroupYearOfStudy, String groupLevelOfEducation, String groupEducationAndProfessionalProgram, int groupCourse) {
-        Session session = null;
-        try {
-            session = HibernateUtil.getSession();
-            session.beginTransaction();
+        Transaction transaction = null;
+        try(Session session = HibernateUtil.getSession();) {
+            transaction = session.beginTransaction();
 
             Groups groups = new Groups();
             groups.setGroupName(groupName);
@@ -127,12 +127,10 @@ public class AddData {
             groups.setActive(true);
 
             session.persist(groups);
-            session.getTransaction().commit();
+            transaction.commit();
             HibernateUtil.closeSession(session);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            HibernateUtil.closeSession(session);
         }
     }
 

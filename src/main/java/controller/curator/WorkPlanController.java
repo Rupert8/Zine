@@ -1,6 +1,6 @@
 package controller.curator;
 
-import controller.interfaces.WindowActions.WindowControl;
+import interfaces.WindowActions.WindowControl;
 import data.DeleteData;
 import data.DisplayDate;
 import data.SearchStudentData;

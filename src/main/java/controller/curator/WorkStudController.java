@@ -1,6 +1,6 @@
 package controller.curator;
 
-import controller.interfaces.WindowActions.WindowControl;
+import interfaces.WindowActions.WindowControl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

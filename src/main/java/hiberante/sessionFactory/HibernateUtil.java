@@ -17,26 +17,26 @@ public class HibernateUtil {
     static {
         try{
             Configuration configuration = new Configuration().configure();
-            configuration.addAnnotatedClass(User.class);
-            configuration.addAnnotatedClass(StudentInfo.class);
-            configuration.addAnnotatedClass(WorkPlan.class);
-            configuration.addAnnotatedClass(EducationInfo.class);
-            configuration.addAnnotatedClass(MilitaryService.class);
-            configuration.addAnnotatedClass(StudentJob.class);
-            configuration.addAnnotatedClass(StudentParents.class);
-            configuration.addAnnotatedClass(SocialActivity.class);
-            configuration.addAnnotatedClass(CircleActivity.class);
-            configuration.addAnnotatedClass(Promotion.class);
-            configuration.addAnnotatedClass(IndividualSupport.class);
-            configuration.addAnnotatedClass(DroppedOutStudents.class);
-            configuration.addAnnotatedClass(SocialPassport.class);
-            configuration.addAnnotatedClass(SpCategoryName.class);
-            configuration.addAnnotatedClass(SpChornobiltsi.class);
-            configuration.addAnnotatedClass(SpInvalidPeople.class);
-            configuration.addAnnotatedClass(SpManyChildrenFamily.class);
-            configuration.addAnnotatedClass(Groups.class);
-            configuration.addAnnotatedClass(Curators.class);
-            configuration.addAnnotatedClass(StudentGroups.class);
+//            configuration.addAnnotatedClass(User.class);
+//            configuration.addAnnotatedClass(StudentInfo.class);
+//            configuration.addAnnotatedClass(WorkPlan.class);
+//            configuration.addAnnotatedClass(EducationInfo.class);
+//            configuration.addAnnotatedClass(MilitaryService.class);
+//            configuration.addAnnotatedClass(StudentJob.class);
+//            configuration.addAnnotatedClass(StudentParents.class);
+//            configuration.addAnnotatedClass(SocialActivity.class);
+//            configuration.addAnnotatedClass(CircleActivity.class);
+//            configuration.addAnnotatedClass(Promotion.class);
+//            configuration.addAnnotatedClass(IndividualSupport.class);
+//            configuration.addAnnotatedClass(DroppedOutStudents.class);
+//            configuration.addAnnotatedClass(SocialPassport.class);
+//            configuration.addAnnotatedClass(SpCategoryName.class);
+//            configuration.addAnnotatedClass(SpChornobiltsi.class);
+//            configuration.addAnnotatedClass(SpInvalidPeople.class);
+//            configuration.addAnnotatedClass(SpManyChildrenFamily.class);
+//            configuration.addAnnotatedClass(Groups.class);
+//            configuration.addAnnotatedClass(Curators.class);
+//            configuration.addAnnotatedClass(StudentGroups.class);
 
             factory = configuration.buildSessionFactory();
         }catch (HibernateException e){

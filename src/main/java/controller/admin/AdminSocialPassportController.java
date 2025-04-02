@@ -1,6 +1,11 @@
 package controller.admin;
 
 import hibernate.entity.SocialPassport;
+import interfaces.WindowActions.WindowControl;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import services.ScreenService;
 import services.TableService;
 import data.DisplayDate;
 import javafx.collections.FXCollections;
@@ -14,6 +19,7 @@ import javafx.scene.control.TableView;
 import start.zine.HelloApplication;
 import tableView.SocialPassportPrototype;
 
+import java.awt.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,7 +28,7 @@ import java.util.ResourceBundle;
 
 import static services.exportExel.ExelExportService.exportToExcel;
 
-public class AdminSocialPassportController extends HelloApplication implements Initializable {
+public class AdminSocialPassportController extends HelloApplication implements Initializable, WindowControl {
 
     @FXML
     private TableColumn<SocialPassportPrototype, String> Category;
@@ -57,6 +63,17 @@ public class AdminSocialPassportController extends HelloApplication implements I
     @FXML
     private ComboBox<String> SortSocialPassportComboBox;
 
+    @FXML
+    private HBox Hbox;
+    @FXML
+    private Button minimizeWindowButton,maximizeWindowButton,closeWindowButton;
+
+    @FXML
+    private HBox WorkPlanHBox,WorkTeacherHBox,SocialPassportPaneHBox,StudentHBox,GroupHBox,SocialPassportHBox;
+    @FXML
+    private HBox SortLabelHBox,SortComboBoxHBox,SortByCategoryHBox,SortByGroupHBox;
+    @FXML
+    private HBox ExtendedInfoHbox,AddHbox;
 
     private ObservableList<SocialPassportPrototype> socialPassportPrototypes = FXCollections.observableArrayList();
 
@@ -135,6 +152,18 @@ public class AdminSocialPassportController extends HelloApplication implements I
         SortByGroupComboBox.setVisible(false);
         SortCategoryComboBox.setVisible(false);
         SocialPassportTable.getSelectionModel().clearSelection();
+        StudentHBox.setPickOnBounds(false);
+        WorkTeacherHBox.setPickOnBounds(false);
+        SocialPassportHBox.setPickOnBounds(false);
+        GroupHBox.setPickOnBounds(false);
+        WorkPlanHBox.setPickOnBounds(false);
+        SortComboBoxHBox.setPickOnBounds(false);
+        SortLabelHBox.setPickOnBounds(false);
+        AddHbox.setPickOnBounds(false);
+        ExtendedInfoHbox.setPickOnBounds(false);
+        SortByGroupHBox.setPickOnBounds(false);
+        SortByCategoryHBox.setPickOnBounds(false);
+        SocialPassportPaneHBox.setPickOnBounds(false);
     }
 
     public void selectedSortSocialPassportComboBox(){
@@ -172,5 +201,30 @@ public class AdminSocialPassportController extends HelloApplication implements I
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         startSocialPassport();
+    }
+
+    @Override
+    public void setMinimizeWindowButton() {
+        ScreenService.minimized_Window(minimizeWindowButton);
+    }
+
+    @Override
+    public void setMaximizeWindowButton() {
+        ScreenService.maximized_Window(maximizeWindowButton.getScene().getWindow());
+    }
+
+    @Override
+    public void setCloseWindow() {
+        ScreenService.close_Window();
+    }
+
+    @Override
+    public void setDragWindow(MouseEvent dragEvent) {
+        ScreenService.paneDragged(dragEvent,Hbox);
+    }
+
+    @Override
+    public void setPressedWindow(MouseEvent mouseEvent) {
+        ScreenService.panePressed(mouseEvent);
     }
 }

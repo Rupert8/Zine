@@ -1,5 +1,6 @@
 package controller.admin;
 
+import interfaces.WindowActions.WindowControl;
 import data.DeleteData;
 import data.DisplayDate;
 import data.SearchStudentData;
@@ -9,18 +10,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import services.ClearValueService;
+import services.ScreenService;
 import start.zine.HelloApplication;
 
 import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
 
-public class AdminWorkPlanController extends HelloApplication implements Initializable {
-    @FXML
-    private TableColumn<WorkPlan, Boolean> CompletionColumn;
-
+public class AdminWorkPlanController extends HelloApplication implements Initializable, WindowControl {
     @FXML
     private Button SortDateButton;
 
@@ -31,20 +32,17 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
     private Label SortDateLabel;
 
     @FXML
+    private TableColumn<WorkPlan, Boolean> CompletionColumn;
+    @FXML
     private TableColumn<WorkPlan, Date> ExecutionDateColumn;
-
     @FXML
     private TableColumn<WorkPlan, String> NameEventColumn;
-
     @FXML
     private TableColumn<WorkPlan, Integer> NumberColumn;
-
     @FXML
     private TableColumn<WorkPlan, String> ConfirmationNote;
-
     @FXML
     private TableColumn<WorkPlan, String> PerformerColumn;
-
     @FXML
     private TableView<WorkPlan> PlanTable;
 
@@ -68,6 +66,18 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
 
     @FXML
     public Button DeletePlanButton,UpdatePlanButton;
+
+    @FXML
+    public HBox MenuBarHBox;
+    @FXML
+    public Button minimizeWindowButton,maximizeWindowButton,closeWindowButton;
+
+    @FXML
+    public HBox WorkPlanPaneHBox,WorkPlanHBox,WorkTeacherHBox,StudentHBox,GroupHBox,SocialPassportHBox;
+    @FXML
+    private HBox SortLabelHBox,ShowAllHbox,ChooseSemesterHbox,SearchButtonHbox,StartDateHbox,EndDateHbox,DateHbox;
+    @FXML
+    private HBox DeleteHbox,UpdateHbox,AddHbox;
 
     public static int AdminPlanId;
     public static String passEventName;
@@ -225,6 +235,21 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
         SortComboBox.setValue("Показати все");
         displayPlanInfo();
         PlanTable.getSelectionModel().clearSelection();
+        StudentHBox.setPickOnBounds(false);
+        WorkTeacherHBox.setPickOnBounds(false);
+        GroupHBox.setPickOnBounds(false);
+        WorkPlanHBox.setPickOnBounds(false);
+        SocialPassportHBox.setPickOnBounds(false);
+        SortLabelHBox.setPickOnBounds(false);
+        ShowAllHbox.setPickOnBounds(false);
+        AddHbox.setPickOnBounds(false);
+        UpdateHbox.setPickOnBounds(false);
+        DeleteHbox.setPickOnBounds(false);
+        ChooseSemesterHbox.setPickOnBounds(false);
+        SearchButtonHbox.setPickOnBounds(false);
+        StartDateHbox.setPickOnBounds(false);
+        EndDateHbox.setPickOnBounds(false);
+        DateHbox.setPickOnBounds(false);
     }
 
 
@@ -236,5 +261,30 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
         setPlanComboBox();
         setSortComboBox();
         start();
+    }
+
+    @Override
+    public void setMinimizeWindowButton() {
+        ScreenService.minimized_Window(minimizeWindowButton);
+    }
+
+    @Override
+    public void setMaximizeWindowButton() {
+        ScreenService.maximized_Window(maximizeWindowButton.getScene().getWindow());
+    }
+
+    @Override
+    public void setCloseWindow() {
+        ScreenService.close_Window();
+    }
+
+    @Override
+    public void setDragWindow(MouseEvent dragEvent) {
+        ScreenService.paneDragged(dragEvent,MenuBarHBox);
+    }
+
+    @Override
+    public void setPressedWindow(MouseEvent mouseEvent) {
+        ScreenService.panePressed(mouseEvent);
     }
 }

@@ -1,15 +1,14 @@
 package hibernate.entity;
 
 
+import enums.UserStatus;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.type.NumericBooleanConverter;
 
+@Data
 @Entity
 @Table(name = "user_nefk")
-//@Getter @Setter
 @NoArgsConstructor
 public class User {
     @Id
@@ -28,8 +27,8 @@ public class User {
     private Curators curators;
 
     @Column
-    @Convert(converter = NumericBooleanConverter.class)
-    private boolean Status;
+    @Enumerated(EnumType.STRING)
+    private UserStatus Status;
 
     public long getId() {
         return id;
@@ -39,16 +38,8 @@ public class User {
         return Email;
     }
 
-    public String getPassword() {
-        return Password;
-    }
-
     public Curators getCurators() {
         return curators;
-    }
-
-    public boolean isStatus() {
-        return Status;
     }
 
     public void setId(long id) {
@@ -67,7 +58,4 @@ public class User {
         this.curators = curators;
     }
 
-    public void setStatus(boolean status) {
-        Status = status;
-    }
 }
