@@ -258,7 +258,7 @@
                         </HBox>
                         <HBox fx:id="SortByGroupHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <ComboBox fx:id="SortByGroupComboBox" onAction="#displayDataByGroupName" prefHeight="32.0" prefWidth="235.0" promptText="Виберіть групу" style="-fx-cursor: pointer;" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false">
+                              <ComboBox fx:id="SortByGroupComboBox" onAction="#displayDataByGroupNameStream" prefHeight="32.0" prefWidth="235.0" promptText="Виберіть групу" style="-fx-cursor: pointer;" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false">
                                  <HBox.margin>
                                     <Insets right="55.0" />
                                  </HBox.margin>

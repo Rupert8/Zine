@@ -98,7 +98,6 @@ public class LoginController extends HelloApplication implements Initializable, 
                     if (UserStatus.USER == user.getStatus()) {
                         curatorEmail = emailField.getText();
                         idCurator = user.getCurators().getId();
-                        System.out.println(idCurator);
 
                         Curators curators = session.get(Curators.class, idCurator);
                         if(curators != null){
@@ -108,7 +107,6 @@ public class LoginController extends HelloApplication implements Initializable, 
                         }
 
                         switchScene((Node) event.getSource(), "/fxml/curator/WorkGroupPane.fxml");
-                        System.out.print(curatorGroupName);
                     } else if(UserStatus.ADMIN == user.getStatus()){
                         AddData.insertCategoriesIfNotExist();
                         switchScene((Node) event.getSource(), "/fxml/admin/AdminMain.fxml");

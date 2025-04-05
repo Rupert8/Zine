@@ -4,6 +4,7 @@ import interfaces.WindowActions.WindowControl;
 import data.DisplayDate;
 import data.SearchStudentData;
 import hibernate.entity.StudentInfo;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,8 +20,10 @@ import start.zine.HelloApplication;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
-import static controller.ExtendedInformationAboutStudent.userStatus;
+import static controller.extendedInformationAboutStudent.ExtendedInformationAboutStudent.userStatus;
 
 
 public class AdminMainController extends HelloApplication implements WindowControl {
@@ -67,7 +70,9 @@ public class AdminMainController extends HelloApplication implements WindowContr
     public static String studentAddress;
     public static String studentPhoneNumber;
     public static String studentGroupName;
-    private static ObservableList<StudentInfo> list;
+    private static ObservableList<StudentInfo> studentList;
+
+
 
     private void setDataInGroupTable(ObservableList<StudentInfo> studentInfo){
         GroupTable.setItems(studentInfo);
@@ -110,10 +115,24 @@ public class AdminMainController extends HelloApplication implements WindowContr
 
     }
 
+    public void displayDataByGroupNameStream(){
+        String semester = SortByGroupComboBox.getValue();
+        if(semester != null){
+            List<StudentInfo> studentSortByGroup = studentList.stream()
+                    .filter(studentInfo ->  Objects.equals(studentInfo.getGroupName(), semester))
+                    .collect(Collectors.toList());
+
+            ObservableList<StudentInfo> studentSortByGroupConvertedList = FXCollections.observableArrayList(studentSortByGroup);
+            setDataInGroupTable(studentSortByGroupConvertedList);
+        }else {
+            throw new IllegalArgumentException("Група не може бути null");
+        }
+
+    }
+
     private void displayGroupData(){
-        String hql = "FROM StudentInfo";
-        list = DisplayDate.getStudentInfo();
-        setDataInGroupTable(list);
+        studentList = DisplayDate.getStudentInfo();
+        setDataInGroupTable(studentList);
     }
 
 

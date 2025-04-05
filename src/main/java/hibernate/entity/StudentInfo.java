@@ -2,6 +2,7 @@ package hibernate.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DialectOverride;
 
 import java.sql.Date;
 import java.util.List;
@@ -84,6 +85,17 @@ public class StudentInfo {
 
     }
 
+    public StudentInfo(Integer id,String name,String surname,String middleName,Date date_of_birth,String phoneNumber,String address,String groupName){
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.middleName = middleName;
+        this.date_of_birth = date_of_birth;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.groupName = groupName;
+    }
+
     public StudentInfo(Integer id,String name,String surname,String middleName,Date date_of_birth,String phoneNumber,String address){
         this.id = id;
         this.name = name;
@@ -92,6 +104,7 @@ public class StudentInfo {
         this.date_of_birth = date_of_birth;
         this.phoneNumber = phoneNumber;
         this.address = address;
+        this.groupName = groupName;
     }
 
     public String getFullName(){

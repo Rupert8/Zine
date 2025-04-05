@@ -23,7 +23,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
 
-import static controller.ExtendedInformationAboutStudent.userStatus;
+import static controller.extendedInformationAboutStudent.ExtendedInformationAboutStudent.userStatus;
 import static controller.login.LoginController.curatorEmail;
 import static controller.login.LoginController.curatorGroupName;
 import static controller.admin.AdminMainController.studentGroupName;

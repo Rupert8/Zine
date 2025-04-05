@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<DialogPane styleClass="dialogPane" stylesheets="@../../css/dialogPane.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ExtendedInformationAboutStudent">
+<DialogPane styleClass="dialogPane" stylesheets="@../../css/dialogPane.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.extendedInformationAboutStudent.ExtendedInformationAboutStudent">
    <content>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="524.0" style="-fx-background-color: #fff;">
          <children>

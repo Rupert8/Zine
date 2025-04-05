@@ -48,4 +48,6 @@ module start.zine {
     exports controller.login;
     opens controller.login to javafx.fxml;
     exports controller.curator;
+    exports controller.extendedInformationAboutStudent;
+    opens controller.extendedInformationAboutStudent to javafx.fxml;
 }

@@ -1,16 +1,19 @@
-package controller;
+package controller.extendedInformationAboutStudent;
 
 import controller.admin.AdminMainController;
 import data.DisplayDate;
 import data.UpdateData;
 import hibernate.entity.*;
+import interfaces.WindowActions.WindowControl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import services.ScreenService;
 import services.ValidateValueService;
 
 import java.net.URL;
@@ -242,6 +245,10 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     @FXML
     private Button BackAllSocialPassportButton;
 
+    @FXML
+    private HBox MenuBarHBox;
+    @FXML
+    private Button minimizeWindowButton,maximizeWindowButton,closeWindowButton;
 
     private int semesterSocialValue;
     private int semesterGroupValue;
@@ -1479,4 +1486,13 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
 
     }
 
+    @Override
+    public void setDragWindow(MouseEvent dragEvent) {
+        ScreenService.paneDragged(dragEvent,MenuBarHBox);
+    }
+
+    @Override
+    public void setPressedWindow(MouseEvent mouseEvent) {
+        ScreenService.panePressed(mouseEvent);
+    }
 }

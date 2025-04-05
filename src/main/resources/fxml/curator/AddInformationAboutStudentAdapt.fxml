@@ -11,7 +11,10 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -19,240 +22,77 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <StackPane prefHeight="150.0" prefWidth="200.0">
-         <StackPane.margin>
-            <Insets left="200.0" />
-         </StackPane.margin>
+      <HBox fx:id="MenuBarHBox" alignment="TOP_RIGHT" maxHeight="29.0" minHeight="29.0" onMouseDragged="#setDragWindow" onMousePressed="#setPressedWindow" style="-fx-background-color: #e8d58c;">
          <children>
-            <TabPane fx:id="GeneralInfoTab" prefHeight="700.0" prefWidth="1080.0" stylesheets="@../../css/tabPane.css" tabClosingPolicy="UNAVAILABLE">
-               <tabs>
-                  <Tab text="Дані про освіту">
-                     <content>
-                        <StackPane alignment="TOP_CENTER" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #fff;">
-                           <children>
-                              <FlowPane maxHeight="338.0" prefHeight="200.0" prefWidth="1070.0" rowValignment="TOP" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 2;">
-                                 <StackPane.margin>
-                                    <Insets left="3.0" right="5.0" top="5.0" />
-                                 </StackPane.margin>
-                                 <children>
-                                    <HBox prefHeight="70.0" prefWidth="1070.0">
-                                       <children>
-                                          <Label styleClass="font" stylesheets="@../../css/font.css" text="Студент">
-                                             <font>
-                                                <Font name="Gotham-Bold" size="20.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets left="20.0" top="25.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <ComboBox fx:id="StudentPIPEducation" onAction="#onEducationStudentSelected" promptText="Виберіть студента зі списку" styleClass="comboBox" stylesheets="@../../css/textField.css">
-                                             <HBox.margin>
-                                                <Insets left="20.0" top="17.0" />
-                                             </HBox.margin>
-                                          </ComboBox>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </FlowPane>
-                           </children>
-                        </StackPane>
-                     </content>
-                  </Tab>
-                  <Tab text="Військова служба">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <AnchorPane layoutX="5.0" layoutY="351.0" prefHeight="316.0" prefWidth="1070.0">
-                                 <children>
-                                    <TableView fx:id="GroupTable" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css" visible="false">
-                                       <columns>
-                                          <TableColumn fx:id="NumberColumn" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
-                                          <TableColumn fx:id="SurnameColumn" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
-                                          <TableColumn fx:id="NameColumn" prefWidth="141.60000610351562" style="-fx-background-color: #fff;" styleClass="column" text="Ім`я" />
-                                          <TableColumn fx:id="MiddleNameColumn" prefWidth="195.99996948242188" style="-fx-background-color: #fff;" styleClass="column" text="По-батькові" />
-                                          <TableColumn fx:id="DateBirthDayColumn" prefWidth="201.60000610351562" style="-fx-background-color: #fff;" styleClass="column" text="Дата початку" />
-                                          <TableColumn fx:id="PhoneNumberColumn" prefWidth="157.0" style="-fx-background-color: #fff;" styleClass="column" text="Дата закінчення" />
-                                          <TableColumn fx:id="AddressColumn" prefWidth="206.0" style="-fx-background-color: #fff;" styleClass="column" text="Підрозділ" />
-                                       </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
-                                    </TableView>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="5.0" layoutY="6.0" prefHeight="338.0" prefWidth="1070.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-background-color: #fff; -fx-background-radius: 5; -fx-border-width: 2;">
-                                 <children>
-                                    <Label layoutX="23.0" layoutY="28.0" styleClass="font" stylesheets="@../../css/font.css" text="Студент">
-                                       <font>
-                                          <Font name="Gotham-Bold" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <ComboBox fx:id="StudentPIPMilitary" layoutX="122.0" layoutY="22.0" onAction="#onMilitaryStudentSelected" prefHeight="36.0" prefWidth="325.0" promptText="Виберіть студента зі списку" styleClass="comboBox" stylesheets="@../../css/textField.css" />
-                                    <Label layoutX="39.0" layoutY="105.0" styleClass="font" stylesheets="@../../css/font.css" text="Прізвище">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="429.0" layoutY="105.0" styleClass="font" stylesheets="@../../css/font.css" text="Ім'я" />
-                                    <Label layoutX="739.0" layoutY="105.0" styleClass="font" stylesheets="@../../css/font.css" text="По-батькові" />
-                                    <Label layoutX="22.0" layoutY="185.0" styleClass="font" stylesheets="@../../css/font.css" text="Дата початку" />
-                                    <Label layoutX="375.0" layoutY="185.0" styleClass="font" stylesheets="@../../css/font.css" text="Дата закінчення" />
-                                    <Label layoutX="749.0" layoutY="185.0" styleClass="font" stylesheets="@../../css/font.css" text="Підрозділ" />
-                                    <TextField fx:id="SurnameMilitary" disable="true" layoutX="159.0" layoutY="98.0" promptText="Прізвище" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="NameMilitary" disable="true" layoutX="527.0" layoutY="98.0" promptText="Ім'я" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="MiddleNameMilitary" disable="true" layoutX="855.0" layoutY="97.0" promptText="По-батькові" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="UnitMilitary" layoutX="855.0" layoutY="178.0" promptText="Підрозділ" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <Button layoutX="956.0" layoutY="287.0" mnemonicParsing="false" onAction="#addMilitaryInfo" stylesheets="@../../css/button.css" text="Додати" />
-                                    <DatePicker fx:id="StartDateMilitary" editable="false" layoutX="159.0" layoutY="178.0" prefHeight="35.0" prefWidth="191.0" promptText="Дата Початку" styleClass="data_picker">
-                                       <stylesheets>
-                                          <URL value="@../../css/style.css" />
-                                          <URL value="@../../css/datePicker.css" />
-                                       </stylesheets>
-                                    </DatePicker>
-                                    <DatePicker fx:id="EndDateMilitary" editable="false" layoutX="527.0" layoutY="178.0" prefHeight="35.0" prefWidth="191.0" promptText="Дата Закінчення" styleClass="data_picker">
-                                       <stylesheets>
-                                          <URL value="@../../css/style.css" />
-                                          <URL value="@../../css/datePicker.css" />
-                                       </stylesheets>
-                                    </DatePicker>
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab text="Трудова діяльність">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <AnchorPane layoutX="5.0" layoutY="351.0" prefHeight="316.0" prefWidth="1070.0">
-                                 <children>
-                                    <TableView fx:id="GroupTable1" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css" visible="false">
-                                       <columns>
-                                          <TableColumn fx:id="NumberColumn1" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
-                                          <TableColumn fx:id="SurnameColumn1" prefWidth="170.0" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
-                                          <TableColumn fx:id="NameColumn1" prefWidth="78.0" style="-fx-background-color: #fff;" styleClass="column" text="Ім`я" />
-                                          <TableColumn fx:id="MiddleNameColumn1" prefWidth="195.99996948242188" style="-fx-background-color: #fff;" styleClass="column" text="По-батькові" />
-                                          <TableColumn fx:id="DateBirthDayColumn1" prefWidth="152.0" style="-fx-background-color: #fff;" styleClass="column" text="Дата початку" />
-                                          <TableColumn fx:id="AddressColumn1" prefWidth="175.0" style="-fx-background-color: #fff;" styleClass="column" text="Дата закінчення" />
-                                          <TableColumn fx:id="ExitDateColumn" prefWidth="150.0" style="-fx-background-color: #fff;" styleClass="column" text="Місце" />
-                                          <TableColumn fx:id="PhoneNumberColumn1" prefWidth="213.0" style="-fx-background-color: #fff;" styleClass="column" text="Посада" />
-                                       </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
-                                    </TableView>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="5.0" layoutY="6.0" prefHeight="338.0" prefWidth="1070.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-background-color: #fff; -fx-background-radius: 5; -fx-border-width: 2;">
-                                 <children>
-                                    <Label layoutX="23.0" layoutY="28.0" styleClass="font" stylesheets="@../../css/font.css" text="Студент">
-                                       <font>
-                                          <Font name="Gotham-Bold" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <ComboBox fx:id="StudentPIPJob" layoutX="122.0" layoutY="22.0" onAction="#onJobStudentSelected" prefHeight="36.0" prefWidth="325.0" promptText="Виберіть студента зі списку" styleClass="comboBox" stylesheets="@../../css/textField.css" />
-                                    <Label layoutX="39.0" layoutY="105.0" styleClass="font" stylesheets="@../../css/font.css" text="Прізвище">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="429.0" layoutY="105.0" styleClass="font" stylesheets="@../../css/font.css" text="Ім'я" />
-                                    <Label layoutX="739.0" layoutY="105.0" styleClass="font" stylesheets="@../../css/font.css" text="По-батькові" />
-                                    <Label layoutX="22.0" layoutY="185.0" styleClass="font" stylesheets="@../../css/font.css" text="Дата початку" />
-                                    <Label layoutX="375.0" layoutY="185.0" styleClass="font" stylesheets="@../../css/font.css" text="Дата закінчення" />
-                                    <Label layoutX="766.0" layoutY="185.0" styleClass="font" stylesheets="@../../css/font.css" text="Місце" />
-                                    <TextField fx:id="SurnameJob" disable="true" layoutX="159.0" layoutY="98.0" promptText="Прізвище" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="NameJob" disable="true" layoutX="527.0" layoutY="97.0" promptText="Ім'я" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="MiddleNameJob" disable="true" layoutX="855.0" layoutY="97.0" promptText="По-батькові" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="PlaceJob" layoutX="855.0" layoutY="178.0" promptText="Місце" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <Button layoutX="956.0" layoutY="287.0" mnemonicParsing="false" onAction="#addJobInfo" stylesheets="@../../css/button.css" text="Додати" />
-                                    <TextField fx:id="PositionJob" layoutX="159.0" layoutY="257.0" promptText="Посада" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <Label layoutX="49.0" layoutY="264.0" styleClass="font" stylesheets="@../../css/font.css" text="Посада" />
-                                    <DatePicker fx:id="StartDateJob" editable="false" layoutX="159.0" layoutY="179.0" prefHeight="35.0" prefWidth="191.0" promptText="Дата Початку" styleClass="data_picker">
-                                       <stylesheets>
-                                          <URL value="@../../css/style.css" />
-                                          <URL value="@../../css/datePicker.css" />
-                                       </stylesheets>
-                                    </DatePicker>
-                                    <DatePicker fx:id="EndDateJob" editable="false" layoutX="527.0" layoutY="178.0" prefHeight="35.0" prefWidth="191.0" promptText="Дата Закінчення" styleClass="data_picker">
-                                       <stylesheets>
-                                          <URL value="@../../css/style.css" />
-                                          <URL value="@../../css/datePicker.css" />
-                                       </stylesheets>
-                                    </DatePicker>
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab text="Інформація про батьків">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <AnchorPane layoutX="5.0" layoutY="351.0" prefHeight="316.0" prefWidth="1070.0">
-                                 <children>
-                                    <TableView fx:id="GroupTable2" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css" visible="false">
-                                       <columns>
-                                          <TableColumn fx:id="NumberColumn2" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
-                                          <TableColumn fx:id="SurnameColumn2" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
-                                          <TableColumn fx:id="NameColumn2" prefWidth="141.60000610351562" style="-fx-background-color: #fff;" styleClass="column" text="Ім`я" />
-                                          <TableColumn fx:id="MiddleNameColumn2" prefWidth="132.0" style="-fx-background-color: #fff;" styleClass="column" text="По-батькові" />
-                                          <TableColumn fx:id="DateBirthDayColumn2" prefWidth="247.0" style="-fx-background-color: #fff;" styleClass="column" text="ПІП батька" />
-                                          <TableColumn fx:id="PhoneNumberColumn2" prefWidth="141.0" style="-fx-background-color: #fff;" styleClass="column" text="Тел.Батька" />
-                                          <TableColumn fx:id="AddressColumn2" minWidth="0.0" prefWidth="168.0" style="-fx-background-color: #fff;" styleClass="column" text="ПІП матері" />
-                                          <TableColumn fx:id="ExitDateColumn1" prefWidth="153.0" style="-fx-background-color: #fff;" styleClass="column" text="Тел.матері" />
-                                          <TableColumn prefWidth="105.0" styleClass="column" text="Примітка" />
-                                       </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
-                                    </TableView>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane layoutX="5.0" layoutY="6.0" prefHeight="338.0" prefWidth="1070.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 2; -fx-background-color: #fff;">
-                                 <children>
-                                    <Label layoutX="23.0" layoutY="28.0" styleClass="font" stylesheets="@../../css/font.css" text="Студент">
-                                       <font>
-                                          <Font name="Gotham-Bold" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <ComboBox fx:id="StudentPIPParents" layoutX="122.0" layoutY="22.0" onAction="#onFamilyStudentSelected" prefHeight="36.0" prefWidth="325.0" promptText="Виберіть студента зі списку" styleClass="comboBox" stylesheets="@../../css/textField.css" />
-                                    <Label layoutX="53.0" layoutY="105.0" styleClass="font" stylesheets="@../../css/font.css" text="Прізвище">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="417.0" layoutY="104.0" styleClass="font" stylesheets="@../../css/font.css" text="Ім'я" />
-                                    <Label layoutX="722.0" layoutY="105.0" styleClass="font" stylesheets="@../../css/font.css" text="По-батькові" />
-                                    <Label layoutX="48.0" layoutY="185.0" styleClass="font" stylesheets="@../../css/font.css" text="ПІП батька" />
-                                    <Label layoutX="387.0" layoutY="186.0" styleClass="font" stylesheets="@../../css/font.css" text="ПІП матері" />
-                                    <Label layoutX="705.0" layoutY="185.0" styleClass="font" stylesheets="@../../css/font.css" text="Телефон батька" />
-                                    <TextField fx:id="SurnameParents" disable="true" layoutX="175.0" layoutY="98.0" promptText="Прізвище" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="NameParents" disable="true" layoutX="492.0" layoutY="98.0" promptText="Ім'я" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="MiddleNameParents" disable="true" layoutX="855.0" layoutY="97.0" promptText="По-батькові" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="PhoneFatherParents" layoutX="855.0" layoutY="178.0" promptText="Телефон батька" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <Button layoutX="956.0" layoutY="287.0" mnemonicParsing="false" onAction="#addFamilyInfo" stylesheets="@../../css/button.css" text="Додати" />
-                                    <TextField fx:id="PhoneMotherParents" layoutX="175.0" layoutY="257.0" promptText="Телефон матері" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <Label layoutX="26.0" layoutY="264.0" styleClass="font" stylesheets="@../../css/font.css" text="Телефон матері" />
-                                    <TextField fx:id="PIPFatherParents" layoutX="175.0" layoutY="179.0" promptText="ПІП батька" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                    <TextField fx:id="PIPMotherParents" layoutX="492.0" layoutY="178.0" promptText="ПІП матері" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-               </tabs>
-            </TabPane>
+            <Button fx:id="minimizeWindowButton" mnemonicParsing="false" onAction="#setMinimizeWindowButton" prefWidth="45.0" styleClass="basicMenuButton" stylesheets="@../../css/menuBur.css" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icon/minimizeWindowIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="maximizeWindowButton" mnemonicParsing="false" onAction="#setMaximizeWindowButton" prefWidth="45.0" styleClass="basicMenuButton" stylesheets="@../../css/menuBur.css">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icon/fullScreenIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="closeWindowButton" mnemonicParsing="false" onAction="#setCloseWindow" prefWidth="45.0" styleClass="basicMenuButton" stylesheets="@../../css/menuBur.css">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icon/closeWindowIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
          </children>
-      </StackPane>
+         <StackPane.margin>
+            <Insets bottom="671.0" />
+         </StackPane.margin>
+      </HBox>
       <StackPane alignment="CENTER_LEFT">
          <children>
-            <VBox alignment="CENTER" maxWidth="200.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #e8d58c;">
+            <VBox maxWidth="200.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #e8d58c;">
+               <children>
+                  <AnchorPane prefHeight="63.0" prefWidth="150.0">
+                     <children>
+                        <Label layoutX="8.0" layoutY="4.0" styleClass="iconFont" stylesheets="@../../css/font.css" text="Journal" />
+                        <Label layoutX="38.0" layoutY="31.0" prefHeight="29.0" prefWidth="109.0" styleClass="iconFont" stylesheets="@../../css/font.css" text="Curatora" />
+                        <Pane layoutX="9.0" layoutY="32.0" prefHeight="1.0" prefWidth="131.0" rotate="-2.9000000000000004" style="-fx-background-color: #fff;" />
+                     </children>
+                     <VBox.margin>
+                        <Insets left="22.0" top="22.0" />
+                     </VBox.margin>
+                  </AnchorPane>
+               </children>
+            </VBox>
+            <VBox alignment="BOTTOM_LEFT" maxWidth="200.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="118.0" styleClass="menuButton" stylesheets="@../../css/button.css" text="Повернутися">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </VBox>
+            <VBox alignment="CENTER" maxWidth="200.0" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Button fx:id="GeneralInfoButton" mnemonicParsing="false" onAction="#visiblePane" prefHeight="29.0" prefWidth="179.0" styleClass="menuButton" stylesheets="@../../css/button.css" text="Загальні відомості ">
                      <VBox.margin>
@@ -276,38 +116,964 @@
                   </Button>
                   <Button fx:id="SocialActivityButton" mnemonicParsing="false" onAction="#visiblePane" prefHeight="29.0" prefWidth="179.0" styleClass="menuButton" stylesheets="@../../css/button.css" text="Громадська діяльність">
                      <VBox.margin>
-                        <Insets bottom="50.0" />
-                     </VBox.margin>
-                  </Button>
-               </children>
-            </VBox>
-            <VBox alignment="BOTTOM_LEFT" maxWidth="200.0" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="118.0" styleClass="menuButton" stylesheets="@../../css/button.css" text="Повернутися">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" />
+                        <Insets bottom="11.0" />
                      </VBox.margin>
                   </Button>
                </children>
                <StackPane.margin>
-                  <Insets />
+                  <Insets bottom="39.0" />
                </StackPane.margin>
-            </VBox>
-            <VBox maxWidth="200.0" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <AnchorPane prefHeight="63.0" prefWidth="150.0">
-                     <children>
-                        <Label layoutX="8.0" layoutY="4.0" styleClass="iconFont" stylesheets="@../../css/font.css" text="Journal" />
-                        <Label layoutX="38.0" layoutY="31.0" prefHeight="29.0" prefWidth="109.0" styleClass="iconFont" stylesheets="@../../css/font.css" text="Curatora" />
-                        <Pane layoutX="9.0" layoutY="32.0" prefHeight="1.0" prefWidth="131.0" rotate="-2.9000000000000004" style="-fx-background-color: #fff;" />
-                     </children>
-                     <VBox.margin>
-                        <Insets left="22.0" top="22.0" />
-                     </VBox.margin>
-                  </AnchorPane>
-               </children>
             </VBox>
          </children>
       </StackPane>
+      <BorderPane>
+         <StackPane.margin>
+            <Insets left="200.0" top="29.0" />
+         </StackPane.margin>
+         <center>
+            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TabPane fx:id="GeneralInfoTab" stylesheets="@../../css/tabPane.css" tabClosingPolicy="UNAVAILABLE" visible="false">
+                     <tabs>
+                        <Tab text="Дані про освіту">
+                           <content>
+                              <StackPane alignment="TOP_CENTER" style="-fx-background-color: #fff;">
+                                 <children>
+                                    <StackPane alignment="TOP_LEFT" maxHeight="338.0" minHeight="338.0" style="-fx-border-color: #e8d58c; -fx-border-width: 2; -fx-border-radius: 5;">
+                                       <children>
+                                          <HBox maxHeight="70.0" prefWidth="1133.0">
+                                             <children>
+                                                <Label styleClass="font" stylesheets="@../../css/font.css" text="Студент">
+                                                   <font>
+                                                      <Font name="Gotham-Bold" size="20.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" top="25.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <ComboBox fx:id="StudentPIPEducation" onAction="#onEducationStudentSelected" prefWidth="325.0" promptText="Виберіть студента зі списку" styleClass="comboBox" stylesheets="@../../css/textField.css">
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" top="17.0" />
+                                                   </HBox.margin>
+                                                </ComboBox>
+                                             </children>
+                                          </HBox>
+                                          <FlowPane maxHeight="230.0">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" maxWidth="356.0" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Прізвище">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="33.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="SurnameEducation" disable="true" promptText="Прізвище" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="52.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" maxWidth="356.0" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Ім'я">
+                                                         <HBox.margin>
+                                                            <Insets left="60.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="NameEducation" disable="true" promptText="Ім'я" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="75.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="По-батькові">
+                                                         <HBox.margin>
+                                                            <Insets left="33.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="MiddleNameEducation" disable="true" promptText="По-батькові" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="32.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Дата закінчення">
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <DatePicker fx:id="EndDateEducation" editable="false" prefHeight="35.0" prefWidth="191.0" promptText="Дата Закінчення" styleClass="data_picker">
+                                                         <stylesheets>
+                                                            <URL value="@../../css/style.css" />
+                                                            <URL value="@../../css/datePicker.css" />
+                                                         </stylesheets>
+                                                         <HBox.margin>
+                                                            <Insets left="18.0" />
+                                                         </HBox.margin>
+                                                      </DatePicker>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Заклад">
+                                                         <HBox.margin>
+                                                            <Insets left="47.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="SchoolNameEducation" promptText="Заклад" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="59.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Середній бал">
+                                                         <HBox.margin>
+                                                            <Insets left="20.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="GradeAvarageEducation" promptText="Середній бал" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="35.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <StackPane.margin>
+                                                <Insets top="70.0" />
+                                             </StackPane.margin>
+                                          </FlowPane>
+                                          <HBox alignment="BOTTOM_RIGHT" maxHeight="36.0">
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#addEducationInfo" stylesheets="@../../css/button.css" text="Додати">
+                                                   <HBox.margin>
+                                                      <Insets right="25.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                             </children>
+                                             <StackPane.margin>
+                                                <Insets top="288.0" />
+                                             </StackPane.margin>
+                                          </HBox>
+                                       </children>
+                                       <StackPane.margin>
+                                          <Insets bottom="400.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </StackPane>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0" />
+                                 </children>
+                              </StackPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Військова служба">
+                           <content>
+                              <StackPane alignment="TOP_CENTER" style="-fx-background-color: #fff;">
+                                 <children>
+                                    <StackPane alignment="TOP_LEFT" maxHeight="338.0" minHeight="338.0" style="-fx-border-color: #e8d58c; -fx-border-width: 2; -fx-border-radius: 5;">
+                                       <children>
+                                          <HBox maxHeight="70.0" prefWidth="1133.0">
+                                             <children>
+                                                <Label styleClass="font" stylesheets="@../../css/font.css" text="Студент">
+                                                   <font>
+                                                      <Font name="Gotham-Bold" size="20.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" top="25.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <ComboBox fx:id="StudentPIPMilitary" onAction="#onMilitaryStudentSelected" prefHeight="36.0" prefWidth="325.0" promptText="Виберіть студента зі списку" styleClass="comboBox" stylesheets="@../../css/textField.css">
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" top="17.0" />
+                                                   </HBox.margin>
+                                                </ComboBox>
+                                             </children>
+                                          </HBox>
+                                          <FlowPane maxHeight="230.0">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" maxWidth="356.0" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Прізвище">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="33.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="SurnameMilitary" disable="true" promptText="Прізвище" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="52.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" maxWidth="356.0" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Ім'я">
+                                                         <HBox.margin>
+                                                            <Insets left="60.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="NameMilitary" disable="true" promptText="Ім'я" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="75.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="По-батькові">
+                                                         <HBox.margin>
+                                                            <Insets left="33.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="MiddleNameMilitary" disable="true" promptText="По-батькові" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="32.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Дата початку">
+                                                         <HBox.margin>
+                                                            <Insets left="18.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <DatePicker fx:id="StartDateMilitary" editable="false" prefHeight="35.0" prefWidth="191.0" promptText="Дата Початку" styleClass="data_picker">
+                                                         <stylesheets>
+                                                            <URL value="@../../css/style.css" />
+                                                            <URL value="@../../css/datePicker.css" />
+                                                         </stylesheets>
+                                                         <HBox.margin>
+                                                            <Insets left="35.0" />
+                                                         </HBox.margin>
+                                                      </DatePicker>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Дата закінчення">
+                                                         <HBox.margin>
+                                                            <Insets left="15.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <DatePicker fx:id="EndDateMilitary" editable="false" prefHeight="35.0" prefWidth="191.0" promptText="Дата Закінчення" styleClass="data_picker">
+                                                         <stylesheets>
+                                                            <URL value="@../../css/style.css" />
+                                                            <URL value="@../../css/datePicker.css" />
+                                                         </stylesheets>
+                                                         <HBox.margin>
+                                                            <Insets left="14.0" />
+                                                         </HBox.margin>
+                                                      </DatePicker>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Підрозділ">
+                                                         <HBox.margin>
+                                                            <Insets left="35.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="UnitMilitary" promptText="Підрозділ" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="50.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <StackPane.margin>
+                                                <Insets top="70.0" />
+                                             </StackPane.margin>
+                                          </FlowPane>
+                                          <HBox alignment="BOTTOM_RIGHT" maxHeight="36.0">
+                                             <StackPane.margin>
+                                                <Insets top="288.0" />
+                                             </StackPane.margin>
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#addMilitaryInfo" stylesheets="@../../css/button.css" text="Додати">
+                                                   <HBox.margin>
+                                                      <Insets right="25.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <StackPane.margin>
+                                          <Insets bottom="400.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </StackPane>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0" />
+                                 </children>
+                              </StackPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Трудова діяльність">
+                           <content>
+                              <StackPane alignment="TOP_CENTER" style="-fx-background-color: #fff;">
+                                 <children>
+                                    <StackPane alignment="TOP_LEFT" maxHeight="338.0" minHeight="413.0" style="-fx-border-color: #e8d58c; -fx-border-width: 2; -fx-border-radius: 5;">
+                                       <children>
+                                          <HBox maxHeight="70.0" prefWidth="1133.0">
+                                             <children>
+                                                <Label styleClass="font" stylesheets="@../../css/font.css" text="Студент">
+                                                   <font>
+                                                      <Font name="Gotham-Bold" size="20.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" top="25.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <ComboBox fx:id="StudentPIPJob" onAction="#onJobStudentSelected" prefHeight="36.0" prefWidth="325.0" promptText="Виберіть студента зі списку" styleClass="comboBox" stylesheets="@../../css/textField.css">
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" top="17.0" />
+                                                   </HBox.margin>
+                                                </ComboBox>
+                                             </children>
+                                          </HBox>
+                                          <FlowPane maxHeight="230.0">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" maxWidth="356.0" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Прізвище">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="33.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="SurnameJob" disable="true" promptText="Прізвище" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="52.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" maxWidth="356.0" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Ім'я">
+                                                         <HBox.margin>
+                                                            <Insets left="60.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="NameJob" disable="true" promptText="Ім'я" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="75.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="По-батькові">
+                                                         <HBox.margin>
+                                                            <Insets left="33.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="MiddleNameJob" disable="true" promptText="По-батькові" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="32.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Дата початку">
+                                                         <HBox.margin>
+                                                            <Insets left="18.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <DatePicker fx:id="StartDateJob" editable="false" prefHeight="35.0" prefWidth="191.0" promptText="Дата Початку" styleClass="data_picker">
+                                                         <stylesheets>
+                                                            <URL value="@../../css/style.css" />
+                                                            <URL value="@../../css/datePicker.css" />
+                                                         </stylesheets>
+                                                         <HBox.margin>
+                                                            <Insets left="35.0" />
+                                                         </HBox.margin>
+                                                      </DatePicker>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Дата закінчення">
+                                                         <HBox.margin>
+                                                            <Insets left="15.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <DatePicker fx:id="EndDateJob" editable="false" prefHeight="35.0" prefWidth="191.0" promptText="Дата Закінчення" styleClass="data_picker">
+                                                         <stylesheets>
+                                                            <URL value="@../../css/style.css" />
+                                                            <URL value="@../../css/datePicker.css" />
+                                                         </stylesheets>
+                                                         <HBox.margin>
+                                                            <Insets left="14.0" />
+                                                         </HBox.margin>
+                                                      </DatePicker>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Місце">
+                                                         <HBox.margin>
+                                                            <Insets left="52.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="PlaceJob" promptText="Місце" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="67.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="76.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Посада">
+                                                         <HBox.margin>
+                                                            <Insets left="50.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="PositionJob" promptText="Посада" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="56.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                   <FlowPane.margin>
+                                                      <Insets />
+                                                   </FlowPane.margin>
+                                                </HBox>
+                                             </children>
+                                             <StackPane.margin>
+                                                <Insets top="70.0" />
+                                             </StackPane.margin>
+                                          </FlowPane>
+                                          <HBox alignment="BOTTOM_RIGHT" maxHeight="36.0">
+                                             <StackPane.margin>
+                                                <Insets top="363.0" />
+                                             </StackPane.margin>
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#addMilitaryInfo" stylesheets="@../../css/button.css" text="Додати">
+                                                   <HBox.margin>
+                                                      <Insets right="25.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <StackPane.margin>
+                                          <Insets bottom="400.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </StackPane>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0" />
+                                 </children>
+                              </StackPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Інформація про батьків">
+                           <content>
+                              <StackPane alignment="TOP_CENTER" style="-fx-background-color: #fff;">
+                                 <children>
+                                    <StackPane alignment="TOP_LEFT" maxHeight="338.0" minHeight="413.0" style="-fx-border-color: #e8d58c; -fx-border-width: 2; -fx-border-radius: 5;">
+                                       <children>
+                                          <HBox maxHeight="70.0" prefWidth="1133.0">
+                                             <children>
+                                                <Label styleClass="font" stylesheets="@../../css/font.css" text="Студент">
+                                                   <font>
+                                                      <Font name="Gotham-Bold" size="20.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" top="25.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <ComboBox fx:id="StudentPIPParents" onAction="#onFamilyStudentSelected" prefHeight="36.0" prefWidth="325.0" promptText="Виберіть студента зі списку" styleClass="comboBox" stylesheets="@../../css/textField.css">
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" top="17.0" />
+                                                   </HBox.margin>
+                                                </ComboBox>
+                                             </children>
+                                          </HBox>
+                                          <FlowPane maxHeight="230.0">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" maxWidth="356.0" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Прізвище">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="33.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="SurnameParents" disable="true" promptText="Прізвище" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="52.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" maxWidth="356.0" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Ім'я">
+                                                         <HBox.margin>
+                                                            <Insets left="60.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="NameParents" disable="true" promptText="Ім'я" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="75.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="По-батькові">
+                                                         <HBox.margin>
+                                                            <Insets left="33.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="MiddleNameParents" disable="true" promptText="По-батькові" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="32.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="ПІП батька">
+                                                         <HBox.margin>
+                                                            <Insets left="30.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="PIPFatherParents" promptText="ПІП батька" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="45.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="ПІП матері">
+                                                         <HBox.margin>
+                                                            <Insets left="30.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="PIPMotherParents" promptText="ПІП матері" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="47.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Телефон батька">
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="PhoneFatherParents" promptText="Телефон батька" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="20.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="76.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Телефон матері">
+                                                         <HBox.margin>
+                                                            <Insets left="15.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="PhoneMotherParents" promptText="Телефон матері" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="17.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                   <FlowPane.margin>
+                                                      <Insets />
+                                                   </FlowPane.margin>
+                                                </HBox>
+                                             </children>
+                                             <StackPane.margin>
+                                                <Insets top="70.0" />
+                                             </StackPane.margin>
+                                          </FlowPane>
+                                          <HBox alignment="BOTTOM_RIGHT" maxHeight="36.0">
+                                             <StackPane.margin>
+                                                <Insets top="363.0" />
+                                             </StackPane.margin>
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#addMilitaryInfo" stylesheets="@../../css/button.css" text="Додати">
+                                                   <HBox.margin>
+                                                      <Insets right="25.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <StackPane.margin>
+                                          <Insets bottom="400.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </StackPane>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0" />
+                                 </children>
+                              </StackPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
+                  <TabPane fx:id="SocialActivityTab" style="-fx-background-color: #fff;" stylesheets="@../../css/tabPane.css" tabClosingPolicy="UNAVAILABLE">
+                     <tabs>
+                        <Tab text="Громадська діяльність">
+                           <content>
+                              <StackPane alignment="TOP_CENTER" style="-fx-background-color: #fff;">
+                                 <children>
+                                    <StackPane alignment="TOP_LEFT" maxHeight="338.0" minHeight="338.0" style="-fx-border-color: #e8d58c; -fx-border-width: 2; -fx-border-radius: 5;">
+                                       <children>
+                                          <HBox maxHeight="70.0" prefWidth="1133.0">
+                                             <children>
+                                                <Label styleClass="font" stylesheets="@../../css/font.css" text="Студент">
+                                                   <font>
+                                                      <Font name="Gotham-Bold" size="20.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" top="25.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <ComboBox fx:id="StudentPIPSocial" onAction="#onSocialActivityStudentSelected" prefHeight="36.0" prefWidth="325.0" promptText="Виберіть студента зі списку" styleClass="comboBox" stylesheets="@../../css/textField.css">
+                                                   <HBox.margin>
+                                                      <Insets left="29.0" top="17.0" />
+                                                   </HBox.margin>
+                                                </ComboBox>
+                                             </children>
+                                          </HBox>
+                                          <FlowPane maxHeight="230.0">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" maxWidth="356.0" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Прізвище">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="33.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="SurnameSocial" disable="true" promptText="Прізвище" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="52.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" maxWidth="356.0" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Ім'я">
+                                                         <HBox.margin>
+                                                            <Insets left="60.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="NameSocial" disable="true" promptText="Ім'я" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="75.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="По-батькові">
+                                                         <HBox.margin>
+                                                            <Insets left="33.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="MiddleNameSocial" disable="true" promptText="По-батькові" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="32.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Семестр">
+                                                         <HBox.margin>
+                                                            <Insets left="40.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <ComboBox fx:id="SemesterSocial" prefHeight="36.0" prefWidth="190.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="55.0" />
+                                                         </HBox.margin>
+                                                      </ComboBox>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Дата">
+                                                         <HBox.margin>
+                                                            <Insets left="60.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <DatePicker fx:id="DateSocial" editable="false" prefHeight="35.0" prefWidth="191.0" promptText="Дата" styleClass="data_picker">
+                                                         <stylesheets>
+                                                            <URL value="@../../css/style.css" />
+                                                            <URL value="@../../css/datePicker.css" />
+                                                         </stylesheets>
+                                                         <HBox.margin>
+                                                            <Insets left="66.0" />
+                                                         </HBox.margin>
+                                                      </DatePicker>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Діяльність">
+                                                         <HBox.margin>
+                                                            <Insets left="35.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="ActivitySocial" promptText="Діяльність" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="45.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <StackPane.margin>
+                                                <Insets top="70.0" />
+                                             </StackPane.margin>
+                                          </FlowPane>
+                                          <HBox alignment="BOTTOM_RIGHT" maxHeight="36.0">
+                                             <StackPane.margin>
+                                                <Insets top="288.0" />
+                                             </StackPane.margin>
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#addSocialActivityInfo" stylesheets="@../../css/button.css" text="Додати">
+                                                   <HBox.margin>
+                                                      <Insets right="25.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <StackPane.margin>
+                                          <Insets bottom="400.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </StackPane>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0" />
+                                 </children>
+                              </StackPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Гурткова діяльність">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <AnchorPane layoutX="5.0" layoutY="351.0" prefHeight="316.0" prefWidth="1070.0">
+                                       <children>
+                                          <TableView fx:id="GroupTable12" prefHeight="316.0" prefWidth="1070.0" styleClass="table" stylesheets="@../../css/table.css" visible="false">
+                                             <columns>
+                                                <TableColumn fx:id="NumberColumn12" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
+                                                <TableColumn fx:id="SurnameColumn12" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
+                                                <TableColumn fx:id="NameColumn12" prefWidth="141.60000610351562" style="-fx-background-color: #fff;" styleClass="column" text="Ім`я" />
+                                                <TableColumn fx:id="MiddleNameColumn12" prefWidth="195.99996948242188" style="-fx-background-color: #fff;" styleClass="column" text="По-батькові" />
+                                                <TableColumn fx:id="DateBirthDayColumn12" prefWidth="201.60000610351562" style="-fx-background-color: #fff;" styleClass="column" text="Семестр" />
+                                                <TableColumn fx:id="PhoneNumberColumn12" prefWidth="157.0" style="-fx-background-color: #fff;" styleClass="column" text="Назва гуртка" />
+                                                <TableColumn fx:id="AddressColumn12" prefWidth="206.0" style="-fx-background-color: #fff;" styleClass="column" text="Примітка" />
+                                             </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="5.0" layoutY="6.0" prefHeight="338.0" prefWidth="1070.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-background-color: #fff; -fx-background-radius: 5; -fx-border-width: 2;">
+                                       <children>
+                                          <Label layoutX="23.0" layoutY="28.0" styleClass="font" stylesheets="@../../css/font.css" text="Студент">
+                                             <font>
+                                                <Font name="Gotham-Bold" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="StudentPIPGroup" layoutX="122.0" layoutY="22.0" onAction="#onGroupActivityStudentSelected" prefHeight="36.0" prefWidth="325.0" promptText="Виберіть студента зі списку" styleClass="comboBox" stylesheets="@../../css/textField.css" />
+                                          <Label layoutX="17.0" layoutY="103.0" styleClass="font" stylesheets="@../../css/font.css" text="Прізвище">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="390.0" layoutY="105.0" styleClass="font" stylesheets="@../../css/font.css" text="Ім'я" />
+                                          <Label layoutX="723.0" layoutY="103.0" styleClass="font" stylesheets="@../../css/font.css" text="По-батькові" />
+                                          <Label layoutX="22.0" layoutY="184.0" styleClass="font" stylesheets="@../../css/font.css" text="Семестр" />
+                                          <Label layoutX="350.0" layoutY="185.0" styleClass="font" stylesheets="@../../css/font.css" text="Назва гуртка" />
+                                          <Label layoutX="736.0" layoutY="185.0" styleClass="font" stylesheets="@../../css/font.css" text="Примітка" />
+                                          <TextField fx:id="SurnameGroup" disable="true" layoutX="122.0" layoutY="98.0" promptText="Прізвище" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                          <TextField fx:id="NameGroup" disable="true" layoutX="477.0" layoutY="97.0" promptText="Ім'я" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                          <TextField fx:id="MiddleNameGroup" disable="true" layoutX="855.0" layoutY="97.0" promptText="По-батькові" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                          <TextField fx:id="GroupName" layoutX="477.0" layoutY="177.0" promptText="Назва гуртка" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                          <TextField fx:id="NoteGroup" layoutX="855.0" layoutY="178.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                          <Button layoutX="956.0" layoutY="287.0" mnemonicParsing="false" onAction="#addGroupActivityInfo" stylesheets="@../../css/button.css" text="Додати" />
+                                          <ComboBox fx:id="SemesterGroup" layoutX="121.0" layoutY="177.0" prefHeight="36.0" prefWidth="190.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                           <content>
+                              <StackPane alignment="TOP_CENTER" style="-fx-background-color: #fff;">
+                                 <children>
+                                    <StackPane alignment="TOP_LEFT" maxHeight="338.0" minHeight="338.0" style="-fx-border-color: #e8d58c; -fx-border-width: 2; -fx-border-radius: 5;">
+                                       <children>
+                                          <FlowPane maxHeight="230.0">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" maxWidth="356.0" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Прізвище">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="33.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="SurnameSocial1" disable="true" promptText="Прізвище" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="52.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" maxWidth="356.0" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Ім'я">
+                                                         <HBox.margin>
+                                                            <Insets left="60.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="NameSocial1" disable="true" promptText="Ім'я" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="75.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="По-батькові">
+                                                         <HBox.margin>
+                                                            <Insets left="33.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="MiddleNameSocial1" disable="true" promptText="По-батькові" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="32.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Семестр">
+                                                         <HBox.margin>
+                                                            <Insets left="40.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <ComboBox fx:id="SemesterSocial1" prefHeight="36.0" prefWidth="190.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="55.0" />
+                                                         </HBox.margin>
+                                                      </ComboBox>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Дата">
+                                                         <HBox.margin>
+                                                            <Insets left="60.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <DatePicker fx:id="DateSocial1" editable="false" prefHeight="35.0" prefWidth="191.0" promptText="Дата" styleClass="data_picker">
+                                                         <stylesheets>
+                                                            <URL value="@../../css/style.css" />
+                                                            <URL value="@../../css/datePicker.css" />
+                                                         </stylesheets>
+                                                         <HBox.margin>
+                                                            <Insets left="66.0" />
+                                                         </HBox.margin>
+                                                      </DatePicker>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" minWidth="400.0" prefHeight="75.0">
+                                                   <children>
+                                                      <Label styleClass="font" stylesheets="@../../css/font.css" text="Діяльність">
+                                                         <HBox.margin>
+                                                            <Insets left="35.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="ActivitySocial1" promptText="Діяльність" styleClass="textField" stylesheets="@../../css/textField.css">
+                                                         <HBox.margin>
+                                                            <Insets left="45.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <StackPane.margin>
+                                                <Insets top="70.0" />
+                                             </StackPane.margin>
+                                          </FlowPane>
+                                          <HBox alignment="BOTTOM_RIGHT" maxHeight="36.0">
+                                             <StackPane.margin>
+                                                <Insets top="288.0" />
+                                             </StackPane.margin>
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#addSocialActivityInfo" stylesheets="@../../css/button.css" text="Додати">
+                                                   <HBox.margin>
+                                                      <Insets right="25.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <StackPane.margin>
+                                          <Insets bottom="400.0" left="5.0" right="5.0" top="5.0" />
+                                       </StackPane.margin>
+                                    </StackPane>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0" />
+                                 </children>
+                              </StackPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
+               </children>
+            </StackPane>
+         </center>
+      </BorderPane>
    </children>
 </StackPane>

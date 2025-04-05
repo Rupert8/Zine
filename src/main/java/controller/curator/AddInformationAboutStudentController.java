@@ -1,6 +1,12 @@
 package controller.curator;
 
+import interfaces.WindowActions.WindowControl;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import services.ClearValueService;
+import services.ScreenService;
 import services.TextFieldService;
 import data.AddData;
 import data.DisplayDate;
@@ -15,6 +21,7 @@ import javafx.scene.control.*;
 import services.ValidateValueService;
 import start.zine.HelloApplication;
 
+import java.awt.*;
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
@@ -23,7 +30,7 @@ import java.util.ResourceBundle;
 import static controller.login.LoginController.curatorGroupName;
 
 
-public class AddInformationAboutStudentController extends HelloApplication implements Initializable {
+public class AddInformationAboutStudentController extends HelloApplication implements Initializable, WindowControl {
     @FXML
     private Button GeneralInfoButton,SocialActivityButton,IndividualSupportButton,PromotionButton,SocialPassportButton;
     @FXML
@@ -145,6 +152,14 @@ public class AddInformationAboutStudentController extends HelloApplication imple
     private TextField CountFamily,LessThan18Family,MuchThan18Family,NoteFamily;
     @FXML
     private RadioButton AdultStudentManyChildrenStatusRadioButton;
+
+    @FXML // Window
+    private HBox Hbox;
+    @FXML
+    private Button minimizeWindowButton,maximizeWindowButton,closeWindowButton;
+
+    @FXML
+    private HBox StudentHBOx;
 
     public void back(ActionEvent event) {
         switchScene((Node) event.getSource(), "/fxml/curator/WorkWithStudentPane.fxml");
@@ -574,12 +589,42 @@ public class AddInformationAboutStudentController extends HelloApplication imple
     public void setInvalidCategoryComboBox(){
          CategoryInvalidPassport.getItems().addAll("І група інвалідності","ІІ група інвалідності","ІІІ група інвалідності","Дитяча інвалідність");
     }
+
+    private void correctLoadPane(){
+        StudentHBOx.setPickOnBounds(false);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setStudentPIP();
         setSemesterComboBox();
         setCategoryComboBox();
         setInvalidCategoryComboBox();
+        correctLoadPane();
     }
 
+    @Override
+    public void setMinimizeWindowButton() {
+        ScreenService.minimized_Window(minimizeWindowButton);
+    }
+
+    @Override
+    public void setMaximizeWindowButton() {
+        ScreenService.maximized_Window(maximizeWindowButton.getScene().getWindow());
+    }
+
+    @Override
+    public void setCloseWindow() {
+        ScreenService.close_Window();
+    }
+
+    @Override
+    public void setDragWindow(MouseEvent dragEvent) {
+        ScreenService.paneDragged(dragEvent,Hbox);
+    }
+
+    @Override
+    public void setPressedWindow(MouseEvent mouseEvent) {
+        ScreenService.panePressed(mouseEvent);
+    }
 }

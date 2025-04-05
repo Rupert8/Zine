@@ -3,19 +3,16 @@ import hiberante.sessionFactory.HibernateUtil;
 import hibernate.entity.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import lombok.NonNull;
 import org.hibernate.Session;
 import tableView.RemovedStudentPrototype;
 import tableView.SocialPassportCategoryPrototype;
 import tableView.SocialPassportPrototype;
 
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import static controller.ExtendedInformationAboutStudent.*;
+import static controller.extendedInformationAboutStudent.ExtendedInformationAboutStudent.*;
 import static controller.admin.AdminGroupController.*;
 
 public class DisplayDate  {
@@ -126,7 +123,7 @@ public class DisplayDate  {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            List<StudentInfo> resultList = session.createQuery("FROM StudentInfo WHERE status = true", StudentInfo.class).getResultList();
+            List<StudentInfo> resultList = session.createQuery("SELECT s.id, s.name,s.surname,s.middleName,s.date_of_birth,s.phoneNumber,s.address,s.groupName FROM StudentInfo s WHERE status = true", StudentInfo.class).getResultList();
             studentInfo.addAll(resultList);
 
             session.getTransaction().commit();
