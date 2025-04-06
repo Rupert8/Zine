@@ -22,7 +22,7 @@ module start.zine {
     exports controller.curator.individualSupport;
     exports controller.curator.socialActivity;
     exports controller.admin;
-    exports controller.socialPassport;
+    exports controller.curator.socialPassport;
     exports controller;
     exports data;
     exports tableView to org.hibernate.orm.core;
@@ -37,7 +37,7 @@ module start.zine {
     opens controller.curator.promotion to javafx.fxml;
     opens controller.curator.individualSupport to javafx.fxml;
     opens controller.curator.socialActivity to javafx.fxml;
-    opens controller.socialPassport to javafx.fxml;
+    opens controller.curator.socialPassport to javafx.fxml;
     opens controller to javafx.fxml;
     opens data to javafx.fxml;
 

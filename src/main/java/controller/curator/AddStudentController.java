@@ -3,16 +3,21 @@ package controller.curator;
 import data.AddData;
 import data.SearchStudentData;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import start.zine.HelloApplication;
 
+import java.net.URL;
 import java.sql.Date;
+import java.util.ResourceBundle;
+import java.util.function.UnaryOperator;
 
 import static controller.curator.WorkGroupController.saveDialog;
 
 
-public class AddStudentController extends HelloApplication {
+public class AddStudentController extends HelloApplication implements Initializable {
     @FXML
     private TextField StudentName,StudentSurname,StudentMiddleName;
     @FXML
@@ -23,15 +28,19 @@ public class AddStudentController extends HelloApplication {
     public void addStudent() {
         if(isAllFieldFilled()){
             if(!isExist()){
-                String name = StudentName.getText();
-                String surname = StudentSurname.getText();
-                String middleName = StudentMiddleName.getText();
-                String phoneNumber = StudentPhoneNumber.getText();
-                String address = StudentAddress.getText();
-                Date dateOfBirth = Date.valueOf(StudentDateOfBirth.getValue());
-                AddData.addStudent(name,surname,middleName,address,phoneNumber,dateOfBirth);
-                closeDialog();
-                loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
+                if(isPhoneNumberCorrectLength()){
+                    String name = StudentName.getText();
+                    String surname = StudentSurname.getText();
+                    String middleName = StudentMiddleName.getText();
+                    String phoneNumber = StudentPhoneNumber.getText();
+                    String address = StudentAddress.getText();
+                    Date dateOfBirth = Date.valueOf(StudentDateOfBirth.getValue());
+                    AddData.addStudent(name,surname,middleName,address,phoneNumber,dateOfBirth);
+                    closeDialog();
+                    loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
+                } else{
+                     loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/IncorrectPhoneNumber.fxml");
+                }
             }else{
                 loadAndShowLoginAlarm("/fxml/notifications/WarningExistStudent.fxml");
             }
@@ -54,6 +63,24 @@ public class AddStudentController extends HelloApplication {
         }
     }
 
+    public boolean isPhoneNumberCorrectLength(){
+        String phoneNumber = StudentPhoneNumber.getText();
+        return phoneNumber.length() >= 10;
+    }
+
+    public void isPhoneNumberMaxLength(){
+        UnaryOperator<TextFormatter.Change> digitFilter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("\\d{0,10}")) {
+                return change;
+            }
+            return null;
+        };
+
+        TextFormatter<String> textFormatter = new TextFormatter<>(digitFilter);
+        StudentPhoneNumber.setTextFormatter(textFormatter);
+    }
+
     public boolean isExist(){
         String phoneNumber = StudentPhoneNumber.getText();
         return SearchStudentData.validateStudentExist(phoneNumber);
@@ -64,4 +91,8 @@ public class AddStudentController extends HelloApplication {
         saveDialog.close();
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        isPhoneNumberMaxLength();
+    }
 }

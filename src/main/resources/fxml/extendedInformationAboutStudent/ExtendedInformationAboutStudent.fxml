@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
@@ -22,960 +23,969 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="WorkPlanBorderPane" maxHeight="-Infinity" pickOnBounds="false" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.extendedInformationAboutStudent.ExtendedInformationAboutStudent">
-   <top>
-      <StackPane alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="28.0" style="-fx-background-color: #e8d58c;">
-         <children>
-            <HBox fx:id="MenuBarHBox" alignment="TOP_RIGHT" onMouseDragged="#setDragWindow" onMousePressed="#setPressedWindow">
+<StackPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.extendedInformationAboutStudent.ExtendedInformationAboutStudent">
+   <children>
+      <BorderPane fx:id="WorkPlanBorderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #fff;">
+         <top>
+            <StackPane alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="28.0" style="-fx-background-color: #e8d58c;">
                <children>
-                  <Button fx:id="minimizeWindowButton" mnemonicParsing="false" onAction="#setMinimizeWindowButton" prefWidth="45.0" styleClass="basicMenuButton" stylesheets="@../../css/menuBur.css" HBox.hgrow="ALWAYS">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../icon/minimizeWindowIcon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="maximizeWindowButton" mnemonicParsing="false" onAction="#setMaximizeWindowButton" prefWidth="45.0" styleClass="basicMenuButton" stylesheets="@../../css/menuBur.css">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../icon/fullScreenIcon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="closeWindowButton" mnemonicParsing="false" onAction="#setCloseWindow" prefWidth="45.0" styleClass="basicMenuButton" stylesheets="@../../css/menuBur.css">
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../icon/closeWindowIcon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <StackPane.margin>
-                  <Insets />
-               </StackPane.margin>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0">
-               <children>
-                  <Label fx:id="CuratorName" style="-fx-text-fill: #000000;" text="Додатова інформація" textFill="WHITE">
-                     <font>
-                        <Font name="Kharkiv Tone Regular" size="36.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-               </children>
-               <StackPane.margin>
-                  <Insets top="27.0" />
-               </StackPane.margin>
-               <padding>
-                  <Insets bottom="36.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0">
-               <StackPane.margin>
-                  <Insets top="27.0" />
-               </StackPane.margin>
-               <children>
-                  <AnchorPane prefHeight="63.0" prefWidth="150.0">
+                  <HBox fx:id="MenuBarHBox" alignment="TOP_RIGHT" onMouseDragged="#setDragWindow" onMousePressed="#setPressedWindow">
                      <children>
-                        <Label layoutX="8.0" layoutY="4.0" styleClass="iconFont" stylesheets="@../../css/font.css" text="Journal" />
-                        <Label layoutX="38.0" layoutY="31.0" prefHeight="29.0" prefWidth="109.0" styleClass="iconFont" stylesheets="@../../css/font.css" text="Curatora" />
-                        <Pane layoutX="9.0" layoutY="32.0" prefHeight="1.0" prefWidth="131.0" rotate="-2.9000000000000004" style="-fx-background-color: #fff;" />
+                        <Button fx:id="minimizeWindowButton" mnemonicParsing="false" onAction="#setMinimizeWindowButton" prefWidth="45.0" styleClass="basicMenuButton" stylesheets="@../../css/menuBur.css" HBox.hgrow="ALWAYS">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../icon/minimizeWindowIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="maximizeWindowButton" mnemonicParsing="false" onAction="#setMaximizeWindowButton" prefWidth="45.0" styleClass="basicMenuButton" stylesheets="@../../css/menuBur.css">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../icon/fullScreenIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="closeWindowButton" mnemonicParsing="false" onAction="#setCloseWindow" prefWidth="45.0" styleClass="basicMenuButton" stylesheets="@../../css/menuBur.css">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../icon/closeWindowIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
                      </children>
-                     <HBox.margin>
-                        <Insets left="25.0" />
-                     </HBox.margin>
-                  </AnchorPane>
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0">
+                     <children>
+                        <Label fx:id="CuratorName" style="-fx-text-fill: #000000;" text="Додатова інформація" textFill="WHITE">
+                           <font>
+                              <Font name="Kharkiv Tone Regular" size="36.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <StackPane.margin>
+                        <Insets top="27.0" />
+                     </StackPane.margin>
+                     <padding>
+                        <Insets bottom="36.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0">
+                     <StackPane.margin>
+                        <Insets top="27.0" />
+                     </StackPane.margin>
+                     <children>
+                        <AnchorPane prefHeight="63.0" prefWidth="150.0">
+                           <children>
+                              <Label layoutX="8.0" layoutY="4.0" styleClass="iconFont" stylesheets="@../../css/font.css" text="Journal" />
+                              <Label layoutX="38.0" layoutY="31.0" prefHeight="29.0" prefWidth="109.0" styleClass="iconFont" stylesheets="@../../css/font.css" text="Curatora" />
+                              <Pane layoutX="9.0" layoutY="32.0" prefHeight="1.0" prefWidth="131.0" rotate="-2.9000000000000004" style="-fx-background-color: #fff;" />
+                           </children>
+                           <HBox.margin>
+                              <Insets left="25.0" />
+                           </HBox.margin>
+                        </AnchorPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="37.0" />
+                     </padding>
+                  </HBox>
                </children>
-               <padding>
-                  <Insets bottom="37.0" />
-               </padding>
-            </HBox>
-         </children>
-      </StackPane>
-   </top>
-   <center>
-      <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            </StackPane>
+         </top>
+         <center>
+            <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TabPane pickOnBounds="false" prefHeight="600.0" prefWidth="1280.0" stylesheets="@../../css/tabPane.css" tabClosingPolicy="UNAVAILABLE">
+                     <tabs>
+                        <Tab fx:id="GeneralInfoTab" text="Загальні відомості">
+                           <content>
+                              <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <StackPane alignment="TOP_CENTER" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0" style="-fx-border-color: #e8d58c; -fx-border-width: 2; -fx-border-radius: 5;">
+                                       <StackPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </StackPane.margin>
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="70.0" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Label styleClass="mainFont" stylesheets="@../../css/font.css" text="Студент:">
+                                                   <font>
+                                                      <Font name="Gotham-Bold" size="20.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <Label fx:id="FullNameStudentGeneralInfoLabel" styleClass="mainFont" stylesheets="@../../css/font.css" text="Ім'я студента">
+                                                   <HBox.margin>
+                                                      <Insets left="21.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <ScrollPane maxHeight="490.0" maxWidth="1256.0" pickOnBounds="false" prefHeight="490.0" prefWidth="1256.0" stylesheets="@../../css/scroollPane.css">
+                                             <content>
+                                                <StackPane alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="460.0" prefWidth="1256.0" style="-fx-background-color: #fff;">
+                                                   <children>
+                                                      <VBox alignment="TOP_CENTER" maxWidth="314.0" prefHeight="460.0" prefWidth="304.0">
+                                                         <children>
+                                                            <Label stylesheets="@../../css/font.css" text="Дані про освіту">
+                                                               <font>
+                                                                  <Font name="Gotham-Bold" size="24.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="20.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                            <Pane maxWidth="265.0" prefHeight="340.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
+                                                               <children>
+                                                                  <Label layoutX="54.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата закінчення" />
+                                                                  <Label layoutX="41.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Навчальний заклад" />
+                                                                  <Label layoutX="68.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Середній бал" />
+                                                                  <DatePicker fx:id="EndDateEducation" editable="false" layoutX="21.0" layoutY="45.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Закінчення" styleClass="data_picker">
+                                                                     <stylesheets>
+                                                                        <URL value="@../../css/style.css" />
+                                                                        <URL value="@../../css/datePicker.css" />
+                                                                     </stylesheets>
+                                                                  </DatePicker>
+                                                                  <TextField fx:id="SchoolNameEducation" editable="false" layoutX="21.0" layoutY="125.0" prefWidth="222.0" promptText="Заклад" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                                                  <TextField fx:id="GradeAvarageEducation" editable="false" layoutX="21.0" layoutY="205.0" prefWidth="222.0" promptText="Середній бал" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                                               </children>
+                                                               <VBox.margin>
+                                                                  <Insets top="16.0" />
+                                                               </VBox.margin>
+                                                            </Pane>
+                                                         </children>
+                                                         <StackPane.margin>
+                                                            <Insets left="2.0" />
+                                                         </StackPane.margin>
+                                                      </VBox>
+                                                      <VBox alignment="TOP_CENTER" maxWidth="314.0" prefHeight="460.0" prefWidth="314.0">
+                                                         <children>
+                                                            <Label stylesheets="@../../css/font.css" text="Військова служба">
+                                                               <font>
+                                                                  <Font name="Gotham-Bold" size="24.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="20.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                            <Pane maxWidth="265.0" prefHeight="340.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
+                                                               <children>
+                                                                  <Label fx:id="StartDateMilitaryLabel" layoutX="73.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата початку" />
+                                                                  <DatePicker fx:id="StartDateMilitary" editable="false" layoutX="21.0" layoutY="45.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Початку" styleClass="data_picker">
+                                                                     <stylesheets>
+                                                                        <URL value="@../../css/style.css" />
+                                                                        <URL value="@../../css/datePicker.css" />
+                                                                     </stylesheets>
+                                                                  </DatePicker>
+                                                                  <DatePicker fx:id="EndDateMilitary" editable="false" layoutX="21.0" layoutY="125.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Закінчення" styleClass="data_picker">
+                                                                     <stylesheets>
+                                                                        <URL value="@../../css/style.css" />
+                                                                        <URL value="@../../css/datePicker.css" />
+                                                                     </stylesheets>
+                                                                  </DatePicker>
+                                                                  <Label fx:id="EndDateMilitaryLabel" layoutX="54.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата закінчення" />
+                                                                  <TextField fx:id="UnitMilitary" editable="false" layoutX="21.0" layoutY="205.0" prefWidth="222.0" promptText="Підрозділ" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                                                  <Label fx:id="UnitMilitaryLabel" layoutX="85.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Підрозділ" />
+                                                               </children>
+                                                               <VBox.margin>
+                                                                  <Insets top="16.0" />
+                                                               </VBox.margin>
+                                                            </Pane>
+                                                         </children>
+                                                         <StackPane.margin>
+                                                            <Insets left="314.0" />
+                                                         </StackPane.margin>
+                                                      </VBox>
+                                                      <VBox alignment="TOP_CENTER" maxWidth="314.0" prefHeight="460.0" prefWidth="314.0">
+                                                         <children>
+                                                            <Label stylesheets="@../../css/font.css" text="Трудова діяльність">
+                                                               <font>
+                                                                  <Font name="Gotham-Bold" size="24.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="20.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                            <Pane maxWidth="265.0" prefHeight="340.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
+                                                               <children>
+                                                                  <DatePicker fx:id="StartDateJob" editable="false" layoutX="21.0" layoutY="45.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Початку" styleClass="data_picker" visible="false">
+                                                                     <stylesheets>
+                                                                        <URL value="@../../css/style.css" />
+                                                                        <URL value="@../../css/datePicker.css" />
+                                                                     </stylesheets>
+                                                                  </DatePicker>
+                                                                  <Label fx:id="StartDateJobLabel" layoutX="67.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата початку" visible="false" />
+                                                                  <DatePicker fx:id="EndDateJob" editable="false" layoutX="21.0" layoutY="125.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Закінчення" styleClass="data_picker" visible="false">
+                                                                     <stylesheets>
+                                                                        <URL value="@../../css/style.css" />
+                                                                        <URL value="@../../css/datePicker.css" />
+                                                                     </stylesheets>
+                                                                  </DatePicker>
+                                                                  <Label fx:id="EndDateJobLabel" layoutX="54.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата закінчення" visible="false" />
+                                                                  <Label fx:id="PlaceJobLabel" layoutX="104.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Місце" visible="false" />
+                                                                  <TextField fx:id="PlaceJob" editable="false" layoutX="21.0" layoutY="205.0" prefWidth="222.0" promptText="Місце" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
+                                                                  <TextField fx:id="PositionJob" editable="false" layoutX="21.0" layoutY="283.0" prefWidth="222.0" promptText="Посада" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
+                                                                  <Label fx:id="PositionJobLabel" layoutX="96.0" layoutY="251.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Посада" visible="false" />
+                                                                  <ComboBox fx:id="ChooseJobComboBox" layoutX="20.0" layoutY="16.0" onAction="#setStudentJobInfoField" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть Запис" styleClass="comboBox" stylesheets="@../../css/textField.css" />
+                                                               </children>
+                                                               <VBox.margin>
+                                                                  <Insets top="16.0" />
+                                                               </VBox.margin>
+                                                            </Pane>
+                                                         </children>
+                                                         <StackPane.margin>
+                                                            <Insets left="618.0" />
+                                                         </StackPane.margin>
+                                                      </VBox>
+                                                      <VBox alignment="TOP_CENTER" maxWidth="314.0" prefHeight="460.0" prefWidth="314.0">
+                                                         <children>
+                                                            <Label stylesheets="@../../css/font.css" text="Інформація про батьків">
+                                                               <font>
+                                                                  <Font name="Gotham-Bold" size="24.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="20.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                            <Pane maxWidth="265.0" prefHeight="340.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
+                                                               <children>
+                                                                  <Label layoutX="81.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="ПІП батька" />
+                                                                  <Label layoutX="78.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="ПІП матері" />
+                                                                  <Label layoutX="56.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Телефон батька" />
+                                                                  <TextField fx:id="PIPFatherParents" editable="false" layoutX="21.0" layoutY="45.0" prefWidth="222.0" promptText="ПІП батька" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                                                  <TextField fx:id="PIPMotherParents" editable="false" layoutX="21.0" layoutY="125.0" prefWidth="222.0" promptText="ПІП матері" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                                                  <TextField fx:id="PhoneFatherParents" editable="false" layoutX="21.0" layoutY="205.0" prefWidth="222.0" promptText="Телефон батька" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                                                  <Label layoutX="53.0" layoutY="251.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Телефон матері" />
+                                                                  <TextField fx:id="PhoneMotherParents" editable="false" layoutX="21.0" layoutY="283.0" prefWidth="222.0" promptText="Телефон матері" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                                               </children>
+                                                               <VBox.margin>
+                                                                  <Insets top="16.0" />
+                                                               </VBox.margin>
+                                                            </Pane>
+                                                         </children>
+                                                         <StackPane.margin>
+                                                            <Insets left="932.0" />
+                                                         </StackPane.margin>
+                                                      </VBox>
+                                                   </children>
+                                                </StackPane>
+                                             </content>
+                                             <StackPane.margin>
+                                                <Insets top="70.0" />
+                                             </StackPane.margin>
+                                          </ScrollPane>
+                                          <StackPane alignment="BOTTOM_LEFT" pickOnBounds="false">
+                                             <children>
+                                                <Button fx:id="BackButton" mnemonicParsing="false" onAction="#back" stylesheets="@../../css/button.css" text="Повернутися">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" left="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                                <Button fx:id="CancelUpdateStudentInfoButton" mnemonicParsing="false" onAction="#cancelUpdateStudentInfo" stylesheets="@../../css/button.css" text="Скасувати" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" left="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                             </children>
+                                          </StackPane>
+                                          <StackPane alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
+                                             <children>
+                                                <Button fx:id="UpdateStudentInfoButton" mnemonicParsing="false" onAction="#updateGeneralInfoStudentInfo" stylesheets="@../../css/button.css" text="Змінити">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                                <Button fx:id="UpdateEducationInfoButton" mnemonicParsing="false" onAction="#setNewValueEducationInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets left="10.0" right="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                                <Button fx:id="UpdateMilitaryInfoButton" mnemonicParsing="false" onAction="#setNewValueMilitaryInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                                <Button fx:id="UpdateJobInfoButton" mnemonicParsing="false" onAction="#setNewValueJobInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                                <Button fx:id="UpdateParentsInfoButton" mnemonicParsing="false" onAction="#setNewValueParentsInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                             </children>
+                                          </StackPane>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="18.0" maxWidth="1256.0" pickOnBounds="false" prefHeight="100.0">
+                                             <StackPane.margin>
+                                                <Insets top="70.0" />
+                                             </StackPane.margin>
+                                             <children>
+                                                <RadioButton fx:id="UpdateEducationInfoRadioButton" mnemonicParsing="false" onAction="#handleGeneralInfoRadioButtonAction" visible="false">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="RadioButton" />
+                                                   </toggleGroup>
+                                                   <HBox.margin>
+                                                      <Insets left="150.0" />
+                                                   </HBox.margin>
+                                                </RadioButton>
+                                                <RadioButton fx:id="UpdateMilitaryInfoRadioButton" mnemonicParsing="false" onAction="#handleGeneralInfoRadioButtonAction" visible="false">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="RadioButton1" />
+                                                   </toggleGroup>
+                                                   <HBox.margin>
+                                                      <Insets left="300.0" />
+                                                   </HBox.margin>
+                                                </RadioButton>
+                                                <RadioButton fx:id="UpdateJobInfoRadioButton" mnemonicParsing="false" onAction="#handleGeneralInfoRadioButtonAction" visible="false">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="RadioButton2" />
+                                                   </toggleGroup>
+                                                   <HBox.margin>
+                                                      <Insets left="290.0" />
+                                                   </HBox.margin>
+                                                </RadioButton>
+                                                <RadioButton fx:id="UpdateParentsInfoRadioButton" mnemonicParsing="false" onAction="#handleGeneralInfoRadioButtonAction" visible="false">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="RadioButton3" />
+                                                   </toggleGroup>
+                                                   <HBox.margin>
+                                                      <Insets left="290.0" />
+                                                   </HBox.margin>
+                                                </RadioButton>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </StackPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="SocialAndGroupActivityTab" text="Громадська діяльність">
+                           <content>
+                              <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <StackPane alignment="TOP_CENTER" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0" style="-fx-border-color: #e8d58c; -fx-border-width: 2; -fx-border-radius: 5;">
+                                       <StackPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </StackPane.margin>
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="70.0" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Label styleClass="mainFont" stylesheets="@../../css/font.css" text="Студент:">
+                                                   <font>
+                                                      <Font name="Gotham-Bold" size="20.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <Label fx:id="FullNameStudentSocialLabel" styleClass="mainFont" stylesheets="@../../css/font.css" text="Ім'я студента">
+                                                   <HBox.margin>
+                                                      <Insets left="21.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <ScrollPane maxHeight="490.0" maxWidth="1256.0" pickOnBounds="false" prefHeight="490.0" prefWidth="1256.0" stylesheets="@../../css/scroollPane.css">
+                                             <content>
+                                                <StackPane alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="460.0" prefWidth="1256.0" style="-fx-background-color: #fff;">
+                                                   <children>
+                                                      <VBox alignment="TOP_CENTER" maxWidth="628.0" prefHeight="200.0" prefWidth="100.0">
+                                                         <children>
+                                                            <Label stylesheets="@../../css/font.css" text="Громадська діяльність">
+                                                               <font>
+                                                                  <Font name="Gotham-Bold" size="24.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets left="200.0" top="20.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                            <Pane maxWidth="265.0" prefHeight="340.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
+                                                               <children>
+                                                                  <ComboBox fx:id="SemesterSocial" layoutX="20.0" layoutY="45.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false" />
+                                                                  <Label fx:id="SemesterSocialActivityLabel" layoutX="90.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Семестр" visible="false" />
+                                                                  <Label fx:id="DateSocialActivityLabel" layoutX="106.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата" visible="false" />
+                                                                  <Label fx:id="ActivitySocialActivityLabel" layoutX="79.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Діяльність" visible="false" />
+                                                                  <TextField fx:id="ActivitySocial" editable="false" layoutX="18.0" layoutY="205.0" prefWidth="222.0" promptText="Діяльність" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
+                                                                  <DatePicker fx:id="DateSocial" editable="false" layoutX="20.0" layoutY="125.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата" styleClass="data_picker" visible="false">
+                                                                     <stylesheets>
+                                                                        <URL value="@../../css/style.css" />
+                                                                        <URL value="@../../css/datePicker.css" />
+                                                                     </stylesheets>
+                                                                  </DatePicker>
+                                                                  <ComboBox fx:id="ChooseSocialActivityComboBox" layoutX="22.0" layoutY="16.0" onAction="#setSocialActivityInfoField" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть Запис" styleClass="comboBox" stylesheets="@../../css/textField.css" />
+                                                               </children>
+                                                               <VBox.margin>
+                                                                  <Insets left="200.0" top="16.0" />
+                                                               </VBox.margin>
+                                                            </Pane>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox alignment="TOP_CENTER" maxWidth="628.0" prefHeight="200.0" prefWidth="100.0">
+                                                         <children>
+                                                            <Label stylesheets="@../../css/font.css" text="Гурткова діяльність">
+                                                               <font>
+                                                                  <Font name="Gotham-Bold" size="24.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets right="200.0" top="20.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                            <Pane maxWidth="265.0" prefHeight="340.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
+                                                               <children>
+                                                                  <Label fx:id="SemesterGroupActivityLabel" layoutX="90.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Cеместр" visible="false" />
+                                                                  <ComboBox fx:id="SemesterGroup" layoutX="20.0" layoutY="45.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false" />
+                                                                  <Label fx:id="NameGroupActivityLabel" layoutX="68.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Назва гуртка" visible="false" />
+                                                                  <Label fx:id="NoteGroupActivityLabel" layoutX="83.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Примітка" visible="false" />
+                                                                  <TextField fx:id="GroupName" editable="false" layoutX="20.0" layoutY="125.0" prefWidth="222.0" promptText="Назва гуртка" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
+                                                                  <TextField fx:id="NoteGroup" editable="false" layoutX="20.0" layoutY="205.0" prefWidth="222.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
+                                                                  <ComboBox fx:id="ChooseGroupActivityComboBox" layoutX="22.0" layoutY="16.0" onAction="#setStudentGroupInfoField" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть Запис" styleClass="comboBox" stylesheets="@../../css/textField.css" />
+                                                               </children>
+                                                               <VBox.margin>
+                                                                  <Insets right="200.0" top="16.0" />
+                                                               </VBox.margin>
+                                                            </Pane>
+                                                         </children>
+                                                         <StackPane.margin>
+                                                            <Insets left="628.0" />
+                                                         </StackPane.margin>
+                                                      </VBox>
+                                                   </children>
+                                                </StackPane>
+                                             </content>
+                                             <StackPane.margin>
+                                                <Insets top="70.0" />
+                                             </StackPane.margin>
+                                          </ScrollPane>
+                                          <StackPane alignment="BOTTOM_LEFT" pickOnBounds="false">
+                                             <children>
+                                                <Button fx:id="BackSocialActivityButton" mnemonicParsing="false" onAction="#back" stylesheets="@../../css/button.css" text="Повернутися">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" left="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                                <Button fx:id="CancelUpdateSocialAndGroupActivityButton" mnemonicParsing="false" onAction="#cancelUpdateSocialAndGroupActivityStudentInfo" stylesheets="@../../css/button.css" text="Скасувати" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" left="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                             </children>
+                                          </StackPane>
+                                          <StackPane alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
+                                             <children>
+                                                <Button fx:id="UpdateSocialAndGroupActivityButton" mnemonicParsing="false" onAction="#updateSocialAndGroupActivityStudentInfo" stylesheets="@../../css/button.css" text="Змінити">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                                <Button fx:id="UpdateSocialActivityButton" mnemonicParsing="false" onAction="#setNewValueSocialActivityInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                                <Button fx:id="UpdateGroupActivityButton" mnemonicParsing="false" onAction="#setNewValueGroupActivityInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                             </children>
+                                          </StackPane>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="18.0" maxWidth="1256.0" pickOnBounds="false" prefHeight="100.0">
+                                             <StackPane.margin>
+                                                <Insets top="70.0" />
+                                             </StackPane.margin>
+                                             <children>
+                                                <RadioButton fx:id="UpdateSocialActivityRadioButton" mnemonicParsing="false" onAction="#handleSocialAndGroupActivityInfoRadioButtonAction" visible="false">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="RadioButton11" />
+                                                   </toggleGroup>
+                                                   <HBox.margin>
+                                                      <Insets left="410.0" />
+                                                   </HBox.margin>
+                                                </RadioButton>
+                                                <RadioButton fx:id="UpdateGroupActivityRadioButton" mnemonicParsing="false" onAction="#handleSocialAndGroupActivityInfoRadioButtonAction" visible="false">
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="RadioButton12" />
+                                                   </toggleGroup>
+                                                   <HBox.margin>
+                                                      <Insets left="410.0" />
+                                                   </HBox.margin>
+                                                </RadioButton>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </StackPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="IndividualSupportTab" text="Супровід">
+                           <content>
+                              <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <StackPane alignment="TOP_CENTER" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0" style="-fx-border-color: #e8d58c; -fx-border-width: 2; -fx-border-radius: 5;">
+                                       <StackPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </StackPane.margin>
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="70.0" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Label styleClass="mainFont" stylesheets="@../../css/font.css" text="Студент:">
+                                                   <font>
+                                                      <Font name="Gotham-Bold" size="20.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <Label fx:id="FullNameStudentSupportLabel" styleClass="mainFont" stylesheets="@../../css/font.css" text="Ім'я студента">
+                                                   <HBox.margin>
+                                                      <Insets left="21.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <ScrollPane maxHeight="490.0" maxWidth="1256.0" pickOnBounds="false" prefHeight="490.0" prefWidth="1256.0" stylesheets="@../../css/scroollPane.css">
+                                             <content>
+                                                <StackPane alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="460.0" prefWidth="1256.0" style="-fx-background-color: #fff;">
+                                                   <children>
+                                                      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                                         <children>
+                                                            <Label stylesheets="@../../css/font.css" text="Супровід">
+                                                               <font>
+                                                                  <Font name="Gotham-Bold" size="24.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="16.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                            <Pane maxWidth="265.0" prefHeight="340.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
+                                                               <children>
+                                                                  <ComboBox fx:id="SemesterSupport" layoutX="20.0" layoutY="45.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false" />
+                                                                  <Label fx:id="SemesterSupportLabel" layoutX="88.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Семестр" visible="false" />
+                                                                  <Label fx:id="DateSupportLabel" layoutX="105.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата" visible="false" />
+                                                                  <Label fx:id="ContentSupportLabel" layoutX="102.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Зміст" visible="false" />
+                                                                  <TextField fx:id="ContentSupport" editable="false" layoutX="18.0" layoutY="205.0" prefWidth="222.0" promptText="Зміст" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
+                                                                  <DatePicker fx:id="DateSupport" editable="false" layoutX="18.0" layoutY="125.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата" styleClass="data_picker" visible="false">
+                                                                     <stylesheets>
+                                                                        <URL value="@../../css/style.css" />
+                                                                        <URL value="@../../css/datePicker.css" />
+                                                                     </stylesheets>
+                                                                  </DatePicker>
+                                                                  <ComboBox fx:id="ChooseIndividualSupportComboBox" layoutX="22.0" layoutY="16.0" onAction="#setStudentIndividualSupportInfoField" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть Запис" styleClass="comboBox" stylesheets="@../../css/textField.css" />
+                                                               </children>
+                                                               <VBox.margin>
+                                                                  <Insets top="20.0" />
+                                                               </VBox.margin>
+                                                            </Pane>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </StackPane>
+                                             </content>
+                                             <StackPane.margin>
+                                                <Insets top="70.0" />
+                                             </StackPane.margin>
+                                          </ScrollPane>
+                                          <StackPane alignment="BOTTOM_LEFT" pickOnBounds="false">
+                                             <children>
+                                                <Button fx:id="BackIndividualSupportButton" mnemonicParsing="false" onAction="#back" stylesheets="@../../css/button.css" text="Повернутися">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" left="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                                <Button fx:id="CancelUpdateIndividualSupportButton" mnemonicParsing="false" onAction="#cancelUpdateIndividualSupportButton" stylesheets="@../../css/button.css" text="Скасувати" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" left="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                             </children>
+                                          </StackPane>
+                                          <StackPane alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
+                                             <children>
+                                                <Button fx:id="UpdateIndividualSupportButton" mnemonicParsing="false" onAction="#updateIndividualSupportStudentInfo" stylesheets="@../../css/button.css" text="Змінити">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                                <Button fx:id="UpdateIndividualSupportButtonInDB" mnemonicParsing="false" onAction="#setNewValueIndividualSupportInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                             </children>
+                                          </StackPane>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </StackPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="PromotionTab" text="Заохочення">
+                           <content>
+                              <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <StackPane alignment="TOP_CENTER" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0" style="-fx-border-color: #e8d58c; -fx-border-width: 2; -fx-border-radius: 5;">
+                                       <StackPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </StackPane.margin>
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="70.0" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Label styleClass="mainFont" stylesheets="@../../css/font.css" text="Студент:">
+                                                   <font>
+                                                      <Font name="Gotham-Bold" size="20.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <Label fx:id="FullNameStudentPromotionLabel" styleClass="mainFont" stylesheets="@../../css/font.css" text="Ім'я студента">
+                                                   <HBox.margin>
+                                                      <Insets left="21.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <ScrollPane maxHeight="490.0" maxWidth="1256.0" pickOnBounds="false" prefHeight="490.0" prefWidth="1256.0" stylesheets="@../../css/scroollPane.css">
+                                             <content>
+                                                <StackPane alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="460.0" prefWidth="1256.0" style="-fx-background-color: #fff;">
+                                                   <children>
+                                                      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                                         <children>
+                                                            <Label stylesheets="@../../css/font.css" text="Заохочення">
+                                                               <font>
+                                                                  <Font name="Gotham-Bold" size="24.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="20.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                            <Pane maxWidth="265.0" prefHeight="340.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
+                                                               <children>
+                                                                  <ComboBox fx:id="SemesterPromotion" layoutX="20.0" layoutY="45.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false" />
+                                                                  <Label fx:id="SemesterPromotionLabel" layoutX="91.0" layoutY="14.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Семестр" visible="false" />
+                                                                  <Label fx:id="DatePromotionLabel" layoutX="106.0" layoutY="93.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата" visible="false" />
+                                                                  <Label fx:id="ContentPromotionLabel" layoutX="103.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Зміст" visible="false" />
+                                                                  <TextField fx:id="ContentPromotion" editable="false" layoutX="20.0" layoutY="205.0" prefWidth="222.0" promptText="Зміст" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
+                                                                  <DatePicker fx:id="DatePromotion" editable="false" layoutX="20.0" layoutY="125.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата" styleClass="data_picker" visible="false">
+                                                                     <stylesheets>
+                                                                        <URL value="@../../css/style.css" />
+                                                                        <URL value="@../../css/datePicker.css" />
+                                                                     </stylesheets>
+                                                                  </DatePicker>
+                                                                  <ComboBox fx:id="ChoosePromotionComboBox" layoutX="22.0" layoutY="19.0" onAction="#setStudentPromotionInfoField" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть Запис" styleClass="comboBox" stylesheets="@../../css/textField.css" />
+                                                               </children>
+                                                               <VBox.margin>
+                                                                  <Insets top="16.0" />
+                                                               </VBox.margin>
+                                                            </Pane>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </StackPane>
+                                             </content>
+                                             <StackPane.margin>
+                                                <Insets top="70.0" />
+                                             </StackPane.margin>
+                                          </ScrollPane>
+                                          <StackPane alignment="BOTTOM_LEFT" pickOnBounds="false">
+                                             <children>
+                                                <Button fx:id="BackPromotionButton" mnemonicParsing="false" onAction="#back" stylesheets="@../../css/button.css" text="Повернутися">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" left="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                                <Button fx:id="CancelUpdatePromotionButton" mnemonicParsing="false" onAction="#cancelUpdatePromotionInfo" stylesheets="@../../css/button.css" text="Скасувати" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" left="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                             </children>
+                                          </StackPane>
+                                          <StackPane alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
+                                             <children>
+                                                <Button fx:id="UpdatePromotionButton" mnemonicParsing="false" onAction="#updatePromotionStudentInfo" stylesheets="@../../css/button.css" text="Змінити">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                                <Button fx:id="UpdatePromotionButtonInDB" mnemonicParsing="false" onAction="#setNewValuePromotionInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                             </children>
+                                          </StackPane>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </StackPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="SocialPassportTab" text="Соціальний паспорт">
+                           <content>
+                              <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <StackPane alignment="TOP_CENTER" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0" style="-fx-border-color: #e8d58c; -fx-border-width: 2; -fx-border-radius: 5;">
+                                       <StackPane.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </StackPane.margin>
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="70.0" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Label styleClass="mainFont" stylesheets="@../../css/font.css" text="Студент:">
+                                                   <font>
+                                                      <Font name="Gotham-Bold" size="20.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <Label fx:id="FullStudentNameSocialPassport" styleClass="mainFont" stylesheets="@../../css/font.css" text="Ім'я студента">
+                                                   <HBox.margin>
+                                                      <Insets left="21.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <ScrollPane maxHeight="490.0" maxWidth="1256.0" pickOnBounds="false" prefHeight="490.0" prefWidth="1256.0" stylesheets="@../../css/scroollPane.css">
+                                             <content>
+                                                <StackPane alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="460.0" prefWidth="1256.0" style="-fx-background-color: #fff;">
+                                                   <children>
+                                                      <VBox alignment="TOP_CENTER" maxWidth="314.0" prefHeight="200.0" prefWidth="100.0">
+                                                         <children>
+                                                            <Label stylesheets="@../../css/font.css" text="Загальні категорії">
+                                                               <font>
+                                                                  <Font name="Gotham-Bold" size="24.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="20.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                            <Pane maxWidth="265.0" prefHeight="370.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
+                                                               <children>
+                                                                  <Label fx:id="StartDateSocialPassportLabel" layoutX="68.0" layoutY="14.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата початку" visible="false" />
+                                                                  <DatePicker fx:id="StartDateSocialPassport" editable="false" layoutX="20.0" layoutY="43.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Початку" styleClass="data_picker" visible="false">
+                                                                     <stylesheets>
+                                                                        <URL value="@../../css/style.css" />
+                                                                        <URL value="@../../css/datePicker.css" />
+                                                                     </stylesheets>
+                                                                  </DatePicker>
+                                                                  <Label fx:id="EndDateSocialPassportLabel" layoutX="53.0" layoutY="84.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата Закінчення" visible="false" />
+                                                                  <Label fx:id="SemesterSocialPassportLabel" layoutX="87.0" layoutY="154.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Семестр" visible="false" />
+                                                                  <Label fx:id="CategorySocialPassportLabel" layoutX="84.0" layoutY="224.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Категорія" visible="false" />
+                                                                  <Label fx:id="NoteSocialPassportLabel" layoutX="84.0" layoutY="294.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Примітка" visible="false" />
+                                                                  <DatePicker fx:id="EndDateSocialPassport" editable="false" layoutX="20.0" layoutY="113.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Закінчення" styleClass="data_picker" visible="false">
+                                                                     <stylesheets>
+                                                                        <URL value="@../../css/style.css" />
+                                                                        <URL value="@../../css/datePicker.css" />
+                                                                     </stylesheets>
+                                                                  </DatePicker>
+                                                                  <ComboBox fx:id="SemesterSocialPassport" layoutX="20.0" layoutY="183.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false" />
+                                                                  <ComboBox fx:id="CategorySocialPassport" layoutX="20.0" layoutY="253.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть категорію" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false" />
+                                                                  <TextField fx:id="NoteSocialPassport" editable="false" layoutX="20.0" layoutY="323.0" prefWidth="222.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
+                                                                  <ComboBox fx:id="ChooseSocialPassportComboBox" layoutX="22.0" layoutY="20.0" onAction="#setSocialPassportInfoField" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть Запис" styleClass="comboBox" stylesheets="@../../css/textField.css" />
+                                                               </children>
+                                                               <VBox.margin>
+                                                                  <Insets top="16.0" />
+                                                               </VBox.margin>
+                                                            </Pane>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox alignment="TOP_CENTER" maxWidth="414.0" prefHeight="200.0" prefWidth="100.0">
+                                                         <StackPane.margin>
+                                                            <Insets left="314.0" />
+                                                         </StackPane.margin>
+                                                         <children>
+                                                            <Label stylesheets="@../../css/font.css" text="Інваліди">
+                                                               <font>
+                                                                  <Font name="Gotham-Bold" size="24.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="20.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                            <Pane maxWidth="265.0" prefHeight="370.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
+                                                               <children>
+                                                                  <Label layoutX="68.0" layoutY="14.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата початку" />
+                                                                  <DatePicker fx:id="StartDateInvalid" editable="false" layoutX="20.0" layoutY="43.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Початку" styleClass="data_picker">
+                                                                     <stylesheets>
+                                                                        <URL value="@../../css/style.css" />
+                                                                        <URL value="@../../css/datePicker.css" />
+                                                                     </stylesheets>
+                                                                  </DatePicker>
+                                                                  <Label layoutX="53.0" layoutY="84.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата Закінчення" />
+                                                                  <Label layoutX="87.0" layoutY="154.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Семестр" />
+                                                                  <Label layoutX="24.0" layoutY="224.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Категорія інвалідності" />
+                                                                  <Label layoutX="84.0" layoutY="294.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Примітка" />
+                                                                  <DatePicker fx:id="EndDateInvalid" editable="false" layoutX="20.0" layoutY="113.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Закінчення" styleClass="data_picker">
+                                                                     <stylesheets>
+                                                                        <URL value="@../../css/style.css" />
+                                                                        <URL value="@../../css/datePicker.css" />
+                                                                     </stylesheets>
+                                                                  </DatePicker>
+                                                                  <ComboBox fx:id="SemesterInvalid" layoutX="20.0" layoutY="183.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" />
+                                                                  <ComboBox fx:id="CategoryInvalid" layoutX="20.0" layoutY="253.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть категорію" styleClass="comboBox" stylesheets="@../../css/textField.css" />
+                                                                  <TextField fx:id="NoteInvalid" editable="false" layoutX="20.0" layoutY="323.0" prefWidth="222.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                                               </children>
+                                                               <VBox.margin>
+                                                                  <Insets top="16.0" />
+                                                               </VBox.margin>
+                                                            </Pane>
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox alignment="TOP_CENTER" maxWidth="528.0" prefHeight="200.0" prefWidth="100.0">
+                                                         <StackPane.margin>
+                                                            <Insets left="728.0" />
+                                                         </StackPane.margin>
+                                                         <children>
+                                                            <Label stylesheets="@../../css/font.css" text="Багатодітні родини">
+                                                               <font>
+                                                                  <Font name="Gotham-Bold" size="24.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="20.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                            <Pane maxWidth="470.0" prefHeight="370.0" prefWidth="470.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
+                                                               <children>
+                                                                  <Label layoutX="48.0" layoutY="14.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата початку" />
+                                                                  <DatePicker fx:id="StartDateFamily" editable="false" layoutX="17.0" layoutY="43.0" prefHeight="35.0" prefWidth="205.0" promptText="Дата Початку" styleClass="data_picker">
+                                                                     <stylesheets>
+                                                                        <URL value="@../../css/style.css" />
+                                                                        <URL value="@../../css/datePicker.css" />
+                                                                     </stylesheets>
+                                                                  </DatePicker>
+                                                                  <DatePicker fx:id="EndDateFamily" editable="false" layoutX="247.0" layoutY="43.0" prefHeight="35.0" prefWidth="205.0" promptText="Дата Закінчення" styleClass="data_picker">
+                                                                     <stylesheets>
+                                                                        <URL value="@../../css/style.css" />
+                                                                        <URL value="@../../css/datePicker.css" />
+                                                                     </stylesheets>
+                                                                  </DatePicker>
+                                                                  <Label layoutX="271.0" layoutY="14.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата закінчення" />
+                                                                  <Label layoutX="87.0" layoutY="92.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Семест" />
+                                                                  <ComboBox fx:id="SemesterFamily" layoutX="19.0" layoutY="123.0" prefHeight="35.0" prefWidth="205.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" />
+                                                                  <Label layoutX="279.0" layoutY="92.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Кількість дітей" />
+                                                                  <TextField fx:id="CountChildrenFamily" editable="false" layoutX="247.0" layoutY="123.0" prefWidth="205.0" promptText="Кількість дітей" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                                                  <Label layoutX="48.0" layoutY="172.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Менше 18 років" />
+                                                                  <TextField fx:id="LessThan18Family" editable="false" layoutX="19.0" layoutY="203.0" prefWidth="205.0" promptText="Менше 18 років" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                                                  <Label layoutX="276.0" layoutY="172.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Більше 18 років" />
+                                                                  <TextField fx:id="MuchThan18Family" editable="false" layoutX="247.0" layoutY="203.0" prefWidth="205.0" promptText="Більше 18 років" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                                                  <Label layoutX="188.0" layoutY="262.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Примітка" />
+                                                                  <TextField fx:id="NoteFamily" editable="false" layoutX="21.0" layoutY="294.0" prefHeight="35.0" prefWidth="422.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" />
+                                                               </children>
+                                                               <VBox.margin>
+                                                                  <Insets top="16.0" />
+                                                               </VBox.margin>
+                                                            </Pane>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </StackPane>
+                                             </content>
+                                             <StackPane.margin>
+                                                <Insets top="70.0" />
+                                             </StackPane.margin>
+                                          </ScrollPane>
+                                          <StackPane alignment="BOTTOM_LEFT" pickOnBounds="false">
+                                             <children>
+                                                <Button fx:id="BackAllSocialPassportButton" mnemonicParsing="false" onAction="#back" stylesheets="@../../css/button.css" text="Повернутися">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" left="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                                <Button fx:id="CancelUpdateSocialPassportButton" mnemonicParsing="false" onAction="#cancelAllSocialPassportStudentInfo" stylesheets="@../../css/button.css" text="Скасувати" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" left="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                             </children>
+                                          </StackPane>
+                                          <StackPane alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
+                                             <children>
+                                                <Button fx:id="UpdateAllSocialPassportButton" mnemonicParsing="false" onAction="#updateAllSocialPassportStudentInfo" stylesheets="@../../css/button.css" text="Змінити">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                                <Button fx:id="UpdateSocialPassportButton" mnemonicParsing="false" onAction="#setNewValueSocialPassport" stylesheets="@../../css/button.css" text="Змінити" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                                <Button fx:id="UpdateInvalidPassportButton" mnemonicParsing="false" onAction="#setNewValueSocialInvalidPassport" stylesheets="@../../css/button.css" text="Змінити" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                                <Button fx:id="UpdateManyChildrenFamilyPassportButton" mnemonicParsing="false" onAction="#setNewValueManyChildrenFamilyPassport" stylesheets="@../../css/button.css" text="Змінити" visible="false">
+                                                   <StackPane.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </StackPane.margin>
+                                                </Button>
+                                             </children>
+                                          </StackPane>
+                                          <HBox alignment="CENTER_LEFT" maxHeight="18.0" maxWidth="1256.0" pickOnBounds="false" prefHeight="100.0">
+                                             <StackPane.margin>
+                                                <Insets top="70.0" />
+                                             </StackPane.margin>
+                                             <children>
+                                                <RadioButton fx:id="UpdateSocialPassportRadioButton" mnemonicParsing="false" onAction="#handleAllSocialPassportStudentInfoRadioButtonAction" visible="false">
+                                                   <HBox.margin>
+                                                      <Insets left="150.0" />
+                                                   </HBox.margin>
+                                                </RadioButton>
+                                                <RadioButton fx:id="UpdateInvalidRadioButton" mnemonicParsing="false" onAction="#handleAllSocialPassportStudentInfoRadioButtonAction" visible="false">
+                                                   <HBox.margin>
+                                                      <Insets left="350.0" />
+                                                   </HBox.margin>
+                                                </RadioButton>
+                                                <RadioButton fx:id="UpdateFamilyRadioButton" mnemonicParsing="false" onAction="#handleAllSocialPassportStudentInfoRadioButtonAction" visible="false">
+                                                   <HBox.margin>
+                                                      <Insets left="450.0" />
+                                                   </HBox.margin>
+                                                </RadioButton>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </StackPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
+               </children>
+            </StackPane>
+         </center>
+      </BorderPane>
+      <StackPane fx:id="loadingPane" prefHeight="150.0" prefWidth="200.0" visible="false">
          <children>
-            <TabPane pickOnBounds="false" prefHeight="600.0" prefWidth="1280.0" stylesheets="@../../css/tabPane.css" tabClosingPolicy="UNAVAILABLE">
-               <tabs>
-                  <Tab fx:id="GeneralInfoTab" text="Загальні відомості">
-                     <content>
-                        <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <StackPane alignment="TOP_CENTER" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0" style="-fx-border-color: #e8d58c; -fx-border-width: 2; -fx-border-radius: 5;">
-                                 <StackPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </StackPane.margin>
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" maxHeight="70.0" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Label styleClass="mainFont" stylesheets="@../../css/font.css" text="Студент:">
-                                             <font>
-                                                <Font name="Gotham-Bold" size="20.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label fx:id="FullNameStudentGeneralInfoLabel" styleClass="mainFont" stylesheets="@../../css/font.css" text="Ім'я студента">
-                                             <HBox.margin>
-                                                <Insets left="21.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <ScrollPane maxHeight="490.0" maxWidth="1256.0" pickOnBounds="false" prefHeight="490.0" prefWidth="1256.0" stylesheets="@../../css/scroollPane.css">
-                                       <content>
-                                          <StackPane alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="460.0" prefWidth="1256.0" style="-fx-background-color: #fff;">
-                                             <children>
-                                                <VBox alignment="TOP_CENTER" maxWidth="314.0" prefHeight="460.0" prefWidth="304.0">
-                                                   <children>
-                                                      <Label stylesheets="@../../css/font.css" text="Дані про освіту">
-                                                         <font>
-                                                            <Font name="Gotham-Bold" size="24.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets top="20.0" />
-                                                         </VBox.margin>
-                                                      </Label>
-                                                      <Pane maxWidth="265.0" prefHeight="340.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
-                                                         <children>
-                                                            <Label layoutX="54.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата закінчення" />
-                                                            <Label layoutX="41.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Навчальний заклад" />
-                                                            <Label layoutX="68.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Середній бал" />
-                                                            <DatePicker fx:id="EndDateEducation" editable="false" layoutX="21.0" layoutY="45.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Закінчення" styleClass="data_picker">
-                                                               <stylesheets>
-                                                                  <URL value="@../../css/style.css" />
-                                                                  <URL value="@../../css/datePicker.css" />
-                                                               </stylesheets>
-                                                            </DatePicker>
-                                                            <TextField fx:id="SchoolNameEducation" editable="false" layoutX="21.0" layoutY="125.0" prefWidth="222.0" promptText="Заклад" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                                            <TextField fx:id="GradeAvarageEducation" editable="false" layoutX="21.0" layoutY="205.0" prefWidth="222.0" promptText="Середній бал" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets top="16.0" />
-                                                         </VBox.margin>
-                                                      </Pane>
-                                                   </children>
-                                                   <StackPane.margin>
-                                                      <Insets left="2.0" />
-                                                   </StackPane.margin>
-                                                </VBox>
-                                                <VBox alignment="TOP_CENTER" maxWidth="314.0" prefHeight="460.0" prefWidth="314.0">
-                                                   <children>
-                                                      <Label stylesheets="@../../css/font.css" text="Військова служба">
-                                                         <font>
-                                                            <Font name="Gotham-Bold" size="24.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets top="20.0" />
-                                                         </VBox.margin>
-                                                      </Label>
-                                                      <Pane maxWidth="265.0" prefHeight="340.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
-                                                         <children>
-                                                            <Label fx:id="StartDateMilitaryLabel" layoutX="73.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата початку" />
-                                                            <DatePicker fx:id="StartDateMilitary" editable="false" layoutX="21.0" layoutY="45.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Початку" styleClass="data_picker">
-                                                               <stylesheets>
-                                                                  <URL value="@../../css/style.css" />
-                                                                  <URL value="@../../css/datePicker.css" />
-                                                               </stylesheets>
-                                                            </DatePicker>
-                                                            <DatePicker fx:id="EndDateMilitary" editable="false" layoutX="21.0" layoutY="125.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Закінчення" styleClass="data_picker">
-                                                               <stylesheets>
-                                                                  <URL value="@../../css/style.css" />
-                                                                  <URL value="@../../css/datePicker.css" />
-                                                               </stylesheets>
-                                                            </DatePicker>
-                                                            <Label fx:id="EndDateMilitaryLabel" layoutX="54.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата закінчення" />
-                                                            <TextField fx:id="UnitMilitary" editable="false" layoutX="21.0" layoutY="205.0" prefWidth="222.0" promptText="Підрозділ" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                                            <Label fx:id="UnitMilitaryLabel" layoutX="85.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Підрозділ" />
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets top="16.0" />
-                                                         </VBox.margin>
-                                                      </Pane>
-                                                   </children>
-                                                   <StackPane.margin>
-                                                      <Insets left="314.0" />
-                                                   </StackPane.margin>
-                                                </VBox>
-                                                <VBox alignment="TOP_CENTER" maxWidth="314.0" prefHeight="460.0" prefWidth="314.0">
-                                                   <children>
-                                                      <Label stylesheets="@../../css/font.css" text="Трудова діяльність">
-                                                         <font>
-                                                            <Font name="Gotham-Bold" size="24.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets top="20.0" />
-                                                         </VBox.margin>
-                                                      </Label>
-                                                      <Pane maxWidth="265.0" prefHeight="340.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
-                                                         <children>
-                                                            <DatePicker fx:id="StartDateJob" editable="false" layoutX="21.0" layoutY="45.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Початку" styleClass="data_picker" visible="false">
-                                                               <stylesheets>
-                                                                  <URL value="@../../css/style.css" />
-                                                                  <URL value="@../../css/datePicker.css" />
-                                                               </stylesheets>
-                                                            </DatePicker>
-                                                            <Label fx:id="StartDateJobLabel" layoutX="67.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата початку" visible="false" />
-                                                            <DatePicker fx:id="EndDateJob" editable="false" layoutX="21.0" layoutY="125.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Закінчення" styleClass="data_picker" visible="false">
-                                                               <stylesheets>
-                                                                  <URL value="@../../css/style.css" />
-                                                                  <URL value="@../../css/datePicker.css" />
-                                                               </stylesheets>
-                                                            </DatePicker>
-                                                            <Label fx:id="EndDateJobLabel" layoutX="54.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата закінчення" visible="false" />
-                                                            <Label fx:id="PlaceJobLabel" layoutX="104.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Місце" visible="false" />
-                                                            <TextField fx:id="PlaceJob" editable="false" layoutX="21.0" layoutY="205.0" prefWidth="222.0" promptText="Місце" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
-                                                            <TextField fx:id="PositionJob" editable="false" layoutX="21.0" layoutY="283.0" prefWidth="222.0" promptText="Посада" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
-                                                            <Label fx:id="PositionJobLabel" layoutX="96.0" layoutY="251.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Посада" visible="false" />
-                                                            <ComboBox fx:id="ChooseJobComboBox" layoutX="20.0" layoutY="16.0" onAction="#setStudentJobInfoField" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть Запис" styleClass="comboBox" stylesheets="@../../css/textField.css" />
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets top="16.0" />
-                                                         </VBox.margin>
-                                                      </Pane>
-                                                   </children>
-                                                   <StackPane.margin>
-                                                      <Insets left="618.0" />
-                                                   </StackPane.margin>
-                                                </VBox>
-                                                <VBox alignment="TOP_CENTER" maxWidth="314.0" prefHeight="460.0" prefWidth="314.0">
-                                                   <children>
-                                                      <Label stylesheets="@../../css/font.css" text="Інформація про батьків">
-                                                         <font>
-                                                            <Font name="Gotham-Bold" size="24.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets top="20.0" />
-                                                         </VBox.margin>
-                                                      </Label>
-                                                      <Pane maxWidth="265.0" prefHeight="340.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
-                                                         <children>
-                                                            <Label layoutX="81.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="ПІП батька" />
-                                                            <Label layoutX="78.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="ПІП матері" />
-                                                            <Label layoutX="56.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Телефон батька" />
-                                                            <TextField fx:id="PIPFatherParents" editable="false" layoutX="21.0" layoutY="45.0" prefWidth="222.0" promptText="ПІП батька" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                                            <TextField fx:id="PIPMotherParents" editable="false" layoutX="21.0" layoutY="125.0" prefWidth="222.0" promptText="ПІП матері" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                                            <TextField fx:id="PhoneFatherParents" editable="false" layoutX="21.0" layoutY="205.0" prefWidth="222.0" promptText="Телефон батька" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                                            <Label layoutX="53.0" layoutY="251.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Телефон матері" />
-                                                            <TextField fx:id="PhoneMotherParents" editable="false" layoutX="21.0" layoutY="283.0" prefWidth="222.0" promptText="Телефон матері" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets top="16.0" />
-                                                         </VBox.margin>
-                                                      </Pane>
-                                                   </children>
-                                                   <StackPane.margin>
-                                                      <Insets left="932.0" />
-                                                   </StackPane.margin>
-                                                </VBox>
-                                             </children>
-                                          </StackPane>
-                                       </content>
-                                       <StackPane.margin>
-                                          <Insets top="70.0" />
-                                       </StackPane.margin>
-                                    </ScrollPane>
-                                    <StackPane alignment="BOTTOM_LEFT" pickOnBounds="false">
-                                       <children>
-                                          <Button fx:id="BackButton" mnemonicParsing="false" onAction="#back" stylesheets="@../../css/button.css" text="Повернутися">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" left="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                          <Button fx:id="CancelUpdateStudentInfoButton" mnemonicParsing="false" onAction="#cancelUpdateStudentInfo" stylesheets="@../../css/button.css" text="Скасувати" visible="false">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" left="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                       </children>
-                                    </StackPane>
-                                    <StackPane alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
-                                       <children>
-                                          <Button fx:id="UpdateStudentInfoButton" mnemonicParsing="false" onAction="#updateGeneralInfoStudentInfo" stylesheets="@../../css/button.css" text="Змінити">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" right="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                          <Button fx:id="UpdateEducationInfoButton" mnemonicParsing="false" onAction="#setNewValueEducationInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false">
-                                             <StackPane.margin>
-                                                <Insets left="10.0" right="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                          <Button fx:id="UpdateMilitaryInfoButton" mnemonicParsing="false" onAction="#setNewValueMilitaryInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" right="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                          <Button fx:id="UpdateJobInfoButton" mnemonicParsing="false" onAction="#setNewValueJobInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" right="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                          <Button fx:id="UpdateParentsInfoButton" mnemonicParsing="false" onAction="#setNewValueParentsInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" right="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                       </children>
-                                    </StackPane>
-                                    <HBox alignment="CENTER_LEFT" maxHeight="18.0" maxWidth="1256.0" pickOnBounds="false" prefHeight="100.0">
-                                       <StackPane.margin>
-                                          <Insets top="70.0" />
-                                       </StackPane.margin>
-                                       <children>
-                                          <RadioButton fx:id="UpdateEducationInfoRadioButton" mnemonicParsing="false" onAction="#handleGeneralInfoRadioButtonAction" visible="false">
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="RadioButton" />
-                                             </toggleGroup>
-                                             <HBox.margin>
-                                                <Insets left="150.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <RadioButton fx:id="UpdateMilitaryInfoRadioButton" mnemonicParsing="false" onAction="#handleGeneralInfoRadioButtonAction" visible="false">
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="RadioButton1" />
-                                             </toggleGroup>
-                                             <HBox.margin>
-                                                <Insets left="300.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <RadioButton fx:id="UpdateJobInfoRadioButton" mnemonicParsing="false" onAction="#handleGeneralInfoRadioButtonAction" visible="false">
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="RadioButton2" />
-                                             </toggleGroup>
-                                             <HBox.margin>
-                                                <Insets left="290.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <RadioButton fx:id="UpdateParentsInfoRadioButton" mnemonicParsing="false" onAction="#handleGeneralInfoRadioButtonAction" visible="false">
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="RadioButton3" />
-                                             </toggleGroup>
-                                             <HBox.margin>
-                                                <Insets left="290.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                           </children>
-                        </StackPane>
-                     </content>
-                  </Tab>
-                  <Tab fx:id="SocialAndGroupActivityTab" text="Громадська діяльність">
-                     <content>
-                        <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <StackPane alignment="TOP_CENTER" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0" style="-fx-border-color: #e8d58c; -fx-border-width: 2; -fx-border-radius: 5;">
-                                 <StackPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </StackPane.margin>
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" maxHeight="70.0" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Label styleClass="mainFont" stylesheets="@../../css/font.css" text="Студент:">
-                                             <font>
-                                                <Font name="Gotham-Bold" size="20.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label fx:id="FullNameStudentSocialLabel" styleClass="mainFont" stylesheets="@../../css/font.css" text="Ім'я студента">
-                                             <HBox.margin>
-                                                <Insets left="21.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <ScrollPane maxHeight="490.0" maxWidth="1256.0" pickOnBounds="false" prefHeight="490.0" prefWidth="1256.0" stylesheets="@../../css/scroollPane.css">
-                                       <content>
-                                          <StackPane alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="460.0" prefWidth="1256.0" style="-fx-background-color: #fff;">
-                                             <children>
-                                                <VBox alignment="TOP_CENTER" maxWidth="628.0" prefHeight="200.0" prefWidth="100.0">
-                                                   <children>
-                                                      <Label stylesheets="@../../css/font.css" text="Громадська діяльність">
-                                                         <font>
-                                                            <Font name="Gotham-Bold" size="24.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets left="200.0" top="20.0" />
-                                                         </VBox.margin>
-                                                      </Label>
-                                                      <Pane maxWidth="265.0" prefHeight="340.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
-                                                         <children>
-                                                            <ComboBox fx:id="SemesterSocial" layoutX="20.0" layoutY="45.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false" />
-                                                            <Label fx:id="SemesterSocialActivityLabel" layoutX="90.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Семестр" visible="false" />
-                                                            <Label fx:id="DateSocialActivityLabel" layoutX="106.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата" visible="false" />
-                                                            <Label fx:id="ActivitySocialActivityLabel" layoutX="79.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Діяльність" visible="false" />
-                                                            <TextField fx:id="ActivitySocial" editable="false" layoutX="18.0" layoutY="205.0" prefWidth="222.0" promptText="Діяльність" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
-                                                            <DatePicker fx:id="DateSocial" editable="false" layoutX="20.0" layoutY="125.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата" styleClass="data_picker" visible="false">
-                                                               <stylesheets>
-                                                                  <URL value="@../../css/style.css" />
-                                                                  <URL value="@../../css/datePicker.css" />
-                                                               </stylesheets>
-                                                            </DatePicker>
-                                                            <ComboBox fx:id="ChooseSocialActivityComboBox" layoutX="22.0" layoutY="16.0" onAction="#setSocialActivityInfoField" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть Запис" styleClass="comboBox" stylesheets="@../../css/textField.css" />
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets left="200.0" top="16.0" />
-                                                         </VBox.margin>
-                                                      </Pane>
-                                                   </children>
-                                                </VBox>
-                                                <VBox alignment="TOP_CENTER" maxWidth="628.0" prefHeight="200.0" prefWidth="100.0">
-                                                   <children>
-                                                      <Label stylesheets="@../../css/font.css" text="Гурткова діяльність">
-                                                         <font>
-                                                            <Font name="Gotham-Bold" size="24.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets right="200.0" top="20.0" />
-                                                         </VBox.margin>
-                                                      </Label>
-                                                      <Pane maxWidth="265.0" prefHeight="340.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
-                                                         <children>
-                                                            <Label fx:id="SemesterGroupActivityLabel" layoutX="90.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Cеместр" visible="false" />
-                                                            <ComboBox fx:id="SemesterGroup" layoutX="20.0" layoutY="45.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false" />
-                                                            <Label fx:id="NameGroupActivityLabel" layoutX="68.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Назва гуртка" visible="false" />
-                                                            <Label fx:id="NoteGroupActivityLabel" layoutX="83.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Примітка" visible="false" />
-                                                            <TextField fx:id="GroupName" editable="false" layoutX="20.0" layoutY="125.0" prefWidth="222.0" promptText="Назва гуртка" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
-                                                            <TextField fx:id="NoteGroup" editable="false" layoutX="20.0" layoutY="205.0" prefWidth="222.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
-                                                            <ComboBox fx:id="ChooseGroupActivityComboBox" layoutX="22.0" layoutY="16.0" onAction="#setStudentGroupInfoField" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть Запис" styleClass="comboBox" stylesheets="@../../css/textField.css" />
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets right="200.0" top="16.0" />
-                                                         </VBox.margin>
-                                                      </Pane>
-                                                   </children>
-                                                   <StackPane.margin>
-                                                      <Insets left="628.0" />
-                                                   </StackPane.margin>
-                                                </VBox>
-                                             </children>
-                                          </StackPane>
-                                       </content>
-                                       <StackPane.margin>
-                                          <Insets top="70.0" />
-                                       </StackPane.margin>
-                                    </ScrollPane>
-                                    <StackPane alignment="BOTTOM_LEFT" pickOnBounds="false">
-                                       <children>
-                                          <Button fx:id="BackSocialActivityButton" mnemonicParsing="false" onAction="#back" stylesheets="@../../css/button.css" text="Повернутися">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" left="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                          <Button fx:id="CancelUpdateSocialAndGroupActivityButton" mnemonicParsing="false" onAction="#cancelUpdateSocialAndGroupActivityStudentInfo" stylesheets="@../../css/button.css" text="Скасувати" visible="false">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" left="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                       </children>
-                                    </StackPane>
-                                    <StackPane alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
-                                       <children>
-                                          <Button fx:id="UpdateSocialAndGroupActivityButton" mnemonicParsing="false" onAction="#updateSocialAndGroupActivityStudentInfo" stylesheets="@../../css/button.css" text="Змінити">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" right="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                          <Button fx:id="UpdateSocialActivityButton" mnemonicParsing="false" onAction="#setNewValueSocialActivityInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" right="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                          <Button fx:id="UpdateGroupActivityButton" mnemonicParsing="false" onAction="#setNewValueGroupActivityInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" right="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                       </children>
-                                    </StackPane>
-                                    <HBox alignment="CENTER_LEFT" maxHeight="18.0" maxWidth="1256.0" pickOnBounds="false" prefHeight="100.0">
-                                       <StackPane.margin>
-                                          <Insets top="70.0" />
-                                       </StackPane.margin>
-                                       <children>
-                                          <RadioButton fx:id="UpdateSocialActivityRadioButton" mnemonicParsing="false" onAction="#handleSocialAndGroupActivityInfoRadioButtonAction" visible="false">
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="RadioButton11" />
-                                             </toggleGroup>
-                                             <HBox.margin>
-                                                <Insets left="410.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <RadioButton fx:id="UpdateGroupActivityRadioButton" mnemonicParsing="false" onAction="#handleSocialAndGroupActivityInfoRadioButtonAction" visible="false">
-                                             <toggleGroup>
-                                                <ToggleGroup fx:id="RadioButton12" />
-                                             </toggleGroup>
-                                             <HBox.margin>
-                                                <Insets left="410.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                           </children>
-                        </StackPane>
-                     </content>
-                  </Tab>
-                  <Tab fx:id="IndividualSupportTab" text="Супровід">
-                     <content>
-                        <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <StackPane alignment="TOP_CENTER" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0" style="-fx-border-color: #e8d58c; -fx-border-width: 2; -fx-border-radius: 5;">
-                                 <StackPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </StackPane.margin>
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" maxHeight="70.0" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Label styleClass="mainFont" stylesheets="@../../css/font.css" text="Студент:">
-                                             <font>
-                                                <Font name="Gotham-Bold" size="20.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label fx:id="FullNameStudentSupportLabel" styleClass="mainFont" stylesheets="@../../css/font.css" text="Ім'я студента">
-                                             <HBox.margin>
-                                                <Insets left="21.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <ScrollPane maxHeight="490.0" maxWidth="1256.0" pickOnBounds="false" prefHeight="490.0" prefWidth="1256.0" stylesheets="@../../css/scroollPane.css">
-                                       <content>
-                                          <StackPane alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="460.0" prefWidth="1256.0" style="-fx-background-color: #fff;">
-                                             <children>
-                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
-                                                   <children>
-                                                      <Label stylesheets="@../../css/font.css" text="Супровід">
-                                                         <font>
-                                                            <Font name="Gotham-Bold" size="24.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets top="16.0" />
-                                                         </VBox.margin>
-                                                      </Label>
-                                                      <Pane maxWidth="265.0" prefHeight="340.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
-                                                         <children>
-                                                            <ComboBox fx:id="SemesterSupport" layoutX="20.0" layoutY="45.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false" />
-                                                            <Label fx:id="SemesterSupportLabel" layoutX="88.0" layoutY="11.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Семестр" visible="false" />
-                                                            <Label fx:id="DateSupportLabel" layoutX="105.0" layoutY="91.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата" visible="false" />
-                                                            <Label fx:id="ContentSupportLabel" layoutX="102.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Зміст" visible="false" />
-                                                            <TextField fx:id="ContentSupport" editable="false" layoutX="18.0" layoutY="205.0" prefWidth="222.0" promptText="Зміст" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
-                                                            <DatePicker fx:id="DateSupport" editable="false" layoutX="18.0" layoutY="125.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата" styleClass="data_picker" visible="false">
-                                                               <stylesheets>
-                                                                  <URL value="@../../css/style.css" />
-                                                                  <URL value="@../../css/datePicker.css" />
-                                                               </stylesheets>
-                                                            </DatePicker>
-                                                            <ComboBox fx:id="ChooseIndividualSupportComboBox" layoutX="22.0" layoutY="16.0" onAction="#setStudentIndividualSupportInfoField" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть Запис" styleClass="comboBox" stylesheets="@../../css/textField.css" />
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets top="20.0" />
-                                                         </VBox.margin>
-                                                      </Pane>
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </StackPane>
-                                       </content>
-                                       <StackPane.margin>
-                                          <Insets top="70.0" />
-                                       </StackPane.margin>
-                                    </ScrollPane>
-                                    <StackPane alignment="BOTTOM_LEFT" pickOnBounds="false">
-                                       <children>
-                                          <Button fx:id="BackIndividualSupportButton" mnemonicParsing="false" onAction="#back" stylesheets="@../../css/button.css" text="Повернутися">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" left="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                          <Button fx:id="CancelUpdateIndividualSupportButton" mnemonicParsing="false" onAction="#cancelUpdateIndividualSupportButton" stylesheets="@../../css/button.css" text="Скасувати" visible="false">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" left="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                       </children>
-                                    </StackPane>
-                                    <StackPane alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
-                                       <children>
-                                          <Button fx:id="UpdateIndividualSupportButton" mnemonicParsing="false" onAction="#updateIndividualSupportStudentInfo" stylesheets="@../../css/button.css" text="Змінити">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" right="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                          <Button fx:id="UpdateIndividualSupportButtonInDB" mnemonicParsing="false" onAction="#setNewValueIndividualSupportInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" right="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                       </children>
-                                    </StackPane>
-                                 </children>
-                              </StackPane>
-                           </children>
-                        </StackPane>
-                     </content>
-                  </Tab>
-                  <Tab fx:id="PromotionTab" text="Заохочення">
-                     <content>
-                        <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <StackPane alignment="TOP_CENTER" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0" style="-fx-border-color: #e8d58c; -fx-border-width: 2; -fx-border-radius: 5;">
-                                 <StackPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </StackPane.margin>
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" maxHeight="70.0" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Label styleClass="mainFont" stylesheets="@../../css/font.css" text="Студент:">
-                                             <font>
-                                                <Font name="Gotham-Bold" size="20.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label fx:id="FullNameStudentPromotionLabel" styleClass="mainFont" stylesheets="@../../css/font.css" text="Ім'я студента">
-                                             <HBox.margin>
-                                                <Insets left="21.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <ScrollPane maxHeight="490.0" maxWidth="1256.0" pickOnBounds="false" prefHeight="490.0" prefWidth="1256.0" stylesheets="@../../css/scroollPane.css">
-                                       <content>
-                                          <StackPane alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="460.0" prefWidth="1256.0" style="-fx-background-color: #fff;">
-                                             <children>
-                                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
-                                                   <children>
-                                                      <Label stylesheets="@../../css/font.css" text="Заохочення">
-                                                         <font>
-                                                            <Font name="Gotham-Bold" size="24.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets top="20.0" />
-                                                         </VBox.margin>
-                                                      </Label>
-                                                      <Pane maxWidth="265.0" prefHeight="340.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
-                                                         <children>
-                                                            <ComboBox fx:id="SemesterPromotion" layoutX="20.0" layoutY="45.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false" />
-                                                            <Label fx:id="SemesterPromotionLabel" layoutX="91.0" layoutY="14.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Семестр" visible="false" />
-                                                            <Label fx:id="DatePromotionLabel" layoutX="106.0" layoutY="93.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата" visible="false" />
-                                                            <Label fx:id="ContentPromotionLabel" layoutX="103.0" layoutY="171.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Зміст" visible="false" />
-                                                            <TextField fx:id="ContentPromotion" editable="false" layoutX="20.0" layoutY="205.0" prefWidth="222.0" promptText="Зміст" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
-                                                            <DatePicker fx:id="DatePromotion" editable="false" layoutX="20.0" layoutY="125.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата" styleClass="data_picker" visible="false">
-                                                               <stylesheets>
-                                                                  <URL value="@../../css/style.css" />
-                                                                  <URL value="@../../css/datePicker.css" />
-                                                               </stylesheets>
-                                                            </DatePicker>
-                                                            <ComboBox fx:id="ChoosePromotionComboBox" layoutX="22.0" layoutY="19.0" onAction="#setStudentPromotionInfoField" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть Запис" styleClass="comboBox" stylesheets="@../../css/textField.css" />
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets top="16.0" />
-                                                         </VBox.margin>
-                                                      </Pane>
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </StackPane>
-                                       </content>
-                                       <StackPane.margin>
-                                          <Insets top="70.0" />
-                                       </StackPane.margin>
-                                    </ScrollPane>
-                                    <StackPane alignment="BOTTOM_LEFT" pickOnBounds="false">
-                                       <children>
-                                          <Button fx:id="BackPromotionButton" mnemonicParsing="false" onAction="#back" stylesheets="@../../css/button.css" text="Повернутися">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" left="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                          <Button fx:id="CancelUpdatePromotionButton" mnemonicParsing="false" onAction="#cancelUpdatePromotionInfo" stylesheets="@../../css/button.css" text="Скасувати" visible="false">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" left="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                       </children>
-                                    </StackPane>
-                                    <StackPane alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
-                                       <children>
-                                          <Button fx:id="UpdatePromotionButton" mnemonicParsing="false" onAction="#updatePromotionStudentInfo" stylesheets="@../../css/button.css" text="Змінити">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" right="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                          <Button fx:id="UpdatePromotionButtonInDB" mnemonicParsing="false" onAction="#setNewValuePromotionInfo" stylesheets="@../../css/button.css" text="Змінити" visible="false">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" right="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                       </children>
-                                    </StackPane>
-                                 </children>
-                              </StackPane>
-                           </children>
-                        </StackPane>
-                     </content>
-                  </Tab>
-                  <Tab fx:id="SocialPassportTab" text="Соціальний паспорт">
-                     <content>
-                        <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <StackPane alignment="TOP_CENTER" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0" style="-fx-border-color: #e8d58c; -fx-border-width: 2; -fx-border-radius: 5;">
-                                 <StackPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </StackPane.margin>
-                                 <children>
-                                    <HBox alignment="CENTER_LEFT" maxHeight="70.0" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Label styleClass="mainFont" stylesheets="@../../css/font.css" text="Студент:">
-                                             <font>
-                                                <Font name="Gotham-Bold" size="20.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                          <Label fx:id="FullStudentNameSocialPassport" styleClass="mainFont" stylesheets="@../../css/font.css" text="Ім'я студента">
-                                             <HBox.margin>
-                                                <Insets left="21.0" />
-                                             </HBox.margin>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                    <ScrollPane maxHeight="490.0" maxWidth="1256.0" pickOnBounds="false" prefHeight="490.0" prefWidth="1256.0" stylesheets="@../../css/scroollPane.css">
-                                       <content>
-                                          <StackPane alignment="CENTER_LEFT" pickOnBounds="false" prefHeight="460.0" prefWidth="1256.0" style="-fx-background-color: #fff;">
-                                             <children>
-                                                <VBox alignment="TOP_CENTER" maxWidth="314.0" prefHeight="200.0" prefWidth="100.0">
-                                                   <children>
-                                                      <Label stylesheets="@../../css/font.css" text="Загальні категорії">
-                                                         <font>
-                                                            <Font name="Gotham-Bold" size="24.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets top="20.0" />
-                                                         </VBox.margin>
-                                                      </Label>
-                                                      <Pane maxWidth="265.0" prefHeight="370.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
-                                                         <children>
-                                                            <Label fx:id="StartDateSocialPassportLabel" layoutX="68.0" layoutY="14.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата початку" visible="false" />
-                                                            <DatePicker fx:id="StartDateSocialPassport" editable="false" layoutX="20.0" layoutY="43.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Початку" styleClass="data_picker" visible="false">
-                                                               <stylesheets>
-                                                                  <URL value="@../../css/style.css" />
-                                                                  <URL value="@../../css/datePicker.css" />
-                                                               </stylesheets>
-                                                            </DatePicker>
-                                                            <Label fx:id="EndDateSocialPassportLabel" layoutX="53.0" layoutY="84.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата Закінчення" visible="false" />
-                                                            <Label fx:id="SemesterSocialPassportLabel" layoutX="87.0" layoutY="154.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Семестр" visible="false" />
-                                                            <Label fx:id="CategorySocialPassportLabel" layoutX="84.0" layoutY="224.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Категорія" visible="false" />
-                                                            <Label fx:id="NoteSocialPassportLabel" layoutX="84.0" layoutY="294.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Примітка" visible="false" />
-                                                            <DatePicker fx:id="EndDateSocialPassport" editable="false" layoutX="20.0" layoutY="113.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Закінчення" styleClass="data_picker" visible="false">
-                                                               <stylesheets>
-                                                                  <URL value="@../../css/style.css" />
-                                                                  <URL value="@../../css/datePicker.css" />
-                                                               </stylesheets>
-                                                            </DatePicker>
-                                                            <ComboBox fx:id="SemesterSocialPassport" layoutX="20.0" layoutY="183.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false" />
-                                                            <ComboBox fx:id="CategorySocialPassport" layoutX="20.0" layoutY="253.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть категорію" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false" />
-                                                            <TextField fx:id="NoteSocialPassport" editable="false" layoutX="20.0" layoutY="323.0" prefWidth="222.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" visible="false" />
-                                                            <ComboBox fx:id="ChooseSocialPassportComboBox" layoutX="22.0" layoutY="20.0" onAction="#setSocialPassportInfoField" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть Запис" styleClass="comboBox" stylesheets="@../../css/textField.css" />
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets top="16.0" />
-                                                         </VBox.margin>
-                                                      </Pane>
-                                                   </children>
-                                                </VBox>
-                                                <VBox alignment="TOP_CENTER" maxWidth="414.0" prefHeight="200.0" prefWidth="100.0">
-                                                   <StackPane.margin>
-                                                      <Insets left="314.0" />
-                                                   </StackPane.margin>
-                                                   <children>
-                                                      <Label stylesheets="@../../css/font.css" text="Інваліди">
-                                                         <font>
-                                                            <Font name="Gotham-Bold" size="24.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets top="20.0" />
-                                                         </VBox.margin>
-                                                      </Label>
-                                                      <Pane maxWidth="265.0" prefHeight="370.0" prefWidth="265.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
-                                                         <children>
-                                                            <Label layoutX="68.0" layoutY="14.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата початку" />
-                                                            <DatePicker fx:id="StartDateInvalid" editable="false" layoutX="20.0" layoutY="43.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Початку" styleClass="data_picker">
-                                                               <stylesheets>
-                                                                  <URL value="@../../css/style.css" />
-                                                                  <URL value="@../../css/datePicker.css" />
-                                                               </stylesheets>
-                                                            </DatePicker>
-                                                            <Label layoutX="53.0" layoutY="84.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата Закінчення" />
-                                                            <Label layoutX="87.0" layoutY="154.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Семестр" />
-                                                            <Label layoutX="24.0" layoutY="224.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Категорія інвалідності" />
-                                                            <Label layoutX="84.0" layoutY="294.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Примітка" />
-                                                            <DatePicker fx:id="EndDateInvalid" editable="false" layoutX="20.0" layoutY="113.0" prefHeight="35.0" prefWidth="222.0" promptText="Дата Закінчення" styleClass="data_picker">
-                                                               <stylesheets>
-                                                                  <URL value="@../../css/style.css" />
-                                                                  <URL value="@../../css/datePicker.css" />
-                                                               </stylesheets>
-                                                            </DatePicker>
-                                                            <ComboBox fx:id="SemesterInvalid" layoutX="20.0" layoutY="183.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" />
-                                                            <ComboBox fx:id="CategoryInvalid" layoutX="20.0" layoutY="253.0" prefHeight="35.0" prefWidth="222.0" promptText="Виберіть категорію" styleClass="comboBox" stylesheets="@../../css/textField.css" />
-                                                            <TextField fx:id="NoteInvalid" editable="false" layoutX="20.0" layoutY="323.0" prefWidth="222.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets top="16.0" />
-                                                         </VBox.margin>
-                                                      </Pane>
-                                                   </children>
-                                                </VBox>
-                                                <VBox alignment="TOP_CENTER" maxWidth="528.0" prefHeight="200.0" prefWidth="100.0">
-                                                   <StackPane.margin>
-                                                      <Insets left="728.0" />
-                                                   </StackPane.margin>
-                                                   <children>
-                                                      <Label stylesheets="@../../css/font.css" text="Багатодітні родини">
-                                                         <font>
-                                                            <Font name="Gotham-Bold" size="24.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets top="20.0" />
-                                                         </VBox.margin>
-                                                      </Label>
-                                                      <Pane maxWidth="470.0" prefHeight="370.0" prefWidth="470.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 5;">
-                                                         <children>
-                                                            <Label layoutX="48.0" layoutY="14.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата початку" />
-                                                            <DatePicker fx:id="StartDateFamily" editable="false" layoutX="17.0" layoutY="43.0" prefHeight="35.0" prefWidth="205.0" promptText="Дата Початку" styleClass="data_picker">
-                                                               <stylesheets>
-                                                                  <URL value="@../../css/style.css" />
-                                                                  <URL value="@../../css/datePicker.css" />
-                                                               </stylesheets>
-                                                            </DatePicker>
-                                                            <DatePicker fx:id="EndDateFamily" editable="false" layoutX="247.0" layoutY="43.0" prefHeight="35.0" prefWidth="205.0" promptText="Дата Закінчення" styleClass="data_picker">
-                                                               <stylesheets>
-                                                                  <URL value="@../../css/style.css" />
-                                                                  <URL value="@../../css/datePicker.css" />
-                                                               </stylesheets>
-                                                            </DatePicker>
-                                                            <Label layoutX="271.0" layoutY="14.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Дата закінчення" />
-                                                            <Label layoutX="87.0" layoutY="92.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Семест" />
-                                                            <ComboBox fx:id="SemesterFamily" layoutX="19.0" layoutY="123.0" prefHeight="35.0" prefWidth="205.0" promptText="Виберіть семестр" styleClass="comboBox" stylesheets="@../../css/textField.css" />
-                                                            <Label layoutX="279.0" layoutY="92.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Кількість дітей" />
-                                                            <TextField fx:id="CountChildrenFamily" editable="false" layoutX="247.0" layoutY="123.0" prefWidth="205.0" promptText="Кількість дітей" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                                            <Label layoutX="48.0" layoutY="172.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Менше 18 років" />
-                                                            <TextField fx:id="LessThan18Family" editable="false" layoutX="19.0" layoutY="203.0" prefWidth="205.0" promptText="Менше 18 років" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                                            <Label layoutX="276.0" layoutY="172.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Більше 18 років" />
-                                                            <TextField fx:id="MuchThan18Family" editable="false" layoutX="247.0" layoutY="203.0" prefWidth="205.0" promptText="Більше 18 років" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                                            <Label layoutX="188.0" layoutY="262.0" styleClass="littleFont" stylesheets="@../../css/font.css" text="Примітка" />
-                                                            <TextField fx:id="NoteFamily" editable="false" layoutX="21.0" layoutY="294.0" prefHeight="35.0" prefWidth="422.0" promptText="Примітка" styleClass="textField" stylesheets="@../../css/textField.css" />
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets top="16.0" />
-                                                         </VBox.margin>
-                                                      </Pane>
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </StackPane>
-                                       </content>
-                                       <StackPane.margin>
-                                          <Insets top="70.0" />
-                                       </StackPane.margin>
-                                    </ScrollPane>
-                                    <StackPane alignment="BOTTOM_LEFT" pickOnBounds="false">
-                                       <children>
-                                          <Button fx:id="BackAllSocialPassportButton" mnemonicParsing="false" onAction="#back" stylesheets="@../../css/button.css" text="Повернутися">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" left="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                          <Button fx:id="CancelUpdateSocialPassportButton" mnemonicParsing="false" onAction="#cancelAllSocialPassportStudentInfo" stylesheets="@../../css/button.css" text="Скасувати" visible="false">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" left="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                       </children>
-                                    </StackPane>
-                                    <StackPane alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="150.0" prefWidth="200.0">
-                                       <children>
-                                          <Button fx:id="UpdateAllSocialPassportButton" mnemonicParsing="false" onAction="#updateAllSocialPassportStudentInfo" stylesheets="@../../css/button.css" text="Змінити">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" right="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                          <Button fx:id="UpdateSocialPassportButton" mnemonicParsing="false" onAction="#setNewValueSocialPassport" stylesheets="@../../css/button.css" text="Змінити" visible="false">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" right="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                          <Button fx:id="UpdateInvalidPassportButton" mnemonicParsing="false" onAction="#setNewValueSocialInvalidPassport" stylesheets="@../../css/button.css" text="Змінити" visible="false">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" right="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                          <Button fx:id="UpdateManyChildrenFamilyPassportButton" mnemonicParsing="false" onAction="#setNewValueManyChildrenFamilyPassport" stylesheets="@../../css/button.css" text="Змінити" visible="false">
-                                             <StackPane.margin>
-                                                <Insets bottom="10.0" right="10.0" />
-                                             </StackPane.margin>
-                                          </Button>
-                                       </children>
-                                    </StackPane>
-                                    <HBox alignment="CENTER_LEFT" maxHeight="18.0" maxWidth="1256.0" pickOnBounds="false" prefHeight="100.0">
-                                       <StackPane.margin>
-                                          <Insets top="70.0" />
-                                       </StackPane.margin>
-                                       <children>
-                                          <RadioButton fx:id="UpdateSocialPassportRadioButton" mnemonicParsing="false" onAction="#handleAllSocialPassportStudentInfoRadioButtonAction" visible="false">
-                                             <HBox.margin>
-                                                <Insets left="150.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <RadioButton fx:id="UpdateInvalidRadioButton" mnemonicParsing="false" onAction="#handleAllSocialPassportStudentInfoRadioButtonAction" visible="false">
-                                             <HBox.margin>
-                                                <Insets left="350.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                          <RadioButton fx:id="UpdateFamilyRadioButton" mnemonicParsing="false" onAction="#handleAllSocialPassportStudentInfoRadioButtonAction" visible="false">
-                                             <HBox.margin>
-                                                <Insets left="450.0" />
-                                             </HBox.margin>
-                                          </RadioButton>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                           </children>
-                        </StackPane>
-                     </content>
-                  </Tab>
-               </tabs>
-            </TabPane>
+            <ProgressIndicator />
          </children>
       </StackPane>
-   </center>
-</BorderPane>
+   </children>
+</StackPane>

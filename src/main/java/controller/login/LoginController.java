@@ -120,7 +120,8 @@ public class LoginController extends HelloApplication implements Initializable, 
                 throw new IllegalArgumentException("Сесія null");
             }
         } catch (Exception e) {
-            throw new IllegalArgumentException("немає інтернету");
+            loadAndShowLoginWarning("/fxml/notifications/warningNotifications/LostInternetConnection.fxml");
+            throw new IllegalArgumentException("Немає підключення до інтернету");
         }finally {
             HibernateUtil.closeSession(session);
         }

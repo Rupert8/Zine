@@ -7,12 +7,15 @@ import hibernate.entity.*;
 import interfaces.WindowActions.WindowControl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import services.ScreenService;
 import services.ValidateValueService;
 
@@ -249,6 +252,12 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     private HBox MenuBarHBox;
     @FXML
     private Button minimizeWindowButton,maximizeWindowButton,closeWindowButton;
+
+    @FXML
+    private StackPane loadingPane;
+
+    @FXML
+    private BorderPane WorkPlanBorderPane;
 
     private int semesterSocialValue;
     private int semesterGroupValue;
@@ -1467,23 +1476,56 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
         CategoryInvalid.getItems().addAll("І група інвалідності","ІІ група інвалідності","ІІІ група інвалідності","Дитяча інвалідність");
     }
 
+    public void loadPane() {
+        // Спочатку ховаємо прогрес-бар
+        loadingPane.setVisible(true);
+        WorkPlanBorderPane.setDisable(true);
+
+        // Завантажуємо дані в окремому потоці, щоб не блокувати інтерфейс
+        Task<Void> loadDataTask = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                setStudentEducationInfoField();
+                setStudentMilitaryInfoField();
+                setStudentParentsInfoField();
+                setInvalidPassportInfoField();
+                setManyChildrenFamily();
+
+                setStudentNameInLabel();
+
+                loadAndSetSocialPassportInfo();
+                loadAndSetJobInfo();
+                loadAndSetSocialActivityInfo();
+                loadAndSetGroupActivityInfo();
+                loadAndSetIndividualSupportInfo();
+                loadAndSetPromotionInfo();
+
+                return null;
+            }
+
+            @Override
+            protected void succeeded() {
+                // Коли завантаження завершено, ховаємо прогрес-бар
+                loadingPane.setVisible(false);
+                WorkPlanBorderPane.setDisable(false);
+            }
+
+            @Override
+            protected void failed() {
+                // Якщо щось пішло не так, ховаємо прогрес-бар і виводимо помилку
+                loadingPane.setVisible(false);
+                System.out.print("Сталася помилка при завантаженні даних");
+            }
+        };
+
+        // Запускаємо завантаження в окремому потоці
+        new Thread(loadDataTask).start();
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-            setStudentEducationInfoField();
-            setStudentMilitaryInfoField();
-            setStudentParentsInfoField();
-            setInvalidPassportInfoField();
-            setManyChildrenFamily();
-
-            setStudentNameInLabel();
-
-            loadAndSetSocialPassportInfo();
-            loadAndSetJobInfo();
-            loadAndSetSocialActivityInfo();
-            loadAndSetGroupActivityInfo();
-            loadAndSetIndividualSupportInfo();
-            loadAndSetPromotionInfo();
-
+        loadPane();
     }
 
     @Override

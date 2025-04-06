@@ -3,12 +3,17 @@ package controller.admin;
 import data.DisplayDate;
 import hibernate.entity.Curators;
 import hibernate.entity.StudentInfo;
+import interfaces.WindowActions.WindowControl;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import services.ScreenService;
 import start.zine.HelloApplication;
 import tableView.RemovedStudentPrototype;
 
@@ -17,7 +22,7 @@ import java.sql.Date;
 import java.util.ResourceBundle;
 
 
-public class RemovedStudentController extends HelloApplication implements Initializable {
+public class RemovedStudentController extends HelloApplication implements Initializable, WindowControl {
     @FXML
     private TableView<RemovedStudentPrototype> RemovedStudentTable;
 
@@ -45,6 +50,11 @@ public class RemovedStudentController extends HelloApplication implements Initia
     @FXML
     private TableColumn<RemovedStudentPrototype, String> SurnameColumn;
 
+    @FXML
+    private HBox Hbox;
+    @FXML
+    private Button minimizeWindowButton,maximizeWindowButton,closeWindowButton;
+
     private void setDataInGroupTable(ObservableList<RemovedStudentPrototype> studentInfo){
         RemovedStudentTable.setItems(studentInfo);
 
@@ -67,6 +77,31 @@ public class RemovedStudentController extends HelloApplication implements Initia
     public void initialize(URL url, ResourceBundle resourceBundle) {
         displayRemovedStudentData();
         RemovedStudentTable.getSelectionModel().clearSelection();
+    }
+
+    @Override
+    public void setMinimizeWindowButton() {
+        ScreenService.minimized_Window(minimizeWindowButton);
+    }
+
+    @Override
+    public void setMaximizeWindowButton() {
+        ScreenService.maximized_Window(maximizeWindowButton.getScene().getWindow());
+    }
+
+    @Override
+    public void setCloseWindow() {
+        ScreenService.close_Window();
+    }
+
+    @Override
+    public void setDragWindow(MouseEvent dragEvent) {
+        ScreenService.paneDragged(dragEvent,Hbox);
+    }
+
+    @Override
+    public void setPressedWindow(MouseEvent mouseEvent) {
+        ScreenService.panePressed(mouseEvent);
     }
 }
 

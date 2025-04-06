@@ -4,6 +4,7 @@ import interfaces.WindowActions.WindowControl;
 import data.DisplayDate;
 import data.SearchStudentData;
 import hibernate.entity.StudentInfo;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -186,6 +187,7 @@ public class AdminMainController extends HelloApplication implements WindowContr
 
     public void initialize() {
         correctVisible();
+        //AddressColumn.setPrefWidth(262);
     }
 
     @Override

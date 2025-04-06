@@ -190,7 +190,7 @@
                               </Button>
                            </children>
                         </HBox>
-                        <HBox fx:id="SocialPassportHBox" alignment="CENTER" prefHeight="50.0" prefWidth="329.0">
+                        <HBox fx:id="SocialPassportHBox" alignment="CENTER" prefHeight="50.0" prefWidth="330.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#switchToAdminSocialPassport" prefHeight="45.0" prefWidth="330.0" style="-fx-background-color: #fff; -fx-text-fill: #000000; -fx-background-radius: 30px;" text="Соціальний паспорт">
                                  <font>
@@ -207,24 +207,21 @@
          <center>
             <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <center>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <StackPane BorderPane.alignment="CENTER">
                      <children>
-                        <TableView fx:id="GroupTable" editable="true" prefHeight="550.0" prefWidth="1240.0" styleClass="table" stylesheets="@../../css/style.css">
+                        <TableView fx:id="GroupTable" editable="true" styleClass="table" stylesheets="@../../css/style.css">
                            <columns>
-                              <TableColumn fx:id="NumberColumn" prefWidth="43.0" resizable="false" style="-fx-background-color: #fff;" styleClass="column" text="№" />
+                              <TableColumn fx:id="NumberColumn" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
                               <TableColumn fx:id="SurnameColumn" prefWidth="178.3" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
                               <TableColumn fx:id="NameColumn" prefWidth="178.3" style="-fx-background-color: #fff;" styleClass="column" text="Ім`я" />
                               <TableColumn fx:id="MiddleNameColumn" prefWidth="178.3" style="-fx-background-color: #fff;" styleClass="column" text="По-батькові" />
-                              <TableColumn fx:id="DateBirthDayColumn" prefWidth="210.0" style="-fx-background-color: #fff;" styleClass="column" text="Дата Народження" />
-                              <TableColumn fx:id="PhoneNumberColumn" prefWidth="182.0" style="-fx-background-color: #fff;" styleClass="column" text="Телефон" />
-                              <TableColumn fx:id="AddressColumn" prefWidth="262.0" style="-fx-background-color: #fff;" styleClass="column" text="Адреса" />
+                              <TableColumn fx:id="DateBirthDayColumn" maxWidth="179.0" minWidth="179.0" prefWidth="179.0" style="-fx-background-color: #fff;" styleClass="column" text="Дата Народження" />
+                              <TableColumn fx:id="PhoneNumberColumn" maxWidth="223.0" minWidth="137.0" prefWidth="188.0" style="-fx-background-color: #fff;" styleClass="column" text="Телефон" />
+                              <TableColumn fx:id="AddressColumn" maxWidth="338.0" minWidth="262.0" prefWidth="287.0" style="-fx-background-color: #fff;" styleClass="column" text="Адреса" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
-                           <StackPane.margin>
-                              <Insets />
-                           </StackPane.margin>
                         </TableView>
                      </children>
                      <BorderPane.margin>
