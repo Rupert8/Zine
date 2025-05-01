@@ -42,10 +42,10 @@ public class AddStudentController extends HelloApplication implements Initializa
                      loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/IncorrectPhoneNumber.fxml");
                 }
             }else{
-                loadAndShowLoginAlarm("/fxml/notifications/WarningExistStudent.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningExistStudent.fxml");
             }
         }else{
-            loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
         }
 
     }

@@ -2,9 +2,7 @@ package controller.admin.adminDialog;
 
 import data.DeleteData;
 import data.SearchStudentData;
-import hibernate.entity.SpCategoryName;
 import javafx.scene.control.Button;
-import javafx.scene.control.cell.PropertyValueFactory;
 import org.hibernate.exception.ConstraintViolationException;
 import services.TableService;
 import data.AddData;
@@ -18,7 +16,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import start.zine.HelloApplication;
 import tableView.SocialPassportCategoryPrototype;
-import tableView.SocialPassportPrototype;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -52,10 +49,10 @@ public class AddSocialCategoryDialogPane extends HelloApplication implements Ini
                 String nameCategory = CategoryNameTextField.getText();
                 AddData.addSocialPassportCategoryInfo(nameCategory);
             }else{
-                loadAndShowLoginAlarm("/fxml/notifications/WarningExistSocialPassportCategory.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningExistSocialPassportCategory.fxml");
             }
         }else{
-            loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
         }
     }
 
@@ -77,7 +74,7 @@ public class AddSocialCategoryDialogPane extends HelloApplication implements Ini
             DeleteCategoryButton.setVisible(false);
 
         } catch (ConstraintViolationException e) {
-            loadAndShowLoginAlarm("/fxml/notifications/WarningExistCategory.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningExistCategory.fxml");
         }
     }
 

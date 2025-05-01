@@ -84,7 +84,7 @@ public class AdminSocialPassportController extends HelloApplication implements I
     }
 
     public void loadAddCategoryDialog(){
-        saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AddCategoryDialogPane.fxml",saveDialog);
+        saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AddCategoryDialogPane.fxml",saveDialog,"Реєстрація категорій");
         saveDialog.setOnHidden(event -> startSocialPassport());
     }
 

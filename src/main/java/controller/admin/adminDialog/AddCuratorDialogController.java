@@ -2,17 +2,13 @@ package controller.admin.adminDialog;
 
 import controller.admin.AdminCuratorController;
 import data.AddData;
-import data.DisplayDate;
 import data.SearchStudentData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import start.zine.HelloApplication;
 
 import java.net.URL;
-import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -61,10 +57,10 @@ public class AddCuratorDialogController extends AdminCuratorController implement
                     loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningInvalidEmail.fxml");
                 }
             } else {
-                loadAndShowLoginAlarm("/fxml/notifications/WarningExistCuratorEmail.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningExistCuratorEmail.fxml");
             }
         } else {
-            loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
         }
 
     }

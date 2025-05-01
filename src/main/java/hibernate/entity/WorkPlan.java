@@ -1,18 +1,15 @@
 package hibernate.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.type.NumericBooleanConverter;
 
 import java.sql.Date;
 
 
+@Data
 @Entity
 @Table(name = "work_plan_nefk")
-//@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class WorkPlan {
@@ -23,6 +20,9 @@ public class WorkPlan {
 
     @Column(name = "Semester")
     private int semester;
+
+    @Column(name = "AcademicYear")
+    private int academicYear;
 
     @Column(name = "EventName")
     private String eventName;
@@ -41,10 +41,6 @@ public class WorkPlan {
 
     public int getId() {
         return id;
-    }
-
-    public int getSemester() {
-        return semester;
     }
 
     public String getEventName() {

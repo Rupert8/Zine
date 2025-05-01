@@ -21,7 +21,6 @@ import javafx.scene.control.*;
 import services.ValidateValueService;
 import start.zine.HelloApplication;
 
-import java.awt.*;
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
@@ -154,7 +153,7 @@ public class AddInformationAboutStudentController extends HelloApplication imple
     private RadioButton AdultStudentManyChildrenStatusRadioButton;
 
     @FXML // Window
-    private HBox Hbox;
+    private HBox MenuBarHBox;
     @FXML
     private Button minimizeWindowButton,maximizeWindowButton,closeWindowButton;
 
@@ -274,26 +273,30 @@ public class AddInformationAboutStudentController extends HelloApplication imple
         if(ValidateValueService.isStudentSelected(NameEducation,SurnameEducation,MiddleNameEducation)){
             if(ValidateValueService.isEducationFieldEmpty(EndDateEducation,SchoolNameEducation,GradeAvarageEducation)){
                 if(!ValidateValueService.isExistEducation(NameEducation.getText(),SurnameEducation.getText(),MiddleNameEducation.getText())){
-                    String name = NameEducation.getText();
-                    String surname = SurnameEducation.getText();
-                    String middleName = MiddleNameEducation.getText();
-                    String schoolName = SchoolNameEducation.getText();
-                    Date endDate = Date.valueOf(EndDateEducation.getValue());
-                    float averageGrade = Float.valueOf(GradeAvarageEducation.getText());
+                    if(ValidateValueService.isScoreIsNoMoreThan12(Float.parseFloat(GradeAvarageEducation.getText()))){
+                        String name = NameEducation.getText();
+                        String surname = SurnameEducation.getText();
+                        String middleName = MiddleNameEducation.getText();
+                        String schoolName = SchoolNameEducation.getText();
+                        Date endDate = Date.valueOf(EndDateEducation.getValue());
+                        float averageGrade = Float.parseFloat(GradeAvarageEducation.getText());
 
 
-                    int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
-                    AddData.addEducationInfo(id,endDate,schoolName,averageGrade);
-                    loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
-                    ClearValueService.clearEducationInfo(EndDateEducation,SchoolNameEducation,GradeAvarageEducation);
-                }else{
-                    loadAndShowLoginAlarm("/fxml/notifications/WarningExistEducationInfo.fxml");
+                        int id = SearchStudentData.getIdStudent(name,surname,middleName,curatorGroupName);
+                        AddData.addEducationInfo(id,endDate,schoolName,averageGrade);
+                        loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
+                        ClearValueService.clearEducationInfo(EndDateEducation,SchoolNameEducation,GradeAvarageEducation);
+                    }else {
+                        loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningInvalidAverageGrade.fxml");
+                    }
+                }else {
+                    loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningExistEducationInfo.fxml");
                 }
             }else {
-                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
             }
         }else {
-            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningStudentSelected.fxml");
         }
 
     }
@@ -314,13 +317,13 @@ public class AddInformationAboutStudentController extends HelloApplication imple
                     loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                     ClearValueService.clearMilitaryInfo(StartDateMilitary,EndDateMilitary,UnitMilitary);
                 }else{
-                    loadAndShowLoginAlarm("/fxml/notifications/WarningExistMilitaryInfo.fxml");
+                    loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningExistMilitaryInfo.fxml");
                 }
             }else {
-                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
             }
         }else {
-            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningStudentSelected.fxml");
         }
     }
 
@@ -340,10 +343,10 @@ public class AddInformationAboutStudentController extends HelloApplication imple
                 loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                 ClearValueService.clearJobInfo(StartDateJob,EndDateJob,PlaceJob,PositionJob);
             }else {
-                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
             }
         }else {
-            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningStudentSelected.fxml");
         }
     }
 
@@ -364,13 +367,13 @@ public class AddInformationAboutStudentController extends HelloApplication imple
                     loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                     ClearValueService.clearFamilyInfo(PIPFatherParents,PIPMotherParents,PhoneFatherParents,PhoneMotherParents);
                 }else{
-                    loadAndShowLoginAlarm("/fxml/notifications/WarningExistParentsInfo.fxml");
+                    loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningExistParentsInfo.fxml");
                 }
             }else {
-                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
             }
         }else {
-            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningStudentSelected.fxml");
         }
     }
 
@@ -389,10 +392,10 @@ public class AddInformationAboutStudentController extends HelloApplication imple
                 loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                 ClearValueService.clearSocialActivityInfo(SemesterSocial,DateSocial,ActivitySocial);
             }else {
-                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
             }
         }else {
-            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningStudentSelected.fxml");
         }
 
     }
@@ -412,10 +415,10 @@ public class AddInformationAboutStudentController extends HelloApplication imple
                 loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                 ClearValueService.clearGroupActivity(SemesterGroup,GroupName);
             }else {
-                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
             }
         }else {
-            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningStudentSelected.fxml");
         }
 
     }
@@ -435,10 +438,10 @@ public class AddInformationAboutStudentController extends HelloApplication imple
                 loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                 ClearValueService.clearIndividualSupport(SemesterSupport,DateSupport,ContentSupport);
             }else {
-                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
             }
         }else {
-            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningStudentSelected.fxml");
         }
     }
 
@@ -457,10 +460,10 @@ public class AddInformationAboutStudentController extends HelloApplication imple
                 loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                 ClearValueService.clearPromotionInfo(SemesterPromotion,DatePromotion,ContentPromotion);
             }else {
-                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
             }
         }else {
-            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningStudentSelected.fxml");
         }
     }
 
@@ -491,10 +494,10 @@ public class AddInformationAboutStudentController extends HelloApplication imple
                 loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                 ClearValueService.clearSocialPassportField(StartDateSocialPassport,EndDateSocialPassport,SemesterSocialPassport,CategorySocialPassport,NoteSocialPassport,AdultStudentStatusRadioButton);
             }else {
-                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
             }
         }else {
-            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningStudentSelected.fxml");
         }
     }
 
@@ -524,13 +527,13 @@ public class AddInformationAboutStudentController extends HelloApplication imple
                     AddData.addInvalidPassportCategoryInfo(id,category,semester,startDate,endDate,note,statusAdult);
                     loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                 }else{
-                    loadAndShowLoginAlarm("/fxml/notifications/WarningExistInvalidPassport.fxml");
+                    loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningExistInvalidPassport.fxml");
                 }
             }else {
-                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
             }
         }else {
-            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningStudentSelected.fxml");
         }
     }
 
@@ -559,13 +562,13 @@ public class AddInformationAboutStudentController extends HelloApplication imple
                     AddData.addManyChildrenPassportInfo(id,semester,startDate,endDate,note,countChildren,lessThan18,muchThan18,statusAdult);
                     loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
                 }else{
-                    loadAndShowLoginAlarm("/fxml/notifications/WarningExistManyChildrenFamily.fxml");
+                    loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningExistManyChildrenFamily.fxml");
                 }
             }else {
-                loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
             }
         }else {
-            loadAndShowLoginAlarm("/fxml/notifications/WarningStudentSelected.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningStudentSelected.fxml");
         }
     }
 
@@ -620,7 +623,7 @@ public class AddInformationAboutStudentController extends HelloApplication imple
 
     @Override
     public void setDragWindow(MouseEvent dragEvent) {
-        ScreenService.paneDragged(dragEvent,Hbox);
+        ScreenService.paneDragged(dragEvent,MenuBarHBox);
     }
 
     @Override

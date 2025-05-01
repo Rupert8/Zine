@@ -2,17 +2,14 @@ package controller.admin.adminDialog;
 
 import controller.admin.AdminGroupController;
 import data.DeleteData;
-import data.DisplayDate;
 import data.SearchStudentData;
 import data.UpdateData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class AdditionalGroupDialogController extends AdminGroupController implements Initializable {
@@ -61,7 +58,7 @@ public class AdditionalGroupDialogController extends AdminGroupController implem
                 closeDialog();
                 loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessUpdateNotification.fxml");
         }else{
-            loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
         }
 
     }

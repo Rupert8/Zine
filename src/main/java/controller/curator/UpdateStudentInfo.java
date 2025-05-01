@@ -31,7 +31,7 @@ public class UpdateStudentInfo extends WorkGroupController implements Initializa
                 closeDialog();
                 loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessUpdateNotification.fxml");
         }else{
-            loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
         }
 
     }

@@ -66,12 +66,12 @@ public class AdminCuratorController extends HelloApplication implements Initiali
     public static String curatorEmail;
 
     public void showAddDialog(){
-        saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AddCuratorDialogPane.fxml",saveDialog);
+        saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AddCuratorDialogPane.fxml",saveDialog,"Реєстрація куратора");
         saveDialog.setOnHidden(event -> correctLoadPane());
     }
 
     public void showAdditionDialog(){
-        saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AdditionalCuratorDialogPane.fxml",saveDialog);
+        saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AdditionalCuratorDialogPane.fxml",saveDialog, "Редагування та видалення даних куратора");
         saveDialog.setOnHidden(event -> correctLoadPane());
     }
 

@@ -352,7 +352,6 @@ public class UpdateData {
             socialPassport.setEndDate(endDate);
             socialPassport.setSemester(semester);
             socialPassport.setNote(note);
-            socialPassport.getSpCategoryName().setCategory(category);
 
             session.getTransaction().commit();
             HibernateUtil.closeSession(session);

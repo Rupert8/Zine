@@ -14,7 +14,7 @@
          <children>
             <AnchorPane layoutX="24.0" layoutY="65.0" prefHeight="235.0" prefWidth="549.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 2;">
                <children>
-                  <Label layoutX="92.0" layoutY="76.0" text="Прізвище">
+                  <Label layoutX="92.0" layoutY="20.0" text="Прізвище">
                      <font>
                         <Font name="Gotham-Bold" size="20.0" />
                      </font>
@@ -24,14 +24,14 @@
                         <Font name="Gotham-Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="123.0" layoutY="20.0" text="Ім'я">
+                  <Label layoutX="123.0" layoutY="76.0" text="Ім'я">
                      <font>
                         <Font name="Gotham-Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="CuratorName" layoutX="230.0" layoutY="15.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
+                  <TextField fx:id="CuratorName" layoutX="230.0" layoutY="70.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
                   <TextField fx:id="CuratorMiddleName" layoutX="230.0" layoutY="125.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
-                  <TextField fx:id="CuratorSurname" layoutX="230.0" layoutY="70.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
+                  <TextField fx:id="CuratorSurname" layoutX="230.0" layoutY="15.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
                   <TextField fx:id="CuratorEmail" layoutX="230.0" layoutY="180.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
                   <Label layoutX="114.0" layoutY="186.0" text="Email">
                      <font>

@@ -2,16 +2,13 @@ package controller.admin.adminDialog;
 
 import controller.admin.AdminGroupController;
 import data.AddData;
-import data.DisplayDate;
 import data.SearchStudentData;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -56,10 +53,10 @@ public class AddGroupDialogController extends AdminGroupController implements In
                 closeDialog();
                 loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
             }else {
-                loadAndShowLoginAlarm("/fxml/notifications/WarningExistGroupName.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningExistGroupName.fxml");
             }
         }else{
-            loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
         }
 
     }

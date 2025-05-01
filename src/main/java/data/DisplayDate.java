@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import static controller.admin.AdminMainController.studentId;
 import static controller.extendedInformationAboutStudent.ExtendedInformationAboutStudent.*;
 import static controller.admin.AdminGroupController.*;
 
@@ -257,14 +258,13 @@ public class DisplayDate  {
         return planInfo;
     }
 
-    public static ObservableList<WorkPlan> getDataBySemesterForAdminPlanInfo(int semester) {
-        String hql = "FROM WorkPlan WHERE semester = :semester";
+    public static ObservableList<WorkPlan> getDataBySemesterForAdminPlanInfo(int year) {
         ObservableList<WorkPlan> planInfo = FXCollections.observableArrayList();
         try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            List<WorkPlan> resoultlist = session.createQuery(hql, WorkPlan.class).setParameter("semester",semester).getResultList();
+            List<WorkPlan> resoultlist = session.createQuery("FROM WorkPlan  WHERE academicYear = :academicYear", WorkPlan.class).setParameter("academicYear",year).getResultList();
             planInfo.addAll(resoultlist);
 
             session.getTransaction().commit();
@@ -339,14 +339,13 @@ public class DisplayDate  {
         return studentInfo;
     }
 
-    public static ObservableList<WorkPlan> getDataBySemesterPlanInfo(int semester,String performer) {
-        String hql = "FROM WorkPlan WHERE semester = :semester AND (performer = :performer OR performer = 'Адміністратор')";
+    public static ObservableList<WorkPlan> getDataBySemesterPlanInfo(int year,String performer) {
         ObservableList<WorkPlan> planInfo = FXCollections.observableArrayList();
         try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            List<WorkPlan> resoultlist = session.createQuery(hql, WorkPlan.class).setParameter("semester",semester).setParameter("performer", performer).getResultList();
+            List<WorkPlan> resoultlist = session.createQuery("FROM WorkPlan WHERE academicYear = :academicYear AND (performer = :performer OR performer = 'Адміністратор')", WorkPlan.class).setParameter("academicYear",year).setParameter("performer", performer).getResultList();
             planInfo.addAll(resoultlist);
 
             for (int i = 0; i < resoultlist.size(); i++) {
@@ -1035,13 +1034,20 @@ public class DisplayDate  {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            socialPassport = session.createQuery("SELECT s.spCategoryName.category FROM SocialPassport s WHERE s.studentInfo.name = :name and s.studentInfo.surname = :surname and s.studentInfo.middleName = :middleName", String.class)
+            socialPassport = session.createQuery("SELECT s.spCategoryName.category " +
+                                                    "FROM SocialPassport s " +
+                                                    "WHERE s.studentInfo.name = :name " +
+                                                    "and s.studentInfo.surname = :surname " +
+                                                    "and s.studentInfo.middleName = :middleName " +
+                                                    "and s.spCategoryName.category != 'Інвалід' " +
+                                                    "and s.spCategoryName.category != 'Багатодітна родина' ", String.class)
                                                 .setParameter("name", name)
                                                 .setParameter("surname", surname)
                                                 .setParameter("middleName", middleName).getResultList();
 
-
             session.getTransaction().commit();
+
+
 
         }catch (Exception e){
             e.printStackTrace();

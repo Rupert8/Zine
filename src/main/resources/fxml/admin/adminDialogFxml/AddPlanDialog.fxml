@@ -12,9 +12,9 @@
 
 <DialogPane styleClass="dialogPane" stylesheets="@../../../css/dialogPane.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.admin.adminDialog.AddPlanDialogController">
    <content>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="395.0" prefWidth="600.0" style="-fx-background-color: #fff;">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" style="-fx-background-color: #fff;">
          <children>
-            <AnchorPane layoutX="24.0" layoutY="80.0" prefHeight="276.0" prefWidth="550.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 2;">
+            <AnchorPane layoutX="24.0" layoutY="80.0" prefHeight="320.0" prefWidth="550.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 2;">
                <children>
                   <TextField fx:id="NameEvent" layoutX="20.0" layoutY="61.0" prefHeight="25.0" prefWidth="510.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
                   <Label layoutX="203.0" layoutY="22.0" text="Назва Заходу">
@@ -41,13 +41,19 @@
                </font>
             </Label>
             <ComboBox fx:id="SemesterComboBox" layoutX="325.0" layoutY="300.0" prefHeight="35.0" prefWidth="225.0" styleClass="comboBox" stylesheets="@../../../css/textField.css" />
-            <Button fx:id="cancelButton" layoutX="24.0" layoutY="368.0" mnemonicParsing="false" onAction="#closeAddDialog" styleClass="Button" stylesheets="@../../../css/button.css" text="скасувати" />
+            <Button fx:id="cancelButton" layoutX="24.0" layoutY="410.0" mnemonicParsing="false" onAction="#closeAddDialog" styleClass="Button" stylesheets="@../../../css/button.css" text="скасувати" />
             <Label layoutX="192.0" layoutY="14.0" text="Додати План">
                <font>
                   <Font name="Kharkiv Tone Regular" size="32.0" />
                </font>
             </Label>
-            <Button fx:id="applyButton" layoutX="441.0" layoutY="368.0" mnemonicParsing="false" onAction="#addEvent" styleClass="Button" stylesheets="@../../../css/button.css" text="підтвердити" />
+            <Button fx:id="applyButton" layoutX="441.0" layoutY="410.0" mnemonicParsing="false" onAction="#addEvent" styleClass="Button" stylesheets="@../../../css/button.css" text="підтвердити" />
+            <Label layoutX="90.0" layoutY="355.0" text="Навчальний рік">
+               <font>
+                  <Font name="Gotham-Bold" size="20.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="YearComboBox" layoutX="325.0" layoutY="350.0" prefHeight="35.0" prefWidth="225.0" styleClass="comboBox" stylesheets="@../../../css/textField.css" />
          </children>
       </Pane>
    </content>

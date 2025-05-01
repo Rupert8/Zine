@@ -1,16 +1,17 @@
 package controller.login;
 
+import interfaces.WindowActions.LoadablePane;
 import interfaces.WindowActions.WindowControl;
 import data.AddData;
 import enums.UserStatus;
 import hiberante.sessionFactory.HibernateUtil;
 import hibernate.entity.Curators;
 import hibernate.entity.User;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
@@ -19,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 
@@ -28,8 +30,9 @@ import start.zine.HelloApplication;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 
-public class LoginController extends HelloApplication implements Initializable, WindowControl {
+public class LoginController extends HelloApplication implements Initializable, WindowControl, LoadablePane {
     @FXML
     private Label magazineCurator;
     @FXML
@@ -43,9 +46,12 @@ public class LoginController extends HelloApplication implements Initializable, 
     @FXML
     private Button maximizeWindowButton;
     @FXML
-    private BorderPane borderPane;
-    @FXML
     private HBox Hbox;
+
+    @FXML
+    private StackPane LoadLoginstackPane;
+    @FXML
+    private BorderPane borderPane;
 
     private Session session;
 
@@ -53,8 +59,12 @@ public class LoginController extends HelloApplication implements Initializable, 
 
     private Dialog<Boolean> dialog;
 
+    private Preferences login = Preferences.userRoot().node("Login");
+
     public static String curatorEmail;
     public static String curatorGroupName;
+
+    private static boolean currentLoginControllerInitialized = false;
 
     private void loadAndShowLoginWarning(String linkFxml){
         try {
@@ -83,15 +93,19 @@ public class LoginController extends HelloApplication implements Initializable, 
 
     @FXML
     public void login(ActionEvent event) {
+        loadPane();
+    }
+
+    public void processLogin(){
         int idCurator;
-        try  {
+        try {
             session = HibernateUtil.getSession();
-            if(session != null){
+            if (session != null) {
                 session.beginTransaction();
 
                 User user = session.createQuery("FROM User WHERE Email = :email and Password = :password", User.class)
-                        .setParameter("email", emailField.getText())
-                        .setParameter("password", passwordField.getText())
+                        .setParameter("email", emailField.getText().trim())
+                        .setParameter("password", passwordField.getText().trim())
                         .getSingleResultOrNull();
 
                 if (user != null) {
@@ -99,33 +113,34 @@ public class LoginController extends HelloApplication implements Initializable, 
                         curatorEmail = emailField.getText();
                         idCurator = user.getCurators().getId();
 
+                        login.put("Login", curatorEmail);
                         Curators curators = session.get(Curators.class, idCurator);
-                        if(curators != null){
+                        if (curators != null) {
                             curatorGroupName = curators.getGroup();
-                        }else{
-                            throw new IllegalArgumentException("куратор за таким id не знайдено");
+                        } else {
+                            throw new IllegalArgumentException("Куратор за таким id не знайдено");
                         }
 
-                        switchScene((Node) event.getSource(), "/fxml/curator/WorkGroupPane.fxml");
-                    } else if(UserStatus.ADMIN == user.getStatus()){
+                        switchScene(borderPane, "/fxml/curator/WorkGroupPane.fxml");
+                    } else if (UserStatus.ADMIN == user.getStatus()) {
                         AddData.insertCategoriesIfNotExist();
-                        switchScene((Node) event.getSource(), "/fxml/admin/AdminMain.fxml");
+                        switchScene(borderPane, "/fxml/admin/AdminMain.fxml");
                     }
                 } else {
-                    loadAndShowLoginWarning("/fxml/notifications/WarningLoginFxml.fxml");
+                    throw new IllegalArgumentException("Невірний email або пароль");
                 }
 
                 session.getTransaction().commit();
-            } else{
-                throw new IllegalArgumentException("Сесія null");
+            } else {
+                throw new IllegalStateException("Сесія Hibernate повернула null");
             }
         } catch (Exception e) {
-            loadAndShowLoginWarning("/fxml/notifications/warningNotifications/LostInternetConnection.fxml");
-            throw new IllegalArgumentException("Немає підключення до інтернету");
-        }finally {
+            throw new IllegalArgumentException(e);
+        } finally {
             HibernateUtil.closeSession(session);
         }
     }
+
 
     public void clearPassword(){
         passwordField.clear();
@@ -134,6 +149,16 @@ public class LoginController extends HelloApplication implements Initializable, 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        String saveLogin = login.get("Login", "");
+
+        if(currentLoginControllerInitialized){
+            return;
+        }
+
+        currentLoginControllerInitialized = true;
+
+        emailField.setText(saveLogin);
+        currentLoginControllerInitialized = true;
 
     }
 
@@ -162,4 +187,46 @@ public class LoginController extends HelloApplication implements Initializable, 
         ScreenService.panePressed(mouseEvent);
     }
 
+    @Override
+    public void loadPane() {
+            LoadLoginstackPane.setVisible(true);
+            borderPane.setDisable(true);
+
+//            if(!HibernateUtil.isSessionConnected()){
+//                LoadLoginstackPane.setVisible(false);
+//                borderPane.setDisable(false);
+//                loadAndShowLoginWarning("/fxml/notifications/warningNotifications/LostInternetConnection.fxml");
+//                return;
+//            }
+
+                Task<Void> loadDataTask = new Task<>() {
+                    @Override
+                    protected Void call(){
+                        processLogin();
+                        return null;
+                    }
+
+                    @Override
+                    protected void succeeded() {
+                        LoadLoginstackPane.setVisible(false);
+                        borderPane.setDisable(false);
+                    }
+
+                    @Override
+                    protected void failed() {
+                        LoadLoginstackPane.setVisible(false);
+                        borderPane.setDisable(false);
+
+                        Throwable error = getException();
+                        if (error.getCause() instanceof IllegalArgumentException) {
+                            loadAndShowLoginWarning("/fxml/notifications/warningNotifications/WarningLoginFxml.fxml");
+                        } else {
+                            loadAndShowLoginWarning("/fxml/notifications/warningNotifications/LostInternetConnection.fxml");
+                        }
+                    }
+                };
+
+                new Thread(loadDataTask).start();
+
+        }
 }

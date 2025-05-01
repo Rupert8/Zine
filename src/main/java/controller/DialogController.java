@@ -55,11 +55,11 @@ public class DialogController extends WorkPlanController implements Initializabl
                 closeAddDialog();
                 loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
             }else{
-                loadAndShowLoginAlarm("/fxml/notifications/WarningExistEvent.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningExistEvent.fxml");
             }
 
         }else{
-            loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
         }
 
     }

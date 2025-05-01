@@ -1,6 +1,7 @@
 package services;
 
 import data.SearchStudentData;
+import jakarta.persistence.NoResultException;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -17,7 +18,16 @@ public class ValidateValueService {
     }
 
     public static boolean isExistEducation(String name,String surname,String middleName){
-        return SearchStudentData.validateStudentEducationData(name,surname,middleName);
+        try {
+            String result = SearchStudentData.validateStudentEducationData(name, surname, middleName);
+            return result != null; // або просто return true;
+        } catch (NoResultException e) {
+            return false;
+        }
+    }
+
+    public static boolean isScoreIsNoMoreThan12(float averageGrade){
+        return averageGrade <= 12 && averageGrade >= 0;
     }
 
     public static boolean isMilitaryFieldEmpty(DatePicker startDate, DatePicker endDate,TextField unit){

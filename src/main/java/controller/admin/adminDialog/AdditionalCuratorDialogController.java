@@ -8,10 +8,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-
-import static controller.admin.AdminCuratorController.*;
 
 public class AdditionalCuratorDialogController extends AdminCuratorController implements Initializable{
     @FXML
@@ -47,7 +44,7 @@ public class AdditionalCuratorDialogController extends AdminCuratorController im
                 closeDialog();
                 loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessUpdateNotification.fxml");
         }else{
-            loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
         }
         
     }

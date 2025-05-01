@@ -62,17 +62,17 @@ public class AdminGroupController extends HelloApplication implements Initializa
     public static String groupFormOfEducation;
 
     public void loadAddGroupDialog(){
-        saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AddGroupDialogPane.fxml",saveDialog);
+        saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AddGroupDialogPane.fxml",saveDialog,"Реєстрація групи");
         saveDialog.setOnHidden(event -> startAdminGroup());
     }
 
     public void loadAdditionInfoDialog(){
-        saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AdditionalGroupDialogPane.fxml",saveDialog);
+        saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AdditionalGroupDialogPane.fxml",saveDialog,"Редагування та видалення даних групи");
         saveDialog.setOnHidden(event -> startAdminGroup());
     }
 
     public void loadAssignCuratorDialog(){
-        saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AssignCuratorDialog.fxml",saveDialog);
+        saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AssignCuratorDialog.fxml",saveDialog,"Призначити Куратора");
         saveDialog.setOnHidden(event -> startAdminGroup());
     }
 

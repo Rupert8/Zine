@@ -160,13 +160,13 @@ public class WorkGroupController extends HelloApplication implements Initializab
     }
 
     public void showAddStudentDialog(){
-        saveDialog = loadAndShowDialog("/fxml/curator/curatorDialogFxml/AddStudent.fxml",saveDialog);
+        saveDialog = loadAndShowDialog("/fxml/curator/curatorDialogFxml/AddStudent.fxml",saveDialog,"Реєстрація студента");
         saveDialog.setOnHidden(event -> startWorkGroup());
         //saveDialog.setOnHidden(event -> extendedInfo.setVisible(false));
     }
 
     public void showUpdateStudentDialog(){
-        saveDialog = loadAndShowDialog("/fxml/curator/curatorDialogFxml/UpdateStudent.fxml",saveDialog);
+        saveDialog = loadAndShowDialog("/fxml/curator/curatorDialogFxml/UpdateStudent.fxml",saveDialog,"Редагування даних студента");
         saveDialog.setOnHidden(event -> startWorkGroup());
         //saveDialog.setOnHidden(event -> extendedInfo.setVisible(false));
     }

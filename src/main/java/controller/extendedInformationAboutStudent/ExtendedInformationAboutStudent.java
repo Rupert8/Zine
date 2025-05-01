@@ -1,10 +1,11 @@
 package controller.extendedInformationAboutStudent;
 
-import controller.admin.AdminMainController;
 import data.DisplayDate;
 import data.UpdateData;
 import hibernate.entity.*;
+import interfaces.WindowActions.LoadablePane;
 import interfaces.WindowActions.WindowControl;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -18,13 +19,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import services.ScreenService;
 import services.ValidateValueService;
+import start.zine.HelloApplication;
 
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ExtendedInformationAboutStudent extends AdminMainController implements Initializable {
+import static controller.admin.AdminMainController.*;
+
+public class ExtendedInformationAboutStudent extends HelloApplication implements Initializable,WindowControl,LoadablePane {
     @FXML
     private Tab GeneralInfoTab,SocialAndGroupActivityTab,IndividualSupportTab,PromotionTab,SocialPassportTab;
 
@@ -249,9 +253,14 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     private Button BackAllSocialPassportButton;
 
     @FXML
-    private HBox MenuBarHBox;
+    private HBox Hbox;
     @FXML
     private Button minimizeWindowButton,maximizeWindowButton,closeWindowButton;
+
+    @FXML
+    private StackPane tabStackPane;
+    @FXML
+    private TabPane tabPane;
 
     @FXML
     private StackPane loadingPane;
@@ -660,12 +669,14 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     }
 
     private void setStudentNameInLabel(){
-        String name = StudentInfo.getFullNameOneStudent(studentSurname,studentName,studentMiddleName);
-        FullNameStudentGeneralInfoLabel.setText(name);
-        FullNameStudentSocialLabel.setText(name);
-        FullNameStudentPromotionLabel.setText(name);
-        FullStudentNameSocialPassport.setText(name);
-        FullNameStudentSupportLabel.setText(name);
+        String name = StudentInfo.getFullNameOneStudent(studentSurname, studentName, studentMiddleName);
+        Platform.runLater(() -> {
+            FullNameStudentGeneralInfoLabel.setText(name);
+            FullNameStudentSocialLabel.setText(name);
+            FullNameStudentPromotionLabel.setText(name);
+            FullStudentNameSocialPassport.setText(name);
+            FullNameStudentSupportLabel.setText(name);
+        });
     }
 
 //    private void getStudentSocialPassportCategory(){
@@ -820,7 +831,7 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
             PromotionTab.setDisable(true);
             SocialPassportTab.setDisable(true);
         }else{
-            loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningUpdateStudentInfo.fxml");
             cancelUpdateIndividualSupportButton();
         }
 
@@ -842,7 +853,7 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
             IndividualSupportTab.setDisable(true);
             SocialPassportTab.setDisable(true);
         }else{
-            loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningUpdateStudentInfo.fxml");
             cancelUpdatePromotionInfo();
         }
 
@@ -1146,7 +1157,7 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 UpdateMilitaryInfoRadioButton.setDisable(true);
                 UpdateJobInfoRadioButton.setDisable(true);
             }else{
-                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningUpdateStudentInfo.fxml");
                 cancelUpdateStudentInfo();
             }
         } else if (UpdateMilitaryInfoRadioButton.isSelected()) {
@@ -1165,7 +1176,7 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 UpdateEducationInfoRadioButton.setDisable(true);
                 UpdateJobInfoRadioButton.setDisable(true);
             }else{
-                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningUpdateStudentInfo.fxml");
                 cancelUpdateStudentInfo();
             }
         } else if (UpdateJobInfoRadioButton.isSelected()) {
@@ -1186,7 +1197,7 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 UpdateEducationInfoRadioButton.setDisable(true);
                 UpdateMilitaryInfoRadioButton.setDisable(true);
             }else {
-                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningUpdateStudentInfo.fxml");
                 cancelUpdateStudentInfo();
             }
         } else if (UpdateParentsInfoRadioButton.isSelected()) {
@@ -1207,7 +1218,7 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 UpdateMilitaryInfoRadioButton.setDisable(true);
                 UpdateJobInfoRadioButton.setDisable(true);
             }else {
-                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningUpdateStudentInfo.fxml");
                 cancelUpdateStudentInfo();
             }
         }
@@ -1227,7 +1238,7 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 setSemesterComboBox(SemesterSocial);
                 UpdateGroupActivityRadioButton.setDisable(true);
             }else{
-                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningUpdateStudentInfo.fxml");
                 cancelUpdateSocialAndGroupActivityStudentInfo();
             }
 
@@ -1245,7 +1256,7 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 setSemesterComboBox(SemesterGroup);
                 UpdateSocialActivityRadioButton.setDisable(true);
             }else{
-                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningUpdateStudentInfo.fxml");
                 cancelUpdateSocialAndGroupActivityStudentInfo();
             }
         }
@@ -1264,13 +1275,13 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 NoteSocialPassport.setEditable(true);
 
                 setSemesterComboBox(SemesterSocialPassport);
-                setSocialPassportCategoryComboBox();
+                //setSocialPassportCategoryComboBox();
                 UpdateSocialPassportButton.setVisible(true);
 
                 UpdateInvalidRadioButton.setDisable(true);
                 UpdateFamilyRadioButton.setDisable(true);
             }else{
-                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningUpdateStudentInfo.fxml");
                 cancelAllSocialPassportStudentInfo();
             }
 
@@ -1291,7 +1302,7 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 UpdateSocialPassportRadioButton.setDisable(true);
                 UpdateFamilyRadioButton.setDisable(true);
             }else {
-                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningUpdateStudentInfo.fxml");
                 cancelAllSocialPassportStudentInfo();
             }
         }else if (UpdateFamilyRadioButton.isSelected()) {
@@ -1315,7 +1326,7 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
                 UpdateSocialPassportRadioButton.setDisable(true);
                 UpdateInvalidRadioButton.setDisable(true);
             }else {
-                loadAndShowLoginAlarm("/fxml/notifications/WarningUpdateStudentInfo.fxml");
+                loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningUpdateStudentInfo.fxml");
                 cancelAllSocialPassportStudentInfo();
             }
 
@@ -1449,76 +1460,73 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     }
 
 
-    public void setSocialPassportCategoryComboBox() {
-        ObservableList<String> socialCategoryList = DisplayDate.getCategoryInComboBox();
-
-        // Перевіряємо, чи список ComboBox не порожній і чи потрібно оновлювати
-        if (!socialCategoryList.isEmpty()) {
-            // Отримуємо існуючі елементи з ComboBox
-            ObservableList<String> existingItems = CategorySocialPassport.getItems();
-
-            // Фільтруємо нові елементи, які ще не додані в ComboBox
-            ObservableList<String> uniqueItems = FXCollections.observableArrayList();
-            for (String category : socialCategoryList) {
-                if (!existingItems.contains(category)) {
-                    uniqueItems.add(category);
-                }
-            }
-
-            ObservableList<String> filteredList = uniqueItems.filtered(category ->
-                    !category.equals("Багатодітна родина") && !category.equals("Інвалід"));
-
-            CategorySocialPassport.getItems().addAll(filteredList);
-        }
-    }
+//    public void setSocialPassportCategoryComboBox() {
+//        ObservableList<String> socialCategoryList = DisplayDate.getCategoryInComboBox();
+//
+//        // Перевіряємо, чи список ComboBox не порожній і чи потрібно оновлювати
+//        if (!socialCategoryList.isEmpty()) {
+//            // Отримуємо існуючі елементи з ComboBox
+//            ObservableList<String> existingItems = CategorySocialPassport.getItems();
+//
+//            // Фільтруємо нові елементи, які ще не додані в ComboBox
+//            ObservableList<String> uniqueItems = FXCollections.observableArrayList();
+//            for (String category : socialCategoryList) {
+//                if (!existingItems.contains(category)) {
+//                    uniqueItems.add(category);
+//                }
+//            }
+//
+//            ObservableList<String> filteredList = uniqueItems.filtered(category ->
+//                    !category.equals("Багатодітна родина") && !category.equals("Інвалід"));
+//
+//            CategorySocialPassport.getItems().addAll(filteredList);
+//        }
+//    }
 
     private void setInvalidCategoryComboBox(){
         CategoryInvalid.getItems().addAll("І група інвалідності","ІІ група інвалідності","ІІІ група інвалідності","Дитяча інвалідність");
     }
 
     public void loadPane() {
-        // Спочатку ховаємо прогрес-бар
         loadingPane.setVisible(true);
         WorkPlanBorderPane.setDisable(true);
 
-        // Завантажуємо дані в окремому потоці, щоб не блокувати інтерфейс
         Task<Void> loadDataTask = new Task<>() {
             @Override
             protected Void call() throws Exception {
-                setStudentEducationInfoField();
-                setStudentMilitaryInfoField();
-                setStudentParentsInfoField();
-                setInvalidPassportInfoField();
-                setManyChildrenFamily();
+                Platform.runLater(() -> {
+                    setStudentEducationInfoField();
+                    setStudentMilitaryInfoField();
+                    setStudentParentsInfoField();
+                    setInvalidPassportInfoField();
+                    setManyChildrenFamily();
 
-                setStudentNameInLabel();
+                    setStudentNameInLabel();
 
-                loadAndSetSocialPassportInfo();
-                loadAndSetJobInfo();
-                loadAndSetSocialActivityInfo();
-                loadAndSetGroupActivityInfo();
-                loadAndSetIndividualSupportInfo();
-                loadAndSetPromotionInfo();
+                    loadAndSetSocialPassportInfo();
+                    loadAndSetJobInfo();
+                    loadAndSetSocialActivityInfo();
+                    loadAndSetGroupActivityInfo();
+                    loadAndSetIndividualSupportInfo();
+                    loadAndSetPromotionInfo();
+                });
 
                 return null;
             }
 
             @Override
             protected void succeeded() {
-                // Коли завантаження завершено, ховаємо прогрес-бар
                 loadingPane.setVisible(false);
                 WorkPlanBorderPane.setDisable(false);
             }
 
             @Override
             protected void failed() {
-                // Якщо щось пішло не так, ховаємо прогрес-бар і виводимо помилку
                 loadingPane.setVisible(false);
                 System.out.print("Сталася помилка при завантаженні даних");
             }
         };
 
-        // Запускаємо завантаження в окремому потоці
         new Thread(loadDataTask).start();
     }
 
@@ -1526,15 +1534,34 @@ public class ExtendedInformationAboutStudent extends AdminMainController impleme
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadPane();
+        tabPane.setPickOnBounds(false);
+        tabStackPane.setPickOnBounds(false);
+    }
+
+    @Override
+    public void setMinimizeWindowButton() {
+        ScreenService.minimized_Window(minimizeWindowButton);
+    }
+
+    @Override
+    public void setMaximizeWindowButton() {
+        ScreenService.maximized_Window(maximizeWindowButton.getScene().getWindow());
+    }
+
+    @Override
+    public void setCloseWindow() {
+        ScreenService.close_Window();
     }
 
     @Override
     public void setDragWindow(MouseEvent dragEvent) {
-        ScreenService.paneDragged(dragEvent,MenuBarHBox);
+        ScreenService.paneDragged(dragEvent,Hbox);
     }
 
     @Override
     public void setPressedWindow(MouseEvent mouseEvent) {
         ScreenService.panePressed(mouseEvent);
     }
+
+
 }

@@ -37,7 +37,7 @@ public class AddData {
         }
     }
 
-    public static void addPlanForAdminData(String eventName, Date executionDate, String execution, int semester) {
+    public static void addPlanForAdminData(String eventName, Date executionDate, String execution, int semester,int year) {
         try {
             Session session = HibernateUtil.getSession();
             session.beginTransaction();
@@ -49,6 +49,7 @@ public class AddData {
             plan.setSemester(semester);
             plan.setCompletionNote(execution);
             plan.setConfirmationNote("Затверджено");
+            plan.setAcademicYear(year);
 
             session.persist(plan);
             session.getTransaction().commit();

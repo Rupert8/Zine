@@ -21,7 +21,7 @@
                         <Font name="Gotham-Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="68.0" layoutY="36.0" text="Ім'я">
+                  <Label layoutX="511.0" layoutY="36.0" text="Ім'я">
                      <font>
                         <Font name="Gotham-Bold" size="20.0" />
                      </font>
@@ -31,7 +31,7 @@
                         <Font name="Gotham-Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="StudentName" layoutX="189.0" layoutY="30.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
+                  <TextField fx:id="StudentName" layoutX="640.0" layoutY="30.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
                   <TextField fx:id="StudentMiddleName" layoutX="189.0" layoutY="100.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
                   <TextField fx:id="StudentPhoneNumber" layoutX="640.0" layoutY="100.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
                   <Label layoutX="55.0" layoutY="176.0" text="Адрес">
@@ -44,8 +44,8 @@
                         <Font name="Gotham-Bold" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="StudentSurname" layoutX="640.0" layoutY="30.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
-                  <Label layoutX="479.0" layoutY="36.0" text="Прізвище">
+                  <TextField fx:id="StudentSurname" layoutX="189.0" layoutY="30.0" prefHeight="25.0" prefWidth="225.0" styleClass="textField" stylesheets="@../../../css/textField.css" />
+                  <Label layoutX="37.0" layoutY="36.0" text="Прізвище">
                      <font>
                         <Font name="Gotham-Bold" size="20.0" />
                      </font>

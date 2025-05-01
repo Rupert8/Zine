@@ -216,12 +216,12 @@
                      <children>
                         <TableView fx:id="CuratorTable" editable="true" prefHeight="550.0" prefWidth="1240.0" styleClass="table" stylesheets="@../../css/style.css">
                            <columns>
-                              <TableColumn fx:id="CuratorNumberColumn" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
-                              <TableColumn fx:id="CuratorNameColumn" prefWidth="231.6" style="-fx-background-color: #fff;" styleClass="column" text="Ім`я" />
+                              <TableColumn fx:id="CuratorNumberColumn" maxWidth="34.0" minWidth="34.0" prefWidth="34.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
                               <TableColumn fx:id="CuratorSurnameColumn" prefWidth="231.6" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
+                              <TableColumn fx:id="CuratorNameColumn" prefWidth="231.6" style="-fx-background-color: #fff;" styleClass="column" text="Ім`я" />
                               <TableColumn fx:id="CuratorMiddleNameColumn" prefWidth="231.6" style="-fx-background-color: #fff;" styleClass="column" text="По-батькові" />
-                              <TableColumn fx:id="CuratorGroupColumn" prefWidth="138.0" style="-fx-background-color: #fff;" styleClass="column" text="Група" />
-                              <TableColumn fx:id="CuratorEmailColumn" prefWidth="373.0" styleClass="column" text="Email" />
+                              <TableColumn fx:id="CuratorGroupColumn" prefWidth="130.0" style="-fx-background-color: #fff;" styleClass="column" text="Група" />
+                              <TableColumn fx:id="CuratorEmailColumn" minWidth="291.0" prefWidth="291.0" styleClass="column" text="Email" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

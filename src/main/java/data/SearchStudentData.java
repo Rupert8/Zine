@@ -285,26 +285,21 @@ public class SearchStudentData {
         return result;
     }
 
-    public static boolean validateStudentEducationData(String name,String surName,String middleName){
-        boolean result = false;
+    public static String validateStudentEducationData(String name,String surName,String middleName){
+        String education = null;
         try{
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            String education = session.createQuery("SELECT e.schoolName FROM EducationInfo e WHERE e.studentInfo.name = :name and e.studentInfo.surname = :surName and e.studentInfo.middleName = :middleName", String.class)
+            education = session.createQuery("SELECT e.schoolName FROM EducationInfo e WHERE e.studentInfo.name = :name and e.studentInfo.surname = :surName and e.studentInfo.middleName = :middleName", String.class)
                                                         .setParameter("name", name)
                                                         .setParameter("surName", surName)
                                                         .setParameter("middleName", middleName).getSingleResult();
 
-            if(education  != null){
-                result = true;
-            }else{
-                result = false;
-            }
         }catch (RuntimeException e){
             e.printStackTrace();
         }
-        return result;
+        return education;
     }
 
     public static boolean validateStudentMilitary(String name,String surName,String middleName){

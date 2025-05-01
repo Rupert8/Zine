@@ -14,6 +14,7 @@ module start.zine {
     requires commons.math3;
     requires jdk.compiler;
     requires java.desktop;
+    requires java.prefs;
 
     opens start.zine to javafx.fxml;
     exports start.zine;

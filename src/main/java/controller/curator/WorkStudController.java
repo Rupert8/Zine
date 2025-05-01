@@ -79,6 +79,10 @@ public class WorkStudController extends HelloApplication implements Initializabl
         });
     }
 
+    public void switchPlanPage(ActionEvent event) {
+        switchWorkPlanPage(event);
+    }
+
     public void switchSocialActivityPage(){
         SocialActivityComboBox.setOnAction(event -> {
             String selectedModel = SocialActivityComboBox.getSelectionModel().getSelectedItem();

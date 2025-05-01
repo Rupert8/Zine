@@ -55,7 +55,7 @@ public class WorkPlanController extends HelloApplication implements Initializabl
     private TableView<WorkPlan> PlanTable;
 
     @FXML
-    private ComboBox<Integer> SortSemesterComboBox;
+    private ComboBox<Integer> SortYearComboBox;
 
     @FXML
     private DatePicker EndDatePicker;
@@ -79,7 +79,6 @@ public class WorkPlanController extends HelloApplication implements Initializabl
     public Button GroupNameButton;
     @FXML
     public Button minimizeWindowButton,maximizeWindowButton,closeWindowButton;
-
 
     @FXML
     private HBox MenuBarHBox;
@@ -134,19 +133,19 @@ public class WorkPlanController extends HelloApplication implements Initializabl
 
     }
     private void setPlanComboBox(){
-        if(SortSemesterComboBox.getItems().isEmpty()){
-            SortSemesterComboBox.getItems().addAll(1,2,3,4,5,6,7,8);
+        if(SortYearComboBox.getItems().isEmpty()){
+            SortYearComboBox.getItems().addAll(1,2,3,4);
         }
     }
 
-    public void displayDataBySemester(){
-        Integer semester = SortSemesterComboBox.getValue();
+    public void displayDataByYear(){
+        Integer year = SortYearComboBox.getValue();
 
-        ObservableList<WorkPlan> semesterList = DisplayDate.getDataBySemesterPlanInfo(semester,curatorFullName);
-        if(semesterList.isEmpty()) {
-            loadAndShowLoginAlarm("/fxml/notifications/emptyResultNotifications/NoRecordsSemesterFound.fxml");
+        ObservableList<WorkPlan> yearList = DisplayDate.getDataBySemesterPlanInfo(year,curatorFullName);
+        if(yearList.isEmpty()) {
+            loadAndShowLoginAlarm("/fxml/notifications/emptyResultNotifications/NoRecordsYearFound.fxml");
         }else{
-            setDataInPlanTable(semesterList);
+            setDataInPlanTable(yearList);
         }
     }
 
@@ -170,25 +169,27 @@ public class WorkPlanController extends HelloApplication implements Initializabl
                 planId = SearchStudentData.getIdWorkPlan(passEventName,passPerformer);
                 UpdatePlanButton.setVisible(true);
                 DeletePlanButton.setVisible(true);
-                System.out.println("Selected plan: " + workPlan);
             }
         });
     }
 
     private void deletePlanData(){
-        DeleteData.deletePlanDataById(planId);
-        displayPlanInfo();
+        if(!passPerformer.equals("Адміністратор")){
+            DeleteData.deletePlanDataById(planId);
+            loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessDeleteNotification.fxml");
+        }else{
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/NotDeleteAdminPlan.fxml");
+        }
     }
 
     public void delete(){
         deletePlanData();
         displayPlanInfo();
         setPlanComboBox();
-        loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessDeleteNotification.fxml");
     }
 
     public void showAddDialogPane(){
-        saveDialog = loadAndShowDialog("/fxml/dialogPane.fxml",saveDialog);
+        saveDialog = loadAndShowDialog("/fxml/dialogPane.fxml",saveDialog,"Реєстрація плану роботи");
         performerNameForAdd = CuratorName.getText();
         saveDialog.setOnHidden(event -> startWorkPlan());
         PlanTable.getSelectionModel().clearSelection();
@@ -198,7 +199,7 @@ public class WorkPlanController extends HelloApplication implements Initializabl
         if(passConfirmationNote.equals("Затверджено")){
             loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningConfirmationNote.fxml");
         }else{
-            saveDialog =  loadAndShowDialog("/fxml/UpdateDialogPane.fxml",saveDialog);
+            saveDialog =  loadAndShowDialog("/fxml/UpdateDialogPane.fxml",saveDialog,"Редагування даних плану роботи");
             PlanTable.getSelectionModel().clearSelection();
             saveDialog.setOnHidden(event -> startWorkPlan());
         }
@@ -209,7 +210,7 @@ public class WorkPlanController extends HelloApplication implements Initializabl
     }
 
     public void setSortComboBox(){
-        SortComboBox.getItems().addAll("Показати все","Датою","Семестром");
+        SortComboBox.getItems().addAll("Показати все","Датою","Навчальним роком");
     }
 
     public void selectedSortComboBox(){
@@ -218,7 +219,7 @@ public class WorkPlanController extends HelloApplication implements Initializabl
             EndDatePicker.setVisible(false);
             SortDateLabel.setVisible(false);
             SortDateButton.setVisible(false);
-            SortSemesterComboBox.setVisible(false);
+            SortYearComboBox.setVisible(false);
             displayPlanInfo();
             PlanTable.getSelectionModel().clearSelection();
         }else if(SortComboBox.getValue().equals("Датою")){
@@ -226,19 +227,19 @@ public class WorkPlanController extends HelloApplication implements Initializabl
             EndDatePicker.setVisible(true);
             SortDateLabel.setVisible(true);
             SortDateButton.setVisible(true);
-            SortSemesterComboBox.setVisible(false);
+            SortYearComboBox.setVisible(false);
             SortDateButton.setVisible(true);
             displayPlanInfo();
             ClearValueService.clearSortByDateField(StartDatePicker, EndDatePicker);
             PlanTable.getSelectionModel().clearSelection();
-        }else if(SortComboBox.getValue().equals("Семестром")){
+        }else if(SortComboBox.getValue().equals("Навчальним роком")){
             StartDatePicker.setVisible(false);
             EndDatePicker.setVisible(false);
             SortDateLabel.setVisible(false);
-            SortSemesterComboBox.setVisible(true);
+            SortYearComboBox.setVisible(true);
             SortDateButton.setVisible(false);
             displayPlanInfo();
-            ClearValueService.clearSortBySemesterField(SortSemesterComboBox);
+            ClearValueService.clearSortBySemesterField(SortYearComboBox);
             PlanTable.getSelectionModel().clearSelection();
         }
 
@@ -256,7 +257,7 @@ public class WorkPlanController extends HelloApplication implements Initializabl
         UpdatePlanButton.setVisible(false);
         StartDatePicker.setVisible(false);
         EndDatePicker.setVisible(false);
-        SortSemesterComboBox.setVisible(false);
+        SortYearComboBox.setVisible(false);
         SortDateLabel.setVisible(false);
         SortDateButton.setVisible(false);
         SortComboBox.setValue("Показати все");

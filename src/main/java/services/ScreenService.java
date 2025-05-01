@@ -32,6 +32,9 @@ public class ScreenService {
     public static void maximized_Window(Window window) {
         Stage stage = (Stage) window;
 
+        stage.setMinWidth(1030);
+        stage.setMinHeight(600);
+
         if (!isMaximized) {
             // Зберігаємо поточний розмір і позицію перед розгортанням
             prevX = stage.getX();

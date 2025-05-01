@@ -119,7 +119,7 @@ public class HelloApplication extends Application {
         }
     }
 
-    public Dialog<Boolean> loadAndShowDialog(String linkFxml, Dialog<Boolean> saveDialog){
+    public Dialog<Boolean> loadAndShowDialog(String linkFxml, Dialog<Boolean> saveDialog,String windowName){
         try {
             // Завантаження FXML файлу
             FXMLLoader loader = new FXMLLoader(getClass().getResource(linkFxml));
@@ -134,25 +134,13 @@ public class HelloApplication extends Application {
             saveDialog = dialog;
             Stage dialogStage = (Stage) dialog.getDialogPane().getScene().getWindow();
             dialogStage.getIcons().add(new Image(getClass().getResource("/icon/App-icon.png").toExternalForm())); // Замініть "icon.png" на шлях до вашого файл
-            dialog.setTitle("Діалогове вікно");
+            dialog.setTitle(windowName);
             dialog.show();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
         return saveDialog;
-    }
-
-    public void switchNewPanel(ActionEvent event, String fxml) throws IOException {
-        root = FXMLLoader.load(getClass().getResource(fxml));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        stage.setResizable(true);
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
-        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
     }
 
     public void switchScene(Node currentNode, String fxmlFile) {
@@ -169,7 +157,6 @@ public class HelloApplication extends Application {
                 Stage stage = (Stage) currentNode.getScene().getWindow();
                 Scene scene = new Scene(root);
                 // Add your CSS file here:
-                //scene.getStylesheets().add(getClass().getResource("/css/workPlanPageCss/changeButtonColor.css").toExternalForm());
 
                 // Apply fade-in animation for the new scene
                 stage.setScene(scene);
@@ -181,7 +168,7 @@ public class HelloApplication extends Application {
                 stage.getIcons().add(new Image(getClass().getResource("/icon/App-icon.png").toExternalForm())); // Замініть "icon.png" на шлях до вашого файл
                 stage.setTitle("Журнал Куратора");
                 stage.setMinHeight(600);
-                stage.setMinWidth(1000);
+                stage.setMinWidth(1030);
                 //stage.setHeight();
                 ScreenService.makeResizable(stage,scene);
             } catch (IOException e) {

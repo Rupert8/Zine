@@ -53,6 +53,17 @@ public class HibernateUtil {
         }
     }
 
+    public static boolean isSessionConnected() {
+        try(Session session = HibernateUtil.getSession()) {
+            session.beginTransaction();
+            session.createNativeQuery("SELECT 1").getSingleResult();
+            session.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public static void closeSession(Session session) {
         if(session != null){
             session.close();

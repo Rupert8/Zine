@@ -27,10 +27,14 @@ public class AddPlanDialogController extends HelloApplication implements Initial
     @FXML
     private ComboBox<Integer> SemesterComboBox;
 
+    @FXML
+    private ComboBox<Integer> YearComboBox;
+
     private String nameEvent;
     private Date date;
     private Integer semester;
     private String status;
+    private Integer year;
 
 
     private void getData(){
@@ -43,16 +47,17 @@ public class AddPlanDialogController extends HelloApplication implements Initial
         nameEvent = String.valueOf(NameEvent.getText());
         date = Date.valueOf(dateExecution.getValue());
         semester = SemesterComboBox.getValue();
+        year = YearComboBox.getValue();
     }
 
     public void addEvent(){
         if(isAllFieldsFilled()){
             getData();
-            AddData.addPlanForAdminData(nameEvent,date,status,semester);
+            AddData.addPlanForAdminData(nameEvent,date,status,semester,year);
             closeAddDialog();
             loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
         }else{
-            loadAndShowLoginAlarm("/fxml/notifications/WarningEmptyField.fxml");
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningEmptyField.fxml");
         }
 
     }
@@ -67,20 +72,24 @@ public class AddPlanDialogController extends HelloApplication implements Initial
     }
 
     private void setSemesterComboBox(){
-        SemesterComboBox.getItems().addAll(1,2,3,4,5,6,7,8);
+        SemesterComboBox.getItems().addAll(1,2);
     }
+
+    private void setYearComboBox(){ YearComboBox.getItems().addAll(1,2,3,4); }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCompletionComboBox();
         setSemesterComboBox();
+        setYearComboBox();
     }
 
     private boolean isAllFieldsFilled() {
         if (!NameEvent.getText().isEmpty() &&
                 dateExecution.getValue() != null &&
                 SemesterComboBox.getValue() != null &&
-                CompletionComboBox.getValue() != null) {
+                CompletionComboBox.getValue() != null &&
+                YearComboBox.getValue() != null) {
             return true; // Усі поля заповнені
         } else {
             return false; // Є незаповнені поля

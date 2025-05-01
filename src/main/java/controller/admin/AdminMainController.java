@@ -1,5 +1,6 @@
 package controller.admin;
 
+import interfaces.WindowActions.LoadablePane;
 import interfaces.WindowActions.WindowControl;
 import data.DisplayDate;
 import data.SearchStudentData;
@@ -7,27 +8,34 @@ import hibernate.entity.StudentInfo;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import services.ScreenService;
 import start.zine.HelloApplication;
 
+import java.net.URL;
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import static controller.extendedInformationAboutStudent.ExtendedInformationAboutStudent.userStatus;
 
 
-public class AdminMainController extends HelloApplication implements WindowControl {
+public class AdminMainController extends HelloApplication implements Initializable, WindowControl, LoadablePane {
     @FXML
     private TableView<StudentInfo> GroupTable;
 
@@ -63,6 +71,11 @@ public class AdminMainController extends HelloApplication implements WindowContr
     private HBox SortLabelHBox,SortComboBoxHBox,SortByGroupHBox;
     @FXML
     private HBox ExtendedInfoHbox,AddHbox;
+
+    @FXML
+    private StackPane LoadingAdminMainStackPane;
+    @FXML
+    private BorderPane AdminMainBorderPane;
 
     public static int studentId;
     public static String studentName;
@@ -185,10 +198,6 @@ public class AdminMainController extends HelloApplication implements WindowContr
         SortByGroupHBox.setPickOnBounds(false);
     }
 
-    public void initialize() {
-        correctVisible();
-        //AddressColumn.setPrefWidth(262);
-    }
 
     @Override
     public void setMinimizeWindowButton() {
@@ -214,4 +223,37 @@ public class AdminMainController extends HelloApplication implements WindowContr
     public void setPressedWindow(MouseEvent mouseEvent) {
         ScreenService.panePressed(mouseEvent);
     }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        loadPane();
+    }
+
+    @Override
+    public void loadPane() {
+            LoadingAdminMainStackPane.setVisible(true);
+            AdminMainBorderPane.setDisable(true);
+
+            Task<Void> loadDataTask = new Task<>() {
+                @Override
+                protected Void call() {
+                    correctVisible();
+                    return null;
+                }
+
+                @Override
+                protected void succeeded() {
+                    LoadingAdminMainStackPane.setVisible(false);
+                    AdminMainBorderPane.setDisable(false);
+                }
+
+                @Override
+                protected void failed() {
+                    LoadingAdminMainStackPane.setVisible(false);
+                    System.out.print("Сталася помилка при завантаженні даних");
+                }
+            };
+
+            new Thread(loadDataTask).start();
+        }
 }

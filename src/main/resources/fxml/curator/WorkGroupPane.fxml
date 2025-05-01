@@ -157,13 +157,13 @@
                <children>
                   <TableView fx:id="GroupTable" editable="true" prefHeight="550.0" prefWidth="1240.0" styleClass="table" stylesheets="@../../css/style.css">
                      <columns>
-                        <TableColumn fx:id="NumberColumn" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
-                        <TableColumn fx:id="SurnameColumn" prefWidth="178.3" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
+                        <TableColumn fx:id="NumberColumn" maxWidth="34.0" minWidth="34.0" prefWidth="34.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
+                        <TableColumn fx:id="SurnameColumn" prefWidth="186.0" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
                         <TableColumn fx:id="NameColumn" prefWidth="178.3" style="-fx-background-color: #fff;" styleClass="column" text="Ім`я" />
-                        <TableColumn fx:id="MiddleNameColumn" prefWidth="178.3" style="-fx-background-color: #fff;" styleClass="column" text="По-батькові" />
-                        <TableColumn fx:id="DateBirthDayColumn" prefWidth="210.0" style="-fx-background-color: #fff;" styleClass="column" text="Дата Народження" />
-                        <TableColumn fx:id="PhoneNumberColumn" prefWidth="182.0" style="-fx-background-color: #fff;" styleClass="column" text="Телефон" />
-                        <TableColumn fx:id="AddressColumn" prefWidth="262.0" style="-fx-background-color: #fff;" styleClass="column" text="Адреса" />
+                        <TableColumn fx:id="MiddleNameColumn" prefWidth="254.0" style="-fx-background-color: #fff;" styleClass="column" text="По-батькові" />
+                        <TableColumn fx:id="DateBirthDayColumn" maxWidth="178.0" minWidth="178.0" prefWidth="178.0" style="-fx-background-color: #fff;" styleClass="column" text="Дата Народження" />
+                        <TableColumn fx:id="PhoneNumberColumn" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" style="-fx-background-color: #fff;" styleClass="column" text="Телефон" />
+                        <TableColumn fx:id="AddressColumn" minWidth="262.0" prefWidth="287.0" style="-fx-background-color: #fff;" styleClass="column" text="Адреса" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
