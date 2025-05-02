@@ -53,9 +53,9 @@ public class WorkStudController extends HelloApplication implements Initializabl
     private void setAllComboBox(){
         GeneralInfoComboBox.getItems().setAll("Дані про освіту","Служба в ЗСУ","Інформація про батьків","Трудова Діяльність");
         SocialActivityComboBox.getItems().setAll("Громадська діяльність","Гурткова Діяльність");
-        IndividualSupportComboBox.getItems().setAll("Індивідуальний супровід");
-        PromotionComboBox.getItems().setAll("Заохочення");
-        SocialPassportComboBox.getItems().setAll("Соціальний паспорт");
+        //IndividualSupportComboBox.getItems().setAll("Індивідуальний супровід");
+        //PromotionComboBox.getItems().setAll("Заохочення");
+        //SocialPassportComboBox.getItems().setAll("Соціальний паспорт");
     }
 
     public void switchAddInformationAboutStudentPane(ActionEvent event) {
@@ -132,15 +132,16 @@ public class WorkStudController extends HelloApplication implements Initializabl
     private void showAndHideComboBox() {
         GeneralInfoComboBox.setOnMouseEntered(event -> handleComboBoxShow(GeneralInfoComboBox));
         SocialActivityComboBox.setOnMouseEntered(event -> handleComboBoxShow(SocialActivityComboBox));
-        IndividualSupportComboBox.setOnMouseEntered(event -> handleComboBoxShow(IndividualSupportComboBox));
-        PromotionComboBox.setOnMouseEntered(event -> handleComboBoxShow(PromotionComboBox));
-        SocialPassportComboBox.setOnMouseEntered(event -> handleComboBoxShow(SocialPassportComboBox));
+        //IndividualSupportComboBox.setOnMouseEntered(event -> handleComboBoxShow(IndividualSupportComboBox));
+        //PromotionComboBox.setOnMouseEntered(event -> handleComboBoxShow(PromotionComboBox));
+        //SocialPassportComboBox.setOnMouseEntered(event -> handleComboBoxShow(SocialPassportComboBox));
     }
 
     private void handleComboBoxShow(ComboBox<?> activeComboBox) {
         ComboBox<?>[] comboBoxes = {
-                GeneralInfoComboBox, SocialActivityComboBox,
-                IndividualSupportComboBox, PromotionComboBox, SocialPassportComboBox
+                //IndividualSupportComboBox
+                GeneralInfoComboBox, SocialActivityComboBox
+                //,PromotionComboBox, SocialPassportComboBox
         };
 
         for (ComboBox<?> comboBox : comboBoxes) {
@@ -168,9 +169,9 @@ public class WorkStudController extends HelloApplication implements Initializabl
         setAllComboBox();
         switchGeneralDataPage();
         switchSocialActivityPage();
-        switchIndividualSupportPage();
-        switchPromotionPage();
-        switchSocialPassportPage();
+        //switchIndividualSupportPage();
+        //switchPromotionPage();
+        //switchSocialPassportPage();
         setCuratorName();
         setGroupName();
     }

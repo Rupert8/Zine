@@ -165,27 +165,27 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="256.0">
                                  <children>
-                                    <ComboBox fx:id="GeneralInfoComboBox" minHeight="50.0" minWidth="212.0" onAction="#switchGeneralDataPage" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
+                                    <ComboBox fx:id="GeneralInfoComboBox" minHeight="50.0" minWidth="214.0" onAction="#switchGeneralDataPage" prefWidth="150.0" promptText="Загальні відомості" stylesheets="@../../css/comboBox.css" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="256.0">
                                  <children>
-                                    <ComboBox fx:id="SocialActivityComboBox" minHeight="50.0" minWidth="212.0" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
+                                    <ComboBox fx:id="SocialActivityComboBox" minHeight="50.0" minWidth="214.0" prefWidth="150.0" promptText="Діяльності" stylesheets="@../../css/comboBox.css" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="256.0">
                                  <children>
-                                    <ComboBox fx:id="IndividualSupportComboBox" minHeight="50.0" minWidth="212.0" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
+                                    <Button minHeight="50.0" minWidth="214.0" mnemonicParsing="false" onAction="#switchWorkIndividualSupportPage" styleClass="workWithStudButton" stylesheets="@../../css/button.css" text="Індивідуальний супровід" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="256.0">
                                  <children>
-                                    <ComboBox fx:id="PromotionComboBox" minHeight="50.0" minWidth="212.0" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
+                                    <Button minHeight="50.0" minWidth="214.0" mnemonicParsing="false" onAction="#switchWorkPromotionPage" styleClass="workWithStudButton" stylesheets="@../../css/button.css" text="Заохочення" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="256.0">
                                  <children>
-                                    <ComboBox fx:id="SocialPassportComboBox" minHeight="50.0" minWidth="212.0" prefWidth="150.0" promptText="Виберіть категорію" stylesheets="@../../css/comboBox.css" />
+                                    <Button minHeight="50.0" minWidth="214.0" mnemonicParsing="false" onAction="#switchWorkSocialPassport" styleClass="workWithStudButton" stylesheets="@../../css/button.css" text="Соціальний паспорт" />
                                  </children>
                               </HBox>
                            </children>

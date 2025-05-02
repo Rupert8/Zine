@@ -87,4 +87,15 @@
     -fx-border-color:  #cdbb7c;
 }
 
+.workWithStudButton {
+        -fx-background-color: #e8d58c; /* Колір фону ComboBox */
+        -fx-border-color: black; /* Рамка */
+        -fx-border-width: 1px; /* Товщина рамки */
+        -fx-border-radius: 5px; /* Заокруглення країв */
+        -fx-background-radius: 5px; /* Заокруглення фону */
+        -fx-font-family: Gotham;
+        -fx-font-size: 14px;
+        -fx-text-fill: black;
+        -fx-padding: 5px; /* Відступи */
+}
 
