@@ -110,3 +110,17 @@
         -fx-padding: 5px; /* Відступи */
 }
 
+.toggle-button {
+    -fx-background-color: #e8d58c;
+    -fx-border-color: #fff;
+    -fx-font-size: 13px;
+
+}
+
+.toggle-button:selected {
+    -fx-background-radius: 6;
+    -fx-background-color: #fff;
+    -fx-border-color:  #e8d58c;
+
+}
+

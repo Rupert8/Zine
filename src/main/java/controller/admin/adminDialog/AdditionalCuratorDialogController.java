@@ -63,9 +63,14 @@ public class AdditionalCuratorDialogController extends AdminCuratorController im
 //    }
 
     public void deleteCurator(){
-        DeleteData.deleteCurator(curatorId,curatorGroupName);
-        closeDialog();
-        loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessDeleteNotification.fxml");
+        if(curatorGroupName == null){
+            DeleteData.deleteCurator(curatorId,curatorGroupName);
+            closeDialog();
+            loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessDeleteNotification.fxml");
+        } else{
+            loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningCuratorHasGroup.fxml");
+        }
+
     }
 
     private boolean isAllFieldsFilled() {

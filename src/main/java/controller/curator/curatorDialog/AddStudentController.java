@@ -1,4 +1,4 @@
-package controller.curator;
+package controller.curator.curatorDialog;
 
 import data.AddData;
 import data.SearchStudentData;

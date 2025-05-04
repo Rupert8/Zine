@@ -43,6 +43,27 @@ public class StartApplication extends Application {
         stage.show();
     }
 
+    public void loadAndShowEmailWarning(String linkFxml){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(linkFxml));
+            DialogPane dialogPane = loader.load();
+
+            Dialog<Boolean> dialog = new Dialog<>();
+            dialog.setDialogPane(dialogPane);
+            dialog.getDialogPane().getScene().getWindow().setOnCloseRequest(event -> {
+                dialog.close();
+            });
+
+            Stage dialogStage = (Stage) dialog.getDialogPane().getScene().getWindow();
+            dialogStage.getIcons().add(new Image(getClass().getResource("/icon/info-icon.png").toExternalForm())); // Замініть "icon.png" на шлях до вашого файл
+            dialog.setTitle("Помилка!");
+            dialog.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void loadAndShowLoginAlarm(String linkFxml){
         try {
             // Завантаження FXML файлу

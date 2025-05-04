@@ -1,5 +1,6 @@
-package controller.curator;
+package controller.curator.curatorDialog;
 
+import controller.curator.WorkGroupController;
 import data.SearchStudentData;
 import data.UpdateData;
 import javafx.fxml.FXML;

@@ -189,7 +189,7 @@ public class WorkPlanController extends StartApplication implements Initializabl
     }
 
     public void showAddDialogPane(){
-        saveDialog = loadAndShowDialog("/fxml/dialogPane.fxml",saveDialog,"Реєстрація плану роботи");
+        saveDialog = loadAndShowDialog("/fxml/curator/curatorDialogFxml/dialogPane.fxml",saveDialog,"Реєстрація плану роботи");
         performerNameForAdd = CuratorName.getText();
         saveDialog.setOnHidden(event -> startWorkPlan());
         PlanTable.getSelectionModel().clearSelection();
@@ -199,7 +199,7 @@ public class WorkPlanController extends StartApplication implements Initializabl
         if(passConfirmationNote.equals("Затверджено")){
             loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningConfirmationNote.fxml");
         }else{
-            saveDialog =  loadAndShowDialog("/fxml/UpdateDialogPane.fxml",saveDialog,"Редагування даних плану роботи");
+            saveDialog =  loadAndShowDialog("/fxml/curator/curatorDialogFxml/UpdateDialogPane.fxml",saveDialog,"Редагування даних плану роботи");
             PlanTable.getSelectionModel().clearSelection();
             saveDialog.setOnHidden(event -> startWorkPlan());
         }

@@ -165,7 +165,7 @@
                               </HBox>
                               <HBox fx:id="WorkTeacherHBox" alignment="CENTER" prefHeight="50.0" prefWidth="240.0">
                                  <children>
-                                    <Button mnemonicParsing="false" styleClass="mainButton" stylesheets="@../../css/button.css" text="Викладачі">
+                                    <Button mnemonicParsing="false" prefWidth="193.0" styleClass="mainButton" stylesheets="@../../css/button.css" text="Викладачі">
                                        <font>
                                           <Font name="Kharkiv Tone Regular" size="24.0" />
                                        </font>

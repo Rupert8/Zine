@@ -195,7 +195,7 @@
                               </HBox>
                               <HBox fx:id="GroupHBox" alignment="CENTER" prefHeight="50.0" prefWidth="170.0">
                                  <children>
-                                    <Button mnemonicParsing="false" styleClass="mainButton" stylesheets="@../../css/button.css" text="Групи">
+                                    <Button mnemonicParsing="false" prefWidth="121.0" styleClass="mainButton" stylesheets="@../../css/button.css" text="Групи">
                                        <font>
                                           <Font name="Kharkiv Tone Regular" size="24.0" />
                                        </font>

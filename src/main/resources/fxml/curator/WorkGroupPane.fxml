@@ -111,7 +111,7 @@
                               <Font name="Kharkiv Tone Regular" size="24.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="152.0" top="4.0" />
+                              <Insets left="152.0" top="-6.0" />
                            </HBox.margin>
                         </Button>
                      </children>
@@ -130,25 +130,24 @@
                   </HBox>
                   <HBox fx:id="GroupPaneHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Pane fx:id="GroupButtonPane" prefHeight="49.0" prefWidth="152.0" style="-fx-background-color: #e8d58c;">
+                        <HBox minHeight="30.0" style="-fx-background-color: #e8d58c;">
                            <HBox.margin>
-                              <Insets bottom="22.0" right="45.0" />
+                              <Insets bottom="20.0" right="45.0" />
                            </HBox.margin>
-                        </Pane>
+                           <children>
+                              <Button fx:id="GroupNameButton" mnemonicParsing="false" styleClass="mainButton" stylesheets="@../../css/button.css" text="2-KT-21">
+                                 <font>
+                                    <Font name="Kharkiv Tone Regular" size="24.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
-                  <HBox fx:id="GroupHbox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="GroupNameButton" mnemonicParsing="false" prefHeight="49.0" prefWidth="152.0" styleClass="mainButton" stylesheets="@../../css/button.css" text="2-KT-21">
-                           <font>
-                              <Font name="Kharkiv Tone Regular" size="24.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="45.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
+                  <HBox fx:id="GroupHbox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
                </children>
             </StackPane>
          </top>

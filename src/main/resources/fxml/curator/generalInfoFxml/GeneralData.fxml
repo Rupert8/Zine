@@ -20,7 +20,7 @@
         </Pane>
       <TableView fx:id="GeneralInfoTable" layoutX="26.0" layoutY="131.0" prefHeight="594.0" prefWidth="1229.0" styleClass="table" stylesheets="@../../../css/style.css">
         <columns>
-          <TableColumn fx:id="NumberColumn" editable="false" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
+          <TableColumn fx:id="NumberColumn" editable="false" maxWidth="43.0" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
           <TableColumn fx:id="SurnameColumn" editable="false" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
             <TableColumn fx:id="NameColumn" editable="false" prefWidth="141.60000610351562" style="-fx-background-color: #fff;" styleClass="column" text="Ім`я" />
             <TableColumn fx:id="MiddleNameColumn" editable="false" prefWidth="195.99996948242188" style="-fx-background-color: #fff;" styleClass="column" text="По-батькові" />

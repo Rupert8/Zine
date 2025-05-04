@@ -103,6 +103,7 @@ public class AdminCuratorController extends StartApplication implements Initiali
                 curatorEmail = curators.getEmail();
                 curatorGroupName = curators.getGroup();
 
+
                 curatorId = SearchStudentData.getIdCurator(curatorEmail);
 
                 AdditionCuratorButton.setVisible(true);

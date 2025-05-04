@@ -597,16 +597,32 @@ public class AddInformationAboutStudentController extends StartApplication imple
         StudentHBOx.setPickOnBounds(false);
     }
 
-    private void setFocusedMenuButton(){
-        List<Button> menuButtons = List.of(GeneralInfoButton,SocialActivityButton,IndividualSupportButton,PromotionButton,SocialPassportButton);
+//    private void setFocusedMenuButton(){
+//        List<Button> menuButtons = List.of(GeneralInfoButton,SocialActivityButton,IndividualSupportButton,PromotionButton,SocialPassportButton);
+//
+//        for (Button btn : menuButtons) {
+//            btn.setOnAction(e -> {
+//                for (Button b : menuButtons) {
+//                    b.getStyleClass().remove("selected"); // Зняти активність з усіх
+//                }
+//                btn.getStyleClass().add("selected"); // Додати активність до натиснутої
+//            });
+//        }
+//    }
 
-        for (Button btn : menuButtons) {
-            btn.setOnAction(e -> {
-                for (Button b : menuButtons) {
-                    b.getStyleClass().remove("selected"); // Зняти активність з усіх
-                }
-                btn.getStyleClass().add("selected"); // Додати активність до натиснутої
-            });
+    private void setFocusedMenuButton(){
+        if(GeneralInfoButton.isPressed()){
+            GeneralInfoButton.add("selected");
+            SocialActivityButton.getStyleClass().remove("selected");
+            IndividualSupportButton.getStyleClass().remove("selected");
+            PromotionButton.getStyleClass().remove("selected");
+            SocialPassportButton.getStyleClass().remove("selected");
+        }if(SocialActivityButton.isPressed()){
+            SocialActivityButton.getStyleClass().add("selected");
+            IndividualSupportButton.getStyleClass().remove("selected");
+            PromotionButton.getStyleClass().remove("selected");
+            SocialPassportButton.getStyleClass().remove("selected");
+            GeneralInfoButton.getStyleClass().remove("selected");
         }
     }
 

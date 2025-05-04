@@ -23,14 +23,12 @@ public class PassPageController extends StartApplication implements WindowContro
     private Button minimizeWindowButton,maximizeWindowButton,closeWindowButton;
 
     public void recoveryPassword(ActionEvent event) {
-        String email = EmailField.getText();
-        userEmail = email;
+        userEmail = EmailField.getText();
 
-        System.out.println("=== Скидання пароля ===");
-        System.out.print("Введіть ваш email: ");
 
         // Надсилаємо код на email
-        EmailService.sendVerificationCode(email);
+        EmailService.sendVerificationCode(userEmail);
+        loadAndShowEmailWarning("/fxml/recoveryPassword/SentCodeNotification.fxml");
         switchToCodeFxml(event);
     }
 

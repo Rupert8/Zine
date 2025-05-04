@@ -187,8 +187,8 @@ public class WorkGroupController extends StartApplication implements Initializab
         displayGroupData();
         displayCuratorName();
         GroupNameButton.setText(curatorGroupName);
-        GroupButtonPane.prefHeightProperty().bind(GroupNameButton.heightProperty());
-        GroupButtonPane.prefWidthProperty().bind(GroupNameButton.widthProperty());
+        //GroupButtonPane.prefHeightProperty().bind(GroupNameButton.heightProperty());
+        //GroupButtonPane.prefWidthProperty().bind(GroupNameButton.widthProperty());
         UpdateStudentButton.setVisible(false);
         DeleteStudentButton.setVisible(false);
         extendedInfo.setVisible(false);

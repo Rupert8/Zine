@@ -16,7 +16,7 @@ import static controller.login.LoginController.curatorGroupName;
 public class AddData {
     public static final String GET_CATEGORYNAME_ID = "SELECT s FROM SpCategoryName s WHERE s.category = :categoryName";
 
-    public static void addPlanForCuratorData(String eventName, Date executionDate, String Performer, String execution, int semester) {
+    public static void addPlanForCuratorData(String eventName, Date executionDate, String Performer, String execution, int semester,int year) {
         try {
             Session session = HibernateUtil.getSession();
             session.beginTransaction();
@@ -28,6 +28,7 @@ public class AddData {
             plan.setSemester(semester);
             plan.setCompletionNote(execution);
             plan.setConfirmationNote("Не затверджено");
+            plan.setAcademicYear(year);
 
             session.persist(plan);
             session.getTransaction().commit();

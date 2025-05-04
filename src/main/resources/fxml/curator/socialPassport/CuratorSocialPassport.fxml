@@ -109,7 +109,7 @@
                <children>
                   <TableView fx:id="SocialPassportTable" prefHeight="594.0" prefWidth="1229.0" styleClass="table" stylesheets="@../../../css/style.css">
                      <columns>
-                        <TableColumn fx:id="NumberColumn" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
+                        <TableColumn fx:id="NumberColumn" maxWidth="43.0" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
                         <TableColumn fx:id="SurnameColumn" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
                         <TableColumn fx:id="NameColumn" prefWidth="141.60000610351562" style="-fx-background-color: #fff;" styleClass="column" text="Ім`я" />
                         <TableColumn fx:id="MiddleNameColumn" prefWidth="195.99996948242188" style="-fx-background-color: #fff;" styleClass="column" text="По-батькові" />

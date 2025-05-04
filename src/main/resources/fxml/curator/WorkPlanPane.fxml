@@ -162,7 +162,7 @@
                <children>
                   <HBox fx:id="DeleteHbox" alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="DeletePlanButton" mnemonicParsing="false" onAction="#delete" style="-fx-background-color: #e8d58c;" styleClass="Button" stylesheets="@../../css/button.css" text="Видалити" visible="false">
+                        <Button fx:id="DeletePlanButton" mnemonicParsing="false" onAction="#delete" styleClass="Button" stylesheets="@../../css/button.css" text="Видалити" visible="false">
                            <HBox.margin>
                               <Insets bottom="15.0" left="130.0" />
                            </HBox.margin>
@@ -174,7 +174,7 @@
                         <Insets />
                      </StackPane.margin>
                      <children>
-                        <Button fx:id="UpdatePlanButton" mnemonicParsing="false" onAction="#showUpdateDialogPane" style="-fx-background-color: #e8d58c;" styleClass="loginButton" stylesheets="@../../css/button.css" text="Змінити" visible="false">
+                        <Button fx:id="UpdatePlanButton" mnemonicParsing="false" onAction="#showUpdateDialogPane" styleClass="Button" stylesheets="@../../css/button.css" text="Змінити" visible="false">
                            <HBox.margin>
                               <Insets bottom="15.0" left="20.0" />
                            </HBox.margin>
@@ -183,7 +183,7 @@
                   </HBox>
                   <HBox fx:id="AddHbox" alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#showAddDialogPane" style="-fx-background-color: #e8d58c;" styleClass="Button" stylesheets="@../../css/button.css" text="Додати">
+                        <Button mnemonicParsing="false" onAction="#showAddDialogPane" styleClass="Button" stylesheets="@../../css/button.css" text="Додати">
                            <HBox.margin>
                               <Insets bottom="15.0" right="20.0" />
                            </HBox.margin>

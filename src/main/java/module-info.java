@@ -24,7 +24,7 @@ module start.zine {
     exports controller.curator.socialActivity;
     exports controller.admin;
     exports controller.curator.socialPassport;
-    exports controller;
+    exports controller.curator.curatorDialog;
     exports data;
     exports tableView to org.hibernate.orm.core;
     exports hiberante.sessionFactory;
@@ -39,7 +39,6 @@ module start.zine {
     opens controller.curator.individualSupport to javafx.fxml;
     opens controller.curator.socialActivity to javafx.fxml;
     opens controller.curator.socialPassport to javafx.fxml;
-    opens controller to javafx.fxml;
     opens data to javafx.fxml;
 
     opens tableView to org.hibernate.orm.core, javafx.base;
@@ -51,4 +50,5 @@ module start.zine {
     exports controller.curator;
     exports controller.extendedInformationAboutStudent;
     opens controller.extendedInformationAboutStudent to javafx.fxml;
+    opens controller.curator.curatorDialog to javafx.fxml;
 }

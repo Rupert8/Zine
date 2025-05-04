@@ -40,14 +40,11 @@ public class VerifyCodeController extends StartApplication implements WindowCont
     @FXML
     private Button minimizeWindowButton,maximizeWindowButton,closeWindowButton;
 
-
-    private void loadAndShowCodeWarning(String linkFxml){
+    public void loadAndShowCodeWarning(String linkFxml){
         try {
-            // Завантаження FXML файлу
             FXMLLoader loader = new FXMLLoader(getClass().getResource(linkFxml));
             DialogPane dialogPane = loader.load();
 
-            // Створення діалогового вікна
             Dialog<Boolean> dialog = new Dialog<>();
             dialog.setDialogPane(dialogPane);
             dialog.getDialogPane().getScene().getWindow().setOnCloseRequest(event -> {
@@ -66,12 +63,13 @@ public class VerifyCodeController extends StartApplication implements WindowCont
         }
     }
 
+
     public void verifyInputCode(){
         String code = CodeField.getText();
         boolean trueCode = EmailService.isVerifyCode(code);
 
         if(trueCode){
-            System.out.print("код правильний");
+            loadAndShowCodeWarning("/fxml/notifications/successNotifications/SuccessVerifyCode.fxml");
             NewPasswordPane.setVisible(true);
         }else{
             loadAndShowCodeWarning("/fxml/recoveryPassword/Message.fxml");
@@ -82,6 +80,7 @@ public class VerifyCodeController extends StartApplication implements WindowCont
     public void setNewPassword(ActionEvent event){
         String newPassword = NewPasswordField.getText();
         UpdateData.updateUserPassword(userEmail, newPassword);
+        loadAndShowCodeWarning("/fxml/notifications/successNotifications/SuccessPasswordChanged.fxml");
         switchToLoginPage(event);
     }
 

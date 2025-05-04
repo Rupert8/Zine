@@ -1,4 +1,4 @@
-package controller;
+package controller.curator.curatorDialog;
 
 import controller.curator.WorkPlanController;
 import data.AddData;
@@ -25,12 +25,16 @@ public class DialogController extends WorkPlanController implements Initializabl
 
     @FXML
     private ComboBox<Integer> SemesterComboBox;
+    @FXML
+    private ComboBox<Integer> YearComboBox;
+
 
     private String completion;
     private String nameEvent;
     private Date date;
     private Integer semester;
     private String status;
+    private int year;
 
     private URL url;
     private ResourceBundle resources;
@@ -45,13 +49,15 @@ public class DialogController extends WorkPlanController implements Initializabl
         nameEvent = String.valueOf(NameEvent.getText());
         date = Date.valueOf(dateExecution.getValue());
         semester = SemesterComboBox.getValue();
+        year = YearComboBox.getValue();
+
     }
 
     public void addEvent(){
         if(isAllFieldsFilled()){
             if(!isExist()){
                 getData();
-                AddData.addPlanForCuratorData(nameEvent,date,performerNameForAdd,status,semester);
+                AddData.addPlanForCuratorData(nameEvent,date,performerNameForAdd,status,semester,year);
                 closeAddDialog();
                 loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
             }else{
@@ -74,7 +80,11 @@ public class DialogController extends WorkPlanController implements Initializabl
     }
 
     private void setSemesterComboBox(){
-        SemesterComboBox.getItems().addAll(1,2,3,4,5,6,7,8);
+        SemesterComboBox.getItems().addAll(1,2);
+    }
+
+    private void setYearComboBox(){
+        YearComboBox.getItems().addAll(1,2,3,4);
     }
 
     private boolean isAllFieldsFilled() {
@@ -96,5 +106,6 @@ public class DialogController extends WorkPlanController implements Initializabl
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCompletionComboBox();
         setSemesterComboBox();
+        setYearComboBox();
     }
 }
