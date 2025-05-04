@@ -13,7 +13,7 @@ public class ClearValueService {
         endDate.setValue(null);
     }
 
-    public static void clearSortBySemesterField(ComboBox<Integer> comboBox){
+    public static void clearSortBySemesterField(ComboBox<?> comboBox){
         comboBox.setValue(null);
     }
 

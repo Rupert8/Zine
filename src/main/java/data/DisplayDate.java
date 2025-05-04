@@ -278,6 +278,30 @@ public class DisplayDate  {
         return planInfo;
     }
 
+    public static ObservableList<WorkPlan> getDataByCuratorName(String curatorName){
+        ObservableList<WorkPlan> planInfo = FXCollections.observableArrayList();
+
+        try {
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            List<WorkPlan> resoultList = session.createQuery("From WorkPlan Where performer = :curatorName ", WorkPlan.class)
+                                    .setParameter("curatorName",curatorName)
+                                    .getResultList();
+
+            planInfo.addAll(resoultList);
+            session.getTransaction().commit();
+
+            for (int i = 0; i < resoultList.size(); i++) {
+                resoultList.get(i).setId(i + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return planInfo;
+    }
+
     public static ObservableList<StudentInfo> getDataByGroupNameForAdminStudentInfo(String groupName) {
         String hql = "FROM StudentInfo WHERE groupName = :groupName and status = true";
         ObservableList<StudentInfo> studentInfo = FXCollections.observableArrayList();
@@ -424,6 +448,21 @@ public class DisplayDate  {
 
         try{
             List<String> curators = session.createQuery(GET_CURATOR_NAME, String.class).list();
+            curatorName.addAll(curators);
+        } catch (Exception e) {
+            e.printStackTrace();
+            new RuntimeException(e);
+        }
+
+        return curatorName;
+    }
+
+    public static List<String> getCuratorNameForSort(){
+        List<String> curatorName = new ArrayList<>();
+        session = HibernateUtil.getSession();
+
+        try{
+            List<String> curators = session.createQuery("SELECT CONCAT(surname, ' ', name, ' ', middleName) FROM Curators", String.class).list();
             curatorName.addAll(curators);
         } catch (Exception e) {
             e.printStackTrace();

@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 import tableView.SocialPassportCategoryPrototype;
 
 import java.net.URL;
@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 import static controller.admin.AdminSocialPassportController.saveDialog;
 
-public class AddSocialCategoryDialogPane extends HelloApplication implements Initializable {
+public class AddSocialCategoryDialogPane extends StartApplication implements Initializable {
     @FXML
     private TableView<SocialPassportCategoryPrototype> SocialPassportCategory;
 

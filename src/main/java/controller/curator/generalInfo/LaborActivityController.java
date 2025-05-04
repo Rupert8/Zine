@@ -14,13 +14,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import services.ScreenService;
 import services.TableService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
 
-public class LaborActivityController extends HelloApplication implements Initializable, WindowControl {
+public class LaborActivityController extends StartApplication implements Initializable, WindowControl {
 
     @FXML
     private TableColumn<StudentJob, Date> EndDate;

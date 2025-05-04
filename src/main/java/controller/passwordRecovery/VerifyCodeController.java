@@ -16,13 +16,13 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import services.ScreenService;
 import services.email.EmailService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.io.IOException;
 
 import static controller.passwordRecovery.PassPageController.userEmail;
 
-public class VerifyCodeController extends HelloApplication implements WindowControl {
+public class VerifyCodeController extends StartApplication implements WindowControl {
     @FXML
     private Pane CodePane;
 

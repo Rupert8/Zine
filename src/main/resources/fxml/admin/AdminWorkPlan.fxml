@@ -203,6 +203,15 @@
                               </ComboBox>
                            </children>
                         </HBox>
+                        <HBox fx:id="ChooseCuratorHbox" alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <ComboBox fx:id="SortByCuratorComboBox" onAction="#displayDataByCurator" prefHeight="32.0" prefWidth="245.0" promptText="Виберіть викладача" style="-fx-cursor: pointer;" styleClass="comboBox" stylesheets="@../../css/textField.css" visible="false">
+                                 <HBox.margin>
+                                    <Insets right="50.0" top="27.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                           </children>
+                        </HBox>
                         <HBox fx:id="SortLabelHBox" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Label text="Сортувати за:">

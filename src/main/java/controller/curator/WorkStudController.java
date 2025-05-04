@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import services.ScreenService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 import static controller.login.LoginController.curatorGroupName;
 import static controller.curator.WorkGroupController.curatorFullName;
 
-public class WorkStudController extends HelloApplication implements Initializable, WindowControl {
+public class WorkStudController extends StartApplication implements Initializable, WindowControl {
     @FXML
     private ComboBox<String> GeneralInfoComboBox;
 

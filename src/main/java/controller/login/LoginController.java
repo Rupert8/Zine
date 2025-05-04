@@ -25,14 +25,14 @@ import javafx.stage.Stage;
 import org.hibernate.Session;
 
 import services.ScreenService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
-public class LoginController extends HelloApplication implements Initializable, WindowControl, LoadablePane {
+public class LoginController extends StartApplication implements Initializable, WindowControl, LoadablePane {
     @FXML
     private Label magazineCurator;
     @FXML

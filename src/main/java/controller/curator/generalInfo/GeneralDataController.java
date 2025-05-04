@@ -8,16 +8,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import org.apache.commons.math3.analysis.function.Add;
 import services.TableService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.net.URL;
-import java.security.Provider;
 import java.sql.Date;
 import java.util.ResourceBundle;
 
-public class GeneralDataController extends HelloApplication implements Initializable {
+public class GeneralDataController extends StartApplication implements Initializable {
     @FXML
     private TableView<StudentInfo> GeneralInfoTable;
 

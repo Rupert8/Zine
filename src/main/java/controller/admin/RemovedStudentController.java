@@ -1,8 +1,6 @@
 package controller.admin;
 
 import data.DisplayDate;
-import hibernate.entity.Curators;
-import hibernate.entity.StudentInfo;
 import interfaces.WindowActions.WindowControl;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,7 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import services.ScreenService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 import tableView.RemovedStudentPrototype;
 
 import java.net.URL;
@@ -22,7 +20,7 @@ import java.sql.Date;
 import java.util.ResourceBundle;
 
 
-public class RemovedStudentController extends HelloApplication implements Initializable, WindowControl {
+public class RemovedStudentController extends StartApplication implements Initializable, WindowControl {
     @FXML
     private TableView<RemovedStudentPrototype> RemovedStudentTable;
 

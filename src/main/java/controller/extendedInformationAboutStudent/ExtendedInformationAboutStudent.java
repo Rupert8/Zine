@@ -19,7 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import services.ScreenService;
 import services.ValidateValueService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.net.URL;
 import java.sql.Date;
@@ -28,7 +28,7 @@ import java.util.ResourceBundle;
 
 import static controller.admin.AdminMainController.*;
 
-public class ExtendedInformationAboutStudent extends HelloApplication implements Initializable,WindowControl,LoadablePane {
+public class ExtendedInformationAboutStudent extends StartApplication implements Initializable,WindowControl,LoadablePane {
     @FXML
     private Tab GeneralInfoTab,SocialAndGroupActivityTab,IndividualSupportTab,PromotionTab,SocialPassportTab;
 

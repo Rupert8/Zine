@@ -2,7 +2,6 @@ package controller.curator.socialActivity;
 
 import data.DisplayDate;
 import interfaces.WindowActions.WindowControl;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,13 +13,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import services.ScreenService;
 import services.TableService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
 
-public class SocialActivity extends HelloApplication implements Initializable, WindowControl {
+public class SocialActivity extends StartApplication implements Initializable, WindowControl {
     @FXML
     private TableColumn<hibernate.entity.SocialActivity, String> Activity;
 

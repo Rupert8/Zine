@@ -3,13 +3,13 @@ package data;
 import hiberante.sessionFactory.HibernateUtil;
 import hibernate.entity.*;
 import org.hibernate.Session;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.sql.Date;
 import java.time.LocalDate;
 
 
-public class DeleteData extends HelloApplication {
+public class DeleteData extends StartApplication {
 
 
     public static void deletePlanDataById (int planId) {

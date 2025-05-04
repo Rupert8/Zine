@@ -13,12 +13,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import services.ScreenService;
 import services.TableService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Promotion extends HelloApplication implements Initializable, WindowControl {
+public class Promotion extends StartApplication implements Initializable, WindowControl {
     @FXML
     private TableColumn<hibernate.entity.Promotion,String> Content;
 

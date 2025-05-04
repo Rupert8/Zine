@@ -17,7 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import services.ClearValueService;
 import services.ScreenService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.net.URL;
 import java.sql.Date;
@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 import static controller.login.LoginController.curatorGroupName;
 import static controller.curator.WorkGroupController.curatorFullName;
 
-public class WorkPlanController extends HelloApplication implements Initializable, WindowControl {
+public class WorkPlanController extends StartApplication implements Initializable, WindowControl {
     @FXML
     private TableColumn<WorkPlan, Boolean> CompletionColumn;
 
@@ -210,7 +210,9 @@ public class WorkPlanController extends HelloApplication implements Initializabl
     }
 
     public void setSortComboBox(){
-        SortComboBox.getItems().addAll("Показати все","Датою","Навчальним роком");
+        if(SortComboBox.getSelectionModel().isEmpty()){
+            SortComboBox.getItems().addAll("Показати все","Датою","Навчальним роком");
+        }
     }
 
     public void selectedSortComboBox(){

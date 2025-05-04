@@ -5,6 +5,7 @@ import data.DeleteData;
 import data.DisplayDate;
 import data.SearchStudentData;
 import hibernate.entity.WorkPlan;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,13 +16,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import services.ClearValueService;
 import services.ScreenService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
 
-public class AdminWorkPlanController extends HelloApplication implements Initializable, WindowControl {
+public class AdminWorkPlanController extends StartApplication implements Initializable, WindowControl {
     @FXML
     private Button SortDateButton;
 
@@ -50,6 +51,9 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
     private ComboBox<Integer> SortYearComboBox;
 
     @FXML
+    private ComboBox<String> SortByCuratorComboBox;
+
+    @FXML
     private DatePicker EndDatePicker;
 
     @FXML
@@ -75,7 +79,7 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
     @FXML
     public HBox WorkPlanPaneHBox,WorkPlanHBox,WorkTeacherHBox,StudentHBox,GroupHBox,SocialPassportHBox;
     @FXML
-    private HBox SortLabelHBox,ShowAllHbox,ChooseSemesterHbox,SearchButtonHbox,StartDateHbox,EndDateHbox,DateHbox;
+    private HBox SortLabelHBox,ShowAllHbox,ChooseSemesterHbox,SearchButtonHbox,StartDateHbox,EndDateHbox,DateHbox,ChooseCuratorHbox;
     @FXML
     private HBox DeleteHbox,UpdateHbox,AddHbox;
 
@@ -120,6 +124,14 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
         }
     }
 
+    private void setCuratorComboBox(){
+        ObservableList<String> curatorList = FXCollections.observableList(DisplayDate.getCuratorNameForSort());
+        if(SortByCuratorComboBox.getItems().isEmpty()){
+            SortByCuratorComboBox.getItems().addAll(curatorList);
+            System.out.println(curatorList);
+        }
+    }
+
     public void displayDataByYear(){
         Integer year = SortYearComboBox.getValue();
 
@@ -128,6 +140,18 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
             loadAndShowLoginAlarm("/fxml/notifications/emptyResultNotifications/NoRecordsYearFound.fxml");
         }else{
             setDataInPlanTable(yearList);
+        }
+    }
+
+    public void displayDataByCurator(){
+        String curatorName = SortByCuratorComboBox.getValue();
+
+        ObservableList<WorkPlan> curatorPlanList = DisplayDate.getDataByCuratorName(curatorName);
+        if(curatorPlanList.isEmpty()) {
+            loadAndShowLoginAlarm("/fxml/notifications/emptyResultNotifications/NoRecordsCuratorPlanFound.fxml");
+            setDataInPlanTable(null);
+        }else{
+            setDataInPlanTable(curatorPlanList);
         }
     }
 
@@ -188,7 +212,9 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
 
 
     public void setSortComboBox(){
-        SortComboBox.getItems().addAll("Показати все","Датою","Навчальним роком");
+        if (SortComboBox.getSelectionModel().isEmpty()){
+            SortComboBox.getItems().addAll("Показати все","Датою","Навчальним роком","Викладачем");
+        }
     }
 
     public void selectedSortComboBox(){
@@ -200,6 +226,7 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
             SortYearComboBox.setVisible(false);
             displayPlanInfo();
             PlanTable.getSelectionModel().clearSelection();
+            SortByCuratorComboBox.setVisible(false);
         }else if(SortComboBox.getValue().equals("Датою")){
             StartDatePicker.setVisible(true);
             EndDatePicker.setVisible(true);
@@ -210,6 +237,7 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
             displayPlanInfo();
             ClearValueService.clearSortByDateField(StartDatePicker, EndDatePicker);
             PlanTable.getSelectionModel().clearSelection();
+            SortByCuratorComboBox.setVisible(false);
         }else if(SortComboBox.getValue().equals("Навчальним роком")){
             StartDatePicker.setVisible(false);
             EndDatePicker.setVisible(false);
@@ -219,6 +247,18 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
             displayPlanInfo();
             ClearValueService.clearSortBySemesterField(SortYearComboBox);
             PlanTable.getSelectionModel().clearSelection();
+            SortByCuratorComboBox.setVisible(false);
+        } else if(SortComboBox.getValue().equals("Викладачем")){
+            StartDatePicker.setVisible(false);
+            EndDatePicker.setVisible(false);
+            SortDateLabel.setVisible(false);
+            SortYearComboBox.setVisible(false);
+            SortDateButton.setVisible(false);
+            SortByCuratorComboBox.setVisible(true);
+            displayPlanInfo();
+            ClearValueService.clearSortBySemesterField(SortByCuratorComboBox);
+            SortByCuratorComboBox.setPromptText("Виберіть викладача");
+            setCuratorComboBox();
         }
 
 
@@ -250,6 +290,8 @@ public class AdminWorkPlanController extends HelloApplication implements Initial
         StartDateHbox.setPickOnBounds(false);
         EndDateHbox.setPickOnBounds(false);
         DateHbox.setPickOnBounds(false);
+        ChooseCuratorHbox.setPickOnBounds(false);
+
     }
 
 

@@ -9,9 +9,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import services.ScreenService;
 import services.email.EmailService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
-public class PassPageController extends HelloApplication implements WindowControl {
+public class PassPageController extends StartApplication implements WindowControl {
     @FXML
     public TextField EmailField;
 

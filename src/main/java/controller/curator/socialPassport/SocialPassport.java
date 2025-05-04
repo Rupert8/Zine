@@ -1,7 +1,6 @@
 package controller.curator.socialPassport;
 
 import data.DisplayDate;
-import hibernate.entity.CircleActivity;
 import interfaces.WindowActions.WindowControl;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,12 +13,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import services.ScreenService;
 import services.TableService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SocialPassport extends HelloApplication implements Initializable, WindowControl {
+public class SocialPassport extends StartApplication implements Initializable, WindowControl {
     @FXML
     private TableColumn<hibernate.entity.SocialPassport,String> Category;
 

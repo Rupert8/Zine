@@ -133,7 +133,7 @@
          <center>
             <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <TabPane fx:id="GeneralInfoTab" pickOnBounds="false" stylesheets="@../../css/tabPane.css" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane fx:id="GeneralInfoTab" focusTraversable="false" pickOnBounds="false" stylesheets="@../../css/tabPane.css" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="Дані про освіту">
                            <content>

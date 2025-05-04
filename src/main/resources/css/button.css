@@ -37,6 +37,17 @@
     -fx-border-color:  #e8d58c;
 }
 
+.selected {
+    -fx-background-radius: 6;
+    -fx-background-color: #fff;
+    -fx-border-color:  #e8d58c;
+}
+/*.menuButton:selected {*/
+/*    -fx-background-radius: 6;*/
+/*    -fx-background-color: #fff;*/
+/*    -fx-border-color:  #e8d58c;*/
+/*}*/
+
 .mainButton {
     -fx-background-color: #e8d58c;
     -fx-text-fill: black;

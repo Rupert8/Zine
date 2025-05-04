@@ -16,10 +16,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 import tableView.SocialPassportPrototype;
 
-import java.awt.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,7 +27,7 @@ import java.util.ResourceBundle;
 
 import static services.exportExel.ExelExportService.exportToExcel;
 
-public class AdminSocialPassportController extends HelloApplication implements Initializable, WindowControl {
+public class AdminSocialPassportController extends StartApplication implements Initializable, WindowControl {
 
     @FXML
     private TableColumn<SocialPassportPrototype, String> Category;
@@ -99,8 +98,8 @@ public class AdminSocialPassportController extends HelloApplication implements I
     }
 
     private void setSortSocialPassportComboBox(){
-        if(SortSocialPassportComboBox.getSelectionModel().getSelectedItem() == null){
-            SortSocialPassportComboBox.getItems().addAll("Показати все","Групою","Категорією");
+        if(SortSocialPassportComboBox.getSelectionModel().isEmpty()){
+            SortSocialPassportComboBox.getItems().setAll("Показати все","Групою","Категорією");
         }
     }
 

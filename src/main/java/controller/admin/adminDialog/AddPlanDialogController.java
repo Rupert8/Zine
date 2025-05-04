@@ -6,7 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.net.URL;
 import java.sql.Date;
@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 
 import static controller.admin.AdminWorkPlanController.saveDialog;
 
-public class AddPlanDialogController extends HelloApplication implements Initializable {
+public class AddPlanDialogController extends StartApplication implements Initializable {
     @FXML
     private ComboBox<String> CompletionComboBox;
 

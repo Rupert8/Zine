@@ -17,7 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import services.ScreenService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.net.URL;
 import java.sql.Date;
@@ -29,7 +29,7 @@ import static controller.login.LoginController.curatorGroupName;
 import static controller.admin.AdminMainController.studentGroupName;
 import static controller.admin.AdminMainController.*;
 
-public class WorkGroupController extends HelloApplication implements Initializable, WindowControl {
+public class WorkGroupController extends StartApplication implements Initializable, WindowControl {
     @FXML
     private TableView<StudentInfo> GroupTable;
 

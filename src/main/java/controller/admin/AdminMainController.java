@@ -5,7 +5,6 @@ import interfaces.WindowActions.WindowControl;
 import data.DisplayDate;
 import data.SearchStudentData;
 import hibernate.entity.StudentInfo;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -18,12 +17,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import services.ScreenService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.net.URL;
 import java.sql.Date;
@@ -35,7 +33,7 @@ import java.util.stream.Collectors;
 import static controller.extendedInformationAboutStudent.ExtendedInformationAboutStudent.userStatus;
 
 
-public class AdminMainController extends HelloApplication implements Initializable, WindowControl, LoadablePane {
+public class AdminMainController extends StartApplication implements Initializable, WindowControl, LoadablePane {
     @FXML
     private TableView<StudentInfo> GroupTable;
 
@@ -151,7 +149,10 @@ public class AdminMainController extends HelloApplication implements Initializab
 
 
     private void setSortStudentComboBox(){
-        SortStudentComboBox.getItems().setAll("Показати все","Групою");
+        if(SortStudentComboBox.getSelectionModel().isEmpty()){
+            SortStudentComboBox.getItems().setAll("Показати все","Групою");
+        }
+
     }
 
     private void setSortByGroupComboBox(){

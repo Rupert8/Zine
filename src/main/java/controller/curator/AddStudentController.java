@@ -7,7 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.net.URL;
 import java.sql.Date;
@@ -17,7 +17,7 @@ import java.util.function.UnaryOperator;
 import static controller.curator.WorkGroupController.saveDialog;
 
 
-public class AddStudentController extends HelloApplication implements Initializable {
+public class AddStudentController extends StartApplication implements Initializable {
     @FXML
     private TextField StudentName,StudentSurname,StudentMiddleName;
     @FXML

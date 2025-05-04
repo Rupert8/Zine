@@ -1,8 +1,6 @@
 package controller.curator.generalInfo;
 
 import data.DisplayDate;
-import hibernate.entity.EducationInfo;
-import hibernate.entity.MilitaryService;
 import hibernate.entity.StudentParents;
 import interfaces.WindowActions.WindowControl;
 import javafx.collections.ObservableList;
@@ -16,12 +14,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import services.ScreenService;
 import services.TableService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ParentsInfoController extends HelloApplication implements Initializable, WindowControl {
+public class ParentsInfoController extends StartApplication implements Initializable, WindowControl {
 
     @FXML
     private TableColumn<StudentParents, String> MiddleNameColumn;

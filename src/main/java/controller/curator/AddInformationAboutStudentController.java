@@ -19,7 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import services.ValidateValueService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.net.URL;
 import java.sql.Date;
@@ -29,7 +29,7 @@ import java.util.ResourceBundle;
 import static controller.login.LoginController.curatorGroupName;
 
 
-public class AddInformationAboutStudentController extends HelloApplication implements Initializable, WindowControl {
+public class AddInformationAboutStudentController extends StartApplication implements Initializable, WindowControl {
     @FXML
     private Button GeneralInfoButton,SocialActivityButton,IndividualSupportButton,PromotionButton,SocialPassportButton;
     @FXML
@@ -597,6 +597,19 @@ public class AddInformationAboutStudentController extends HelloApplication imple
         StudentHBOx.setPickOnBounds(false);
     }
 
+    private void setFocusedMenuButton(){
+        List<Button> menuButtons = List.of(GeneralInfoButton,SocialActivityButton,IndividualSupportButton,PromotionButton,SocialPassportButton);
+
+        for (Button btn : menuButtons) {
+            btn.setOnAction(e -> {
+                for (Button b : menuButtons) {
+                    b.getStyleClass().remove("selected"); // Зняти активність з усіх
+                }
+                btn.getStyleClass().add("selected"); // Додати активність до натиснутої
+            });
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setStudentPIP();
@@ -604,6 +617,7 @@ public class AddInformationAboutStudentController extends HelloApplication imple
         setCategoryComboBox();
         setInvalidCategoryComboBox();
         correctLoadPane();
+        setFocusedMenuButton();
     }
 
     @Override

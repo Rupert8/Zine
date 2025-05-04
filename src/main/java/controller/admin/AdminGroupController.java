@@ -12,12 +12,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import services.ScreenService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AdminGroupController extends HelloApplication implements Initializable, WindowControl {
+public class AdminGroupController extends StartApplication implements Initializable, WindowControl {
     @FXML
     private TableColumn<Groups, String> GroupCuratorNameColumn;
 

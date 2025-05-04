@@ -2,7 +2,6 @@ package controller.curator.socialActivity;
 
 import data.DisplayDate;
 import hibernate.entity.CircleActivity;
-import hibernate.entity.SocialActivity;
 import interfaces.WindowActions.WindowControl;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,13 +14,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import services.ScreenService;
 import services.TableService;
-import start.zine.HelloApplication;
+import start.zine.StartApplication;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GroupActivity extends HelloApplication implements Initializable, WindowControl {
+public class GroupActivity extends StartApplication implements Initializable, WindowControl {
     @FXML
     private TableView<CircleActivity> GroupActivityTable;
 
