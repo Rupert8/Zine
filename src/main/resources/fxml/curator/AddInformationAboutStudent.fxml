@@ -10,6 +10,8 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -94,31 +96,34 @@
             </VBox>
             <VBox alignment="CENTER" maxWidth="200.0" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button fx:id="GeneralInfoButton" mnemonicParsing="false" onAction="#visiblePane" prefHeight="29.0" prefWidth="179.0" styleClass="menuButton" stylesheets="@../../css/button.css" text="Загальні відомості ">
+                  <ToggleButton fx:id="GeneralInfoButton" mnemonicParsing="false" onAction="#visiblePane" prefWidth="179.0" stylesheets="@../../css/button.css" text="Загальні відомості">
                      <VBox.margin>
                         <Insets bottom="20.0" />
                      </VBox.margin>
-                  </Button>
-                  <Button fx:id="SocialActivityButton" mnemonicParsing="false" onAction="#visiblePane" prefHeight="29.0" prefWidth="179.0" styleClass="menuButton" stylesheets="@../../css/button.css" text="Громадська діяльність">
-                     <VBox.margin>
-                        <Insets bottom="11.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="PromotionButton" mnemonicParsing="false" onAction="#visiblePane" prefHeight="29.0" prefWidth="179.0" styleClass="menuButton" stylesheets="@../../css/button.css" text="Заохочення">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="menuButton" />
+                     </toggleGroup>
+                  </ToggleButton>
+                  <ToggleButton fx:id="ActivitiesButton" mnemonicParsing="false" onAction="#visiblePane" prefWidth="179.0" stylesheets="@../../css/button.css" text="Діяльності" toggleGroup="$menuButton">
                      <VBox.margin>
                         <Insets bottom="20.0" />
                      </VBox.margin>
-                  </Button>
-                  <Button fx:id="IndividualSupportButton" mnemonicParsing="false" onAction="#visiblePane" prefHeight="29.0" prefWidth="179.0" styleClass="menuButton" stylesheets="@../../css/button.css" text="Cупровід">
+                  </ToggleButton>
+                  <ToggleButton fx:id="PromotionButton" mnemonicParsing="false" onAction="#visiblePane" prefWidth="179.0" stylesheets="@../../css/button.css" text="Заохочення" toggleGroup="$menuButton">
                      <VBox.margin>
                         <Insets bottom="20.0" />
                      </VBox.margin>
-                  </Button>
-                  <Button fx:id="SocialPassportButton" mnemonicParsing="false" onAction="#visiblePane" prefHeight="29.0" prefWidth="179.0" styleClass="menuButton" stylesheets="@../../css/button.css" text="Соціальний паспорт">
+                  </ToggleButton>
+                  <ToggleButton fx:id="IndividualSupportButton" mnemonicParsing="false" onAction="#visiblePane" prefWidth="179.0" stylesheets="@../../css/button.css" text="Cупровід" toggleGroup="$menuButton">
                      <VBox.margin>
                         <Insets bottom="20.0" />
                      </VBox.margin>
-                  </Button>
+                  </ToggleButton>
+                  <ToggleButton fx:id="SocialPassportButton" mnemonicParsing="false" onAction="#visiblePane" prefWidth="179.0" stylesheets="@../../css/button.css" text="Соціальний паспорт" toggleGroup="$menuButton">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </ToggleButton>
                </children>
                <StackPane.margin>
                   <Insets bottom="39.0" />

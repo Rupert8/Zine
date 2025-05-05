@@ -31,7 +31,7 @@ import static controller.login.LoginController.curatorGroupName;
 
 public class AddInformationAboutStudentController extends StartApplication implements Initializable, WindowControl {
     @FXML
-    private Button GeneralInfoButton,SocialActivityButton,IndividualSupportButton,PromotionButton,SocialPassportButton;
+    private ToggleButton GeneralInfoButton,ActivitiesButton,IndividualSupportButton,PromotionButton,SocialPassportButton;
     @FXML
     private TabPane GeneralInfoTab,SocialActivityTab,IndividualSupportTab,PromotionTab,SocialPassportTab;
 
@@ -165,31 +165,31 @@ public class AddInformationAboutStudentController extends StartApplication imple
     }
 
     public void visiblePane(){
-        if(GeneralInfoButton.isFocused()){
+        if(GeneralInfoButton.isSelected()){
             GeneralInfoTab.setVisible(true);
             SocialActivityTab.setVisible(false);
             IndividualSupportTab.setVisible(false);
             PromotionTab.setVisible(false);
             SocialPassportTab.setVisible(false);
-        } else if(SocialActivityButton.isFocused()) {
+        } else if(ActivitiesButton.isSelected()) {
             GeneralInfoTab.setVisible(false);
             SocialActivityTab.setVisible(true);
             IndividualSupportTab.setVisible(false);
             PromotionTab.setVisible(false);
             SocialPassportTab.setVisible(false);
-        } else if(IndividualSupportButton.isFocused()) {
+        } else if(IndividualSupportButton.isSelected()) {
             GeneralInfoTab.setVisible(false);
             SocialActivityTab.setVisible(false);
             IndividualSupportTab.setVisible(true);
             PromotionTab.setVisible(false);
             SocialPassportTab.setVisible(false);
-        } else if(PromotionButton.isFocused()) {
+        } else if(PromotionButton.isSelected()) {
             GeneralInfoTab.setVisible(false);
             SocialActivityTab.setVisible(false);
             IndividualSupportTab.setVisible(false);
             PromotionTab.setVisible(true);
             SocialPassportTab.setVisible(false);
-        } else if(SocialPassportButton.isFocused()) {
+        } else if(SocialPassportButton.isSelected()) {
             GeneralInfoTab.setVisible(false);
             SocialActivityTab.setVisible(false);
             IndividualSupportTab.setVisible(false);
@@ -610,21 +610,7 @@ public class AddInformationAboutStudentController extends StartApplication imple
 //        }
 //    }
 
-    private void setFocusedMenuButton(){
-        if(GeneralInfoButton.isPressed()){
-            GeneralInfoButton.add("selected");
-            SocialActivityButton.getStyleClass().remove("selected");
-            IndividualSupportButton.getStyleClass().remove("selected");
-            PromotionButton.getStyleClass().remove("selected");
-            SocialPassportButton.getStyleClass().remove("selected");
-        }if(SocialActivityButton.isPressed()){
-            SocialActivityButton.getStyleClass().add("selected");
-            IndividualSupportButton.getStyleClass().remove("selected");
-            PromotionButton.getStyleClass().remove("selected");
-            SocialPassportButton.getStyleClass().remove("selected");
-            GeneralInfoButton.getStyleClass().remove("selected");
-        }
-    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -633,7 +619,7 @@ public class AddInformationAboutStudentController extends StartApplication imple
         setCategoryComboBox();
         setInvalidCategoryComboBox();
         correctLoadPane();
-        setFocusedMenuButton();
+        //setFocusedMenuButton();
     }
 
     @Override

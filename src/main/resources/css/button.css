@@ -111,6 +111,10 @@
 }
 
 .toggle-button {
+    -fx-border-radius: 5;
+    -fx-border-width: 2;
+    -fx-background-radius: 5;
+    -fx-font-family: Gotham;
     -fx-background-color: #e8d58c;
     -fx-border-color: #fff;
     -fx-font-size: 13px;
@@ -122,5 +126,12 @@
     -fx-background-color: #fff;
     -fx-border-color:  #e8d58c;
 
+}
+
+.toggle-button:hover {
+    -fx-background-radius: 6;
+    -fx-background-color: #fff;
+    -fx-border-color:  #e8d58c;
+    -fx-transition: 0.7s;
 }
 
