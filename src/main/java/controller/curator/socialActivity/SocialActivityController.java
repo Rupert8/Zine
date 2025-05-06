@@ -19,7 +19,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
 
-public class SocialActivity extends StartApplication implements Initializable, WindowControl {
+public class SocialActivityController extends StartApplication implements Initializable, WindowControl {
     @FXML
     private TableColumn<hibernate.entity.SocialActivity, String> Activity;
 

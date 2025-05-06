@@ -42,9 +42,9 @@ public class AssignCuratorDialogController extends AdminGroupController implemen
                 String name = parts[1];
                 String middleName = parts[2];
 
-                // Викликаємо метод, передаючи параметри
+                UpdateData.updatePastCuratorStatus(groupName);
                 UpdateData.updateCuratorGroup(name, surname, middleName, groupName);
-                UpdateData.updateGroupCurator(CuratorComboBox.getValue(),groupName,true);
+                UpdateData.updateGroupCurator(CuratorComboBox.getValue(),groupName);
                 closeDialog();
                 loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
             } else {

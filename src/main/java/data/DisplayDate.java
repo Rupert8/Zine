@@ -8,6 +8,7 @@ import tableView.RemovedStudentPrototype;
 import tableView.SocialPassportCategoryPrototype;
 import tableView.SocialPassportPrototype;
 
+import java.lang.reflect.Method;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -519,7 +520,7 @@ public class DisplayDate  {
         return planNames;
     }
 
-    public static void setFullGroupInfo(int id){
+    public static void getFullGroupInfo(int id){
         try{
             session = HibernateUtil.getSession();
             session.beginTransaction();
@@ -802,7 +803,7 @@ public class DisplayDate  {
             session.getTransaction().commit();
 
         }catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
             session.getTransaction().rollback();
         }
         return circleActivity;
@@ -1196,6 +1197,38 @@ public class DisplayDate  {
         }
         return list;
     }
+
+    public static <T> ObservableList<T> loadByStudentId(Class<T> clazz,String fieldName, int studentId) {
+        ObservableList<T> list = FXCollections.observableArrayList();
+        session = HibernateUtil.getSession();
+
+        try {
+            assert session != null;
+
+            String hql = "FROM " + clazz.getSimpleName() + " WHERE " + fieldName + " = :studentId";
+            List<T> data = session.createQuery(hql, clazz)
+                    .setParameter("studentId", studentId)
+                    .list();
+
+            list.addAll(data);
+
+            // якщо у T є метод setId(int), можна встановити ID:
+            for (int i = 0; i < data.size(); i++) {
+                try {
+                    Method setIdMethod = clazz.getMethod("setId", int.class);
+                    setIdMethod.invoke(data.get(i), i + 1);
+                } catch (NoSuchMethodException ignored) {
+                    // нічого не робимо, якщо такого методу немає
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
 
     public static ObservableList<MilitaryService> tableMilitaryService() {
         ObservableList<MilitaryService> list = FXCollections.observableArrayList();

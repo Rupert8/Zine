@@ -1,10 +1,10 @@
 package controller.admin;
 
+import hibernate.entity.*;
 import interfaces.WindowActions.LoadablePane;
 import interfaces.WindowActions.WindowControl;
 import data.DisplayDate;
 import data.SearchStudentData;
-import hibernate.entity.StudentInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -25,12 +25,14 @@ import start.zine.StartApplication;
 
 import java.net.URL;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import static controller.extendedInformationAboutStudent.ExtendedInformationAboutStudent.userStatus;
+import static services.exportExel.ExelExportService.exportMultiSheetExcel;
 
 
 public class AdminMainController extends StartApplication implements Initializable, WindowControl, LoadablePane {
@@ -75,6 +77,9 @@ public class AdminMainController extends StartApplication implements Initializab
     @FXML
     private BorderPane AdminMainBorderPane;
 
+    @FXML
+    private Button exportStudentInfoButton;
+
     public static int studentId;
     public static String studentName;
     public static String studentSurname;
@@ -112,6 +117,7 @@ public class AdminMainController extends StartApplication implements Initializab
                 extendedInfo.setVisible(true);
 
                 studentId = SearchStudentData.getIdStudentForAdmin(studentAddress,studentPhoneNumber);
+                exportStudentInfoButton.setVisible(true);
             }
         });
     }
@@ -197,6 +203,33 @@ public class AdminMainController extends StartApplication implements Initializab
         ExtendedInfoHbox.setPickOnBounds(false);
         StudentBackPane.setPickOnBounds(false);
         SortByGroupHBox.setPickOnBounds(false);
+        exportStudentInfoButton.setVisible(false);
+    }
+
+    public void exportAllStudentInfo(){
+        List<EducationInfo> educationInfoList = DisplayDate.loadByStudentId(EducationInfo.class, "id", studentId);
+        List<MilitaryService> militaryList = DisplayDate.loadByStudentId(MilitaryService.class, "id", studentId);
+        List<StudentParents> parentsList = DisplayDate.loadByStudentId(StudentParents.class, "id", studentId);
+        List<StudentJob> jobList = DisplayDate.loadByStudentId(StudentJob.class, "id", studentId);
+        List<CircleActivity> circleActivityList = DisplayDate.loadByStudentId(CircleActivity.class, "id", studentId);
+        List<SocialActivity> socialActivityList = DisplayDate.loadByStudentId(SocialActivity.class, "id", studentId);
+        List<Promotion> promotionList = DisplayDate.loadByStudentId(Promotion.class, "id", studentId);
+        List<IndividualSupport> individualSupportList = DisplayDate.loadByStudentId(IndividualSupport.class, "id", studentId);
+        List<SocialPassport> socialPassportList = DisplayDate.loadByStudentId(SocialPassport.class, "id", studentId);
+
+        String downloadFolder = System.getProperty("user.home") + "\\Downloads";
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDate = dateFormat.format(new java.util.Date());
+        String filePath = downloadFolder + "\\Повна_інформація_"+ studentSurname + "_" + studentName + "_" + studentMiddleName + "_" + currentDate + ".xlsx";
+
+        try {
+            exportMultiSheetExcel(educationInfoList,militaryList,parentsList,jobList,socialActivityList,circleActivityList,individualSupportList,promotionList,socialPassportList,filePath);
+            loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessExportNotification.fxml");
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
     }
 
 

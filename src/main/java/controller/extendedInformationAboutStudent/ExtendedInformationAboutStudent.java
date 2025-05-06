@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import services.ScreenService;
 import services.ValidateValueService;
@@ -43,6 +44,8 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     private RadioButton UpdateEducationInfoRadioButton;
     @FXML
     private Button UpdateEducationInfoButton;
+    @FXML
+    private Pane EducationInfoPane,emptyEdicationInfoPane;
     public static Date endDateEducation;
     public static String schoolNameEducation;
     public static float gradeAverageEducation;
@@ -57,6 +60,8 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     private RadioButton UpdateMilitaryInfoRadioButton;
     @FXML
     private Button UpdateMilitaryInfoButton;
+    @FXML
+    private Pane emptyMilitaryDataPane,MilitaryInfoPane;
     public static Date startDateMilitary;
     public static Date endDateMilitary;
     public static String unitMilitary;
@@ -73,6 +78,8 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     private RadioButton UpdateJobInfoRadioButton;
     @FXML
     private Button UpdateJobInfoButton;
+    @FXML
+    private Pane StudentJobInfoPane,emptyStudentJobInfoPane;
     public static Date startDateJob;
     public static Date endDateJob;
     public static String placeJob;
@@ -86,6 +93,8 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     private RadioButton UpdateParentsInfoRadioButton;
     @FXML
     private Button UpdateParentsInfoButton;
+    @FXML
+    private Pane StudentParentsInfoPane,emptyStudentParentsInfoPane;
     public static String pipFatherParent;
     public static String pipMotherParent;
     public static String phoneFatherParent;
@@ -105,6 +114,8 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     private RadioButton UpdateSocialActivityRadioButton;
     @FXML
     private Button UpdateSocialActivityButton;
+    @FXML
+    private Pane SocialActivityInfoPane,emptySocialActivityInfoPane;
     public static int semesterSocial;
     public static Date dateSocial;
     public static String activitySocial;
@@ -121,6 +132,8 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     private RadioButton UpdateGroupActivityRadioButton;
     @FXML
     private Button UpdateGroupActivityButton;
+    @FXML
+    private Pane GroupActivityInfoPane,emptyGroupActivityInfoPane;
     public static int semesterGroup;
     public static String groupNameGroup;
     public static String noteGroup;
@@ -137,12 +150,14 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     private ComboBox<String> ChooseIndividualSupportComboBox;
     @FXML
     private Button UpdateIndividualSupportButtonInDB;
+    @FXML
+    private Pane IndividualSupportInfoPane,emptyIndividualSupportPane;
     public static int semesterSupport;
     public static Date dateSupport;
     public static String contentSupport;
     public static String tmpContentSupport;
 
-    @FXML
+    @FXML // Заохочення
     private DatePicker DatePromotion;
     @FXML
     private ComboBox<Integer> SemesterPromotion;
@@ -154,6 +169,8 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     private ComboBox<String> ChoosePromotionComboBox;
     @FXML
     private Button UpdatePromotionButtonInDB;
+    @FXML
+    private Pane PromotionInfoPane,emptyPromotionInfoPane;
     public static int semesterPromotion;
     public static Date datePromotion;
     public static String contentPromotion;
@@ -175,6 +192,8 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     private RadioButton UpdateSocialPassportRadioButton;
     @FXML
     private Button UpdateSocialPassportButton;
+    @FXML
+    private Pane SocialPassportInfoPane,emptySocialPassportInfoPane;
     public static Date startDateSocialPassport;
     public static Date endDateSocialPassport;
     public static String categorySocialPassport;
@@ -194,6 +213,8 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     private RadioButton UpdateInvalidRadioButton;
     @FXML
     private Button UpdateInvalidPassportButton;
+    @FXML
+    private Pane InvalidInfoPane,emptyInvalidInfoPane;
     public static Date startDateInvalid;
     public static Date endDateInvalid;
     public static String categoryInvalid;
@@ -211,6 +232,8 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     private RadioButton UpdateFamilyRadioButton;
     @FXML
     private Button UpdateManyChildrenFamilyPassportButton;
+    @FXML
+    private Pane FamilyInfoPane,emptyFamilyInfoPane;
     public static Date startDateFamily;
     public static Date endDateFamily;
     public static int countChildrenFamily;
@@ -296,6 +319,9 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
             EndDateEducation.setValue(endDateEducation.toLocalDate());
             SchoolNameEducation.setText(schoolNameEducation);
             GradeAvarageEducation.setText(Float.toString(gradeAverageEducation));
+        }else{
+            EducationInfoPane.setVisible(false);
+            emptyEdicationInfoPane.setVisible(true);
         }
 
     }
@@ -309,7 +335,9 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
             StartDateMilitary.setValue(startDateMilitary.toLocalDate());
             EndDateMilitary.setValue(endDateMilitary.toLocalDate());
             UnitMilitary.setText(unitMilitary);
-
+        }else{
+            MilitaryInfoPane.setVisible(false);
+            emptyMilitaryDataPane.setVisible(true);
         }
     }
 
@@ -380,6 +408,9 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
             PIPMotherParents.setText(pipMotherParent);
             PhoneFatherParents.setText(phoneFatherParent);
             PhoneMotherParents.setText(phoneMotherParent);
+        }else{
+            StudentParentsInfoPane.setVisible(false);
+            emptyStudentParentsInfoPane.setVisible(true);
         }
     }
 
@@ -651,6 +682,9 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
             CategoryInvalid.setValue(categoryInvalid);
             SemesterInvalid.setValue(semesterInvalid);
             NoteInvalid.setText(noteInvalid);
+        }else{
+            InvalidInfoPane.setVisible(false);
+            emptyInvalidInfoPane.setVisible(true);
         }
     }
 
@@ -664,7 +698,9 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
             LessThan18Family.setText(String.valueOf(lessThan18Family));
             MuchThan18Family.setText(String.valueOf(muchThan18Family));
             NoteSocialPassport.setText(noteSocialPassport);
-
+        } else{
+            FamilyInfoPane.setVisible(false);
+            emptyFamilyInfoPane.setVisible(true);
         }
     }
 
@@ -692,6 +728,11 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
             ChooseSocialPassportComboBox.setVisible(false);
             setSocialPassportInfoFieldIfOneResult();
         }
+        if(socialPassportList.isEmpty()){
+            SocialPassportInfoPane.setVisible(false);
+            emptySocialPassportInfoPane.setVisible(true);
+        }
+
     }
 
     public void loadAndSetJobInfo(){
@@ -701,6 +742,9 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
         }else{
             ChooseJobComboBox.setVisible(false);
             setStudentJobInfoFieldOneResult();
+        }if(studentJobList.isEmpty()){
+            StudentJobInfoPane.setVisible(false);
+            emptyStudentJobInfoPane.setVisible(true);
         }
     }
 
@@ -724,6 +768,9 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
             DateSocialActivityLabel.setVisible(true);
             ActivitySocialActivityLabel.setVisible(true);
             throw new IllegalArgumentException("немає значень");
+        }if(socialActivityList.isEmpty()) {
+            SocialActivityInfoPane.setVisible(false);
+            emptySocialActivityInfoPane.setVisible(true);
         }
 
     }
@@ -736,6 +783,10 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
             ChooseGroupActivityComboBox.setVisible(false);
             setStudentGroupInfoFieldOneResult();
         }
+        if(circleActivityList.isEmpty()) {
+            GroupActivityInfoPane.setVisible(false);
+            emptyGroupActivityInfoPane.setVisible(true);
+        }
     }
 
     public void loadAndSetIndividualSupportInfo(){
@@ -746,6 +797,10 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
             ChooseIndividualSupportComboBox.setVisible(false);
             setStudentIndividualSupportInfoFieldOneResult();
         }
+        if(individualSupportsList.isEmpty()){
+            IndividualSupportInfoPane.setVisible(false);
+            emptyIndividualSupportPane.setVisible(true);
+        }
     }
 
     public void loadAndSetPromotionInfo(){
@@ -755,6 +810,10 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
         }else{
             ChoosePromotionComboBox.setVisible(false);
             setStudentPromotionInfoFieldOneResult();
+        }
+        if(promotionsList.isEmpty()){
+            PromotionInfoPane.setVisible(false);
+            emptyPromotionInfoPane.setVisible(true);
         }
     }
 

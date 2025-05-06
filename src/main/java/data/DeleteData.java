@@ -34,7 +34,7 @@ public class DeleteData extends StartApplication {
             Curators curators = session.get(Curators.class, curatorId);
             session.remove(curators);
 
-            UpdateData.updateGroupCurator(null,group,false);
+            UpdateData.updateGroupCurator(null,group);
             session.getTransaction().commit();
             HibernateUtil.closeSession(session);
         }catch (Exception e){
@@ -52,7 +52,7 @@ public class DeleteData extends StartApplication {
             groups.setActive(false);
 
             UpdateData.updateStudentActiveStatus(groupName);
-            UpdateData.updateGroupCurator(null,groupName,false);
+            UpdateData.updateGroupCurator(null,groupName);
 
             UpdateData.updateCuratorAfterDeleteGroup(groupName);
             session.getTransaction().commit();

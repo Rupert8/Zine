@@ -95,16 +95,18 @@ public class AdminGroupController extends StartApplication implements Initializa
                 groupId = SearchStudentData.getIdGroup(groupName);
                 groupNameForDelete = groups.getGroupName();
 
+                DisplayDate.getFullGroupInfo(groupId);
+                AdditionInfoButton.setVisible(true);
+                AssignCuratorButton.setVisible(true);
 
-                if(groupCurator == null){
-                    DisplayDate.setFullGroupInfo(groupId);
-                    AdditionInfoButton.setVisible(true);
-                    AssignCuratorButton.setVisible(true);
-                }else{
-                    DisplayDate.setFullGroupInfo(groupId);
-                    AdditionInfoButton.setVisible(true);
-                    AssignCuratorButton.setVisible(false);
-                }
+
+//                if(groupCurator == null){
+
+//                }else{
+//                    DisplayDate.setFullGroupInfo(groupId);
+//                    AdditionInfoButton.setVisible(true);
+//                    AssignCuratorButton.setVisible(false);
+//                }
 
 
                 }

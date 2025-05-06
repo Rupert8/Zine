@@ -19,7 +19,7 @@ import start.zine.StartApplication;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GroupActivity extends StartApplication implements Initializable, WindowControl {
+public class GroupActivityController extends StartApplication implements Initializable, WindowControl {
     @FXML
     private TableView<CircleActivity> GroupActivityTable;
 

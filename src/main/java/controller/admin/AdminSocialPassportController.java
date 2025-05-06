@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static services.exportExel.ExelExportService.exportToExcel;
+import static services.exportExel.ExelExportService.exportToExcelSocialPassport;
 
 public class AdminSocialPassportController extends StartApplication implements Initializable, WindowControl {
 
@@ -193,7 +193,7 @@ public class AdminSocialPassportController extends StartApplication implements I
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String currentDate = dateFormat.format(new Date());
         String filePath = downloadFolder + "\\Соціальний_паспорт_експорт_" + currentDate + ".xlsx";
-        exportToExcel(socialPassportList, filePath);
+        exportToExcelSocialPassport(socialPassportList, filePath);
         loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessExportNotification.fxml");
     }
 

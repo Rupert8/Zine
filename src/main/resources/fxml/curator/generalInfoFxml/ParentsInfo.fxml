@@ -114,7 +114,7 @@
                         <TableColumn fx:id="NameColumn" editable="false" prefWidth="141.60000610351562" style="-fx-background-color: #fff;" styleClass="column" text="Ім`я" />
                         <TableColumn fx:id="MiddleNameColumn" editable="false" prefWidth="132.0" style="-fx-background-color: #fff;" styleClass="column" text="По-батькові" />
                         <TableColumn fx:id="PIPFatherColumn" editable="false" prefWidth="176.800048828125" style="-fx-background-color: #fff;" styleClass="column" text="ПІП батька" />
-                        <TableColumn fx:id="PhoneFather" prefWidth="171.99993896484375" style="-fx-background-color: #fff;" styleClass="column" text="Тел.Батька" />
+                        <TableColumn fx:id="PhoneFather" prefWidth="171.99993896484375" style="-fx-background-color: #fff;" styleClass="column" text="Тел.батька" />
                         <TableColumn fx:id="PIPMother" editable="false" minWidth="0.0" prefWidth="200.800048828125" style="-fx-background-color: #fff;" styleClass="column" text="ПІП матері" />
                         <TableColumn fx:id="PhoneMother" editable="false" prefWidth="153.0" style="-fx-background-color: #fff;" styleClass="column" text="Тел.матері" />
                         <TableColumn fx:id="Note" prefWidth="105.0" styleClass="column" text="Примітка" />

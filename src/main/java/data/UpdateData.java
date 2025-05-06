@@ -51,7 +51,7 @@ public class UpdateData {
         }
     }
 
-    public static void updateGroupCurator(String curatorName,String groupName,boolean status) {
+    public static void updateGroupCurator(String curatorName,String groupName) {
         try {
             Session session = HibernateUtil.getSession();
             session.beginTransaction();
@@ -59,7 +59,7 @@ public class UpdateData {
             Groups groups = session.createQuery("From Groups Where groupName = :group" , Groups.class).setParameter("group", groupName).getSingleResult();
             System.out.println(groups.getGroupName());
             groups.setCurator(curatorName);
-            groups.setStatus(status);
+            //groups.setStatus(status);
 
             session.getTransaction().commit();
             HibernateUtil.closeSession(session);
@@ -93,6 +93,23 @@ public class UpdateData {
                     .setParameter("surname", surname)
                     .setParameter("middleName", middleName).getSingleResult();
             curators.setGroup(groupName);
+
+            session.getTransaction().commit();
+            HibernateUtil.closeSession(session);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updatePastCuratorStatus(String name) {
+        try {
+            Session session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            Curators curators = session.createQuery("From Curators Where group = :name", Curators.class)
+                                                    .setParameter("name",name).getSingleResult();
+
+            curators.setGroup(null);
 
             session.getTransaction().commit();
             HibernateUtil.closeSession(session);

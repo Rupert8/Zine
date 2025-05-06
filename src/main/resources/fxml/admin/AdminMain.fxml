@@ -119,7 +119,7 @@
                                     <Font name="Kharkiv Tone Regular" size="20.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets bottom="15.0" left="20.0" />
+                                    <Insets bottom="15.0" left="84.0" />
                                  </HBox.margin>
                               </Button>
                            </children>
@@ -132,6 +132,25 @@
                                  </font>
                                  <HBox.margin>
                                     <Insets bottom="15.0" right="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <StackPane.margin>
+                              <Insets />
+                           </StackPane.margin>
+                        </HBox>
+                        <HBox fx:id="ExtendedInfoHbox1" alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="exportStudentInfoButton" mnemonicParsing="false" onAction="#exportAllStudentInfo" prefHeight="23.0" prefWidth="0.0" style="-fx-background-color: #e8d58c;" styleClass="plus_btn" stylesheets="@../../css/style.css" visible="false">
+                                 <graphic>
+                                    <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+                                       <image>
+                                          <Image url="@../../icon/icon-import.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets bottom="15.0" left="20.0" />
                                  </HBox.margin>
                               </Button>
                            </children>
