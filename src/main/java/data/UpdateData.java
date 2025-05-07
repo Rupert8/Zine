@@ -51,6 +51,21 @@ public class UpdateData {
         }
     }
 
+    public static void updateStudentGroup(String groupName){
+        try{
+            Session session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            StudentInfo studentInfo = session.get(StudentInfo.class, studentId);
+            studentInfo.setGroupName(groupName);
+
+            session.getTransaction().commit();
+            HibernateUtil.closeSession(session);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void updateGroupCurator(String curatorName,String groupName) {
         try {
             Session session = HibernateUtil.getSession();

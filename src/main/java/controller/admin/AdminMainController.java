@@ -77,6 +77,8 @@ public class AdminMainController extends StartApplication implements Initializab
 
     @FXML
     private Button exportStudentInfoButton;
+    @FXML
+    private Button ChangeStudentGroupButton;
 
     public static int studentId;
     public static String studentName;
@@ -112,10 +114,12 @@ public class AdminMainController extends StartApplication implements Initializab
                 studentAddress = studentInfo.getAddress();
                 studentPhoneNumber = studentInfo.getPhoneNumber();
                 studentGroupName = studentInfo.getGroupName();
-                extendedInfo.setVisible(true);
 
                 studentId = SearchStudentData.getIdStudentForAdmin(studentAddress,studentPhoneNumber);
+
                 exportStudentInfoButton.setVisible(true);
+                extendedInfo.setVisible(true);
+                ChangeStudentGroupButton.setVisible(true);
             }
         });
     }
@@ -188,6 +192,11 @@ public class AdminMainController extends StartApplication implements Initializab
         saveDialog.setOnHidden(event -> correctVisible());
     }
 
+    public void loadChangeStudentGroup(){
+        saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/ChangeStudentGroupDialogPane.fxml",saveDialog,"Змінити групу");
+        saveDialog.setOnHidden(event -> correctVisible());
+    }
+
     private void correctVisible(){
         SortByGroupComboBox.setVisible(false);
         GroupTable.getSelectionModel().clearSelection();
@@ -208,6 +217,7 @@ public class AdminMainController extends StartApplication implements Initializab
         SortByGroupHBox.setPickOnBounds(false);
         exportStudentInfoButton.setVisible(false);
         extendedInfo.setVisible(false);
+        ChangeStudentGroupButton.setVisible(false);
     }
 
 

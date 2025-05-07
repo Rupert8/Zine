@@ -3,6 +3,7 @@ package controller.admin.adminDialog;
 import controller.admin.AdminGroupController;
 import data.AddData;
 import data.SearchStudentData;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -89,4 +90,5 @@ public class AddGroupDialogController extends AdminGroupController implements In
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCourseComboBox();
     }
+
 }
