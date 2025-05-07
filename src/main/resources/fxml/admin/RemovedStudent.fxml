@@ -60,7 +60,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0">
                <children>
-                  <Label fx:id="CuratorName" style="-fx-text-fill: #000000;" text="Дані про освіту" textFill="WHITE">
+                  <Label fx:id="CuratorName" style="-fx-text-fill: #000000;" text="Вилучені студенти" textFill="WHITE">
                      <font>
                         <Font name="Kharkiv Tone Regular" size="36.0" />
                      </font>
@@ -145,7 +145,7 @@
                   </HBox>
                   <HBox alignment="BOTTOM_RIGHT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="exportStudentInfoButton" mnemonicParsing="false" onAction="#exportAllRemovedStudentData" prefHeight="23.0" prefWidth="0.0" style="-fx-background-color: #e8d58c;" styleClass="plus_btn" stylesheets="@../../css/style.css">
+                        <Button fx:id="exportStudentInfoButton" mnemonicParsing="false" onAction="#loadChooseExportMethod" prefHeight="23.0" prefWidth="0.0" style="-fx-background-color: #e8d58c;" styleClass="plus_btn" stylesheets="@../../css/style.css" visible="false">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                                  <image>

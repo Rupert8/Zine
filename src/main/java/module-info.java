@@ -26,6 +26,7 @@ module start.zine {
     exports controller.curator.socialPassport;
     exports controller.curator.curatorDialog;
     exports data;
+    exports controller.exportWindow;
     exports tableView to org.hibernate.orm.core;
     exports hiberante.sessionFactory;
     exports hibernate.entity;
@@ -40,6 +41,7 @@ module start.zine {
     opens controller.curator.socialActivity to javafx.fxml;
     opens controller.curator.socialPassport to javafx.fxml;
     opens data to javafx.fxml;
+    opens controller.exportWindow to javafx.fxml;
 
     opens tableView to org.hibernate.orm.core, javafx.base;
     opens hibernate.entity to javafx.base, org.hibernate.orm.core;

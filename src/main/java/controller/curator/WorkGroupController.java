@@ -49,7 +49,7 @@ public class WorkGroupController extends StartApplication implements Initializab
     private TableColumn<StudentInfo, String> MiddleNameColumn;
 
     @FXML
-    private Button DeleteStudentButton,UpdateStudentButton;
+    private Button DeleteStudentButton,UpdateStudentButton,exportStudentInfoButton;
 
     @FXML
     private Label CuratorName;
@@ -139,6 +139,7 @@ public class WorkGroupController extends StartApplication implements Initializab
 
                 UpdateStudentButton.setVisible(true);
                 DeleteStudentButton.setVisible(true);
+                exportStudentInfoButton.setVisible(true);
                 extendedInfo.setVisible(true);
             }
         });
@@ -163,6 +164,11 @@ public class WorkGroupController extends StartApplication implements Initializab
         saveDialog = loadAndShowDialog("/fxml/curator/curatorDialogFxml/AddStudent.fxml",saveDialog,"Реєстрація студента");
         saveDialog.setOnHidden(event -> startWorkGroup());
         //saveDialog.setOnHidden(event -> extendedInfo.setVisible(false));
+    }
+
+    public void showChooseExportDialog(){
+        saveDialog = loadAndShowDialog("/fxml/exportWindow/ChooseExportMethodCuratorDialog.fxml",saveDialog,"Експорт Документа");
+        saveDialog.setOnHidden(event -> startWorkGroup());
     }
 
     public void showUpdateStudentDialog(){
@@ -202,6 +208,7 @@ public class WorkGroupController extends StartApplication implements Initializab
         WorkStudHBox.setPickOnBounds(false);
         GroupPaneHBox.setPickOnBounds(false);
         GroupHbox.setPickOnBounds(false);
+        exportStudentInfoButton.setVisible(false);
     }
 
 

@@ -135,3 +135,19 @@
     -fx-transition: 0.7s;
 }
 
+.custom-radio {
+    -fx-background-color: white;
+    -fx-border-color: #e8d58c;
+    -fx-border-radius: 15;
+
+}
+
+.custom-radio .radio {
+    -fx-background-color: white;
+    -fx-border-color: #e8d58c;
+    -fx-border-radius: 50%;
+}
+
+.custom-radio:selected .radio {
+    -fx-background-color: #e8d58c;
+}

@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -61,10 +62,12 @@ public class RemovedStudentController extends StartApplication implements Initia
     @FXML
     private Button exportStudentInfoButton;
 
-    private String studentSurname;
-    private String studentName;
-    private String studentMiddleName;
-    private int studentId;
+    public static Dialog<Boolean> saveDialog;
+
+    public static String studentSurname;
+    public static String studentName;
+    public static String studentMiddleName;
+    public static int studentId;
 
     private void setDataInGroupTable(ObservableList<RemovedStudentPrototype> studentInfo){
         RemovedStudentTable.setItems(studentInfo);
@@ -107,32 +110,9 @@ public class RemovedStudentController extends StartApplication implements Initia
         exportStudentInfoButton.setVisible(false);
     }
 
-    public void exportAllRemovedStudentData(){
-        List<EducationInfo> educationInfoList = DisplayDate.loadByStudentId(EducationInfo.class, "id", studentId);
-        List<MilitaryService> militaryList = DisplayDate.loadByStudentId(MilitaryService.class, "id", studentId);
-        List<StudentParents> parentsList = DisplayDate.loadByStudentId(StudentParents.class, "id", studentId);
-        List<StudentJob> jobList = DisplayDate.loadByStudentId(StudentJob.class, "id", studentId);
-        List<CircleActivity> circleActivityList = DisplayDate.loadByStudentId(CircleActivity.class, "id", studentId);
-        List<SocialActivity> socialActivityList = DisplayDate.loadByStudentId(SocialActivity.class, "id", studentId);
-        List<Promotion> promotionList = DisplayDate.loadByStudentId(Promotion.class, "id", studentId);
-        List<IndividualSupport> individualSupportList = DisplayDate.loadByStudentId(IndividualSupport.class, "id", studentId);
-        List<SocialPassport> socialPassportList = DisplayDate.loadByStudentId(SocialPassport.class, "id", studentId);
 
-        String downloadFolder = System.getProperty("user.home") + "\\Downloads";
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String currentDate = dateFormat.format(new java.util.Date());
-        String filePath = downloadFolder + "\\Повна_інформація_"+ studentSurname + "_" + studentName + "_" + studentMiddleName + "_" + currentDate + ".xlsx";
-
-        try {
-            exportMultiSheetExcel(educationInfoList,militaryList,parentsList,jobList,socialActivityList,circleActivityList,individualSupportList,promotionList,socialPassportList,filePath);
-            loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessExportNotification.fxml");
-        }catch (Exception e){
-            e.printStackTrace();
-
-        }
-
-
+    public void loadChooseExportMethod(){
+        saveDialog = loadAndShowDialog("/fxml/exportWindow/ChooseExportMethodRemovedDialog.fxml",saveDialog,"Експорт Документа");
     }
 
     @Override

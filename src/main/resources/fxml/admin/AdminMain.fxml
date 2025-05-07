@@ -139,9 +139,9 @@
                               <Insets />
                            </StackPane.margin>
                         </HBox>
-                        <HBox fx:id="ExtendedInfoHbox1" alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
+                        <HBox fx:id="ExtendedInfoHbox1" alignment="BOTTOM_LEFT" pickOnBounds="false" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="exportStudentInfoButton" mnemonicParsing="false" onAction="#exportAllStudentInfo" prefHeight="23.0" prefWidth="0.0" style="-fx-background-color: #e8d58c;" styleClass="plus_btn" stylesheets="@../../css/style.css" visible="false">
+                              <Button fx:id="exportStudentInfoButton" mnemonicParsing="false" onAction="#loadChooseExportMethod" prefHeight="23.0" prefWidth="0.0" style="-fx-background-color: #e8d58c;" styleClass="plus_btn" stylesheets="@../../css/style.css" visible="false">
                                  <graphic>
                                     <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                                        <image>

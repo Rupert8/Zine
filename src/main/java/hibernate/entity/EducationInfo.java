@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 
 import java.sql.Date;
@@ -11,6 +12,7 @@ import java.sql.Date;
 @Entity
 @Table(name = "student_education_info_nefk")
 //@Getter @Setter
+@ToString(exclude = "studentInfo")
 @NoArgsConstructor
 public class EducationInfo {
 

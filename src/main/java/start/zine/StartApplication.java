@@ -130,7 +130,7 @@ public class StartApplication extends Application {
             });
             Stage dialogStage = (Stage) dialog.getDialogPane().getScene().getWindow();
             dialogStage.getIcons().add(new Image(getClass().getResource("/icon/icon-success.png").toExternalForm())); // Замініть "icon.png" на шлях до вашого файл
-            dialog.setTitle("Помилка!");
+            dialog.setTitle("Успішно!");
             dialog.show();
 
         } catch (IOException e) {
@@ -301,7 +301,6 @@ public class StartApplication extends Application {
     public void switchToUpdateEducationInfo(ActionEvent event) {
         switchScene((Node) event.getSource(), "/fxml/extendedInformationAboutStudent/UpdateEducationInfo.fxml");
     }
-
 
     public static void main(String[] args) {
         //Session session = HibernateUtil.getSessionFactory().openSession();

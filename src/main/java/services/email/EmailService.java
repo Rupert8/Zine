@@ -13,7 +13,7 @@ public class EmailService {
         String message = "Ваш код підтвердження: " + generatedCode;
 
         try {
-            EmailSender.sendEmail(email, subject, message); // Використовуємо SMTP-сервіс для надсилання
+            EmailSender.sendCodeEmail(email, subject, message); // Використовуємо SMTP-сервіс для надсилання
             System.out.println("Код підтвердження надіслано на email: " + email);
         } catch (Exception e) {
             e.printStackTrace();

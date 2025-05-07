@@ -1208,7 +1208,7 @@ public class DisplayDate  {
             String hql = "FROM " + clazz.getSimpleName() + " WHERE " + fieldName + " = :studentId";
             List<T> data = session.createQuery(hql, clazz)
                     .setParameter("studentId", studentId)
-                    .list();
+                    .getResultList();
 
             list.addAll(data);
 

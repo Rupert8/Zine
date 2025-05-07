@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane prefHeight="262.0" prefWidth="600.0" styleClass="dialogPane" stylesheets="@../../css/dialogPane.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.exportWindow.ChooseExportMethodRemovedController">
+   <content>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="600.0" style="-fx-background-color: #fff;">
+         <children>
+            <AnchorPane fx:id="ChooseExportMethodPane" layoutX="24.0" layoutY="65.0" prefHeight="165.0" prefWidth="549.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 2;">
+               <children>
+                  <RadioButton fx:id="SendEmailRadioButton" layoutX="100.0" layoutY="38.0" mnemonicParsing="false" styleClass="custom-radio" stylesheets="@../../css/button.css">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="radioButton" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="SaveDiskRadioButton" layoutX="100.0" layoutY="102.0" mnemonicParsing="false" styleClass="custom-radio" stylesheets="@../../css/button.css" toggleGroup="$radioButton" />
+                  <Label layoutX="159.0" layoutY="36.0" text="Відправити на пошту">
+                     <font>
+                        <Font name="Gotham-Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="159.0" layoutY="100.0" text="Зберегти на диску">
+                     <font>
+                        <Font name="Gotham-Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <AnchorPane fx:id="AdminEmailPane" layoutX="24.0" layoutY="65.0" prefHeight="165.0" prefWidth="549.0" style="-fx-border-color: #e8d58c; -fx-border-radius: 5; -fx-border-width: 2;" visible="false">
+               <children>
+                  <Label layoutX="53.0" layoutY="71.0" text="Введіть Email">
+                     <font>
+                        <Font name="Gotham-Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="AdminEmail" layoutX="223.0" layoutY="65.0" prefWidth="250.0" styleClass="textField" stylesheets="@../../css/textField.css" />
+               </children>
+            </AnchorPane>
+            <Button fx:id="applyButton" layoutX="441.0" layoutY="246.0" mnemonicParsing="false" onAction="#chooseExportMethod" styleClass="Button" stylesheets="@../../css/button.css" text="підтвердити" />
+            <Button fx:id="cancelButton" layoutX="24.0" layoutY="246.0" mnemonicParsing="false" onAction="#closeDialog" styleClass="Button" stylesheets="@../../css/button.css" text="скасувати" />
+            <Label layoutX="151.0" layoutY="14.0" text="Спосіб експорту">
+               <font>
+                  <Font name="Kharkiv Tone Regular" size="32.0" />
+               </font>
+            </Label>
+            <Button fx:id="applyButtonForEmail" layoutX="441.0" layoutY="246.0" mnemonicParsing="false" onAction="#sentExelOnEmail" styleClass="Button" stylesheets="@../../css/button.css" text="підтвердити" visible="false" />
+         </children>
+      </Pane>
+   </content>
+</DialogPane>

@@ -11,10 +11,7 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -32,6 +29,7 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import static controller.extendedInformationAboutStudent.ExtendedInformationAboutStudent.userStatus;
+import static services.email.EmailSender.exportAndSendExcelByEmail;
 import static services.exportExel.ExelExportService.exportMultiSheetExcel;
 
 
@@ -89,7 +87,7 @@ public class AdminMainController extends StartApplication implements Initializab
     public static String studentGroupName;
     private static ObservableList<StudentInfo> studentList;
 
-
+    public static Dialog<Boolean> saveDialog;
 
     private void setDataInGroupTable(ObservableList<StudentInfo> studentInfo){
         GroupTable.setItems(studentInfo);
@@ -185,6 +183,11 @@ public class AdminMainController extends StartApplication implements Initializab
         switchToExtendedStudentInfo(event);
     }
 
+    public void loadChooseExportMethod(){
+        saveDialog = loadAndShowDialog("/fxml/exportWindow/ChooseExportMethodAdminDialog.fxml",saveDialog,"Експорт Документа");
+        saveDialog.setOnHidden(event -> correctVisible());
+    }
+
     private void correctVisible(){
         SortByGroupComboBox.setVisible(false);
         GroupTable.getSelectionModel().clearSelection();
@@ -204,33 +207,9 @@ public class AdminMainController extends StartApplication implements Initializab
         StudentBackPane.setPickOnBounds(false);
         SortByGroupHBox.setPickOnBounds(false);
         exportStudentInfoButton.setVisible(false);
+        extendedInfo.setVisible(false);
     }
 
-    public void exportAllStudentInfo(){
-        List<EducationInfo> educationInfoList = DisplayDate.loadByStudentId(EducationInfo.class, "id", studentId);
-        List<MilitaryService> militaryList = DisplayDate.loadByStudentId(MilitaryService.class, "id", studentId);
-        List<StudentParents> parentsList = DisplayDate.loadByStudentId(StudentParents.class, "id", studentId);
-        List<StudentJob> jobList = DisplayDate.loadByStudentId(StudentJob.class, "id", studentId);
-        List<CircleActivity> circleActivityList = DisplayDate.loadByStudentId(CircleActivity.class, "id", studentId);
-        List<SocialActivity> socialActivityList = DisplayDate.loadByStudentId(SocialActivity.class, "id", studentId);
-        List<Promotion> promotionList = DisplayDate.loadByStudentId(Promotion.class, "id", studentId);
-        List<IndividualSupport> individualSupportList = DisplayDate.loadByStudentId(IndividualSupport.class, "id", studentId);
-        List<SocialPassport> socialPassportList = DisplayDate.loadByStudentId(SocialPassport.class, "id", studentId);
-
-        String downloadFolder = System.getProperty("user.home") + "\\Downloads";
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String currentDate = dateFormat.format(new java.util.Date());
-        String filePath = downloadFolder + "\\Повна_інформація_"+ studentSurname + "_" + studentName + "_" + studentMiddleName + "_" + currentDate + ".xlsx";
-
-        try {
-            exportMultiSheetExcel(educationInfoList,militaryList,parentsList,jobList,socialActivityList,circleActivityList,individualSupportList,promotionList,socialPassportList,filePath);
-            loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessExportNotification.fxml");
-        }catch (Exception e){
-            e.printStackTrace();
-
-        }
-    }
 
 
     @Override

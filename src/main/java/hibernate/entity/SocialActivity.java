@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.sql.Date;
 
 @Entity
 @Table(name = "social_activity_nefk")
 //@Getter @Setter
+@ToString(exclude = "studentInfo")
 @NoArgsConstructor
 public class SocialActivity {
     @Id
