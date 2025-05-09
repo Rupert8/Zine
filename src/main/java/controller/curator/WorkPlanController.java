@@ -98,6 +98,7 @@ public class WorkPlanController extends StartApplication implements Initializabl
     public static int passSemester;
     public static String passDone;
     public static String passConfirmationNote;
+    public static String passGroupName;
 
     public static String performerNameForAdd;
 
@@ -150,7 +151,7 @@ public class WorkPlanController extends StartApplication implements Initializabl
     }
 
     public void displayPlanInfo(){
-        ObservableList<WorkPlan> planList = DisplayDate.getFullPlanInfo(curatorFullName);
+        ObservableList<WorkPlan> planList = DisplayDate.getFullPlanInfo(curatorFullName,curatorGroupName);
         setDataInPlanTable(planList);
     }
 

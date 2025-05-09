@@ -109,12 +109,12 @@
                <children>
                   <TableView fx:id="StudentJobTable" editable="true" prefHeight="594.0" prefWidth="1229.0" styleClass="table" stylesheets="@../../../css/style.css">
                      <columns>
-                        <TableColumn fx:id="NumberColumn" maxWidth="43.0" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
+                        <TableColumn fx:id="NumberColumn" maxWidth="43.0" minWidth="43.0" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
                         <TableColumn fx:id="SurnameColumn" prefWidth="170.0" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
                         <TableColumn fx:id="NameColumn" prefWidth="78.0" style="-fx-background-color: #fff;" styleClass="column" text="Ім`я" />
                         <TableColumn fx:id="MiddleNameColumn" prefWidth="195.99996948242188" style="-fx-background-color: #fff;" styleClass="column" text="По-батькові" />
-                        <TableColumn fx:id="StartDate" prefWidth="152.0" style="-fx-background-color: #fff;" styleClass="column" text="Дата початку" />
-                        <TableColumn fx:id="EndDate" prefWidth="132.0" style="-fx-background-color: #fff;" styleClass="column" text="Дата кінця" />
+                        <TableColumn fx:id="StartDate" maxWidth="171.20001220703125" minWidth="171.20001220703125" prefWidth="171.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Дата початку" />
+                        <TableColumn fx:id="EndDate" maxWidth="171.20001220703125" minWidth="171.20001220703125" prefWidth="171.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Дата кінця" />
                         <TableColumn fx:id="Place" prefWidth="242.0" style="-fx-background-color: #fff;" styleClass="column" text="Місце" />
                         <TableColumn fx:id="Position" prefWidth="213.0" style="-fx-background-color: #fff;" styleClass="column" text="Посада" />
                      </columns>

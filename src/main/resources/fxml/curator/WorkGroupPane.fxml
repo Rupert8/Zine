@@ -198,7 +198,7 @@
                   </HBox>
                   <HBox fx:id="DeleteHbox" alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="DeleteStudentButton" mnemonicParsing="false" onAction="#delete" prefHeight="38.0" prefWidth="122.0" styleClass="Button" stylesheets="@../../css/button.css" text="Видалити">
+                        <Button fx:id="DeleteStudentButton" mnemonicParsing="false" onAction="#delete" prefHeight="38.0" prefWidth="122.0" styleClass="Button" stylesheets="@../../css/button.css" text="Видалити" visible="false">
                            <font>
                               <Font name="Kharkiv Tone Regular" size="20.0" />
                            </font>
@@ -210,7 +210,7 @@
                   </HBox>
                   <HBox fx:id="ExtendedInfoHbox" alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="extendedInfo" mnemonicParsing="false" onAction="#loadExtendedStudentDialog" prefHeight="38.0" prefWidth="225.0" styleClass="Button" stylesheets="@../../css/button.css" text="Додаткова інформація">
+                        <Button fx:id="extendedInfo" mnemonicParsing="false" onAction="#loadExtendedStudentDialog" prefHeight="38.0" prefWidth="225.0" styleClass="Button" stylesheets="@../../css/button.css" text="Додаткова інформація" visible="false">
                            <font>
                               <Font name="Kharkiv Tone Regular" size="20.0" />
                            </font>
@@ -222,7 +222,7 @@
                   </HBox>
                   <HBox fx:id="UpdateHbox" alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="1280.0">
                      <children>
-                        <Button fx:id="UpdateStudentButton" mnemonicParsing="false" onAction="#showUpdateStudentDialog" prefHeight="38.0" prefWidth="100.0" styleClass="Button" stylesheets="@../../css/button.css" text="Змінити">
+                        <Button fx:id="UpdateStudentButton" mnemonicParsing="false" onAction="#showUpdateStudentDialog" prefHeight="38.0" prefWidth="100.0" styleClass="Button" stylesheets="@../../css/button.css" text="Змінити" visible="false">
                            <font>
                               <Font name="Kharkiv Tone Regular" size="20.0" />
                            </font>

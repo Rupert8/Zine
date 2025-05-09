@@ -12,6 +12,8 @@ import java.sql.Date;
 
 import java.util.ResourceBundle;
 
+import static controller.login.LoginController.curatorGroupName;
+
 public class DialogController extends WorkPlanController implements Initializable{
     @FXML
     private ComboBox<String> CompletionComboBox;
@@ -35,9 +37,7 @@ public class DialogController extends WorkPlanController implements Initializabl
     private Integer semester;
     private String status;
     private int year;
-
-    private URL url;
-    private ResourceBundle resources;
+    private String groupName;
 
     private void getData(){
         if(CompletionComboBox.getValue().equals("Виконано")){
@@ -50,14 +50,14 @@ public class DialogController extends WorkPlanController implements Initializabl
         date = Date.valueOf(dateExecution.getValue());
         semester = SemesterComboBox.getValue();
         year = YearComboBox.getValue();
-
+        groupName = curatorGroupName;
     }
 
     public void addEvent(){
         if(isAllFieldsFilled()){
             if(!isExist()){
                 getData();
-                AddData.addPlanForCuratorData(nameEvent,date,performerNameForAdd,status,semester,year);
+                AddData.addPlanForCuratorData(nameEvent,date,performerNameForAdd,status,semester,year,groupName);
                 closeAddDialog();
                 loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
             }else{

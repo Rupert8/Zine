@@ -109,12 +109,12 @@
                <children>
                   <TableView fx:id="IndividualSupportTable" editable="true" prefHeight="594.0" prefWidth="1229.0" styleClass="table" stylesheets="@../../../css/style.css">
                      <columns>
-                        <TableColumn fx:id="NumberColumn" maxWidth="43.0" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
+                        <TableColumn fx:id="NumberColumn" maxWidth="43.0" minWidth="43.0" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
                         <TableColumn fx:id="SurnameColumn" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
                         <TableColumn fx:id="NameColumn" prefWidth="141.60000610351562" style="-fx-background-color: #fff;" styleClass="column" text="Ім`я" />
                         <TableColumn fx:id="MiddleNameColumn" prefWidth="195.99996948242188" style="-fx-background-color: #fff;" styleClass="column" text="По-батькові" />
                         <TableColumn fx:id="Semester" prefWidth="201.60000610351562" style="-fx-background-color: #fff;" styleClass="column" text="Семестр" />
-                        <TableColumn fx:id="Date" prefWidth="157.0" style="-fx-background-color: #fff;" styleClass="column" text="Дата" />
+                        <TableColumn fx:id="Date" maxWidth="171.20001220703125" minWidth="171.20001220703125" prefWidth="171.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Дата" />
                         <TableColumn fx:id="Content" prefWidth="206.0" style="-fx-background-color: #fff;" styleClass="column" text="Зміст" />
                      </columns>
                      <columnResizePolicy>

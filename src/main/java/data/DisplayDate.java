@@ -499,13 +499,13 @@ public class DisplayDate  {
         return groupNames;
     }
 
-    public static ObservableList<WorkPlan> getFullPlanInfo(String performer) {
+    public static ObservableList<WorkPlan> getFullPlanInfo(String performer,String groupName) {
         ObservableList<WorkPlan> planNames = FXCollections.observableArrayList();
         session = HibernateUtil.getSession();
         try {
             List<WorkPlan> workPlan = session.createQuery(
-                            "FROM WorkPlan Where performer = :performer or performer = 'Адміністратор'", WorkPlan.class)
-                    .setParameter("performer", performer)
+                            "FROM WorkPlan Where groupName = :groupName  or performer = 'Адміністратор'", WorkPlan.class)
+                    .setParameter("groupName", groupName)
                     .getResultList();
 
             for (int i = 0; i < workPlan.size(); i++) {

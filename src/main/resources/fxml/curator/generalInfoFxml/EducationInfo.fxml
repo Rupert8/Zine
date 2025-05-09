@@ -109,13 +109,13 @@
                <children>
                   <TableView fx:id="EducationInfoTable" editable="true" prefHeight="594.0" prefWidth="1229.0" styleClass="table" stylesheets="@../../../css/style.css">
                      <columns>
-                        <TableColumn fx:id="NumberColumn" maxWidth="43.0" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
+                        <TableColumn fx:id="NumberColumn" maxWidth="43.0" minWidth="43.0" prefWidth="43.0" style="-fx-background-color: #fff;" styleClass="column" text="№" />
                         <TableColumn fx:id="SurnameColumn" prefWidth="107.20001220703125" style="-fx-background-color: #fff;" styleClass="column" text="Призвіще" />
                         <TableColumn fx:id="NameColumn" prefWidth="141.60000610351562" style="-fx-background-color: #fff;" styleClass="column" text="Ім`я" />
                         <TableColumn fx:id="MiddleNameColumn" prefWidth="195.99996948242188" style="-fx-background-color: #fff;" styleClass="column" text="По-батькові" />
-                        <TableColumn fx:id="EndDate" prefWidth="194.0" style="-fx-background-color: #fff;" styleClass="column" text="Дата закінчення" />
+                        <TableColumn fx:id="EndDate" maxWidth="194.0" minWidth="194.0" prefWidth="194.0" style="-fx-background-color: #fff;" styleClass="column" text="Дата закінчення" />
                         <TableColumn fx:id="SchoolName" prefWidth="399.0" style="-fx-background-color: #fff;" styleClass="column" text="Назва закладу" />
-                        <TableColumn fx:id="AverageGrade" prefWidth="146.0" style="-fx-background-color: #fff;" styleClass="column" text="Середній бал" />
+                        <TableColumn fx:id="AverageGrade" maxWidth="146.0" minWidth="146.0" prefWidth="146.0" style="-fx-background-color: #fff;" styleClass="column" text="Середній бал" />
                      </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
