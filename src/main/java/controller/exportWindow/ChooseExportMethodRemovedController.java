@@ -2,7 +2,6 @@ package controller.exportWindow;
 
 import data.DisplayDate;
 import hibernate.entity.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -13,8 +12,8 @@ import start.zine.StartApplication;
 import java.util.List;
 
 import static controller.admin.RemovedStudentController.*;
-import static services.email.EmailSender.exportAndSendExcelByEmail;
-import static services.email.EmailSender.exportStudentInfoOnDisk;
+import static services.email.EmailSender.exportAndSendStudentInfoExcelByEmail;
+import static services.exportExel.ExelExportService.exportStudentInfoOnDisk;
 
 public class ChooseExportMethodRemovedController extends StartApplication {
     @FXML
@@ -65,7 +64,7 @@ public class ChooseExportMethodRemovedController extends StartApplication {
     public void sentExelOnEmail(){
         try{
             getDataForExport(studentId);
-            exportAndSendExcelByEmail(AdminEmail.getText(), studentSurname, studentName, studentMiddleName, studentInfoList, educationInfoList, militaryList, parentsList, jobList, socialActivityList, circleActivityList, individualSupportList, promotionList, socialPassportList);
+            exportAndSendStudentInfoExcelByEmail(AdminEmail.getText(), studentSurname, studentName, studentMiddleName, studentInfoList, educationInfoList, militaryList, parentsList, jobList, socialActivityList, circleActivityList, individualSupportList, promotionList, socialPassportList);
             loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessEmailExportNotification.fxml");
             closeDialog();
         }catch (Exception e){

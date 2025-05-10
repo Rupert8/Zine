@@ -82,6 +82,11 @@ public class AdminSocialPassportController extends StartApplication implements I
         TableService.setDataInSocialPassportTable(socialPassportPrototypes,SocialPassportTable,NumberStudent,Name,Surname,MiddleName,Semester,Category,GroupName);
     }
 
+    public void loadChooseMethodExportSocialPassportDialog(){
+        saveDialog = loadAndShowDialog("/fxml/exportWindow/ChooseExportMethodSocialPassportDialog.fxml",saveDialog,"Експорт соціальний паспорт");
+        saveDialog.setOnHidden(event -> startSocialPassport());
+    }
+
     public void loadAddCategoryDialog(){
         saveDialog = loadAndShowDialog("/fxml/admin/adminDialogFxml/AddCategoryDialogPane.fxml",saveDialog,"Реєстрація категорій");
         saveDialog.setOnHidden(event -> startSocialPassport());
@@ -186,16 +191,6 @@ public class AdminSocialPassportController extends StartApplication implements I
         }
     }
 
-    public void exportExelSocialPassport(){
-        List<SocialPassport> socialPassportList = DisplayDate.selectStudentSocialPassportInfoForExport();
-        String downloadFolder = System.getProperty("user.home") + "\\Downloads";
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String currentDate = dateFormat.format(new Date());
-        String filePath = downloadFolder + "\\Соціальний_паспорт_експорт_" + currentDate + ".xlsx";
-        exportToExcelSocialPassport(socialPassportList, filePath);
-        loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessExportNotification.fxml");
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

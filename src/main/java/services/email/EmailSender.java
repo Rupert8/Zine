@@ -14,8 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Properties;
 
-import static controller.curator.WorkGroupController.*;
-import static services.exportExel.ExelExportService.exportMultiSheetExcel;
+import static services.exportExel.ExelExportService.*;
 
 public class EmailSender extends StartApplication {
 
@@ -53,7 +52,7 @@ public class EmailSender extends StartApplication {
         System.out.println("Лист успішно відправлено на " + recipientEmail);
     }
 
-    public static void sentExcelDocumentEmail(String email,String filePath,String fileName) throws MessagingException, IOException {
+    public static void sentExcelDocumentEmail(String email,String filePath,String fileName,String SubjectText) throws MessagingException, IOException {
         String host = "smtp.gmail.com";
         String fromEmail = "antonsavcenko128@gmail.com"; // Ваш Gmail
         String password = "laww jbsg xacw pmcj";    // Ваш App Password (створіть у Google)
@@ -76,7 +75,7 @@ public class EmailSender extends StartApplication {
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress(fromEmail));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-        message.setSubject("Експорт даних студента");
+        message.setSubject(SubjectText);
 
         // Текст + прикріплення
         MimeBodyPart messageBodyPart = new MimeBodyPart();
@@ -100,35 +99,9 @@ public class EmailSender extends StartApplication {
         message.setContent(multipart);
 
         Transport.send(message);
-        System.out.println("Лист успішно відправлено на " + email);
     }
 
-    public static void exportStudentInfoOnDisk(String StudentName,String StudentSurname,String StudentMiddleName,List<StudentInfo> studentInfoList,
-                                     List<EducationInfo> educationInfoList,
-                                     List<MilitaryService> militaryList,
-                                     List<StudentParents> parentsList,
-                                     List<StudentJob> jobList,
-                                     List<CircleActivity> circleActivityList,
-                                     List<SocialActivity> socialActivityList,
-                                     List<Promotion> promotionList,
-                                     List<IndividualSupport> individualSupportList,
-                                     List<SocialPassport> socialPassportList){
-
-        String downloadFolder = System.getProperty("user.home") + "\\Downloads";
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String currentDate = dateFormat.format(new java.util.Date());
-        String filePath = downloadFolder + "\\Повна_інформація_"+ StudentSurname + "_" + StudentName + "_" + StudentMiddleName + "_" + currentDate + ".xlsx";
-
-        try {
-            exportMultiSheetExcel(studentInfoList,educationInfoList,militaryList,parentsList,jobList,socialActivityList,circleActivityList,individualSupportList,promotionList,socialPassportList,filePath);
-        }catch (Exception e){
-            e.printStackTrace();
-
-        }
-    }
-
-    public static void exportAndSendExcelByEmail(
+    public static void exportAndSendStudentInfoExcelByEmail(
             String studentEmail,
             String studentSurname,
             String studentName,
@@ -170,7 +143,32 @@ public class EmailSender extends StartApplication {
             );
 
             // 3. Надсилання листа з файлом
-            sentExcelDocumentEmail(studentEmail, filePath,fileName);
+            sentExcelDocumentEmail(studentEmail, filePath,fileName,"Експорт даних студента");
+
+            // 4. Видалення тимчасового файлу після надсилання
+            if (tempFile.exists()) {
+                tempFile.delete();
+                System.out.println("Файл видалено: " + filePath);
+            }
+
+        } catch (MessagingException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void exportAndSendSocialPassportExcelByEmail(String studentEmail,List<SocialPassport> socialPassportList) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String currentDate = dateFormat.format(new java.util.Date());
+
+            // 1. Створення тимчасового файлу
+            String fileName = "\\Соціальний_паспорт_експорт_" + currentDate + ".xlsx";
+            File tempFile = new File(System.getProperty("java.io.tmpdir"), fileName);
+            String filePath = tempFile.getAbsolutePath();
+
+            exportToExcelSocialPassport(socialPassportList, filePath);
+
+            sentExcelDocumentEmail(studentEmail, filePath,fileName, "Експорт соціальний паспорт");
 
             // 4. Видалення тимчасового файлу після надсилання
             if (tempFile.exists()) {

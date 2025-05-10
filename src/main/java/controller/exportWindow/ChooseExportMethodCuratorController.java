@@ -10,8 +10,8 @@ import java.util.List;
 
 import static controller.curator.WorkGroupController.*;
 import static controller.login.LoginController.curatorEmail;
-import static services.email.EmailSender.exportAndSendExcelByEmail;
-import static services.email.EmailSender.exportStudentInfoOnDisk;
+import static services.email.EmailSender.exportAndSendStudentInfoExcelByEmail;
+import static services.exportExel.ExelExportService.exportStudentInfoOnDisk;
 
 public class ChooseExportMethodCuratorController extends StartApplication {
     @FXML
@@ -32,7 +32,7 @@ public class ChooseExportMethodCuratorController extends StartApplication {
         if(SendEmailRadioButton.isSelected()) {
             try{
                 getDataForExport(studentWorkId);
-                exportAndSendExcelByEmail(curatorEmail, studentWorkSurname, studentWorkName, studentWorkMiddleName, studentInfoList, educationInfoList, militaryList, parentsList, jobList, socialActivityList, circleActivityList, individualSupportList, promotionList, socialPassportList);
+                exportAndSendStudentInfoExcelByEmail(curatorEmail, studentWorkSurname, studentWorkName, studentWorkMiddleName, studentInfoList, educationInfoList, militaryList, parentsList, jobList, socialActivityList, circleActivityList, individualSupportList, promotionList, socialPassportList);
                 loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessEmailExportNotification.fxml");
                 closeDialog();
             }catch (Exception e){

@@ -12,8 +12,8 @@ import start.zine.StartApplication;
 import java.util.List;
 
 import static controller.admin.AdminMainController.*;
-import static services.email.EmailSender.exportAndSendExcelByEmail;
-import static services.email.EmailSender.exportStudentInfoOnDisk;
+import static services.email.EmailSender.exportAndSendStudentInfoExcelByEmail;
+import static services.exportExel.ExelExportService.exportStudentInfoOnDisk;
 
 public class ChooseExportMethodAdminController extends StartApplication {
     @FXML
@@ -64,7 +64,7 @@ public class ChooseExportMethodAdminController extends StartApplication {
     public void sentExelOnEmail(){
         try{
             getDataForExport(studentId);
-            exportAndSendExcelByEmail(AdminEmail.getText(), studentSurname, studentName, studentMiddleName, studentInfoList, educationInfoList, militaryList, parentsList, jobList, socialActivityList, circleActivityList, individualSupportList, promotionList, socialPassportList);
+            exportAndSendStudentInfoExcelByEmail(AdminEmail.getText(), studentSurname, studentName, studentMiddleName, studentInfoList, educationInfoList, militaryList, parentsList, jobList, socialActivityList, circleActivityList, individualSupportList, promotionList, socialPassportList);
             loadAndShowLoginSuccess("/fxml/notifications/successNotifications/SuccessEmailExportNotification.fxml");
             closeDialog();
         }catch (Exception e){

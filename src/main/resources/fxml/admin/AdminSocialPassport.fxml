@@ -111,7 +111,7 @@
                <children>
                   <HBox fx:id="ExtendedInfoHbox" alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#exportExelSocialPassport" prefHeight="23.0" prefWidth="0.0" style="-fx-background-color: #e8d58c;" styleClass="plus_btn" stylesheets="@../../css/style.css">
+                        <Button mnemonicParsing="false" onAction="#loadChooseMethodExportSocialPassportDialog" prefHeight="23.0" prefWidth="0.0" style="-fx-background-color: #e8d58c;" styleClass="plus_btn" stylesheets="@../../css/style.css">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                                  <image>

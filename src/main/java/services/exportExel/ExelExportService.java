@@ -7,6 +7,8 @@ import org.hibernate.jdbc.Work;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ExelExportService {
@@ -16,7 +18,7 @@ public class ExelExportService {
 
         Row headerRow = sheet.createRow(0);
         String[] headers = {
-                "Ім'я", "Прізвище", "По батькові", "Дата народження",
+                "Прізвище", "Ім'я", "По батькові", "Дата народження",
                 "Семестр", "Назва категорії", "Дата початку",
                 "Дата кінця", "Статус повнолітності", "Група"
         };
@@ -35,8 +37,8 @@ public class ExelExportService {
         for (SocialPassport passport : passports) {
             Row row = sheet.createRow(rowIndex++);
 
-            row.createCell(0).setCellValue(passport.getStudentInfo().getName());
-            row.createCell(1).setCellValue(passport.getStudentInfo().getSurname());
+            row.createCell(0).setCellValue(passport.getStudentInfo().getSurname());
+            row.createCell(1).setCellValue(passport.getStudentInfo().getName());
             row.createCell(2).setCellValue(passport.getStudentInfo().getMiddleName());
 
             Cell birthDateCell = row.createCell(3);
@@ -539,5 +541,38 @@ public class ExelExportService {
         style.setAlignment(HorizontalAlignment.CENTER);
         style.setVerticalAlignment(VerticalAlignment.CENTER);
         return style;
+    }
+
+    public static void exportStudentInfoOnDisk(String StudentName,String StudentSurname,String StudentMiddleName,List<StudentInfo> studentInfoList,
+                                     List<EducationInfo> educationInfoList,
+                                     List<MilitaryService> militaryList,
+                                     List<StudentParents> parentsList,
+                                     List<StudentJob> jobList,
+                                     List<CircleActivity> circleActivityList,
+                                     List<SocialActivity> socialActivityList,
+                                     List<Promotion> promotionList,
+                                     List<IndividualSupport> individualSupportList,
+                                     List<SocialPassport> socialPassportList){
+
+        String downloadFolder = System.getProperty("user.home") + "\\Downloads";
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDate = dateFormat.format(new java.util.Date());
+        String filePath = downloadFolder + "\\Повна_інформація_"+ StudentSurname + "_" + StudentName + "_" + StudentMiddleName + "_" + currentDate + ".xlsx";
+
+        try {
+            exportMultiSheetExcel(studentInfoList,educationInfoList,militaryList,parentsList,jobList,socialActivityList,circleActivityList,individualSupportList,promotionList,socialPassportList,filePath);
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+    }
+
+    public static void exportSocialPassportOnDisk(List<SocialPassport> socialPassportList){
+        String downloadFolder = System.getProperty("user.home") + "\\Downloads";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDate = dateFormat.format(new Date());
+        String filePath = downloadFolder + "\\Соціальний_паспорт_експорт_" + currentDate + ".xlsx";
+        exportToExcelSocialPassport(socialPassportList, filePath);
     }
 }
