@@ -71,6 +71,7 @@ public class AdditionalGroupDialogController extends AdminGroupController implem
         closeDialog();
         loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessDeleteGroupNotification.fxml");
         exportGroupAndWorkPlanInfoExcel(DisplayDate.getDataStudentInfoForExport(groupNameForDelete),DisplayDate.WorkPlanForExport(groupNameForDelete),groupNameForDelete);
+        DeleteData.deletePlanDataWhenExport(groupNameForDelete);
     }
 
     public void closeDialog(){

@@ -215,13 +215,14 @@ public class DisplayDate  {
 
 
     public static ObservableList<WorkPlan> getDataWithParameterForAdminPlanInfo(Date startDate, Date endDate) {
-        String hql = "FROM WorkPlan WHERE executionDate BETWEEN :startDate AND :endDate" ;
         ObservableList<WorkPlan> planInfo = FXCollections.observableArrayList();
         try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            List<WorkPlan> resoultlist = session.createQuery(hql, WorkPlan.class).setParameter("startDate", startDate).setParameter("endDate", endDate).getResultList();
+            List<WorkPlan> resoultlist = session.createQuery("FROM WorkPlan WHERE executionDate BETWEEN :startDate AND :endDate and active = true", WorkPlan.class)
+                                                                .setParameter("startDate", startDate)
+                                                                .setParameter("endDate", endDate).getResultList();
             planInfo.addAll(resoultlist);
 
             session.getTransaction().commit();
@@ -237,7 +238,7 @@ public class DisplayDate  {
     }
 
     public static ObservableList<WorkPlan> getDataWithParameterPlanInfo(Date startDate, Date endDate,String performer) {
-        String hql = "FROM WorkPlan WHERE executionDate BETWEEN :startDate AND :endDate AND (performer = :performer or performer = 'Адміністратор')" ;
+        String hql = "FROM WorkPlan WHERE executionDate BETWEEN :startDate AND :endDate AND (performer = :performer or performer = 'Адміністратор') AND active = true" ;
         ObservableList<WorkPlan> planInfo = FXCollections.observableArrayList();
         try {
             session = HibernateUtil.getSession();
@@ -259,13 +260,12 @@ public class DisplayDate  {
     }
 
     public static ObservableList<WorkPlan> getPlanForAdminInfo() {
-        String hql = "FROM WorkPlan";
         ObservableList<WorkPlan> planInfo = FXCollections.observableArrayList();
         try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            List<WorkPlan> resoultlist = session.createQuery(hql, WorkPlan.class).getResultList();
+            List<WorkPlan> resoultlist = session.createQuery("FROM WorkPlan w where w.active = true", WorkPlan.class).getResultList();
             planInfo.addAll(resoultlist);
 
             session.getTransaction().commit();
@@ -285,7 +285,7 @@ public class DisplayDate  {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            List<WorkPlan> resoultlist = session.createQuery("FROM WorkPlan  WHERE academicYear = :academicYear", WorkPlan.class).setParameter("academicYear",year).getResultList();
+            List<WorkPlan> resoultlist = session.createQuery("FROM WorkPlan  WHERE academicYear = :academicYear And active = true", WorkPlan.class).setParameter("academicYear",year).getResultList();
             planInfo.addAll(resoultlist);
 
             session.getTransaction().commit();
@@ -306,7 +306,7 @@ public class DisplayDate  {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            List<WorkPlan> resoultList = session.createQuery("From WorkPlan Where performer = :curatorName ", WorkPlan.class)
+            List<WorkPlan> resoultList = session.createQuery("From WorkPlan Where performer = :curatorName And active = true", WorkPlan.class)
                                     .setParameter("curatorName",curatorName)
                                     .getResultList();
 
@@ -412,7 +412,7 @@ public class DisplayDate  {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            List<WorkPlan> resoultlist = session.createQuery("FROM WorkPlan WHERE academicYear = :academicYear AND (performer = :performer OR performer = 'Адміністратор')", WorkPlan.class).setParameter("academicYear",year).setParameter("performer", performer).getResultList();
+            List<WorkPlan> resoultlist = session.createQuery("FROM WorkPlan WHERE academicYear = :academicYear AND (performer = :performer OR performer = 'Адміністратор') AND active = true", WorkPlan.class).setParameter("academicYear",year).setParameter("performer", performer).getResultList();
             planInfo.addAll(resoultlist);
 
             for (int i = 0; i < resoultlist.size(); i++) {
@@ -558,7 +558,7 @@ public class DisplayDate  {
         session = HibernateUtil.getSession();
         try {
             List<WorkPlan> workPlan = session.createQuery(
-                            "FROM WorkPlan Where groupName = :groupName  or performer = 'Адміністратор'", WorkPlan.class)
+                            "FROM WorkPlan w Where w.groupName = :groupName  or w.performer = 'Адміністратор' and w.active = true", WorkPlan.class)
                     .setParameter("groupName", groupName)
                     .getResultList();
 
@@ -566,7 +566,6 @@ public class DisplayDate  {
                 workPlan.get(i).setId(i + 1);
             }
 
-            System.out.print("результат " + performer);
             planNames.addAll(workPlan);
         } catch (Exception e) {
             e.printStackTrace();

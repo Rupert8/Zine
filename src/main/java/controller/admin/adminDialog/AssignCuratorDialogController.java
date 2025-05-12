@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import org.hibernate.sql.Update;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -45,6 +46,7 @@ public class AssignCuratorDialogController extends AdminGroupController implemen
                 UpdateData.updatePastCuratorStatus(groupName);
                 UpdateData.updateCuratorGroup(name, surname, middleName, groupName);
                 UpdateData.updateGroupCurator(CuratorComboBox.getValue(),groupName);
+                UpdateData.updatePlanInfoPerformer(groupName,fullName);
                 closeDialog();
                 loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessAddNotification.fxml");
             } else {

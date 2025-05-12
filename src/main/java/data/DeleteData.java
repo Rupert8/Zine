@@ -7,6 +7,7 @@ import start.zine.StartApplication;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 
 public class DeleteData extends StartApplication {
@@ -26,6 +27,24 @@ public class DeleteData extends StartApplication {
 
         }
     }
+
+    public static void deletePlanDataWhenExport(String groupName) {
+        try {
+            Session session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            session.createQuery("DELETE FROM WorkPlan WHERE groupName = :groupName")
+                    .setParameter("groupName", groupName)
+                    .executeUpdate();
+
+
+            session.getTransaction().commit();
+            HibernateUtil.closeSession(session);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void deleteCurator (int curatorId,String group) {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();

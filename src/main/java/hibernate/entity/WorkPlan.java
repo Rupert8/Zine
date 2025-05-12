@@ -44,4 +44,6 @@ public class WorkPlan {
     @Column(name = "ConfirmationNote")
     private String confirmationNote;
 
+    @Column(name = "Active")
+    private boolean active;
 }

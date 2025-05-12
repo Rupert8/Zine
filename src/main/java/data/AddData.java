@@ -30,6 +30,7 @@ public class AddData {
             plan.setConfirmationNote("Не затверджено");
             plan.setAcademicYear(year);
             plan.setGroupName(groupName);
+            plan.setActive(true);
 
             session.persist(plan);
             session.getTransaction().commit();
@@ -52,6 +53,7 @@ public class AddData {
             plan.setCompletionNote(execution);
             plan.setConfirmationNote("Затверджено");
             plan.setAcademicYear(year);
+            plan.setActive(true);
 
             session.persist(plan);
             session.getTransaction().commit();

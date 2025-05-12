@@ -506,4 +506,21 @@ public class UpdateData {
             }
         }
     }
+
+    public static void updatePlanInfoPerformer(String groupName,String curatorName) {
+        try {
+            Session session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            session.createQuery("UPDATE WorkPlan SET performer = :curatorName WHERE groupName = :groupName")
+                    .setParameter("curatorName", curatorName)
+                    .setParameter("groupName", groupName)
+                    .executeUpdate();
+
+            session.getTransaction().commit();
+            HibernateUtil.closeSession(session);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
