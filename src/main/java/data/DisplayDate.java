@@ -97,6 +97,26 @@ public class DisplayDate  {
         return studentInfo;
     }
 
+    public static ObservableList<StudentInfo> getDataStudentInfoForExport(String groupName) {
+        ObservableList<StudentInfo> studentInfo = FXCollections.observableArrayList();
+        try {
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            List<StudentInfo> resoultlist = session.createQuery("SELECT si.id, si.name,si.surname,si.middleName,si.date_of_birth,si.phoneNumber,si.address,si.groupName FROM StudentInfo si WHERE si.groupName = :groupName and si.status = false", StudentInfo.class).setParameter("groupName", groupName).list();
+            studentInfo.addAll(resoultlist);
+
+            session.getTransaction().commit();
+            for (int i = 0; i < resoultlist.size(); i++) {
+                resoultlist.get(i).setId(i + 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            HibernateUtil.rollback(session);
+        }
+        return studentInfo;
+    }
+
     public static ObservableList<RemovedStudentPrototype> getRemovedStudentInfo() {
         ObservableList<RemovedStudentPrototype> studentInfo = FXCollections.observableArrayList();
         try {
@@ -1391,4 +1411,21 @@ public class DisplayDate  {
         }
         return list;
     }
+
+    public static List<WorkPlan> WorkPlanForExport(String groupName) {
+        List<WorkPlan> list = FXCollections.observableArrayList();
+        session = HibernateUtil.getSession();
+        try {
+            assert session != null;
+            List<WorkPlan> data = session.createQuery("FROM WorkPlan w WHERE w.groupName = :groupName ", WorkPlan.class)
+                                                         .setParameter("groupName", groupName).list();
+
+            list.addAll(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
 }

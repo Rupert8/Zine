@@ -141,6 +141,37 @@ public class ExelExportService {
         }
     }
 
+    public static void exportGroupAndWorkPlanInfoExcel(List<StudentInfo> studentInfoList, List<WorkPlan> workPlanList,String GroupName){
+        Workbook workbook = new XSSFWorkbook();
+
+        Sheet GroupStudent = workbook.createSheet("Студенти");
+        writeGeneralStudentInfoSheet(GroupStudent,studentInfoList,workbook);
+
+        Sheet GroupWorkPlan = workbook.createSheet("План роботи");
+        writeWorkPlanInfoSheet(GroupWorkPlan,workPlanList,workbook);
+
+        String downloadFolder = System.getProperty("user.home") + "\\Downloads";
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDate = dateFormat.format(new java.util.Date());
+        String filePath = downloadFolder + "\\Повна_інформація_"+ GroupName + "_" +currentDate + ".xlsx";
+
+
+        // Збереження файлу
+        try (FileOutputStream fileOut = new FileOutputStream(filePath)) {
+            workbook.write(fileOut);
+            System.out.println("Файл збережено: " + filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                workbook.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private static void writeGeneralStudentInfoSheet(Sheet sheet, List<StudentInfo> data,Workbook workbook) {
         // Створюємо стиль заголовків
         CellStyle headerStyle = getHeaderCellStyle(workbook);
@@ -191,6 +222,51 @@ public class ExelExportService {
         }
 
         for (int i = 0; i < 7; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
+    }
+
+    private static void writeWorkPlanInfoSheet(Sheet sheet, List<WorkPlan> data,Workbook workbook) {
+
+        CellStyle headerStyle = getHeaderCellStyle(workbook);
+
+        Row header = sheet.createRow(0);
+
+        Cell cellEventName = header.createCell(0);
+        cellEventName.setCellValue("Назва заходу");
+        cellEventName.setCellStyle(headerStyle);
+
+        Cell cellPerformer = header.createCell(1);
+        cellPerformer.setCellValue("Виконавець");
+        cellPerformer.setCellStyle(headerStyle);
+
+        Cell cellExecutionDate = header.createCell(2);
+        cellExecutionDate.setCellValue("Дата виконання");
+        cellExecutionDate.setCellStyle(headerStyle);
+
+        Cell cellAcademyYear = header.createCell(3);
+        cellAcademyYear.setCellValue("Навчальний рік");
+        cellAcademyYear.setCellStyle(headerStyle);
+
+        Cell cellSemester = header.createCell(4);
+        cellSemester.setCellValue("Семестер");
+        cellSemester.setCellStyle(headerStyle);
+
+        int rowIndex = 1;
+        for (WorkPlan plan : data) {
+            Row row = sheet.createRow(rowIndex++);
+
+            row.createCell(0).setCellValue(plan.getEventName());
+            row.createCell(1).setCellValue(plan.getPerformer());
+            Cell cellDate = row.createCell(2);
+            cellDate.setCellValue(plan.getExecutionDate());
+            cellDate.setCellStyle(dateStyle(workbook));
+            row.createCell(3).setCellValue(plan.getAcademicYear());
+            row.createCell(4).setCellValue(plan.getSemester());
+        }
+
+        for (int i = 0; i < 5; i++) {
             sheet.autoSizeColumn(i);
         }
 

@@ -189,7 +189,7 @@ public class AdminWorkPlanController extends StartApplication implements Initial
 
     public void delete(){
         deletePlanData();
-        displayDataByYear();
+        displayPlanInfo();
         setPlanComboBox();
         loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessDeleteNotification.fxml");
     }

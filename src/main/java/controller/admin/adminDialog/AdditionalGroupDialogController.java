@@ -2,6 +2,7 @@ package controller.admin.adminDialog;
 
 import controller.admin.AdminGroupController;
 import data.DeleteData;
+import data.DisplayDate;
 import data.SearchStudentData;
 import data.UpdateData;
 import javafx.fxml.FXML;
@@ -11,6 +12,8 @@ import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static services.exportExel.ExelExportService.exportGroupAndWorkPlanInfoExcel;
 
 public class AdditionalGroupDialogController extends AdminGroupController implements Initializable {
     @FXML
@@ -66,7 +69,8 @@ public class AdditionalGroupDialogController extends AdminGroupController implem
     public void deleteGroup(){
         DeleteData.deleteGroup(groupId,groupNameForDelete);
         closeDialog();
-        loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessDeleteNotification.fxml");
+        loadAndShowSuccessNotification("/fxml/notifications/successNotifications/SuccessDeleteGroupNotification.fxml");
+        exportGroupAndWorkPlanInfoExcel(DisplayDate.getDataStudentInfoForExport(groupNameForDelete),DisplayDate.WorkPlanForExport(groupNameForDelete),groupNameForDelete);
     }
 
     public void closeDialog(){

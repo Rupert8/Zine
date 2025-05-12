@@ -5,6 +5,7 @@ import hibernate.entity.*;
 import org.hibernate.Session;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import static controller.login.LoginController.curatorGroupName;
@@ -488,6 +489,7 @@ public class UpdateData {
 
             for (StudentInfo student : studentInfoList) {
                 student.setStatus(false);
+                student.setRemovedDate(Date.valueOf(LocalDate.now()));
                 session.update(student);
             }
 
