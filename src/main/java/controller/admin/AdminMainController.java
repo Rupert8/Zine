@@ -22,7 +22,6 @@ import start.zine.StartApplication;
 
 import java.net.URL;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -162,7 +161,7 @@ public class AdminMainController extends StartApplication implements Initializab
     }
 
     private void setSortByGroupComboBox(){
-        List<String> groupName = DisplayDate.getGroupName();
+        List<String> groupName = DisplayDate.getActiveGroupName();
         SortByGroupComboBox.getItems().setAll(groupName);
     }
 

@@ -235,21 +235,23 @@ public class UpdateData {
         }
     }
 
-    public static void updateStudentJobInfo(Date startDate,Date endDate,String place,String position){
+    public static void updateStudentJobInfo(Date startDate,Date endDate,String place,String newPlace,String newPosition,String position){
         try{
             Session session = HibernateUtil.getSession();
             session.beginTransaction();
 
             int id = SearchStudentData.getIdStudent(studentName,studentSurname,studentMiddleName,studentGroupName);
 
-            int jobInfoId = session.createQuery("SELECT j.id FROM StudentJob j WHERE j.studentInfo.id = :id", Integer.class)
-                    .setParameter("id", id).getSingleResult();
+            int jobInfoId = session.createQuery("SELECT j.id FROM StudentJob j WHERE j.studentInfo.id = :id and j.place = :place and j.position = : position", Integer.class)
+                                                    .setParameter("id", id)
+                                                    .setParameter("place", place)
+                                                    .setParameter("position", position).getSingleResult();
 
             StudentJob studentJob = session.get(StudentJob.class, jobInfoId);
             studentJob.setStartDate(startDate);
             studentJob.setEndDate(endDate);
-            studentJob.setPlace(place);
-            studentJob.setPosition(position);
+            studentJob.setPlace(newPlace);
+            studentJob.setPosition(newPosition);
 
             session.getTransaction().commit();
             HibernateUtil.closeSession(session);
@@ -281,19 +283,21 @@ public class UpdateData {
         }
     }
 
-    public static void updateStudentSocialActivityInfo(int semester,String activity,Date date){
+    public static void updateStudentSocialActivityInfo(int semester,String activity,Date date,String newActivity,Date newDate){
         try{
             Session session = HibernateUtil.getSession();
             session.beginTransaction();
 
             int id = SearchStudentData.getIdStudent(studentName,studentSurname,studentMiddleName,studentGroupName);
 
-            int socialActivityInfoId = session.createQuery("SELECT s.id FROM SocialActivity s WHERE s.studentInfo.id = :id", Integer.class)
-                    .setParameter("id", id).getSingleResult();
+            int socialActivityInfoId = session.createQuery("SELECT s.id FROM SocialActivity s WHERE s.studentInfo.id = :id and s.activity = :activity and s.date = :date", Integer.class)
+                    .setParameter("id", id)
+                    .setParameter("activity", activity)
+                    .setParameter("date", date).getSingleResult();
 
             SocialActivity socialActivity = session.get(SocialActivity.class, socialActivityInfoId);
-            socialActivity.setActivity(activity);
-            socialActivity.setDate(date);
+            socialActivity.setActivity(newActivity);
+            socialActivity.setDate(newDate);
             socialActivity.setSemestr(semester);
 
             session.getTransaction().commit();
@@ -303,19 +307,20 @@ public class UpdateData {
         }
     }
 
-    public static void updateStudentGroupActivityInfo(int semester,String groupName,String note){
+    public static void updateStudentGroupActivityInfo(int semester,String groupName,String note,String newGroupName){
         try{
             Session session = HibernateUtil.getSession();
             session.beginTransaction();
 
             int id = SearchStudentData.getIdStudent(studentName,studentSurname,studentMiddleName,studentGroupName);
 
-            int groupActivityInfoId = session.createQuery("SELECT c.id FROM CircleActivity c WHERE c.studentInfo.id = :id", Integer.class)
+            int groupActivityInfoId = session.createQuery("SELECT c.id FROM CircleActivity c WHERE c.studentInfo.id = :id and c.circleName = :groupName", Integer.class)
+                    .setParameter("groupName", groupName)
                     .setParameter("id", id).getSingleResult();
 
             CircleActivity circleActivity = session.get(CircleActivity.class, groupActivityInfoId);
             circleActivity.setSemestr(semester);
-            circleActivity.setCircleName(groupName);
+            circleActivity.setCircleName(newGroupName);
             circleActivity.setNote(note);
 
             session.getTransaction().commit();
@@ -325,19 +330,21 @@ public class UpdateData {
         }
     }
 
-    public static void updateStudentIndividualSupportInfo(int semester,Date date,String content,String tmpContent){
+    public static void updateStudentIndividualSupportInfo(int semester,Date date,String content,Date newDate,String newContent){
         try{
             Session session = HibernateUtil.getSession();
             session.beginTransaction();
 
             int id = SearchStudentData.getIdStudent(studentName,studentSurname,studentMiddleName,studentGroupName);
 
-            int individualSupportInfoId = session.createQuery("SELECT i.id FROM IndividualSupport i WHERE i.studentInfo.id = :id and i.content = :content", Integer.class)
-                                                                 .setParameter("id", id).setParameter("content", tmpContent).getSingleResult();
+            int individualSupportInfoId = session.createQuery("SELECT i.id FROM IndividualSupport i WHERE i.studentInfo.id = :id and i.content = :content and i.date = :date", Integer.class)
+                                                                 .setParameter("id", id)
+                                                                 .setParameter("content", content)
+                                                                 .setParameter("date", date).getSingleResult();
 
             IndividualSupport individualSupport = session.get(IndividualSupport.class, individualSupportInfoId);
-            individualSupport.setDate(date);
-            individualSupport.setContent(content);
+            individualSupport.setDate(newDate);
+            individualSupport.setContent(newContent);
             individualSupport.setSemestr(semester);
 
             session.getTransaction().commit();
@@ -347,20 +354,22 @@ public class UpdateData {
         }
     }
 
-    public static void updateStudentPromotionInfo(int semester,Date date,String content,String tmpContent){
+    public static void updateStudentPromotionInfo(int semester,Date date,String content,String newContent,Date newDate){
         try{
             Session session = HibernateUtil.getSession();
             session.beginTransaction();
 
             int id = SearchStudentData.getIdStudent(studentName,studentSurname,studentMiddleName,studentGroupName);
 
-            int promotionSupportInfoId = session.createQuery("SELECT p.id FROM Promotion p WHERE p.studentInfo.id = :id and p.content = :content", Integer.class)
-                    .setParameter("id", id).setParameter("content", tmpContent).getSingleResult();
+            int promotionSupportInfoId = session.createQuery("SELECT p.id FROM Promotion p WHERE p.studentInfo.id = :id and p.content = :content and p.startDate = :date", Integer.class)
+                                                                .setParameter("id", id)
+                                                                .setParameter("content", content)
+                                                                .setParameter("date", date).getSingleResult();
 
             Promotion promotion = session.get(Promotion.class, promotionSupportInfoId);
-            promotion.setStartDate(date);
+            promotion.setStartDate(newDate);
             promotion.setSemestr(semester);
-            promotion.setContent(content);
+            promotion.setContent(newContent);
 
             session.getTransaction().commit();
             HibernateUtil.closeSession(session);

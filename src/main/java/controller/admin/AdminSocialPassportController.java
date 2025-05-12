@@ -1,6 +1,5 @@
 package controller.admin;
 
-import hibernate.entity.SocialPassport;
 import interfaces.WindowActions.WindowControl;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -20,12 +19,8 @@ import start.zine.StartApplication;
 import tableView.SocialPassportPrototype;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import static services.exportExel.ExelExportService.exportToExcelSocialPassport;
 
 public class AdminSocialPassportController extends StartApplication implements Initializable, WindowControl {
 
@@ -131,7 +126,7 @@ public class AdminSocialPassportController extends StartApplication implements I
     }
 
     private void setSortByGroupComboBox(){
-        List<String> groupName = DisplayDate.getGroupName();
+        List<String> groupName = DisplayDate.getActiveGroupName();
         if(groupName != null){
             System.out.print(groupName);
             SortByGroupComboBox.getItems().setAll(groupName);

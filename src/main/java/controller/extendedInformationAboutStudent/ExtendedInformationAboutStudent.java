@@ -84,6 +84,8 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     public static Date endDateJob;
     public static String placeJob;
     public static String positionJob;
+    private String positionForUpdate;
+    private String placeForUpdate;
 
     @FXML   //Інформація про батьків студента
     private TextField PIPFatherParents,PIPMotherParents;
@@ -119,6 +121,8 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     public static int semesterSocial;
     public static Date dateSocial;
     public static String activitySocial;
+    private Date dateForUpdate;
+    private String activitySocialForUpdate;
 
     @FXML   //Інформація про гурткову діяльність
     private ComboBox<Integer> SemesterGroup;
@@ -137,6 +141,7 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     public static int semesterGroup;
     public static String groupNameGroup;
     public static String noteGroup;
+    private String groupNameForUpdate;
 
     @FXML
     private DatePicker DateSupport;
@@ -156,6 +161,8 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     public static Date dateSupport;
     public static String contentSupport;
     public static String tmpContentSupport;
+    private String contentSupportForUpdate;
+    private Date dateSupportForUpdate;
 
     @FXML // Заохочення
     private DatePicker DatePromotion;
@@ -174,7 +181,8 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     public static int semesterPromotion;
     public static Date datePromotion;
     public static String contentPromotion;
-    public static String tmpContentPromotion;
+    private String contentPromotionForUpdate;
+    private Date datePromotionForUpdate;
 
     @FXML
     private DatePicker StartDateSocialPassport,EndDateSocialPassport;
@@ -877,6 +885,9 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     public void updateIndividualSupportStudentInfo(){
         if(ValidateValueService.isIndividualSupportFieldEmpty(SemesterSupport,DateSupport,ContentSupport)){
             tmpContentSupport = ContentSupport.getText();
+            dateSupportForUpdate = Date.valueOf(DateSupport.getValue());
+            contentSupportForUpdate = ContentSupport.getText();
+
             CancelUpdateIndividualSupportButton.setVisible(true);
             BackIndividualSupportButton.setVisible(false);
             UpdateIndividualSupportButton.setVisible(false);
@@ -898,7 +909,8 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
 
     public void updatePromotionStudentInfo(){
         if(ValidateValueService.isPromotionFieldEmpty(SemesterPromotion,DatePromotion,ContentPromotion)){
-            tmpContentPromotion = ContentPromotion.getText();
+            contentPromotionForUpdate = ContentPromotion.getText();
+            datePromotionForUpdate = Date.valueOf(DatePromotion.getValue());
             CancelUpdatePromotionButton.setVisible(true);
             BackPromotionButton.setVisible(false);
             UpdatePromotionButton.setVisible(false);
@@ -1255,6 +1267,8 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
                 UpdateParentsInfoRadioButton.setDisable(true);
                 UpdateEducationInfoRadioButton.setDisable(true);
                 UpdateMilitaryInfoRadioButton.setDisable(true);
+                placeForUpdate = PlaceJob.getText();
+                positionForUpdate = PositionJob.getText();
             }else {
                 loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningUpdateStudentInfo.fxml");
                 cancelUpdateStudentInfo();
@@ -1296,6 +1310,8 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
 
                 setSemesterComboBox(SemesterSocial);
                 UpdateGroupActivityRadioButton.setDisable(true);
+                dateForUpdate = Date.valueOf(DateSocial.getValue());
+                activitySocialForUpdate = ActivitySocial.getText();
             }else{
                 loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningUpdateStudentInfo.fxml");
                 cancelUpdateSocialAndGroupActivityStudentInfo();
@@ -1314,6 +1330,7 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
 
                 setSemesterComboBox(SemesterGroup);
                 UpdateSocialActivityRadioButton.setDisable(true);
+                groupNameForUpdate = GroupName.getText();
             }else{
                 loadAndShowLoginAlarm("/fxml/notifications/warningNotifications/WarningUpdateStudentInfo.fxml");
                 cancelUpdateSocialAndGroupActivityStudentInfo();
@@ -1411,9 +1428,10 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
     public void setNewValueJobInfo(){
         Date startDate = Date.valueOf(StartDateJob.getValue());
         Date endDate = Date.valueOf(EndDateJob.getValue());
-        String place = PlaceJob.getText();
-        String position = PositionJob.getText();
-        UpdateData.updateStudentJobInfo(startDate,endDate,place,position);
+        String newPlace = PlaceJob.getText();
+        String newPosition = PositionJob.getText();
+
+        UpdateData.updateStudentJobInfo(startDate,endDate,placeForUpdate,newPlace,newPosition,positionForUpdate);
         cancelUpdateStudentInfo();
     }
 
@@ -1428,34 +1446,34 @@ public class ExtendedInformationAboutStudent extends StartApplication implements
 
     public void setNewValueSocialActivityInfo(){
         int semester = SemesterSocial.getValue();
-        String activity = ActivitySocial.getText();
-        Date date  = Date.valueOf(DateSocial.getValue());
-        UpdateData.updateStudentSocialActivityInfo(semester,activity,date);
+        String newActivity = ActivitySocial.getText();
+        Date newDate  = Date.valueOf(DateSocial.getValue());
+        UpdateData.updateStudentSocialActivityInfo(semester,activitySocialForUpdate,dateForUpdate,newActivity,newDate);
         cancelUpdateSocialAndGroupActivityStudentInfo();
 
     }
 
     public void setNewValueGroupActivityInfo(){
         int semester = SemesterGroup.getValue();
-        String groupName = GroupName.getText();
+        String newGroupName = GroupName.getText();
         String note = NoteGroup.getText();
-        UpdateData.updateStudentGroupActivityInfo(semester,groupName,note);
+        UpdateData.updateStudentGroupActivityInfo(semester,groupNameForUpdate,note,newGroupName);
         cancelUpdateSocialAndGroupActivityStudentInfo();
     }
 
     public void setNewValueIndividualSupportInfo(){
         int semester = SemesterSupport.getValue();
-        Date date  = Date.valueOf(DateSupport.getValue());
-        String content = ContentSupport.getText();
-        UpdateData.updateStudentIndividualSupportInfo(semester,date,content,tmpContentSupport);
+        Date newDate  = Date.valueOf(DateSupport.getValue());
+        String newContent = ContentSupport.getText();
+        UpdateData.updateStudentIndividualSupportInfo(semester,dateSupportForUpdate,contentSupportForUpdate,newDate,newContent);
         cancelUpdateIndividualSupportButton();
     }
 
     public void setNewValuePromotionInfo(){
         int semester = SemesterPromotion.getValue();
-        Date date  = Date.valueOf(DatePromotion.getValue());
-        String content = ContentPromotion.getText();
-        UpdateData.updateStudentPromotionInfo(semester,date,content,tmpContentPromotion);
+        Date newDate  = Date.valueOf(DatePromotion.getValue());
+        String newContent = ContentPromotion.getText();
+        UpdateData.updateStudentPromotionInfo(semester,datePromotionForUpdate,contentPromotionForUpdate,newContent,newDate);
         cancelUpdatePromotionInfo();
     }
 

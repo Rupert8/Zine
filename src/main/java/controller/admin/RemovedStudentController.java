@@ -2,15 +2,12 @@ package controller.admin;
 
 import data.DisplayDate;
 import data.SearchStudentData;
-import hibernate.entity.*;
+import hibernate.entity.StudentInfo;
 import interfaces.WindowActions.WindowControl;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -20,11 +17,8 @@ import tableView.RemovedStudentPrototype;
 
 import java.net.URL;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import static services.exportExel.ExelExportService.exportMultiSheetExcel;
 
 
 public class RemovedStudentController extends StartApplication implements Initializable, WindowControl {
@@ -61,6 +55,10 @@ public class RemovedStudentController extends StartApplication implements Initia
     private Button minimizeWindowButton,maximizeWindowButton,closeWindowButton;
     @FXML
     private Button exportStudentInfoButton;
+    @FXML
+    private ComboBox<String> SortStudentComboBox;
+    @FXML
+    private ComboBox<String> SortByGroupComboBox;
 
     public static Dialog<Boolean> saveDialog;
 
@@ -80,6 +78,34 @@ public class RemovedStudentController extends StartApplication implements Initia
         PhoneNumberColumn.setCellValueFactory(new PropertyValueFactory<RemovedStudentPrototype, String>("studentPhoneNumber"));
         AddressColumn.setCellValueFactory(new PropertyValueFactory<RemovedStudentPrototype, String>("studentAddress"));
         RemovedDateColumn.setCellValueFactory(new PropertyValueFactory<RemovedStudentPrototype, Date>("studentRemovedDate"));
+    }
+
+
+    public void selectSortStudentComboBox() {
+        if (SortStudentComboBox.getValue().equals("Показати все")) {
+            displayRemovedStudentData();
+            SortByGroupComboBox.setVisible(false);
+            SortByGroupComboBox.getItems().clear();
+            RemovedStudentTable.getSelectionModel().clearSelection();
+        } else if (SortStudentComboBox.getValue().equals("Групою")) {
+            SortByGroupComboBox.setVisible(true);
+            SortByGroupComboBox.getItems().clear();
+            setSortByGroupComboBox();
+            RemovedStudentTable.getSelectionModel().clearSelection();
+        }
+
+    }
+
+    private void setSortStudentComboBox(){
+        if(SortStudentComboBox.getSelectionModel().isEmpty()){
+            SortStudentComboBox.getItems().setAll("Показати все","Групою");
+        }
+    }
+
+
+    private void setSortByGroupComboBox(){
+        List<String> groupName = DisplayDate.getRemovedGroupName();
+        SortByGroupComboBox.getItems().setAll(groupName);
     }
 
     private void selectItems(){
@@ -102,12 +128,24 @@ public class RemovedStudentController extends StartApplication implements Initia
         setDataInGroupTable(removedStudentInfoList);
     }
 
+    public void displayDataByGroupName(){
+        String groupName = SortByGroupComboBox.getValue();
+        if(groupName != null){
+            ObservableList<RemovedStudentPrototype> groupList = DisplayDate.getDataByGroupNameForRemoved(groupName);
+            setDataInGroupTable(groupList);
+        }else {
+            throw new IllegalArgumentException("Група не може бути null");
+        }
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         displayRemovedStudentData();
         selectItems();
         RemovedStudentTable.getSelectionModel().clearSelection();
         exportStudentInfoButton.setVisible(false);
+        setSortStudentComboBox();
     }
 
 

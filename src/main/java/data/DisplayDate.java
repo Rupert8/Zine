@@ -324,13 +324,35 @@ public class DisplayDate  {
         return studentInfo;
     }
 
+    public static ObservableList<RemovedStudentPrototype> getDataByGroupNameForRemoved(String groupName) {
+        ObservableList<RemovedStudentPrototype> studentInfo = FXCollections.observableArrayList();
+        try {
+            session = HibernateUtil.getSession();
+            session.beginTransaction();
+
+            List<RemovedStudentPrototype> resoultlist = session.createQuery("FROM StudentInfo WHERE groupName = :groupName", RemovedStudentPrototype.class)
+                                                                .setParameter("groupName",groupName).getResultList();
+            studentInfo.addAll(resoultlist);
+
+            session.getTransaction().commit();
+            for (int i = 0; i < resoultlist.size(); i++) {
+                resoultlist.get(i).setStudentId(i + 1);
+            }
+        } catch (Exception e) {
+            HibernateUtil.rollback(session);
+        }
+        return studentInfo;
+    }
+
     public static ObservableList<SocialPassportPrototype> getDataByGroupNameForAdminSocialPassport(String groupName) {
         ObservableList<SocialPassportPrototype> studentInfo = FXCollections.observableArrayList();
         try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            List<SocialPassportPrototype> resoultlist = session.createQuery(GET_SOCIAL_BY_GROUP_NAME_PASSPORT_INFO, SocialPassportPrototype.class).setParameter("groupName",groupName).getResultList();
+            List<SocialPassportPrototype> resoultlist = session.createQuery(GET_SOCIAL_BY_GROUP_NAME_PASSPORT_INFO, SocialPassportPrototype.class)
+                                                                            .setParameter("groupName",groupName).getResultList();
+
             studentInfo.addAll(resoultlist);
 
             session.getTransaction().commit();
@@ -401,11 +423,23 @@ public class DisplayDate  {
         return studentNames;
     }
 
-    public static List<String> getGroupName() {
+    public static List<String> getActiveGroupName() {
         List<String> groupNames = new ArrayList<>();
         session = HibernateUtil.getSession();
         try {
             List<String> students = session.createQuery("SELECT groupName FROM Groups WHERE Active = true", String.class).list();
+            groupNames.addAll(students);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return groupNames;
+    }
+
+    public static List<String> getRemovedGroupName() {
+        List<String> groupNames = new ArrayList<>();
+        session = HibernateUtil.getSession();
+        try {
+            List<String> students = session.createQuery("SELECT groupName FROM Groups WHERE Active = false", String.class).list();
             groupNames.addAll(students);
         }catch (Exception e){
             e.printStackTrace();
