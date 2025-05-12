@@ -4,6 +4,7 @@ import data.DisplayDate;
 import data.SearchStudentData;
 import hibernate.entity.StudentInfo;
 import interfaces.WindowActions.WindowControl;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +18,7 @@ import tableView.RemovedStudentPrototype;
 
 import java.net.URL;
 import java.sql.Date;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 

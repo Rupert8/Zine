@@ -346,23 +346,40 @@ public class DisplayDate  {
 
     public static ObservableList<RemovedStudentPrototype> getDataByGroupNameForRemoved(String groupName) {
         ObservableList<RemovedStudentPrototype> studentInfo = FXCollections.observableArrayList();
+        Session session = null;
         try {
             session = HibernateUtil.getSession();
             session.beginTransaction();
 
-            List<RemovedStudentPrototype> resoultlist = session.createQuery("FROM StudentInfo WHERE groupName = :groupName", RemovedStudentPrototype.class)
-                                                                .setParameter("groupName",groupName).getResultList();
-            studentInfo.addAll(resoultlist);
+            List<StudentInfo> resultList = session.createQuery(
+                            "FROM StudentInfo s WHERE s.groupName = :groupName AND s.status = false", StudentInfo.class)
+                    .setParameter("groupName", groupName)
+                    .getResultList();
 
             session.getTransaction().commit();
-            for (int i = 0; i < resoultlist.size(); i++) {
-                resoultlist.get(i).setStudentId(i + 1);
+
+            for (int i = 0; i < resultList.size(); i++) {
+                StudentInfo s = resultList.get(i);
+                RemovedStudentPrototype r = new RemovedStudentPrototype(
+                        i + 1,
+                        s.getName(),
+                        s.getSurname(),
+                        s.getMiddleName(),
+                        s.getDate_of_birth(),
+                        s.getPhoneNumber(),
+                        s.getAddress(),
+                        s.getRemovedDate()
+                );
+                studentInfo.add(r);
             }
+
         } catch (Exception e) {
-            HibernateUtil.rollback(session);
+            if (session != null) HibernateUtil.rollback(session);
+            e.printStackTrace();
         }
         return studentInfo;
     }
+
 
     public static ObservableList<SocialPassportPrototype> getDataByGroupNameForAdminSocialPassport(String groupName) {
         ObservableList<SocialPassportPrototype> studentInfo = FXCollections.observableArrayList();
@@ -459,7 +476,7 @@ public class DisplayDate  {
         List<String> groupNames = new ArrayList<>();
         session = HibernateUtil.getSession();
         try {
-            List<String> students = session.createQuery("SELECT groupName FROM Groups WHERE Active = false", String.class).list();
+            List<String> students = session.createQuery("SELECT groupName FROM Groups", String.class).list();
             groupNames.addAll(students);
         }catch (Exception e){
             e.printStackTrace();
